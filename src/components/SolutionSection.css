@@ -1,0 +1,354 @@
+.solution-section {
+    background: var(--color-navy-light);
+    /* Slightly lighter navy for contrast against problem section */
+    position: relative;
+    overflow: hidden;
+}
+
+.section-header {
+    margin-bottom: 3rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-main);
+    opacity: 0.9;
+    margin-top: 1rem;
+}
+
+.pipeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    gap: 1rem;
+}
+
+@media (min-width: 900px) {
+    .pipeline-container {
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: 0;
+    }
+}
+
+.pipeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    width: 100%;
+    max-width: 350px;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    z-index: 2;
+}
+
+@media (min-width: 900px) {
+    .pipeline-step {
+        width: 30%;
+    }
+}
+
+.pipeline-step:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-gold-champagne);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+}
+
+.step-number {
+    font-size: 4rem;
+    font-weight: 900;
+    opacity: 0.2;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    line-height: 1;
+}
+
+.step-icon {
+    background: rgba(212, 175, 55, 0.1);
+    padding: 1.5rem;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.step-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+}
+
+.step-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.pipeline-connector {
+    width: 4px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(0, 229, 255, 0.5), rgba(212, 175, 55, 0.5));
+    z-index: 1;
+}
+
+@media (min-width: 900px) {
+    .pipeline-connector {
+        width: 50px;
+        height: 4px;
+        background: linear-gradient(to right, rgba(0, 229, 255, 0.5), rgba(212, 175, 55, 0.5));
+        align-self: center;
+        flex-grow: 1;
+        margin: 0 -10px;
+        /* Bring connectors slightly behind the cards */
+    }
+}
+
+/* Intent Into Revenue Journey V8 */
+.intent-revenue-journey {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    background: rgba(5, 11, 25, 0.4);
+    padding: 3rem 2rem;
+    border-radius: 30px;
+    border: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+@media (min-width: 1100px) {
+    .intent-revenue-journey {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start; /* Ensure all headers line up at the top */
+        padding: 4rem 3rem;
+    }
+}
+
+.journey-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem; /* Consistent gap between elements */
+    width: 100%;
+}
+
+.stage-media {
+    height: 180px; /* Standardize height for all visual elements */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.stage-label {
+    height: 30px; /* Fixed height for alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-cyan-neon);
+    letter-spacing: 2px;
+}
+
+.stage-caption {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    line-height: 1.5;
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.stage-caption strong {
+    color: var(--color-text-main);
+}
+
+/* Influence Stage */
+.creative-stack {
+    position: relative;
+    width: 200px;
+    height: 140px;
+}
+
+.creative-mini-card {
+    position: absolute;
+    width: 160px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.influence-1 {
+    top: 0;
+    left: 0;
+    z-index: 2;
+    transform: rotate(-5deg);
+}
+
+.influence-2 {
+    top: 20px;
+    left: 40px;
+    z-index: 1;
+    transform: rotate(5deg);
+    opacity: 0.6;
+}
+
+.mini-tag {
+    position: absolute;
+    bottom: -8px;
+    right: 10px;
+    background: var(--color-gold-champagne);
+    color: #000;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 2px 8px;
+    border-radius: 100px;
+    text-transform: uppercase;
+}
+
+/* Intent Stage */
+.intent-profile-box {
+    width: 240px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-cyan-neon);
+}
+
+.intent-tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.intent-tag {
+    font-size: 0.65rem;
+    background: rgba(255,255,255,0.05);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.glow-cyan { color: var(--color-cyan-neon); border-color: rgba(0, 229, 255, 0.3); }
+.glow-gold { color: var(--color-gold-champagne); border-color: rgba(212, 175, 55, 0.3); }
+
+.behavioral-data {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+/* Offer Stage */
+.direct-offer-card {
+    width: 280px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--color-gold-champagne);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+.offer-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--color-cyan-neon);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 900;
+    padding: 4px 12px;
+    border-radius: 4px;
+}
+
+.offer-content {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent 80%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.offer-content h4 {
+    font-size: 1rem;
+    margin: 0;
+    color: #fff;
+}
+
+.plus-sign {
+    font-size: 1.2rem;
+    color: var(--color-gold-champagne);
+    margin: 2px 0;
+}
+
+.offer-content h3 {
+    font-size: 1.3rem;
+    color: var(--color-cyan-neon);
+    margin: 0 0 10px 0;
+}
+
+.offer-tagline {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* Connectors */
+.journey-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+
+.connector-line {
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold-champagne));
+}
+
+@media (min-width: 1100px) {
+    .journey-connector {
+        height: auto;
+        width: 60px;
+        flex-direction: row;
+    }
+    .connector-line {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, var(--color-cyan-neon), var(--color-gold-champagne));
+    }
+}
+

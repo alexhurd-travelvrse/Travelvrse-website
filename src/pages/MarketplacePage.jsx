@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 const cities = [
   { 
     name: 'Barcelona Cruises', 
-    img: 'https://images.unsplash.com/photo-1583997051651-8255c7fc7b2d?auto=format&fit=crop&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1511527661048-7fe73d393d44?auto=format&fit=crop&q=80&w=800&v=2',
     desc: 'Setting sail from the heart of Catalonia.',
     url: 'https://msc-cruises.vercel.app/'
   },
@@ -16,7 +16,7 @@ const cities = [
   },
   { 
     name: 'Manchester', 
-    img: 'https://images.unsplash.com/photo-1633519520417-91024346e297?auto=format&fit=crop&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1549923333-a3d70f074d00?auto=format&fit=crop&q=80&w=800&v=2',
     desc: 'The heart of British industrial heritage.'
   },
   { 

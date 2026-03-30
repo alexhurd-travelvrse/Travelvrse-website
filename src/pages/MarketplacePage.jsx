@@ -4,28 +4,29 @@ import Footer from '../components/Footer';
 
 const cities = [
   { 
+    name: 'Barcelona Cruises', 
+    img: 'https://images.unsplash.com/photo-1583997051651-8255c7fc7b2d?auto=format&fit=crop&q=80&w=800',
+    desc: 'Setting sail from the heart of Catalonia.',
+    url: 'https://msc-cruises.vercel.app/'
+  },
+  { 
+    name: 'Miami', 
+    img: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?auto=format&fit=crop&q=80&w=800',
+    desc: 'Sun-drenched beaches and vibrant culture.'
+  },
+  { 
+    name: 'Manchester', 
+    img: 'https://images.unsplash.com/photo-1633519520417-91024346e297?auto=format&fit=crop&q=80&w=800',
+    desc: 'The heart of British industrial heritage.'
+  },
+  { 
     name: 'London', 
     img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800',
     desc: 'The historic capital of England.'
   },
   { 
-    name: 'Miami', 
-    img: 'https://images.unsplash.com/photo-1514214246283-d427a9575dca?auto=format&fit=crop&q=80&w=800',
-    desc: 'Sun-drenched beaches and vibrant culture.'
-  },
-  { 
-    name: 'Manchester', 
-    img: 'https://images.unsplash.com/photo-1515586838455-8f8f940d685c?auto=format&fit=crop&q=80&w=800',
-    desc: 'The heart of British industrial heritage.'
-  },
-  { 
-    name: 'Dubrovnik', 
-    img: 'https://images.unsplash.com/photo-1555990548-02883019409b?auto=format&fit=crop&q=80&w=800',
-    desc: 'The pearl of the Adriatic.'
-  },
-  { 
     name: 'Palm Springs', 
-    img: 'https://images.unsplash.com/photo-1505245208461-1e2474f3923c?auto=format&fit=crop&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=800',
     desc: 'A desert oasis of mid-century modern style.'
   },
   { 
@@ -71,7 +72,22 @@ const MarketplacePage = () => {
                                     borderRadius: '24px', 
                                     overflow: 'hidden',
                                     display: 'flex',
-                                    flexDirection: 'column'
+                                    flexDirection: 'column',
+                                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                    cursor: city.url ? 'pointer' : 'default'
+                                }}
+                                onClick={() => city.url && window.open(city.url, '_blank')}
+                                onMouseOver={(e) => {
+                                    if (city.url) {
+                                        e.currentTarget.style.transform = 'translateY(-10px)';
+                                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,229,255,0.2)';
+                                    }
+                                }}
+                                onMouseOut={(e) => {
+                                    if (city.url) {
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                        e.currentTarget.style.boxShadow = 'none';
+                                    }
                                 }}
                             >
                                 <div style={{ height: '300px', position: 'relative', overflow: 'hidden' }}>
@@ -84,8 +100,7 @@ const MarketplacePage = () => {
                                             objectFit: 'cover',
                                             transition: 'transform 0.5s ease'
                                         }} 
-                                        onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-                                        onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                                        className="city-image"
                                     />
                                     <div style={{ 
                                         position: 'absolute', 
@@ -101,9 +116,15 @@ const MarketplacePage = () => {
                                     </div>
                                 </div>
                                 <div style={{ padding: '30px', flexGrow: 1, display: 'flex', alignItems: 'flex-end' }}>
-                                    <button className="btn btn-outline" style={{ width: '100%', opacity: 0.6, cursor: 'not-allowed', borderStyle: 'dashed' }}>
-                                        Coming Soon
-                                    </button>
+                                    {city.url ? (
+                                        <button className="btn btn-primary" style={{ width: '100%' }}>
+                                            Visit Experience
+                                        </button>
+                                    ) : (
+                                        <button className="btn btn-outline" style={{ width: '100%', opacity: 0.6, cursor: 'not-allowed', borderStyle: 'dashed' }}>
+                                            Coming Soon
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         ))}

@@ -44,7 +44,7 @@ const Hero = () => {
 
                     <div className="hero-cta-group animate-fade-up delay-2">
                         <a href="#partner" className="btn btn-primary btn-large">
-                            Partner with Us
+                            Influencer Log-in
                         </a>
                         <Link to="/marketplace" className="btn btn-outline btn-large glass-btn">
                             <Play size={20} />

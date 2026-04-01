@@ -4,14 +4,14 @@ import './ProblemSection.css';
 
 const ProblemSection = () => {
     return (
-        <section className="section-padding problem-section">
+        <section className="section-padding problem-section" id="problem">
             <div className="container">
 
-                <div className="problem-header text-center animate-fade-up">
+                <div className="section-header animate-fade-up">
                     <h2 className="problem-title">
-                        The Experiences Gap
+                        The Experiences <span className="text-gold">Opportunity</span>
                     </h2>
-                    <p className="problem-hook text-xl">
+                    <p className="subtitle">
                         Next-Gen travelers don't search first for rooms - they search for local vibes.
                     </p>
                 </div>
@@ -23,7 +23,7 @@ const ProblemSection = () => {
                         <div className="card-icon-wrapper">
                             <Target size={32} className="text-cyan" />
                         </div>
-                        <h3>Experiences-First</h3>
+                        <h3>Experiences First</h3>
                         <p>
                             75% of Millennials & Gen-Z find the "what to do" before the "where to stay."
                         </p>
@@ -52,6 +52,10 @@ const ProblemSection = () => {
                     </div>
 
                 </div>
+            </div>
+            
+            <div className="section-bridge animate-fade-up delay-4">
+                <div className="bridge-line"></div>
             </div>
         </section>
     );

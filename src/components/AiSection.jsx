@@ -7,16 +7,18 @@ const AiSection = () => {
         <section className="section-padding ai-section" id="ai">
             <div className="container">
 
+                <div className="section-header animate-fade-up">
+                    <h2>
+                        Future-Proof Your <span className="text-cyan">Discovery</span>
+                    </h2>
+                    <p className="subtitle">
+                        Static websites are becoming invisible. Offer an immersive experience that OTAs cannot replicate.
+                    </p>
+                </div>
+
                 <div className="ai-layout">
-                    {/* Left: Copy */}
+                    {/* Content below header */}
                     <div className="ai-copy">
-                        <h2 className="animate-fade-up">
-                            Future-Proof Your <br />
-                            <span className="text-cyan">Discovery.</span>
-                        </h2>
-                        <p className="subtitle animate-fade-up delay-1">
-                            Static websites are becoming invisible. Offer an immersive experience that OTAs cannot replicate.
-                        </p>
 
                         <div className="ai-features">
                             <div className="ai-feature animate-fade-up delay-2">

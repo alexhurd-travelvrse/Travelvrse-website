@@ -5,9 +5,8 @@ import './Hero.css';
 
 const Hero = () => {
     return (
-        <section className="hero-section" style={{ background: '#050B14' }}>
-            {/* VIDEO BACKGROUND */}
-            <div className="hero-bg-container" style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden' }}>
+        <section className="hero-section">
+            <div className="hero-bg-container">
                 <video 
                     src="/models/Generic_Luxury_Travel_Video_Creation.mp4" 
                     className="hero-video"
@@ -15,43 +14,34 @@ const Hero = () => {
                     muted 
                     loop 
                     playsInline 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }}
                 />
-                
-                {/* Overlay on top of the Video */}
-                <div className="hero-overlay" style={{ 
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'linear-gradient(to bottom, rgba(5,11,20,0.5) 0%, rgba(5,11,20,0.3) 50%, rgba(5,11,20,0.95) 100%)', 
-                    zIndex: 1, 
-                    pointerEvents: 'none' 
-                }} />
+                <div className="hero-overlay" />
             </div>
 
-            <div className="container hero-content text-center" style={{ position: 'relative', zIndex: 10, pointerEvents: 'none' }}>
-                <div style={{ pointerEvents: 'auto' }}>
-                    <h1 className="hero-title animate-fade-up" style={{ textAlign: 'center', lineHeight: '1.2' }}>
-                        Own the Inspiration <br />
-                        <span className="text-gradient">Futureproof Your Direct Revenue</span>
-                    </h1>
+            <div className="container hero-content">
+                <h1 className="hero-title animate-fade-up">
+                    Own the Inspiration <br />
+                    <span className="text-gradient">Futureproof Your Direct Revenue</span>
+                </h1>
 
-                    <p className="hero-subtitle animate-fade-up delay-1">
-                        Stop waiting at the finish line. Join the influencer marketplace that puts your iconic experiences at the front of the Next-Gen discovery journey.
-                    </p>
+                <p className="hero-subtitle animate-fade-up delay-1">
+                    Stop waiting at the finish line. Join the influencer marketplace that puts <br />
+                    iconic hotel experiences at the front of the Next-Gen discovery journey.
+                </p>
 
-                    <div className="hero-cta-group animate-fade-up delay-2">
-                        <a href="#partner" className="btn btn-primary btn-large">
-                            Influencer Log-in
-                        </a>
-                        <Link to="/marketplace" className="btn btn-outline btn-large glass-btn">
-                            <Play size={20} />
-                            Visit our marketplace
-                        </Link>
-                    </div>
+                <div className="hero-cta-group animate-fade-up delay-2">
+                    <a href="#partner" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
+                        Influencer Log-in
+                    </a>
+                    <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
+                        <Play size={20} style={{ marginRight: '8px' }} />
+                        Visit our marketplace
+                    </Link>
                 </div>
+            </div>
+
+            <div className="scroll-indicator">
+                <div style={{ width: '4px', height: '60px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), transparent)', borderRadius: '4px' }}></div>
             </div>
         </section>
     );

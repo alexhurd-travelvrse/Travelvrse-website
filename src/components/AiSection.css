@@ -1,20 +1,18 @@
 .ai-section {
-    background: var(--color-navy-base);
-    border-top: 1px solid rgba(0, 229, 255, 0.1);
-    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
-    overflow: hidden;
+    background-color: var(--color-navy-deep);
+    position: relative;
 }
 
 .ai-layout {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
-    align-items: center;
+    gap: 3rem;
 }
 
 @media (min-width: 900px) {
     .ai-layout {
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
     }
 }
@@ -38,6 +36,18 @@
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: var(--glass-border);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.ai-feature:hover {
+    transform: translateX(5px);
+    border-color: var(--color-cyan-neon);
 }
 
 .ai-icon {
@@ -59,6 +69,11 @@
 .ai-icon.bg-gold-glow {
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
     border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.ai-icon.bg-navy-glow {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .ai-feature h4 {
@@ -116,27 +131,21 @@
 }
 
 .cyber-badge {
-    position: relative;
-    z-index: 10;
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 1.5rem 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
 
 @keyframes spin {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
 
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
+@media (max-width: 768px) {
+    .ai-visual {
+        max-width: 300px;
+        height: 300px;
     }
 }

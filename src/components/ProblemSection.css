@@ -13,16 +13,6 @@
     margin-bottom: 1.5rem;
 }
 
-.problem-hook {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    border-left: 4px solid var(--color-gold-champagne);
-    padding-left: 1.5rem;
-    text-align: left;
-}
-
 .problem-grid {
     display: grid;
     grid-template-columns: 1fr;

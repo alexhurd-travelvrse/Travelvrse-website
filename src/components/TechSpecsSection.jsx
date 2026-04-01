@@ -7,11 +7,11 @@ const TechSpecsSection = () => {
         <section className="section-padding tech-section" id="tech">
             <div className="container">
 
-                <div className="section-header text-center animate-fade-up">
+                <div className="section-header animate-fade-up">
                     <h2>
                         Frictionless <span className="text-cyan">Integration</span>
                     </h2>
-                    <p className="subtitle mx-auto max-w-2xl">
+                    <p className="subtitle">
                         Use our self-serve tools to manage influencers, game creation and experience intent data.
                     </p>
                 </div>
@@ -19,7 +19,7 @@ const TechSpecsSection = () => {
                 <div className="tools-creative animate-fade-up delay-2">
                     
                     {/* Tool 1: Campaign Manager */}
-                    <div className="tool-box">
+                    <div className="tool-box glass-card">
                         <div className="tool-label">Campaign Manager</div>
                         <div className="tool-media">
                             <div className="tool-screenshot" style={{ backgroundImage: 'url(/models/ceratortools.png)' }}>
@@ -36,7 +36,7 @@ const TechSpecsSection = () => {
                     </div>
 
                     {/* Tool 2: Creator Tools */}
-                    <div className="tool-box">
+                    <div className="tool-box glass-card">
                         <div className="tool-label">Creator Tools</div>
                         <div className="tool-media">
                             <div className="tool-screenshot" style={{ backgroundImage: 'url(/models/msc_mobile_scan.png)' }}>
@@ -53,7 +53,7 @@ const TechSpecsSection = () => {
                     </div>
 
                     {/* Tool 3: API Data Hand-off */}
-                    <div className="tool-box">
+                    <div className="tool-box glass-card">
                         <div className="tool-label">API Data Hand-off</div>
                         <div className="tool-media">
                             <div className="api-json-visual glass-card">
@@ -72,6 +72,9 @@ const TechSpecsSection = () => {
 
                 </div>
 
+            </div>
+            <div className="section-bridge animate-fade-up delay-4">
+                <div className="bridge-line"></div>
             </div>
         </section>
     );

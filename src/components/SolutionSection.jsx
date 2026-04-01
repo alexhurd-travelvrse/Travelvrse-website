@@ -1,14 +1,55 @@
 import React from 'react';
-import { Box, Gamepad2, BrainCircuit } from 'lucide-react';
+import { Box, Gamepad2, BrainCircuit, Compass, BellRing, MapPin, ChevronRight } from 'lucide-react';
 import './SolutionSection.css';
+
+const JourneyLifecycle = () => {
+    return (
+        <div className="journey-lifecycle-container animate-fade-up">
+            <div className="lifecycle-header">
+                <h4>SUPPORTED GUEST JOURNEYS</h4>
+            </div>
+            <div className="lifecycle-track">
+                
+                <div className="lifecycle-node">
+                    <div className="node-icon-bg">
+                        <Compass size={24} />
+                    </div>
+                    <div className="node-label">Pre-Booking</div>
+                    <div className="node-sublabel">Discovery & Intent</div>
+                </div>
+
+                <ChevronRight className="lifecycle-arrow" size={24} />
+
+                <div className="lifecycle-node">
+                    <div className="node-icon-bg">
+                        <BellRing size={24} />
+                    </div>
+                    <div className="node-label">Pre-Stay</div>
+                    <div className="node-sublabel">Upsell & Upgrade</div>
+                </div>
+
+                <ChevronRight className="lifecycle-arrow" size={24} />
+
+                <div className="lifecycle-node">
+                    <div className="node-icon-bg">
+                        <MapPin size={24} />
+                    </div>
+                    <div className="node-label">During Stay</div>
+                    <div className="node-sublabel">Rewards & Onsite</div>
+                </div>
+
+            </div>
+        </div>
+    );
+};
 
 const IntentRevenueVisual = () => {
     return (
         <div className="intent-revenue-journey animate-fade-up delay-4">
             
             {/* Stage 1: Creative Influence */}
-            <div className="journey-stage stage-influence">
-                <div className="stage-label">Step 1: Immersive Challenges</div>
+            <div className="journey-stage stage-influence glass-card">
+                <div className="stage-label">STEP 1: Choose Experience</div>
                 <div className="stage-media">
                     <div className="creative-stack">
                         <div className="creative-mini-card influence-1" style={{ backgroundImage: 'url(/assets/msc_home_preview.png)' }}>
@@ -19,45 +60,33 @@ const IntentRevenueVisual = () => {
                         </div>
                     </div>
                 </div>
-                <div className="stage-caption">Influencers turn your best experiences into hyperrealistic <strong>Immersive Challenges</strong> that lead guests through your property and local area.</div>
+                <div className="stage-caption">Choose an amazing onsite experience and reward. Bars, cabanas, restaurants, spas.</div>
             </div>
 
             <div className="journey-connector">
                 <div className="connector-line"></div>
-                <div className="connector-arrow"></div>
             </div>
 
-            {/* Stage 2: Experiences Intent Profile */}
-            <div className="journey-stage stage-intent">
-                <div className="stage-label">Step 2: Guest Intent DNA</div>
+            {/* Stage 2: Immersive Challenge */}
+            <div className="journey-stage stage-intent glass-card">
+                <div className="stage-label">STEP 2: Immersive Challenge</div>
                 <div className="stage-media">
-                    <div className="intent-profile-box glass-card">
-                        <div className="profile-header">
-                            <div className="profile-id">ID: 8829-X</div>
-                            <div className="profile-status">Capture: LIVE</div>
-                        </div>
-                        <div className="intent-tags-cloud">
-                            <span className="intent-tag glow-cyan">#WellnessVoyager</span>
-                            <span className="intent-tag">#Speakeasy</span>
-                            <span className="intent-tag glow-gold">#UltraLuxe</span>
-                        </div>
-                        <div className="behavioral-data">
-                            <div className="data-point">Dwell Time: High (22m)</div>
-                            <div className="data-point">Interaction: 98%</div>
-                        </div>
+                    <div className="immersive-challenge-card" style={{ 
+                        backgroundImage: 'url(/models/mscscreenshotfortravelvrse.png)',
+                    }}>
+                        <div className="challenge-pulse"></div>
                     </div>
                 </div>
-                <div className="stage-caption">Users play to unlock Exclusive Rewards; we extract their <strong>Experiences Intent</strong> while they play.</div>
+                <div className="stage-caption">Influencers create and promote web based challenges featuring your property and local area.</div>
             </div>
 
             <div className="journey-connector">
                 <div className="connector-line"></div>
-                <div className="connector-arrow"></div>
             </div>
 
             {/* Stage 3: Direct Offer Engine */}
-            <div className="journey-stage stage-offer">
-                <div className="stage-label">Step 3: Direct Revenue</div>
+            <div className="journey-stage stage-offer glass-card">
+                <div className="stage-label">STEP 3: Experiences Intent</div>
                 <div className="stage-media">
                     <div className="direct-offer-card" style={{ backgroundImage: 'url(/assets/balcony_grab.png)' }}>
                         <div className="offer-badge">COMBINED PACKAGE</div>
@@ -69,7 +98,7 @@ const IntentRevenueVisual = () => {
                         </div>
                     </div>
                 </div>
-                <div className="stage-caption">Use Intent for combined room and experience offers, delivering <strong>High-Margin Revenue</strong> bypassing OTA commissions.</div>
+                <div className="stage-caption">Challenge engagement generates intent for experiences upsell offers. Bookable direct.</div>
             </div>
 
         </div>
@@ -83,14 +112,16 @@ const SolutionSection = () => {
 
                 <div className="section-header text-center animate-fade-up">
                     <h2>
-                        Experiences-First <span className="text-gold">Discovery</span>
+                        Experiences First <span className="text-gold">Discovery</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        Make your onsite and local experiences the destination - curated by influencers on social media.
+                        Make your onsite and local experiences the destination - curated and promoted by influencers on social media.
                     </p>
                 </div>
 
                 <IntentRevenueVisual />
+
+                <JourneyLifecycle />
 
             </div>
         </section>

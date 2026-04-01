@@ -9,7 +9,6 @@ import TechSpecsSection from './components/TechSpecsSection';
 import TeamSection from './components/TeamSection';
 import Footer from './components/Footer';
 import MarketplacePage from './pages/MarketplacePage';
-import InfluencerPortal from './pages/InfluencerPortal';
 
 // ScrollToTop component ensures we start at the top when navigating between pages
 const ScrollToTop = () => {
@@ -41,7 +40,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<B2BHome />} />
         <Route path="/marketplace" element={<MarketplacePage />} />
-        <Route path="/influencer-portal" element={<InfluencerPortal />} />
       </Routes>
     </Router>
   );

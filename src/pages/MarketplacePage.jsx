@@ -7,7 +7,7 @@ const cities = [
     name: 'Barcelona Cruises', 
     img: 'https://images.unsplash.com/photo-1511527661048-7fe73d393d44?auto=format&fit=crop&q=80&w=800&v=2',
     desc: 'Setting sail from the heart of Catalonia.',
-    url: 'https://msc-cruises.vercel.app/'
+    url: '/barcelona'
   },
   { 
     name: 'Miami', 

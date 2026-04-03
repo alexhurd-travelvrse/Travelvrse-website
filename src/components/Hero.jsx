@@ -19,14 +19,15 @@ const Hero = () => {
             </div>
 
             <div className="container hero-content">
-                <h1 className="hero-title animate-fade-up">
-                    Own the Inspiration <br />
-                    <span className="text-gradient">Futureproof Your Direct Revenue</span>
-                </h1>
+                <div className="hero-header-group animate-fade-up">
+                    <h2 className="hero-strategy">Own The Inspiration: Interactive Hotel Experience Marketing</h2>
+                    <h1 className="hero-title">
+                        <span className="text-gradient">Futureproof Your Direct Revenue</span>
+                    </h1>
+                </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Stop waiting at the finish line. Join the influencer marketplace that puts <br />
-                    iconic hotel experiences at the front of the Next-Gen discovery journey.
+                    Join the Influencer Marketplace that turns iconic hotel, resort and cruise experiences into Next-Gen direct bookings
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">

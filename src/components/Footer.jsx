@@ -120,6 +120,10 @@ const Footer = () => {
                 <div className="footer-bottom">
                     <p className="copyright">&copy; {new Date().getFullYear()} Travelvrse. All rights reserved.</p>
                     <div className="footer-links">
+                        <a href="https://usgrant.travelvrse.com/privacy" target="_blank" rel="noopener noreferrer" className="footer-link">Privacy Policy</a>
+                        <span className="footer-divider">|</span>
+                        <a href="https://usgrant.travelvrse.com/terms" target="_blank" rel="noopener noreferrer" className="footer-link">Terms & Conditions</a>
+                        <span className="footer-divider">|</span>
                         {/* The Hidden Influencer Link */}
                         <Link to="/influencer-portal" className="stealth-link" title="Influencer Portal">
                             Influencers

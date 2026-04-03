@@ -101,15 +101,20 @@
     gap: 1.5rem;
 }
 
-.stealth-link {
+.stealth-link, .footer-link {
     color: var(--color-text-muted);
     text-decoration: none;
     font-size: 0.85rem;
     transition: color 0.3s ease;
 }
 
-.stealth-link:hover {
+.stealth-link:hover, .footer-link:hover {
     color: var(--color-cyan-neon);
+}
+
+.footer-divider {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.85rem;
 }
 
 /* Animations (Generic) */

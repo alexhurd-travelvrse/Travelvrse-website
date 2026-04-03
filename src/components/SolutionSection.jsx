@@ -52,10 +52,10 @@ const IntentRevenueVisual = () => {
                 <div className="stage-label">STEP 1: Choose Experience</div>
                 <div className="stage-media">
                     <div className="creative-stack">
-                        <div className="creative-mini-card influence-1" style={{ backgroundImage: 'url(/assets/msc_home_preview.png)' }}>
+                        <div className="creative-mini-card influence-1" style={{ backgroundImage: 'url(/assets/msc_home_preview.png)' }} role="img" aria-label="3D preview of a luxury cruise bar experience">
                             <div className="mini-tag">Guest List Bar Entry</div>
                         </div>
-                        <div className="creative-mini-card influence-2" style={{ backgroundImage: 'url(/models/cabana.png)' }}>
+                        <div className="creative-mini-card influence-2" style={{ backgroundImage: 'url(/models/cabana.png)' }} role="img" aria-label="3D render of a private cabana experience">
                             <div className="mini-tag">Free Cabana Upgrade</div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@ const IntentRevenueVisual = () => {
                 <div className="stage-media">
                     <div className="immersive-challenge-card" style={{ 
                         backgroundImage: 'url(/models/mscscreenshotfortravelvrse.png)',
-                    }}>
+                    }} role="img" aria-label="Influencer challenge showing a photorealistic 3D resort deck">
                         <div className="challenge-pulse"></div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@ const IntentRevenueVisual = () => {
             <div className="journey-stage stage-offer glass-card">
                 <div className="stage-label">STEP 3: Experiences Intent</div>
                 <div className="stage-media">
-                    <div className="direct-offer-card" style={{ backgroundImage: 'url(/assets/balcony_grab.png)' }}>
+                    <div className="direct-offer-card" style={{ backgroundImage: 'url(/assets/balcony_grab.png)' }} role="img" aria-label="Personalized direct booking offer for an ocean view balcony and spa package">
                         <div className="offer-badge">COMBINED PACKAGE</div>
                         <div className="offer-content">
                             <h4>Grand Ocean View Balcony</h4>

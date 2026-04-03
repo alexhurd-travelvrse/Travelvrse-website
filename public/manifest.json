@@ -1,0 +1,16 @@
+{
+  "name": "TravelVRse",
+  "short_name": "TravelVRse",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050b14",
+  "theme_color": "#00e5ff",
+  "description": "Experience Marketing for Hotels & Cruises via Immersive Influencer Challenges.",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -17,8 +17,8 @@ const Layout = ({ children }) => {
                         />
                     </Link>
                     <nav className="header-nav" style={{ display: 'flex', gap: '30px', color: 'white', fontWeight: 'bold', fontSize: '14px', alignItems: 'center', marginLeft: '40px' }}>
-                        <a href="#problem" style={{ color: 'white', textDecoration: 'none' }}>Experiences Opportunity</a>
-                        <a href="#solution" style={{ color: 'white', textDecoration: 'none' }}>Experiences First Discovery</a>
+                        <a href="#problem" style={{ color: 'white', textDecoration: 'none' }}>the $2b Experiences Opportunity</a>
+                        <a href="#solution" style={{ color: 'white', textDecoration: 'none' }}>Interactive Hotel Marketing</a>
                         <a href="#ai" style={{ color: 'white', textDecoration: 'none' }}>Future-Proof Your Discovery</a>
                         <Link to="/marketplace" style={{ color: 'white', textDecoration: 'none' }}>Marketplace</Link>
                         <a href="#team" style={{ color: 'white', textDecoration: 'none' }}>Our Team</a>

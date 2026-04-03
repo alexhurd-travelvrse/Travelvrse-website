@@ -112,7 +112,7 @@ const SolutionSection = () => {
 
                 <div className="section-header text-center animate-fade-up">
                     <h2>
-                        Interactive Experience <span className="text-gold">Marketing</span>
+                        Interactive Hotel <span className="text-gold">Marketing</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
                         Move beyond static photos. Our interactive 3D previews allow Next-Gen travelers to explore your property in real-time. By letting guests 'try before they stay,' you build the confidence that leads to direct bookings and higher on-site spend.

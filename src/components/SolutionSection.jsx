@@ -112,10 +112,10 @@ const SolutionSection = () => {
 
                 <div className="section-header text-center animate-fade-up">
                     <h2>
-                        Experiences First <span className="text-gold">Discovery</span>
+                        Interactive Experience <span className="text-gold">Marketing</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        Make your onsite and local experiences the destination - curated and promoted by influencers on social media.
+                        Move beyond static photos. Our interactive 3D previews allow Next-Gen travelers to explore your property in real-time. By letting guests 'try before they stay,' you build the confidence that leads to direct bookings and higher on-site spend.
                     </p>
                 </div>
 

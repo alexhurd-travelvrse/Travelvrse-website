@@ -23,7 +23,7 @@ const Hero = () => {
                     <h1 className="hero-title">
                         <span className="text-gradient">Futureproof Your Direct Revenue</span>
                     </h1>
-                    <h2 className="hero-strategy">Interactive Experience Marketing for Hotels, Resorts, and Cruise Operators</h2>
+                    <h2 className="hero-strategy">Interactive Experiences Marketing for Hotels, Resorts, and Cruise Operators</h2>
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">

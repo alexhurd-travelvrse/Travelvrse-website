@@ -20,19 +20,19 @@ const Hero = () => {
 
             <div className="container hero-content">
                 <div className="hero-header-group animate-fade-up">
-                    <h2 className="hero-strategy">Own The Inspiration: Interactive Hotel Marketing</h2>
                     <h1 className="hero-title">
                         <span className="text-gradient">Futureproof Your Direct Revenue</span>
                     </h1>
+                    <h2 className="hero-strategy">Interactive Experience Marketing for Hotels, Resorts, and Cruise Operators</h2>
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Join the Influencer Marketplace that turns iconic hotel, resort and cruise experiences into Next-Gen direct bookings
+                    Join the marketplace that puts your iconic experiences at the front of the Next-Gen discovery journey. Every interaction builds a Guest Profile, delivering qualified Direct Leads
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">
                     <a href="#partner" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-                        Influencer Log-in
+                        Start Generating Leads
                     </a>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />

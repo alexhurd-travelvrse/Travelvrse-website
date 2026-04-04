@@ -27,7 +27,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Join the marketplace that puts your iconic experiences at the front of the Next-Gen discovery journey. Every interaction builds a Guest Profile, delivering qualified Direct Leads
+                    Join the marketplace that puts your iconic experiences at the front of the Next-Gen discovery journey. Build Guest Profiles that deliver qualified Direct Leads
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">

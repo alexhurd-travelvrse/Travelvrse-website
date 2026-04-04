@@ -1,0 +1,25 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : 03 April 2026 16:03:10
+   Source : C:\Users\Student\.gemini\antigravity\scratch\travel-vrse\public\
+     Dest : C:\Users\Student\.gemini\antigravity\scratch\travel-vrse\Travelvrse website\public\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /DCOPY:DA /COPY:DAT /Z /MT:32 /R:5 /W:15 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         3         3         3         0         0         0
+   Files :        66         0        66         0         0         0
+   Bytes :   53.09 m         0   53.09 m         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+   Ended : 03 April 2026 16:03:11
+

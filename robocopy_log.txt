@@ -1,0 +1,33 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : 03 April 2026 16:03:02
+   Source : C:\Users\Student\.gemini\antigravity\scratch\travel-vrse\src\
+     Dest : C:\Users\Student\.gemini\antigravity\scratch\travel-vrse\Travelvrse website\src\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /DCOPY:DA /COPY:DAT /Z /MT:32 /R:5 /W:15 
+
+------------------------------------------------------------------------------
+
+	    Newer     		    2330	C:\Users\Student\.gemini\antigravity\scratch\travel-vrse\src\components\Footer.css  0%  100%  
+	    Newer     		    6256	C:\Users\Student\.gemini\antigravity\scratch\travel-vrse\src\components\Footer.jsx100%  
+	    Newer     		    2530	C:\Users\Student\.gemini\antigravity\scratch\travel-vrse\src\components\Hero.css100%  
+	    Newer     		    2129	C:\Users\Student\.gemini\antigravity\scratch\travel-vrse\src\components\Hero.jsx100%  
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         5         5         5         0         0         0
+   Files :        51         4        47         0         0         0
+   Bytes :    5.08 m    12.9 k    5.07 m         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :           1,892,142 Bytes/sec.
+   Speed :             108.269 MegaBytes/min.
+   Ended : 03 April 2026 16:03:02
+

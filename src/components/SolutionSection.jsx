@@ -124,7 +124,7 @@ const SolutionSection = () => {
                         Interactive Experiences <span className="text-gold">Marketing</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        Our photorealistic 3D previews allow Next-Gen travelers to 'try before they stay', building the confidence that leads to direct bookings and higher on-site spend.
+                        Our photorealistic 3D previews allow Next-Gen travelers to 'try before they stay', building a Guest Profile that leads to direct bookings and higher on-site spend.
                     </p>
                 </div>
 

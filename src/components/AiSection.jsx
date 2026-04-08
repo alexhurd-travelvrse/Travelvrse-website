@@ -8,26 +8,27 @@ const AiSection = () => {
             <div className="container">
 
                 <div className="section-header animate-fade-up">
-                    <h2>
-                        Future-Proof Your <span className="text-cyan">Discovery</span>
+                    <h1 className="problem-title" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', textAlign: 'left' }}>
+                        Go OTA-Free. <span className="text-cyan">Own Your Digital Space.</span>
+                    </h1>
+                    <h2 className="subtitle" style={{ color: 'var(--color-gold-champagne)', textAlign: 'left', marginTop: '1rem', textTransform: 'none', letterSpacing: 'normal', fontWeight: 'bold' }}>
+                        Interactive Experience Assets & Spatial SEO
                     </h2>
-                    <p className="subtitle">
-                        Static websites are becoming invisible. Offer an immersive experience that OTAs cannot replicate.
-                    </p>
+                    <h3 className="subtitle" style={{ color: 'var(--color-text-muted)', textAlign: 'left', marginTop: '0.5rem', fontSize: '1.2rem', textTransform: 'none', letterSpacing: 'normal' }}>
+                        B2B Training & Internal Influencer Tools
+                    </h3>
                 </div>
 
                 <div className="ai-layout">
-                    {/* Content below header */}
                     <div className="ai-copy">
-
                         <div className="ai-features">
                             <div className="ai-feature animate-fade-up delay-2">
                                 <div className="ai-icon bg-cyan-glow">
                                     <Search size={24} className="text-cyan" />
                                 </div>
                                 <div>
-                                    <h4>Social Media</h4>
-                                    <p>Turn passive scrolling into active exploration within Instagram and TikTok.</p>
+                                    <h4>Own the Search (Spatial SEO)</h4>
+                                    <p>Unlike 2D photos that OTAs scrape and reuse, your 3D experience is a unique spatial asset. By hosting it on your domain, you claim the Spatial SEO credit, ensuring your property—not a third-party—ranks first when Next-Gen travelers search for their next experience.</p>
                                 </div>
                             </div>
 
@@ -36,28 +37,18 @@ const AiSection = () => {
                                     <Sparkles size={24} className="text-gold" />
                                 </div>
                                 <div>
-                                    <h4>Influencer & Concierge Power</h4>
-                                    <p>Empower creators and your own elite staff to become immersive storytellers.</p>
+                                    <h4>Empower Your Teams</h4>
+                                    <p>Transform your concierge into a digital guide. Use your 3D assets as a high-fidelity B2B Training Tool for global travel agencies, giving them a "walkthrough" understanding of your property that no brochure can match.</p>
                                 </div>
                             </div>
 
-                            <div className="ai-feature animate-fade-up delay-3">
+                            <div className="ai-feature animate-fade-up delay-4">
                                 <div className="ai-icon bg-navy-glow">
                                     <Timer size={24} className="text-cyan" />
                                 </div>
                                 <div>
-                                    <h4>Full-Journey Engagement</h4>
-                                    <p>Own the relationship at every touchpoint: Pre-Booking, Pre-Arrival, and During-Stay.</p>
-                                </div>
-                            </div>
-                            
-                            <div className="ai-feature animate-fade-up delay-4" id="friction">
-                                <div className="ai-icon bg-cyan-glow">
-                                    <Sparkles size={24} className="text-cyan" />
-                                </div>
-                                <div>
-                                    <h4>AI & Visual Search Authority</h4>
-                                    <p>Become the "Source of Truth" for Google Gemini, Google Lens, and Apple Intelligence.</p>
+                                    <h4>Next-Gen Performance</h4>
+                                    <p>Influencers drive the traffic, but your 3D environment captures the lead. Engage guests on their favorite channels and pull them directly into a world you own, building a Guest Profile that bypasses the OTA middleman entirely.</p>
                                 </div>
                             </div>
                         </div>

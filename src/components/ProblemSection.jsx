@@ -36,7 +36,7 @@ const ProblemSection = () => {
                         </div>
                         <h3>Invisible Icons</h3>
                         <p>
-                            Your rooftop bars, spas, cabanas and local attractions are hidden behind room-rate spreadsheets.
+                            Your rooftop bars, spas, cabanas and local attractions are hidden by OTAs.
                         </p>
                     </div>
 
@@ -47,7 +47,7 @@ const ProblemSection = () => {
                         </div>
                         <h3>The Price Trap</h3>
                         <p>
-                            By only marketing the room, you’re forced to compete on price with OTAs, losing both margin and Guest Profile.
+                            By only marketing the room, you’re forced to compete on price with OTAs.
                         </p>
                     </div>
 

@@ -47,7 +47,7 @@ const ProblemSection = () => {
                         </div>
                         <h3>The Price Trap</h3>
                         <p>
-                            By only marketing the room, you’re forced to compete on price with OTAs, losing both margin and Guest Intent.
+                            By only marketing the room, you’re forced to compete on price with OTAs, losing both margin and Guest Profile.
                         </p>
                     </div>
 

@@ -28,7 +28,6 @@ const B2BHome = () => {
       <ExperienceVerticals />
       <ProblemSection />
       <SolutionSection />
-      <AiSection />
       <TechSpecsSection />
       <TeamSection />
       <Footer />

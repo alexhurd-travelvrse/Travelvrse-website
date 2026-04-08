@@ -60,7 +60,10 @@ const IntentRevenueVisual = () => {
                         </div>
                     </div>
                 </div>
-                <div className="stage-caption">Choose an amazing onsite experience and reward. Bars, cabanas, restaurants, spas.</div>
+                <div className="stage-caption">
+                    Choose an amazing onsite experience.
+                    <div className="caption-example">Example: <strong>Rooftop Bar</strong></div>
+                </div>
             </div>
 
             <div className="journey-connector">
@@ -77,7 +80,10 @@ const IntentRevenueVisual = () => {
                         <div className="challenge-pulse"></div>
                     </div>
                 </div>
-                <div className="stage-caption">Influencers create and promote web based challenges featuring your experiences and local area.</div>
+                <div className="stage-caption">
+                    Influencers create a rewarded challenge.
+                    <div className="caption-example">Example: <strong>Guest List Entry</strong></div>
+                </div>
             </div>
 
             <div className="journey-connector">
@@ -86,7 +92,7 @@ const IntentRevenueVisual = () => {
 
             {/* Stage 3: Direct Offer Engine */}
             <div className="journey-stage stage-offer glass-card">
-                <div className="stage-label">STEP 3: Experiences Intent</div>
+                <div className="stage-label">STEP 3: Guest Profile</div>
                 <div className="stage-media">
                     <div className="direct-offer-card" style={{ backgroundImage: 'url(/assets/balcony_grab.png)' }} role="img" aria-label="Personalized direct booking offer for an ocean view balcony and spa package">
                         <div className="offer-badge">COMBINED PACKAGE</div>
@@ -98,7 +104,10 @@ const IntentRevenueVisual = () => {
                         </div>
                     </div>
                 </div>
-                <div className="stage-caption">Challenge engagement generates intent for experiences upsell offers. Bookable direct.</div>
+                <div className="stage-caption">
+                    Guests build a profile and receive upsell offer.
+                    <div className="caption-example">Example: <strong>Spa Packages</strong></div>
+                </div>
             </div>
 
         </div>

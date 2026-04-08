@@ -77,6 +77,19 @@
     margin: 0 auto;
 }
 
+.caption-example {
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--color-text-main);
+}
+
+.caption-example strong {
+    color: var(--color-gold-champagne);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+}
+
 /* Influence Stage */
 .creative-stack {
     position: relative;

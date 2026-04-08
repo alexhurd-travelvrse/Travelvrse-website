@@ -7,6 +7,7 @@ import SolutionSection from './components/SolutionSection';
 import AiSection from './components/AiSection';
 import TechSpecsSection from './components/TechSpecsSection';
 import TeamSection from './components/TeamSection';
+import ExperienceVerticals from './components/ExperienceVerticals';
 import Footer from './components/Footer';
 import MarketplacePage from './pages/MarketplacePage';
 import BarcelonaPage from './pages/BarcelonaPage';
@@ -24,6 +25,7 @@ const B2BHome = () => {
   return (
     <Layout>
       <Hero />
+      <ExperienceVerticals />
       <ProblemSection />
       <SolutionSection />
       <AiSection />

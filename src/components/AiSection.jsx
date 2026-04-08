@@ -12,7 +12,7 @@ const AiSection = () => {
                         Go OTA-Free. <span className="text-cyan">Own Your Digital Space.</span>
                     </h1>
                     <h2 className="subtitle" style={{ color: 'var(--color-gold-champagne)', textAlign: 'left', marginTop: '1rem', textTransform: 'none', letterSpacing: 'normal', fontWeight: 'bold' }}>
-                        Interactive Experience Assets & Spatial SEO
+                        Rewarded Experience Assets & Spatial SEO
                     </h2>
                     <h3 className="subtitle" style={{ color: 'var(--color-text-muted)', textAlign: 'left', marginTop: '0.5rem', fontSize: '1.2rem', textTransform: 'none', letterSpacing: 'normal' }}>
                         B2B Training & Internal Influencer Tools

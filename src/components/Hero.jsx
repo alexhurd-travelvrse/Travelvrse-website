@@ -23,11 +23,12 @@ const Hero = () => {
                     <h1 className="hero-title">
                         <span className="text-gradient">Futureproof Your Direct Revenue</span>
                     </h1>
-                    <h2 className="hero-strategy">Interactive Experiences Marketing for HOTELS, RESORTS AND CRUISE  OPERATORS</h2>
+                    <h2 className="hero-strategy">Rewarded Experience Marketing for HOTELS, RESORTS AND CRUISE OPERATORS</h2>
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Join the marketplace that puts your iconic experiences at the front of the Next-Gen discovery journey. Build Guest Profiles that deliver qualified Direct Leads
+                    Join the marketplace putting your icons at the front of the Next-Gen journey.<br />
+                    Turn interaction into Rewarded Discovery that delivers qualified Direct Leads.
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">

@@ -12,7 +12,7 @@ const TechSpecsSection = () => {
                         Frictionless <span className="text-cyan">Integration</span>
                     </h2>
                     <p className="subtitle">
-                        Use our self-serve tools to manage influencers, game creation and experience intent data.
+                        Use our self-serve tools to manage influencers, rewarded discovery, and first-party intent data.
                     </p>
                 </div>
 

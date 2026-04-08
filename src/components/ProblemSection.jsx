@@ -9,7 +9,7 @@ const ProblemSection = () => {
 
                 <div className="section-header animate-fade-up">
                     <h2 className="problem-title">
-                        $300b Experiences <span className="text-gold">Opportunity</span>
+                        The $300b Experiences Opportunity: <span className="text-gold">Rewarded Experience Marketing</span>
                     </h2>
                     <p className="subtitle">
                         Next-Gen travelers don't search first for rooms - they search for local vibes.

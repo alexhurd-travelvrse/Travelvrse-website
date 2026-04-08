@@ -115,7 +115,7 @@ const SolutionSection = () => {
                         Interactive Experiences <span className="text-gold">Marketing</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        Move beyond static photos. Our interactive 3D previews allow Next-Gen travelers to explore your experiences in real-time. By letting guests 'try before they stay,' you build the confidence that leads to direct bookings and higher on-site spend.
+                        Move beyond static photos. Our photorealistic 3D previews allow Next-Gen travelers to explore your experiences in real-time. By letting guests 'try before they stay,' you build the confidence that leads to direct bookings and higher on-site spend.
                     </p>
                 </div>
 

@@ -233,3 +233,13 @@ p, .subtitle {
 ::-webkit-scrollbar-track { background: var(--color-navy-deep); }
 ::-webkit-scrollbar-thumb { background: var(--color-navy-light); border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+.nav-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--color-cyan-neon);
+}

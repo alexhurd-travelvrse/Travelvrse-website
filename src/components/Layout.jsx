@@ -16,12 +16,21 @@ const Layout = ({ children }) => {
                             style={{ height: '70px' }}
                         />
                     </Link>
-                    <nav className="header-nav" style={{ display: 'flex', gap: '30px', color: 'white', fontWeight: 'bold', fontSize: '14px', alignItems: 'center', marginLeft: '40px' }}>
-                        <a href="#problem" style={{ color: 'white', textDecoration: 'none' }}>$300b Experiences Opportunity</a>
-                        <a href="#solution" style={{ color: 'white', textDecoration: 'none' }}>Interactive Experiences Marketing</a>
-                        <a href="#ai" style={{ color: 'white', textDecoration: 'none' }}>Go OTA Free</a>
-                        <Link to="/marketplace" style={{ color: 'white', textDecoration: 'none' }}>Marketplace</Link>
-                        <a href="#team" style={{ color: 'white', textDecoration: 'none' }}>Our Team</a>
+                    <nav className="header-nav" style={{ 
+                        display: 'flex', 
+                        gap: '40px', 
+                        color: 'white', 
+                        fontWeight: '600', 
+                        fontSize: '13px', 
+                        alignItems: 'center',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px'
+                    }}>
+                        <a href="#problem" className="nav-link">$300b Experiences Opportunity</a>
+                        <a href="#solution" className="nav-link">Interactive Experiences Marketing</a>
+                        <a href="#ai" className="nav-link">Go OTA Free</a>
+                        <Link to="/marketplace" className="nav-link">Marketplace</Link>
+                        <a href="#team" className="nav-link">Our Team</a>
                     </nav>
                 </div>
             </header>

@@ -69,7 +69,7 @@ const IntentRevenueVisual = () => {
 
             {/* Stage 2: Immersive Challenge */}
             <div className="journey-stage stage-intent glass-card">
-                <div className="stage-label">STEP 2: Immersive Challenge</div>
+                <div className="stage-label">STEP 2: Interactive Challenge</div>
                 <div className="stage-media">
                     <div className="immersive-challenge-card" style={{ 
                         backgroundImage: 'url(/models/mscscreenshotfortravelvrse.png)',

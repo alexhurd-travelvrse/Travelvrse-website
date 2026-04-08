@@ -32,7 +32,7 @@
 @media (min-width: 1100px) {
     .intent-revenue-journey {
         display: grid;
-        grid-template-columns: 1fr 60px 1fr 60px 1fr;
+        grid-template-columns: 1fr 60px 1.2fr 60px 1fr; /* Give Step 2 more weight */
         justify-content: center;
         align-items: stretch;
         padding: 4rem 2rem;
@@ -116,6 +116,7 @@
 .immersive-challenge-card {
     height: 100%;
     width: 100%;
+    max-width: 340px; /* Better presence for Step 2 */
     background-size: cover;
     background-position: center;
     border-radius: 16px;
@@ -138,7 +139,8 @@
 
 /* Offer Stage */
 .direct-offer-card {
-    width: 280px;
+    width: 100%;
+    max-width: 300px;
     height: 180px;
     background-size: cover;
     background-position: center;

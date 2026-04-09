@@ -61,7 +61,7 @@ const IntentRevenueVisual = () => {
                     </div>
                 </div>
                 <div className="stage-caption">
-                    Choose an amazing onsite experience.
+                    Choose an amazing onsite experience
                     <div className="caption-example">Example: <strong>Rooftop Bar</strong></div>
                 </div>
             </div>
@@ -81,7 +81,7 @@ const IntentRevenueVisual = () => {
                     </div>
                 </div>
                 <div className="stage-caption">
-                    Influencers create and promote a playable rewarded challenge.
+                    Influencers create and promote a playable rewarded challenge
                     <div className="caption-example">Example: <strong>Guest List Entry</strong></div>
                 </div>
             </div>
@@ -105,7 +105,7 @@ const IntentRevenueVisual = () => {
                     </div>
                 </div>
                 <div className="stage-caption">
-                    Guests build a profile and receive upsell offer.
+                    Guests build a profile and receive upsell offer
                     <div className="caption-example">Example: <strong>Dining Package</strong></div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Join the influencer marketplace putting your iconic experiences at the front of the Next-Gen discovery journey
+                    Put your iconic experiences at the front of the Next-Gen discovery journey
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">

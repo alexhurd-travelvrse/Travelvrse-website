@@ -72,7 +72,10 @@ const IntentRevenueVisual = () => {
             
             {/* Stage 1: Creative Influence */}
             <div className="journey-stage stage-influence glass-card">
-                <div className="stage-label">STEP 1<div className="mt-1" style={{ color: 'var(--color-text-main)' }}>Choose Experience</div></div>
+                <div className="stage-label">
+                    <div>STEP 1</div>
+                    <div className="mt-1" style={{ color: 'var(--color-text-main)', fontSize: '0.9rem', textTransform: 'none' }}>Choose Experience</div>
+                </div>
                 <div className="stage-media">
                     <div className="creative-stack">
                         <div className="creative-mini-card influence-1" style={{ backgroundImage: 'url(/assets/msc_home_preview.png)' }} role="img" aria-label="3D preview of a luxury cruise bar experience">
@@ -84,7 +87,7 @@ const IntentRevenueVisual = () => {
                     </div>
                 </div>
                 <div className="stage-caption">
-                    Choose an amazing onsite experience and offer
+                    <div className="caption-text">Choose an amazing onsite experience and offer</div>
                     <div className="caption-example">Example: <strong>GUEST LIST ENTRY ROOFTOP BAR</strong></div>
                 </div>
             </div>
@@ -95,7 +98,10 @@ const IntentRevenueVisual = () => {
 
             {/* Stage 2: Immersive Challenge */}
             <div className="journey-stage stage-intent glass-card">
-                <div className="stage-label">STEP 2<div className="mt-1" style={{ color: 'var(--color-text-main)' }}>Rewarded Challenge</div></div>
+                <div className="stage-label">
+                    <div>STEP 2</div>
+                    <div className="mt-1" style={{ color: 'var(--color-text-main)', fontSize: '0.9rem', textTransform: 'none' }}>Rewarded Challenge</div>
+                </div>
                 <div className="stage-media">
                     <div className="immersive-challenge-card" style={{ 
                         backgroundImage: 'url(/models/mscscreenshotfortravelvrse.png)',
@@ -104,7 +110,7 @@ const IntentRevenueVisual = () => {
                     </div>
                 </div>
                 <div className="stage-caption">
-                    Creators create/promote playable rewarded challenge
+                    <div className="caption-text">Creators create/promote playable rewarded challenge</div>
                     <div className="caption-example">Example: <strong>TRY OUT 5 ONSITE/LOCAL EXPERIENCES</strong></div>
                 </div>
             </div>
@@ -115,7 +121,10 @@ const IntentRevenueVisual = () => {
 
             {/* Stage 3: Direct Offer Engine */}
             <div className="journey-stage stage-offer glass-card">
-                <div className="stage-label">STEP 3<div className="mt-1" style={{ color: 'var(--color-text-main)' }}>Direct Lead</div></div>
+                <div className="stage-label">
+                    <div>STEP 3</div>
+                    <div className="mt-1" style={{ color: 'var(--color-text-main)', fontSize: '0.9rem', textTransform: 'none' }}>Direct Lead</div>
+                </div>
                 <div className="stage-media">
                     <div className="direct-offer-card" style={{ backgroundImage: 'url(/assets/balcony_grab.png)' }} role="img" aria-label="Personalized direct booking offer for an ocean view balcony and spa package">
                         <div className="offer-badge">COMBINED PACKAGE</div>
@@ -128,7 +137,7 @@ const IntentRevenueVisual = () => {
                     </div>
                 </div>
                 <div className="stage-caption">
-                    Guests build a profile and receive upsell offer
+                    <div className="caption-text">Guests build a profile and receive upsell offer</div>
                     <div className="caption-example">Example: <strong>Dining Package</strong></div>
                 </div>
             </div>

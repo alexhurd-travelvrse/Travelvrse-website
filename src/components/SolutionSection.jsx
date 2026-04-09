@@ -145,7 +145,7 @@ const SolutionSection = () => {
                 <div className="section-header text-center animate-fade-up">
                     <h2 className="text-gold">REWARDED EXPERIENCE MARKETPLACE</h2>
                     <p className="subtitle mx-auto max-w-4xl">
-                        Our photorealistic 3D previews allow Next-Gen travelers to 'Play before you stay', building a Guest Profile that leads to direct bookings and higher on-site spend
+                        Our photorealistic challenges allow Next-Gen travelers to 'Play before you stay' seamlessly building a Guest Profile that leads to direct bookings and higher on-site spend
                     </p>
                 </div>
 

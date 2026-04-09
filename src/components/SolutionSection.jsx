@@ -92,7 +92,7 @@ const IntentRevenueVisual = () => {
 
             {/* Stage 3: Direct Offer Engine */}
             <div className="journey-stage stage-offer glass-card">
-                <div className="stage-label">STEP 3<div className="mt-1" style={{ color: 'var(--color-text-main)' }}>Guest Profile</div></div>
+                <div className="stage-label">STEP 3<div className="mt-1" style={{ color: 'var(--color-text-main)' }}>Direct Lead</div></div>
                 <div className="stage-media">
                     <div className="direct-offer-card" style={{ backgroundImage: 'url(/assets/balcony_grab.png)' }} role="img" aria-label="Personalized direct booking offer for an ocean view balcony and spa package">
                         <div className="offer-badge">COMBINED PACKAGE</div>

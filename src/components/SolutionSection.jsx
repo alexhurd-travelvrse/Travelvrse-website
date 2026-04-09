@@ -104,8 +104,8 @@ const IntentRevenueVisual = () => {
                     </div>
                 </div>
                 <div className="stage-caption">
-                    Influencers create/promote playable rewarded challenge
-                    <div className="caption-example">Example: <strong>Guest List Entry</strong></div>
+                    Creators create/promote playable rewarded challenge
+                    <div className="caption-example">Example: <strong>TRY OUT 5 ONSITE/LOCAL EXPERIENCES</strong></div>
                 </div>
             </div>
 

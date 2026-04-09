@@ -122,7 +122,7 @@ const SolutionSection = () => {
                 <div className="section-header text-center animate-fade-up">
                     <h2 className="text-gold">Rewarded Experiences</h2>
                     <p className="subtitle mx-auto max-w-4xl">
-                        Play before you stay
+                        Our photorealistic 3D previews allow Next-Gen travelers to 'Play before you stay', building a Guest Profile that leads to direct bookings and higher on-site spend
                     </p>
                 </div>
 

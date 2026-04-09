@@ -12,7 +12,7 @@ const ProblemSection = () => {
                         The $300b Experiences Opportunity
                     </h2>
                     <p className="subtitle">
-                        Next-Gen travelers don't search first for rooms - they search for local vibes.
+                        Next-Gen travelers don't search first for rooms - they search for local vibes
                     </p>
                 </div>
 
@@ -25,7 +25,7 @@ const ProblemSection = () => {
                         </div>
                         <h3>Experiences First</h3>
                         <p>
-                            75% of Millennials & Gen-Z find the "what to do" before the "where to stay."
+                            75% of Millennials & Gen-Z find the "what to do" before the "where to stay"
                         </p>
                     </div>
 
@@ -36,7 +36,7 @@ const ProblemSection = () => {
                         </div>
                         <h3>Invisible Icons</h3>
                         <p>
-                            Your rooftop bars, spas, cabanas and local attractions are hidden by OTAs.
+                            Your rooftop bars, spas, cabanas and local attractions are hidden by OTAs
                         </p>
                     </div>
 
@@ -47,7 +47,7 @@ const ProblemSection = () => {
                         </div>
                         <h3>The Price Trap</h3>
                         <p>
-                            By only marketing the room, you’re forced to compete on price with OTAs.
+                            By only marketing the room, you’re forced to compete on price with OTAs
                         </p>
                     </div>
 

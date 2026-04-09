@@ -7,14 +7,11 @@ const Layout = ({ children }) => {
     return (
         <>
             <header className="main-header" style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000, padding: '1rem 0', background: 'rgba(5, 11, 20, 0.8)', backdropFilter: 'blur(10px)' }}>
-                <div className="header-content" style={{ 
+                <div className="container header-content" style={{ 
                     display: 'flex', 
                     justifyContent: 'space-between', 
                     alignItems: 'center', 
-                    width: '100%', 
-                    padding: '0 4rem', // More lateral space
-                    maxWidth: '1800px', // Wider than standard container for header
-                    margin: '0 auto' 
+                    height: '100%'
                 }}>
                     <Link to="/" className="logo">
                         <img

@@ -120,11 +120,9 @@ const SolutionSection = () => {
             <div className="container">
 
                 <div className="section-header text-center animate-fade-up">
-                    <h2>
-                        Own the Inspiration: <span className="text-gold">Rewarded Experiences</span>
-                    </h2>
+                    <h2 className="text-gold">Rewarded Experiences</h2>
                     <p className="subtitle mx-auto max-w-4xl">
-                        Stop losing guests to anonymous third-party platforms. Our platform turns the inspiration phase into a Rewarded Journey, capturing first-party intent data and delivering Qualified Direct Leads at the point of discovery.
+                        Play before you stay
                     </p>
                 </div>
 

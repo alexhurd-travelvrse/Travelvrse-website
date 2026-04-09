@@ -1,6 +1,15 @@
 import React from 'react';
-import { Box, Gamepad2, BrainCircuit, Compass, BellRing, MapPin, ChevronRight } from 'lucide-react';
+import { Box, Gamepad2, BrainCircuit, Compass, BellRing, MapPin, ChevronRight, Wine, Waves, Utensils, Zap, Camera, Hotel } from 'lucide-react';
 import './SolutionSection.css';
+
+const verticals = [
+    { icon: <Waves size={20} />, label: 'LUXURY SPAS' },
+    { icon: <Hotel size={20} />, label: 'PRIVATE CABANAS' },
+    { icon: <Utensils size={20} />, label: 'SIGNATURE DINING' },
+    { icon: <Wine size={20} />, label: 'ROOFTOP BARS' },
+    { icon: <Zap size={20} />, label: 'BEACH CLUBS' },
+    { icon: <Camera size={20} />, label: 'EXCURSIONS' }
+];
 
 const JourneyLifecycle = () => {
     return (
@@ -38,6 +47,20 @@ const JourneyLifecycle = () => {
                     <div className="node-sublabel">Rewards & Onsite</div>
                 </div>
 
+            </div>
+
+            <div className="lifecycle-divider"></div>
+
+            <div className="lifecycle-footer">
+                <div className="strip-title">WORKS FOR EVERY TOUCHPOINT</div>
+                <div className="verticals-grid">
+                    {verticals.map((v, i) => (
+                        <div key={i} className="vertical-tag">
+                            <span className="tag-icon">{v.icon}</span>
+                            <span className="tag-label">{v.label}</span>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

@@ -121,7 +121,7 @@ const SolutionSection = () => {
 
                 <div className="section-header text-center animate-fade-up">
                     <h2>
-                        Own the Inspiration: <span className="text-gold">Rewarded Experience Marketing</span>
+                        Own the Inspiration: <span className="text-gold">REWARDED EXPERIENCE MARKETPLACE</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-4xl">
                         Stop losing guests to anonymous third-party platforms. Our platform turns the inspiration phase into a Rewarded Journey, capturing first-party intent data and delivering Qualified Direct Leads at the point of discovery.

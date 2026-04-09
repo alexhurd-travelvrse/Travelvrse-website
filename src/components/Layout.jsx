@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
                     }}>
                         <a href="#problem" className="nav-link">$300b Experiences Opportunity</a>
                         <a href="#solution" className="nav-link">REWARDED EXPERIENCE MARKETPLACE</a>
-                        <Link to="/marketplace" className="nav-link">Marketplace</Link>
+                        <Link to="/marketplace" className="nav-link">Creator Signup/Login</Link>
                         <a href="#team" className="nav-link">Our Team</a>
                     </nav>
                 </div>

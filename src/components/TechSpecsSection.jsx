@@ -14,6 +14,11 @@ const TechSpecsSection = () => {
                     <p className="subtitle">
                         Use our self-serve tools to manage influencers, rewarded discovery, and first-party intent data.
                     </p>
+                    <div style={{ marginTop: '2rem' }}>
+                        <a href="#marketplace" className="btn btn-outline" style={{ padding: '0.8rem 2rem', fontSize: '1rem' }}>
+                            Become A Creator
+                        </a>
+                    </div>
                 </div>
 
                 <div className="tools-creative animate-fade-up delay-2">

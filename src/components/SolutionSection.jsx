@@ -84,8 +84,8 @@ const IntentRevenueVisual = () => {
                     </div>
                 </div>
                 <div className="stage-caption">
-                    Choose an amazing onsite experience
-                    <div className="caption-example">Example: <strong>Rooftop Bar</strong></div>
+                    Choose an amazing onsite experience and offer
+                    <div className="caption-example">Example: <strong>GUEST LIST ENTRY ROOFTOP BAR</strong></div>
                 </div>
             </div>
 

@@ -9,7 +9,7 @@ const AiSection = () => {
 
                 <div className="section-header animate-fade-up">
                     <h1 className="problem-title" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', textAlign: 'left' }}>
-                        Go OTA-Free. <span className="text-cyan">Own Your Digital Space.</span>
+                        Go OTA-Free <span className="text-cyan">Own Your Digital Space</span>
                     </h1>
                     <h2 className="subtitle" style={{ color: 'var(--color-gold-champagne)', textAlign: 'left', marginTop: '1rem', textTransform: 'none', letterSpacing: 'normal', fontWeight: 'bold' }}>
                         Rewarded Experience Assets & Spatial SEO

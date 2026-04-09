@@ -72,7 +72,7 @@ const ResultsSection = () => {
 
                 <div className="results-cta mt-16 text-center animate-fade-up delay-4">
                     <div className="glass-card footer-pitch py-8 px-12 inline-block">
-                        <h3 className="text-gold mb-4">Stop selling a stay. Start curating a journey.</h3>
+                        <h3 className="text-gold mb-4">Stop selling a stay Start curating a journey</h3>
                         <p className="opacity-80">Hyper-personalisation at every touchpoint, from discovery to departure.</p>
                     </div>
                 </div>

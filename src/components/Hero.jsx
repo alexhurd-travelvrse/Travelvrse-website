@@ -23,12 +23,11 @@ const Hero = () => {
                     <h1 className="hero-title">
                         <span className="text-gradient">Futureproof Your Direct Revenue</span>
                     </h1>
-                    <h2 className="hero-strategy">REWARDED EXPERIENCE MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS</h2>
+                    <h2 className="hero-strategy">Rewarded Experiences for HOTELS, RESORTS AND CRUISE OPERATORS</h2>
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Join the marketplace putting your icons at the front of the Next-Gen journey.<br />
-                    Turn interaction into Rewarded Discovery that delivers qualified Direct Leads.
+                    Join the influencer marketplace putting your iconic experiences at the front of the Next-Gen discovery journey
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">
@@ -37,7 +36,7 @@ const Hero = () => {
                     </a>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />
-                        Visit our marketplace
+                        Visit Our Marketplace
                     </Link>
                 </div>
             </div>

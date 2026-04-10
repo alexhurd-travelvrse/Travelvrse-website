@@ -12,7 +12,7 @@ const HowItWorks = () => {
                     <div className="animate-fade-up">
                         <div className="glass-card" style={{ padding: '0', overflow: 'hidden', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
                             <img 
-                                src="/hola_grab.png" 
+                                src="/assets/hola_grab.png" 
                                 alt="Influencer Experience" 
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
                             />

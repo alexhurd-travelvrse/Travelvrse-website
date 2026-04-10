@@ -21,28 +21,28 @@ const team = [
         linkedin: "https://www.linkedin.com/in/julianhouchin/"
     },
     {
+        name: "Lindsay Kotas",
+        role: "Board Adviser - VP Operations Insignia Event Services",
+        image: "/models/LindsayKotas.jpg",
+        linkedin: "https://www.linkedin.com/in/lindsay-kotas/"
+    },
+    {
         name: "Amir Azulay",
-        role: "CEO Travel Curious",
+        role: "Board Adviser - CEO Travel Curious",
         image: "/models/Amir Azulay.png",
         linkedin: "https://www.linkedin.com/in/amirazulay/"
     },
     {
         name: "Alex Grant",
-        role: "Head of Hotel Solutions, Travel Curious",
+        role: "Board Adviser - Head of Hotel Solutions",
         image: "/models/Alex Grant.png",
         linkedin: "https://www.linkedin.com/in/grantalex/"
     },
     {
         name: "Tristan Gadsby",
-        role: "CEO Alliants",
+        role: "Board Adviser - CEO Alliants",
         image: "/models/tristan.jpg",
         linkedin: "https://www.linkedin.com/in/tristangadsby/"
-    },
-    {
-        name: "Lindsay Kotas",
-        role: "VP Operations Insignia Event Services",
-        image: "/models/LindsayKotas.jpg",
-        linkedin: "https://www.linkedin.com/in/lindsay-kotas/"
     }
 ];
 

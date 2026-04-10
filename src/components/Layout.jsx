@@ -35,8 +35,8 @@ const Layout = ({ children }) => {
                         display: 'flex', 
                         gap: '30px', 
                         color: 'white', 
-                        fontWeight: '600', 
-                        fontSize: '12px', 
+                        fontSize: '14px', 
+                        fontWeight: '700', 
                         alignItems: 'center',
                         textTransform: 'uppercase',
                         letterSpacing: '1.5px'

@@ -37,21 +37,33 @@ const ProblemSection = () => {
                                 alt="Rewarded Experience Challenge" 
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
                             />
-                            <div style={{ position: 'absolute', bottom: '30px', left: '30px', right: '30px', background: 'rgba(5, 11, 20, 0.85)', padding: '20px', borderRadius: '16px', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,215,0,0.3)' }}>
-                                <div style={{ color: 'var(--color-gold)', fontWeight: 'bold', fontSize: '0.65rem', marginBottom: '8px', letterSpacing: '2px' }}>LIVE CHALLENGE</div>
-                                <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: '600' }}>Photorealistic Resort Exploration</div>
-                            </div>
                         </div>
 
-                        {/* Works for Every Touchpoint Panel - Now under the image */}
-                        <div className="glass-card" style={{ padding: '2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '24px' }}>
-                            <div style={{ fontSize: '0.9rem', fontWeight: 'bold', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '20px', textTransform: 'uppercase' }}>
+                        {/* Works for Every Touchpoint Panel - Now colorful */}
+                        <div className="glass-card" style={{ 
+                            padding: '2rem', 
+                            background: 'linear-gradient(135deg, rgba(5, 11, 20, 0.8) 0%, rgba(0, 229, 255, 0.05) 100%)', 
+                            border: '1px solid rgba(0, 229, 255, 0.2)', 
+                            borderRadius: '24px',
+                            boxShadow: 'inset 0 0 30px rgba(0, 229, 255, 0.05)'
+                        }}>
+                            <div style={{ fontSize: '0.9rem', fontWeight: 'bold', letterSpacing: '2px', color: 'var(--color-cyan-neon)', marginBottom: '20px', textTransform: 'uppercase' }}>
                                 Works for Every Touchpoint
                             </div>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px' }}>
                                 {verticals.map((v, i) => (
-                                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', padding: '8px' }}>
-                                        <span style={{ color: 'var(--color-gold)' }}>{v.icon}</span>
+                                    <div key={i} style={{ 
+                                        display: 'flex', 
+                                        alignItems: 'center', 
+                                        gap: '10px', 
+                                        fontSize: '0.75rem', 
+                                        color: 'rgba(255,255,255,0.9)', 
+                                        padding: '10px',
+                                        background: 'rgba(255,255,255,0.03)',
+                                        borderRadius: '12px',
+                                        border: '1px solid rgba(255,255,255,0.05)'
+                                    }}>
+                                        <span style={{ color: i % 2 === 0 ? 'var(--color-cyan-neon)' : 'var(--color-gold)' }}>{v.icon}</span>
                                         {v.label}
                                     </div>
                                 ))}

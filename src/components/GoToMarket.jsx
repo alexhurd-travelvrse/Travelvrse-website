@@ -12,8 +12,8 @@ const HowItWorks = () => {
                     <div className="animate-fade-up">
                         <div className="glass-card" style={{ padding: '0', overflow: 'hidden', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
                             <img 
-                                src="/models/mscscreenshotfortravelvrse.png" 
-                                alt="Influencer creating content" 
+                                src="/hola_grab.png" 
+                                alt="Influencer Experience" 
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
                             />
                             <div style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(5, 11, 20, 0.8)', padding: '10px 15px', borderRadius: '12px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '8px' }}>

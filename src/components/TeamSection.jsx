@@ -6,43 +6,50 @@ const team = [
         name: "Alex Hurd",
         role: "Co-Founder CEO",
         image: "/models/Alex_Hurd.jpg",
-        linkedin: "https://www.linkedin.com/in/alexhurd/"
+        linkedin: "https://www.linkedin.com/in/alexhurd/",
+        advisor: false
     },
     {
         name: "Lee Probert",
         role: "CTO",
         image: "/models/lee Probert.png",
-        linkedin: "https://www.linkedin.com/in/leeprobert/"
+        linkedin: "https://www.linkedin.com/in/leeprobert/",
+        advisor: false
     },
     {
         name: "Julian Houchin",
         role: "Chairman",
         image: "/models/Julianphoto.jpg",
-        linkedin: "https://www.linkedin.com/in/julianhouchin/"
+        linkedin: "https://www.linkedin.com/in/julianhouchin/",
+        advisor: false
     },
     {
         name: "Lindsay Kotas",
-        role: "Board Adviser - VP Operations Insignia Event Services",
+        role: "VP Operations Insignia Event Services",
         image: "/models/LindsayKotas.jpg",
-        linkedin: "https://www.linkedin.com/in/lindsay-kotas/"
+        linkedin: "https://www.linkedin.com/in/lindsay-kotas/",
+        advisor: true
     },
     {
         name: "Amir Azulay",
-        role: "Board Adviser - CEO Travel Curious",
+        role: "CEO Travel Curious",
         image: "/models/Amir Azulay.png",
-        linkedin: "https://www.linkedin.com/in/amirazulay/"
+        linkedin: "https://www.linkedin.com/in/amirazulay/",
+        advisor: true
     },
     {
         name: "Alex Grant",
-        role: "Board Adviser - Head of Hotel Solutions",
+        role: "Head of Hotel Solutions",
         image: "/models/Alex Grant.png",
-        linkedin: "https://www.linkedin.com/in/grantalex/"
+        linkedin: "https://www.linkedin.com/in/grantalex/",
+        advisor: true
     },
     {
         name: "Tristan Gadsby",
-        role: "Board Adviser - CEO Alliants",
+        role: "CEO Alliants",
         image: "/models/tristan.jpg",
-        linkedin: "https://www.linkedin.com/in/tristangadsby/"
+        linkedin: "https://www.linkedin.com/in/tristangadsby/",
+        advisor: true
     }
 ];
 
@@ -55,30 +62,54 @@ const TeamSection = () => {
                         Our <span className="text-cyan">Team</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        A group of visionaries and industry experts dedicated to transforming the future of travel and immersive technology.
+                        A group of visionaries and industry experts dedicated to transforming the future of travel and immersive technology
                     </p>
                 </div>
 
-                <div className="team-grid">
+                <div className="team-grid" style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', 
+                    gap: '20px',
+                    justifyContent: 'center'
+                }}>
                     {team.map((member, index) => (
-                        <div key={index} className="team-card glass-card animate-fade-up" style={{ animationDelay: `${index * 0.1}s`, position: 'relative' }}>
+                        <div key={index} className="team-card glass-card animate-fade-up" style={{ 
+                            animationDelay: `${index * 0.1}s`, 
+                            position: 'relative',
+                            padding: '1.2rem',
+                            borderRadius: '16px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            minHeight: '260px'
+                        }}>
                             {member.linkedin && (
                                 <a 
                                     href={member.linkedin} 
                                     target="_blank" 
                                     rel="noopener noreferrer" 
-                                    style={{ position: 'absolute', top: '15px', right: '15px', zIndex: 10, color: 'rgba(255,255,255,0.4)', transition: 'color 0.3s' }}
+                                    style={{ position: 'absolute', top: '12px', right: '12px', zIndex: 10, color: 'rgba(255,255,255,0.3)', transition: 'color 0.3s' }}
                                     className="linkedin-link"
                                 >
-                                    <Linkedin size={20} />
+                                    <Linkedin size={16} />
                                 </a>
                             )}
-                            <div className="member-image-wrapper">
-                                <img src={member.image} alt={member.name} className="member-image" />
+                            <div className="member-image-wrapper" style={{ width: '80px', height: '80px', marginBottom: '1rem' }}>
+                                <img src={member.image} alt={member.name} className="member-image" style={{ borderRadius: '50%' }} />
                             </div>
-                            <div className="member-info">
-                                <h3 style={{ fontSize: '1.2rem', marginBottom: '8px' }}>{member.name}</h3>
-                                <p className="member-role text-gold" style={{ fontSize: '0.9rem', lineHeight: '1.4' }}>{member.role}</p>
+                            <div className="member-info" style={{ flex: 1, display: 'flex', flexDirection: 'column', width: '100%' }}>
+                                <h3 style={{ fontSize: '0.95rem', marginBottom: '6px', color: 'white', fontWeight: '700' }}>{member.name}</h3>
+                                <p className="member-role text-gold" style={{ fontSize: '0.75rem', lineHeight: '1.4', fontWeight: '500' }}>
+                                    {member.role}
+                                </p>
+                                {member.advisor && (
+                                    <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                                        <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                                            Board Adviser
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))}

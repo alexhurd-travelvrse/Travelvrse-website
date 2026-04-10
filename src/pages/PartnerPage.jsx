@@ -29,21 +29,21 @@ const PartnerPage = () => {
                                     <ShieldCheck className="text-gold" size={24} />
                                     <div>
                                         <h4 style={{ color: 'white', marginBottom: '5px' }}>Qualified Leads</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Capture high-intent guests before they look at OTAs.</p>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Capture high-intent guests before they look at OTAs</p>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <TrendingUp className="text-cyan" size={24} />
                                     <div>
                                         <h4 style={{ color: 'white', marginBottom: '5px' }}>On-site Monetization</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Promote spas, dining, and excursions directly.</p>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Promote spas, dining, and excursions directly</p>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <Users className="text-gold" size={24} />
                                     <div>
                                         <h4 style={{ color: 'white', marginBottom: '5px' }}>Direct Relationships</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Build rich guest profiles via photorealistic challenges.</p>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Build rich guest profiles via photorealistic challenges</p>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@ const PartnerPage = () => {
                             {!submitted ? (
                                 <>
                                     <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Get Started</h3>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Fill out the form below and our team will be in touch with a custom strategy.</p>
+                                    <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Fill out the form below and our team will be in touch with a custom strategy</p>
                                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
                                             <input type="text" placeholder="First Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />

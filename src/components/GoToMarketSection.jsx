@@ -41,14 +41,14 @@ const JourneyLifecycle = () => {
             </div>
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px', textAlign: 'center' }}>
                 <p style={{ color: 'var(--color-gold)', fontWeight: '600', fontSize: '1rem', letterSpacing: '0.5px' }}>
-                    Use your experiences as a hook to drive direct offers.
+                    Use your experiences as a hook to drive direct offers
                 </p>
             </div>
         </div>
     );
 };
 
-const SolutionSection = () => {
+const GoToMarketSection = () => {
     return (
         <section className="section-padding" id="go-to-market" style={{ background: '#0a1628' }}>
             <div className="container">
@@ -61,7 +61,7 @@ const SolutionSection = () => {
                         </h2>
                         
                         <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '30px', maxWidth: '500px' }}>
-                            Our rewarded challenges are configurable for different guest journeys and to be set up and promoted by external or internal influencers.
+                            Our rewarded challenges are configurable for different guest journeys and to be set up and promoted by external or internal influencers
                         </p>
 
                         <JourneyLifecycle />
@@ -113,5 +113,5 @@ const SolutionSection = () => {
     );
 };
 
-export default SolutionSection;
+export default GoToMarketSection;
 

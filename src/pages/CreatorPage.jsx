@@ -29,21 +29,21 @@ const CreatorPage = () => {
                                     <Camera className="text-cyan" size={24} />
                                     <div>
                                         <h4 style={{ color: 'white', marginBottom: '5px' }}>Creative Freedom</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Use our tools to gamify property scans and publish to social media.</p>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Use our tools to gamify property scans and publish to social media</p>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <Wallet className="text-gold" size={24} />
                                     <div>
                                         <h4 style={{ color: 'white', marginBottom: '5px' }}>Earn Rewards</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Get paid for engagement and direct leads generated through your challenges.</p>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Get paid for engagement and direct leads generated through your challenges</p>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <Zap className="text-cyan" size={24} />
                                     <div>
                                         <h4 style={{ color: 'white', marginBottom: '5px' }}>Early Access</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Be the first to create for iconic global properties.</p>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Be the first to create for iconic global properties</p>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@ const CreatorPage = () => {
                             {!submitted ? (
                                 <>
                                     <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Creator Sign-up</h3>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Connect your platforms and join the BETA program.</p>
+                                    <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Connect your platforms and join the BETA program</p>
                                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                         <input type="text" placeholder="Full Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
                                         <input type="email" placeholder="Email Address" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />

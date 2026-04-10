@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Layout from './components/Layout';
 import Hero from './components/Hero';
 import ProblemSection from './components/ProblemSection';
-import SolutionSection from './components/SolutionSection';
-import AiSection from './components/AiSection';
-import TechSpecsSection from './components/TechSpecsSection';
+import HowItWorksSection from './components/HowItWorksSection';
+import GoToMarketSection from './components/GoToMarketSection';
 import TeamSection from './components/TeamSection';
-import GoToMarket from './components/GoToMarket';
 import Footer from './components/Footer';
 import MarketplacePage from './pages/MarketplacePage';
 import BarcelonaPage from './pages/BarcelonaPage';
@@ -28,8 +26,8 @@ const B2BHome = () => {
     <Layout>
       <Hero />
       <ProblemSection />
-      <SolutionSection />
-      <GoToMarket />
+      <HowItWorksSection />
+      <GoToMarketSection />
       <TeamSection />
       <Footer />
     </Layout>

@@ -2,7 +2,7 @@ import React from 'react';
 import { CheckCircle2, ArrowRight, Camera, Smartphone, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const HowItWorks = () => {
+const HowItWorksSection = () => {
     return (
         <section className="section-padding" id="how-it-works" style={{ background: '#050b14' }}>
             <div className="container">
@@ -47,30 +47,30 @@ const HowItWorks = () => {
                         </h2>
                         
                         <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginBottom: '30px', lineHeight: '1.6' }}>
-                            Implementation is friction free and most of the work is done by influencers using a mobile/action camera or existing 2D photos.
+                            Implementation is friction free and most of the work is done by influencers using a mobile/action camera or existing 2D photos
                         </p>
-
+ 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                <div style={{ color: 'var(--color-cyan-neon)', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '2px' }}>a)</div>
+                                <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
                                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
                                     Use self-serve tools to approve influencers, campaigns, rewards and profile schemas
                                 </p>
                             </div>
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                <div style={{ color: 'var(--color-gold)', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '2px' }}>b)</div>
+                                <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
                                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
                                     Influencers scan property on mobile, use our influencer tools to gamify and publish social media
                                 </p>
                             </div>
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                <div style={{ color: 'var(--color-cyan-neon)', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '2px' }}>c)</div>
+                                <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
                                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
                                     Play is available on any PC or mobile browser
                                 </p>
                             </div>
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                <div style={{ color: 'var(--color-gold)', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '2px' }}>d)</div>
+                                <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
                                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
                                     Data profiles are through API handover
                                 </p>
@@ -88,4 +88,4 @@ const HowItWorks = () => {
     );
 };
 
-export default HowItWorks;
+export default HowItWorksSection;

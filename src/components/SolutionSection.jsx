@@ -50,29 +50,9 @@ const SolutionSection = () => {
                             How It <span className="text-cyan">Works</span>
                         </h2>
                         
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', marginBottom: '30px' }}>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-cyan-neon)', width: '40px' }}>01</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '5px' }}>Engage</h4>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)' }}>Next-gen travelers discover and play photorealistic challenges on social media or direct channels.</p>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-gold)', width: '40px' }}>02</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '5px' }}>Profile</h4>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)' }}>By interacting with experiences, guests build a rich data profile of their preferences and intent.</p>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-cyan-neon)', width: '40px' }}>03</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '5px' }}>Convert</h4>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)' }}>Personalized direct booking offers and on-site upsells are triggered based on the guest profile.</p>
-                                </div>
-                            </div>
-                        </div>
+                        <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '30px', maxWidth: '500px' }}>
+                            Our platform bridges the gap between discovery and booking through immersive, rewarded experiences that capture intent.
+                        </p>
 
                         <JourneyLifecycle />
 

@@ -22,6 +22,9 @@ const ProblemSection = () => {
                     <h2 style={{ fontSize: '3rem', lineHeight: '1.2', fontWeight: '800' }}>
                         Rewarded Experience <span className="text-gold">Marketplace</span>
                     </h2>
+                    <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                        75% of Next-Gen search for local vibes before rooms
+                    </div>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '60px', alignItems: 'start' }}>
@@ -58,30 +61,27 @@ const ProblemSection = () => {
 
                     {/* Text Column (Right) */}
                     <div className="animate-fade-up delay-1" style={{ paddingTop: '20px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                            <div style={{ display: 'flex', gap: '20px' }}>
-                                <div style={{ width: '8px', height: '8px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '12px', flexShrink: 0 }}></div>
-                                <p style={{ fontSize: '1.2rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.9)', fontWeight: '500' }}>
-                                    <strong>75% of Millennials/Gen Z</strong> search for local vibes before room features
-                                </p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '35px' }}>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1' }}>01</div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
+                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Next-gen travelers discover and play photorealistic challenges on social media or direct channels.</p>
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '20px' }}>
-                                <div style={{ width: '8px', height: '8px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '12px', flexShrink: 0 }}></div>
-                                <p style={{ fontSize: '1.2rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.9)', fontWeight: '500' }}>
-                                    Photorealistic challenges let them try out your amazing onsite and local experiences.
-                                </p>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-gold)', width: '50px', lineHeight: '1' }}>02</div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Profile</h4>
+                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>By interacting with experiences, guests build a rich data profile of their preferences and intent.</p>
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '20px' }}>
-                                <div style={{ width: '8px', height: '8px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '12px', flexShrink: 0 }}></div>
-                                <p style={{ fontSize: '1.2rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.9)', fontWeight: '500' }}>
-                                    Play seamlessly builds an experiences focused Guest Profile
-                                </p>
-                            </div>
-                            <div style={{ display: 'flex', gap: '20px' }}>
-                                <div style={{ width: '8px', height: '8px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '12px', flexShrink: 0 }}></div>
-                                <p style={{ fontSize: '1.2rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.9)', fontWeight: '500' }}>
-                                    Profile can be used to personalise room and upsell offer
-                                </p>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1' }}>03</div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
+                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Personalized direct booking offers and on-site upsells are triggered based on the guest profile.</p>
+                                </div>
                             </div>
                         </div>
                     </div>

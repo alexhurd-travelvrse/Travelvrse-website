@@ -5,33 +5,33 @@ import './SolutionSection.css';
 
 const JourneyLifecycle = () => {
     return (
-        <div className="glass-card" style={{ padding: '2rem', marginTop: '40px', background: 'rgba(255,255,255,0.02)' }}>
-            <div style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', color: 'rgba(255,255,255,0.5)', marginBottom: '25px', textTransform: 'uppercase', textAlign: 'center' }}>
+        <div className="glass-card" style={{ padding: '2.5rem 2rem', marginTop: '40px', background: 'rgba(255,255,255,0.02)', borderRadius: '24px' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', color: 'rgba(255,255,255,0.5)', marginBottom: '30px', textTransform: 'uppercase', textAlign: 'center' }}>
                 SUPPORTED GUEST JOURNEYS
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '15px' }}>
                 <div style={{ textAlign: 'center', flex: 1 }}>
-                    <div style={{ width: '50px', height: '50px', background: 'rgba(0, 229, 255, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px', color: 'var(--color-cyan-neon)' }}>
+                    <div style={{ width: '50px', height: '50px', background: 'rgba(0, 229, 255, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', color: 'var(--color-cyan-neon)' }}>
                         <Compass size={24} />
                     </div>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Pre-Booking</div>
-                    <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)' }}>Discovery & Intent</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white', marginBottom: '4px' }}>Pre-Booking</div>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.3' }}>Discovery & Intent</div>
                 </div>
-                <ChevronRight size={20} style={{ color: 'rgba(255,255,255,0.2)' }} />
+                <ChevronRight size={18} style={{ color: 'rgba(255,255,255,0.15)', marginTop: '16px' }} />
                 <div style={{ textAlign: 'center', flex: 1 }}>
-                    <div style={{ width: '50px', height: '50px', background: 'rgba(255, 215, 0, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px', color: 'var(--color-gold)' }}>
+                    <div style={{ width: '50px', height: '50px', background: 'rgba(255, 215, 0, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', color: 'var(--color-gold)' }}>
                         <BellRing size={24} />
                     </div>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Pre-Stay</div>
-                    <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)' }}>Upsell & Upgrade</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white', marginBottom: '4px' }}>Pre-Stay</div>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.3' }}>Upsell & Upgrade</div>
                 </div>
-                <ChevronRight size={20} style={{ color: 'rgba(255,255,255,0.2)' }} />
+                <ChevronRight size={18} style={{ color: 'rgba(255,255,255,0.15)', marginTop: '16px' }} />
                 <div style={{ textAlign: 'center', flex: 1 }}>
-                    <div style={{ width: '50px', height: '50px', background: 'rgba(0, 229, 255, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px', color: 'var(--color-cyan-neon)' }}>
+                    <div style={{ width: '50px', height: '50px', background: 'rgba(0, 229, 255, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', color: 'var(--color-cyan-neon)' }}>
                         <MapPin size={24} />
                     </div>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>During Stay</div>
-                    <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)' }}>Rewards & Onsite</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white', marginBottom: '4px' }}>During Stay</div>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.3' }}>Rewards & Onsite</div>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@ const SolutionSection = () => {
                         </h2>
                         
                         <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '30px', maxWidth: '500px' }}>
-                            Our platform bridges the gap between discovery and booking through immersive, rewarded experiences that capture intent.
+                            Our challenges are configurable to support different guest journeys and can be set up and promoted by external or internal influencers.
                         </p>
 
                         <JourneyLifecycle />
@@ -69,6 +69,7 @@ const SolutionSection = () => {
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold' }}>STEP 1</div>
                                     <div style={{ fontWeight: '600' }}>Choose Experience</div>
+                                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>Guest List Access Roof Top Bar</div>
                                 </div>
                             </div>
                             <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))', marginLeft: '60px' }}></div>
@@ -76,7 +77,8 @@ const SolutionSection = () => {
                                 <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/models/mscscreenshotfortravelvrse.png) center/cover' }}></div>
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold' }}>STEP 2</div>
-                                    <div style={{ fontWeight: '600' }}>Rewarded Challenge</div>
+                                    <div style={{ fontWeight: '600' }}>Work with creator</div>
+                                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>Internal Concierge team or external</div>
                                 </div>
                             </div>
                             <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold))', marginLeft: '60px' }}></div>
@@ -84,7 +86,8 @@ const SolutionSection = () => {
                                 <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/balcony_grab.png) center/cover' }}></div>
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold' }}>STEP 3</div>
-                                    <div style={{ fontWeight: '600' }}>Direct Lead</div>
+                                    <div style={{ fontWeight: '600' }}>Choose Media</div>
+                                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>Social Media, Pre-Booking Email</div>
                                 </div>
                             </div>
                         </div>

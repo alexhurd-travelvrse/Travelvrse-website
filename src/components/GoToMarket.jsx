@@ -8,17 +8,34 @@ const HowItWorks = () => {
             <div className="container">
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '80px', alignItems: 'center' }}>
                     
-                    {/* Visual Left - Single Focused Image */}
-                    <div className="animate-fade-up">
-                        <div className="glass-card" style={{ padding: '0', overflow: 'hidden', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
-                            <img 
-                                src="/assets/hola_grab.png" 
-                                alt="Influencer Experience" 
-                                style={{ width: '100%', height: 'auto', display: 'block' }}
-                            />
-                            <div style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(5, 11, 20, 0.8)', padding: '10px 15px', borderRadius: '12px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <Smartphone size={16} className="text-gold" />
-                                <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'white' }}>MOBILE FIRST</span>
+                    {/* Visual Left - Expanded Image Stack */}
+                    <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                        {/* Image 1: Influencer */}
+                        <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                            <img src="/assets/hola_grab.png" alt="Influencer" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
+                            <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <Smartphone size={14} className="text-gold" />
+                                <span style={{ fontSize: '0.7rem', fontWeight: 'bold', color: 'white' }}>Captured With Mobile</span>
+                            </div>
+                        </div>
+                        
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                            {/* Image 2: Sea Containers */}
+                            <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                                <img src="/models/seacontainers.png" alt="Sea Containers" style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+                                <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-cyan-neon)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <Camera size={14} className="text-cyan" />
+                                    <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: 'white' }}>Captured Using Action Camera</span>
+                                </div>
+                            </div>
+                            
+                            {/* Image 3: Beach */}
+                            <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                                <img src="/models/beach.png" alt="Beach" style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+                                <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <Zap size={14} className="text-gold" />
+                                    <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: 'white' }}>Captured using 2D photo</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -30,7 +47,7 @@ const HowItWorks = () => {
                         </h2>
                         
                         <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginBottom: '30px', lineHeight: '1.6' }}>
-                            Implementation is friction free and most of the work is done by influencers with a mobile or action camera.
+                            Implementation is friction free and most of the work is done by influencers using a mobile/action camera or existing 2D photos.
                         </p>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>

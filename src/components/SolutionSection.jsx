@@ -74,30 +74,34 @@ const SolutionSection = () => {
                     {/* Visual Right - Vertical Steps */}
                     <div className="animate-fade-up delay-1">
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '20px', alignItems: 'center', background: 'rgba(255,255,255,0.03)' }}>
-                                <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/msc_home_preview.png) center/cover' }}></div>
-                                <div>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold' }}>STEP 1</div>
-                                    <div style={{ fontWeight: '700', color: 'white' }}>Choose Experience</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', marginTop: '4px' }}>Guest List Access Roof Top Bar</div>
+                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/msc_home_preview.png) center/cover', flexShrink: 0 }}></div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 1</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Choose Experience</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Guest List Access Roof Top Bar</div>
                                 </div>
                             </div>
-                            <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))', marginLeft: '60px' }}></div>
-                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '20px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-cyan-neon)' }}>
-                                <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover' }}></div>
-                                <div>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold' }}>STEP 2</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem' }}>Plan GTM</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', marginTop: '4px' }}>Dining influencer on social media</div>
+
+                            <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))', marginLeft: '85px' }}></div>
+
+                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-cyan-neon)' }}>
+                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover', flexShrink: 0 }}></div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 2</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Plan GTM</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Dining influencer on social media</div>
                                 </div>
                             </div>
-                            <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold))', marginLeft: '60px' }}></div>
-                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '20px', alignItems: 'center', background: 'rgba(255,255,255,0.03)' }}>
-                                <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/restaurant_preview.jpg) center/cover' }}></div>
-                                <div>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold' }}>STEP 3</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '0.95rem', lineHeight: '1.2' }}>Select Data and Direct Offers</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', marginTop: '4px' }}>Objective: find guest interest in dining for package offer</div>
+
+                            <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold))', marginLeft: '85px' }}></div>
+
+                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/restaurant_preview.jpg) center/cover', flexShrink: 0 }}></div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 3</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Select Data and Direct Offers</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Objective: find guest interest in dining for package offer</div>
                                 </div>
                             </div>
                         </div>

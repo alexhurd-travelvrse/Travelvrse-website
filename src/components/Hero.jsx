@@ -23,7 +23,20 @@ const Hero = () => {
                     <h1 className="hero-title">
                         <span className="text-gradient">Futureproof Your Direct Revenue</span>
                     </h1>
-                    <h2 className="hero-strategy">REWARDED EXPERIENCE MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS</h2>
+                    <h2 className="hero-strategy" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' }}>
+                        REWARDED EXPERIENCE MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS
+                        <span style={{ 
+                            fontSize: '0.65rem', 
+                            background: 'rgba(255, 184, 0, 0.1)', 
+                            color: 'var(--color-gold)', 
+                            padding: '4px 10px', 
+                            borderRadius: '20px', 
+                            border: '1px solid var(--color-gold)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px',
+                            fontWeight: '800'
+                        }}>BETA SERVICE</span>
+                    </h2>
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
@@ -31,9 +44,9 @@ const Hero = () => {
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">
-                    <a href="#partner" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-                        Start Generating Leads
-                    </a>
+                    <Link to="/partner" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
+                        Start Promoting Experiences
+                    </Link>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />
                         Visit Our Marketplace

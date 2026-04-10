@@ -7,9 +7,12 @@ import SolutionSection from './components/SolutionSection';
 import AiSection from './components/AiSection';
 import TechSpecsSection from './components/TechSpecsSection';
 import TeamSection from './components/TeamSection';
+import GoToMarket from './components/GoToMarket';
 import Footer from './components/Footer';
 import MarketplacePage from './pages/MarketplacePage';
 import BarcelonaPage from './pages/BarcelonaPage';
+import PartnerPage from './pages/PartnerPage';
+import CreatorPage from './pages/CreatorPage';
 
 // ScrollToTop component ensures we start at the top when navigating between pages
 const ScrollToTop = () => {
@@ -26,7 +29,7 @@ const B2BHome = () => {
       <Hero />
       <ProblemSection />
       <SolutionSection />
-      <TechSpecsSection />
+      <GoToMarket />
       <TeamSection />
       <Footer />
     </Layout>
@@ -41,6 +44,8 @@ const App = () => {
         <Route path="/" element={<B2BHome />} />
         <Route path="/marketplace" element={<MarketplacePage />} />
         <Route path="/barcelona" element={<BarcelonaPage />} />
+        <Route path="/partner" element={<PartnerPage />} />
+        <Route path="/creator" element={<CreatorPage />} />
       </Routes>
     </Router>
   );

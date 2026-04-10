@@ -1,64 +1,102 @@
 import React from 'react';
-import { Target, TrendingDown, EyeOff } from 'lucide-react';
+import { Target, TrendingUp, EyeOff, Waves, Hotel, Utensils, Wine, Zap, Camera, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './ProblemSection.css';
+
+const verticals = [
+    { icon: <Waves size={16} />, label: 'LUXURY SPAS' },
+    { icon: <Hotel size={16} />, label: 'PRIVATE CABANAS' },
+    { icon: <Utensils size={16} />, label: 'SIGNATURE DINING' },
+    { icon: <Wine size={16} />, label: 'ROOFTOP BARS' },
+    { icon: <Zap size={16} />, label: 'BEACH CLUBS' },
+    { icon: <Camera size={16} />, label: 'EXCURSIONS' }
+];
 
 const ProblemSection = () => {
     return (
-        <section className="section-padding problem-section" id="problem">
+        <section className="section-padding" id="solution" style={{ background: '#050b14' }}>
             <div className="container">
+                <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1.2fr) 1fr', gap: '80px', alignItems: 'center' }}>
+                    
+                    {/* Visual Left */}
+                    <div className="animate-fade-up" style={{ position: 'relative' }}>
+                        <div className="glass-card" style={{ padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                            <img 
+                                src="/models/mscscreenshotfortravelvrse.png" 
+                                alt="Rewarded Experience Challenge" 
+                                style={{ width: '100%', height: 'auto', display: 'block' }}
+                            />
+                            <div style={{ position: 'absolute', bottom: '20px', left: '20px', right: '20px', background: 'rgba(5, 11, 20, 0.8)', padding: '15px', borderRadius: '12px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,215,0,0.3)' }}>
+                                <div style={{ color: 'var(--color-gold)', fontWeight: 'bold', fontSize: '0.8rem', marginBottom: '5px' }}>LIVE CHALLENGE</div>
+                                <div style={{ fontSize: '1rem', color: 'white' }}>Photorealistic Resort Exploration</div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div className="section-header animate-fade-up">
-                    <h2 className="problem-title">
-                        The $300b Experiences Opportunity
-                    </h2>
-                    <p className="subtitle">
-                        Next-Gen travelers don't search first for rooms - they search for local vibes
-                    </p>
+                    {/* Text Right */}
+                    <div className="animate-fade-up delay-1">
+                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: '1.2' }}>
+                            Rewarded Experience <span className="text-gold">Marketplace</span>
+                        </h2>
+                        
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '30px' }}>
+                            <div style={{ display: 'flex', gap: '15px' }}>
+                                <div style={{ width: '6px', height: '6px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '10px' }}></div>
+                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)' }}>
+                                    <strong>75% of Millennials/Gen Z</strong> search for local vibes before room features
+                                </p>
+                            </div>
+                            <div style={{ display: 'flex', gap: '15px' }}>
+                                <div style={{ width: '6px', height: '6px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '10px' }}></div>
+                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)' }}>
+                                    Photorealistic challenges let them check out the vibe
+                                </p>
+                            </div>
+                            <div style={{ display: 'flex', gap: '15px' }}>
+                                <div style={{ width: '6px', height: '6px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '10px' }}></div>
+                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)' }}>
+                                    Your amazing onsite and local experiences
+                                </p>
+                            </div>
+                            <div style={{ display: 'flex', gap: '15px' }}>
+                                <div style={{ width: '6px', height: '6px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '10px' }}></div>
+                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)' }}>
+                                    Play seamlessly builds an experiences focused Guest Profile
+                                </p>
+                            </div>
+                            <div style={{ display: 'flex', gap: '15px' }}>
+                                <div style={{ width: '6px', height: '6px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '10px' }}></div>
+                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)' }}>
+                                    Profile can be used to personalise room and upsell offer
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Works for Every Touchpoint Panel */}
+                        <div className="glass-card" style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                            <div style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', color: 'rgba(255,255,255,0.5)', marginBottom: '15px', textTransform: 'uppercase' }}>
+                                Works for Every Touchpoint
+                            </div>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+                                {verticals.map((v, i) => (
+                                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)', padding: '5px' }}>
+                                        <span style={{ color: 'var(--color-gold)' }}>{v.icon}</span>
+                                        {v.label}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <Link to="/partner" className="btn btn-primary" style={{ marginTop: '30px', padding: '15px 30px' }}>
+                            Start Promoting Experiences <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                        </Link>
+                    </div>
+
                 </div>
-
-                <div className="problem-grid">
-
-                    {/* Card 1 */}
-                    <div className="glass-card problem-card animate-fade-up delay-1">
-                        <div className="card-icon-wrapper">
-                            <Target size={32} className="text-cyan" />
-                        </div>
-                        <h3>Experiences First</h3>
-                        <p>
-                            75% of Millennials & Gen-Z find the "what to do" before the "where to stay"
-                        </p>
-                    </div>
-
-                    {/* Card 2 */}
-                    <div className="glass-card problem-card animate-fade-up delay-2">
-                        <div className="card-icon-wrapper">
-                            <EyeOff size={32} className="text-cyan" />
-                        </div>
-                        <h3>Invisible Icons</h3>
-                        <p>
-                            Your rooftop bars, spas, cabanas and local attractions are hidden by OTAs
-                        </p>
-                    </div>
-
-                    {/* Card 3 */}
-                    <div className="glass-card problem-card animate-fade-up delay-3">
-                        <div className="card-icon-wrapper">
-                            <TrendingDown size={32} className="text-gold" />
-                        </div>
-                        <h3>The Price Trap</h3>
-                        <p>
-                            By only marketing the room, you’re forced to compete on price with OTAs
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-            
-            <div className="section-bridge animate-fade-up delay-4">
-                <div className="bridge-line"></div>
             </div>
         </section>
     );
 };
 
 export default ProblemSection;
+

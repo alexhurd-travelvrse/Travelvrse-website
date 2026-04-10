@@ -41,7 +41,7 @@ const JourneyLifecycle = () => {
             </div>
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px', textAlign: 'center' }}>
                 <p style={{ color: 'var(--color-gold)', fontWeight: '600', fontSize: '1rem', letterSpacing: '0.5px' }}>
-                    Use your experiences to drive direct offers.
+                    Use your experiences as a hook to drive direct offers.
                 </p>
             </div>
         </div>
@@ -61,7 +61,7 @@ const SolutionSection = () => {
                         </h2>
                         
                         <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '30px', maxWidth: '500px' }}>
-                            Our rewarded challenges are configurable for different guest journeys and can be set up and promoted by external or internal influencers (such as a concierge team).
+                            Our rewarded challenges are configurable for different guest journeys and to be set up and promoted by external or internal influencers.
                         </p>
 
                         <JourneyLifecycle />
@@ -87,8 +87,8 @@ const SolutionSection = () => {
                                 <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover' }}></div>
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold' }}>STEP 2</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '0.95rem', lineHeight: '1.2' }}>External dining influencer using social media</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-gold)', fontWeight: '600', marginTop: '4px' }}>Internal Concierge team or external</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem' }}>Plan GTM</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', marginTop: '4px' }}>Dining influencer on social media</div>
                                 </div>
                             </div>
                             <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold))', marginLeft: '60px' }}></div>
@@ -97,7 +97,7 @@ const SolutionSection = () => {
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold' }}>STEP 3</div>
                                     <div style={{ fontWeight: '700', color: 'white', fontSize: '0.95rem', lineHeight: '1.2' }}>Select Data and Direct Offers</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', marginTop: '4px' }}>Persona is Entertainment, Offer is Dining package</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', marginTop: '4px' }}>Objective: find guest interest in dining for package offer</div>
                                 </div>
                             </div>
                         </div>

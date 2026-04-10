@@ -9,38 +9,40 @@ const JourneyLifecycle = () => {
             <div style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', color: 'rgba(255,255,255,0.5)', marginBottom: '30px', textTransform: 'uppercase', textAlign: 'center' }}>
                 SUPPORTED GUEST JOURNEYS
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start' }}>
-                <div style={{ textAlign: 'center', width: '140px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: '30px' }}>
+                <div style={{ textAlign: 'center', width: '120px' }}>
                     <div style={{ width: '50px', height: '50px', background: 'rgba(0, 229, 255, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', color: 'var(--color-cyan-neon)' }}>
                         <Compass size={24} />
                     </div>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white', marginBottom: '4px' }}>Pre-Booking</div>
-                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.3' }}>Discovery & Intent</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white' }}>Pre-Booking</div>
                 </div>
 
-                <div style={{ alignSelf: 'center', opacity: 0.2, marginTop: '-20px' }}>
+                <div style={{ opacity: 0.2 }}>
                     <ChevronRight size={20} />
                 </div>
 
-                <div style={{ textAlign: 'center', width: '140px' }}>
+                <div style={{ textAlign: 'center', width: '120px' }}>
                     <div style={{ width: '50px', height: '50px', background: 'rgba(255, 215, 0, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', color: 'var(--color-gold)' }}>
                         <BellRing size={24} />
                     </div>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white', marginBottom: '4px' }}>Pre-Stay</div>
-                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.3' }}>Upsell & Upgrade</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white' }}>Pre-Stay</div>
                 </div>
 
-                <div style={{ alignSelf: 'center', opacity: 0.2, marginTop: '-20px' }}>
+                <div style={{ opacity: 0.2 }}>
                     <ChevronRight size={20} />
                 </div>
 
-                <div style={{ textAlign: 'center', width: '140px' }}>
+                <div style={{ textAlign: 'center', width: '120px' }}>
                     <div style={{ width: '50px', height: '50px', background: 'rgba(0, 229, 255, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', color: 'var(--color-cyan-neon)' }}>
                         <MapPin size={24} />
                     </div>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white', marginBottom: '4px' }}>During Stay</div>
-                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.3' }}>Rewards & Onsite</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white' }}>During Stay</div>
                 </div>
+            </div>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px', textAlign: 'center' }}>
+                <p style={{ color: 'var(--color-gold)', fontWeight: '600', fontSize: '1rem', letterSpacing: '0.5px' }}>
+                    Use your experiences to drive direct offers.
+                </p>
             </div>
         </div>
     );
@@ -59,7 +61,7 @@ const SolutionSection = () => {
                         </h2>
                         
                         <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '30px', maxWidth: '500px' }}>
-                            Our challenges are configurable to support different guest journeys and can be set up and promoted by external or internal influencers.
+                            Our rewarded challenges are configurable for different guest journeys and can be set up and promoted by external or internal influencers (such as a concierge team).
                         </p>
 
                         <JourneyLifecycle />
@@ -76,26 +78,26 @@ const SolutionSection = () => {
                                 <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/msc_home_preview.png) center/cover' }}></div>
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold' }}>STEP 1</div>
-                                    <div style={{ fontWeight: '600' }}>Choose Experience</div>
-                                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>eg Guest List Access Roof Top Bar</div>
+                                    <div style={{ fontWeight: '700', color: 'white' }}>Choose Experience</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', marginTop: '4px' }}>Guest List Access Roof Top Bar</div>
                                 </div>
                             </div>
                             <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))', marginLeft: '60px' }}></div>
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '20px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-cyan-neon)' }}>
-                                <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/models/mscscreenshotfortravelvrse.png) center/cover' }}></div>
+                                <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover' }}></div>
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold' }}>STEP 2</div>
-                                    <div style={{ fontWeight: '600' }}>Work with influencer</div>
-                                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>eg Internal Concierge team or external</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '0.95rem', lineHeight: '1.2' }}>External dining influencer using social media</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-gold)', fontWeight: '600', marginTop: '4px' }}>Internal Concierge team or external</div>
                                 </div>
                             </div>
                             <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold))', marginLeft: '60px' }}></div>
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '20px', alignItems: 'center', background: 'rgba(255,255,255,0.03)' }}>
-                                <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/balcony_grab.png) center/cover' }}></div>
+                                <div style={{ width: '120px', height: '80px', borderRadius: '12px', background: 'url(/assets/restaurant_preview.jpg) center/cover' }}></div>
                                 <div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold' }}>STEP 3</div>
-                                    <div style={{ fontWeight: '600' }}>Choose Media</div>
-                                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>eg Social Media, Pre-Booking Email</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '0.95rem', lineHeight: '1.2' }}>Select Data and Direct Offers</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', marginTop: '4px' }}>Persona is Entertainment, Offer is Dining package</div>
                                 </div>
                             </div>
                         </div>

@@ -23,11 +23,11 @@ const ProblemSection = () => {
                         Rewarded Experience <span className="text-gold">Marketplace</span>
                     </h2>
                     <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                        75% of Next-Gen search for local vibes before rooms
+                        75% of Next-Gen search for local experiences before rooms
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '60px', alignItems: 'start' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
                     
                     {/* Visual Column (Left) */}
                     <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -38,7 +38,7 @@ const ProblemSection = () => {
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
                             />
                             <div style={{ position: 'absolute', bottom: '30px', left: '30px', right: '30px', background: 'rgba(5, 11, 20, 0.85)', padding: '20px', borderRadius: '16px', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,215,0,0.3)' }}>
-                                <div style={{ color: 'var(--color-gold)', fontWeight: 'bold', fontSize: '0.8rem', marginBottom: '8px', letterSpacing: '2px' }}>LIVE CHALLENGE</div>
+                                <div style={{ color: 'var(--color-gold)', fontWeight: 'bold', fontSize: '0.65rem', marginBottom: '8px', letterSpacing: '2px' }}>LIVE CHALLENGE</div>
                                 <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: '600' }}>Photorealistic Resort Exploration</div>
                             </div>
                         </div>

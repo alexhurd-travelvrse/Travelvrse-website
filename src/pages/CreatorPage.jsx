@@ -5,10 +5,33 @@ import { Camera, Zap, Wallet, ArrowRight, Instagram, Youtube } from 'lucide-reac
 
 const CreatorPage = () => {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
+        setLoading(true);
+
+        const formData = new FormData(e.target);
+        
+        try {
+            const response = await fetch("https://formspree.io/f/mgopgyyy", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            alert("Connection error. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -55,29 +78,29 @@ const CreatorPage = () => {
                                     <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Creator Sign-up</h3>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Connect your platforms and join the BETA program</p>
                                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                                        <input type="text" placeholder="Full Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
-                                        <input type="email" placeholder="Email Address" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                        <input type="text" name="name" placeholder="Full Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                        <input type="email" name="email" placeholder="Email Address" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
                                         
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
                                             <div style={{ position: 'relative' }}>
                                                 <Instagram size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)' }} />
-                                                <input type="text" placeholder="Instagram" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px 12px 35px', borderRadius: '8px', color: 'white' }} />
+                                                <input type="text" name="instagram" placeholder="Instagram" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px 12px 35px', borderRadius: '8px', color: 'white' }} />
                                             </div>
                                             <div style={{ position: 'relative' }}>
                                                 <Youtube size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)' }} />
-                                                <input type="text" placeholder="TikTok/Youtube" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px 12px 35px', borderRadius: '8px', color: 'white' }} />
+                                                <input type="text" name="tiktok_youtube" placeholder="TikTok/Youtube" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px 12px 35px', borderRadius: '8px', color: 'white' }} />
                                             </div>
                                         </div>
 
-                                        <select style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
+                                        <select name="niche" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
                                             <option value="">Primary Niche</option>
                                             <option value="luxury">Luxury Travel</option>
                                             <option value="adventure">Adventure / Outdoors</option>
                                             <option value="lifestyle">Lifestyle & Tech</option>
                                         </select>
 
-                                        <button className="btn btn-outline" style={{ border: '1px solid var(--color-cyan-neon)', color: 'var(--color-cyan-neon)', marginTop: '10px', width: '100%', padding: '15px' }}>
-                                            Join Marketplace <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                                        <button className="btn btn-outline" type="submit" disabled={loading} style={{ border: '1px solid var(--color-cyan-neon)', color: 'var(--color-cyan-neon)', marginTop: '10px', width: '100%', padding: '15px' }}>
+                                            {loading ? 'Joining...' : 'Join Marketplace'} <ArrowRight size={18} style={{ marginLeft: '10px' }} />
                                         </button>
                                     </form>
                                 </>

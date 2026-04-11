@@ -5,10 +5,33 @@ import { ShieldCheck, TrendingUp, Users, ArrowRight } from 'lucide-react';
 
 const PartnerPage = () => {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
+        setLoading(true);
+
+        const formData = new FormData(e.target);
+        
+        try {
+            const response = await fetch("https://formspree.io/f/xaqlrjor", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            alert("Connection error. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -54,23 +77,25 @@ const PartnerPage = () => {
                                 <>
                                     <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Become a beta partner</h3>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Fill out the form below and we'll be in touch</p>
-                                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                                            <input type="text" placeholder="First Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
-                                            <input type="text" placeholder="Last Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
-                                        </div>
-                                        <input type="email" placeholder="Work Email" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
-                                        <input type="text" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
-                                        <select style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
-                                            <option value="">Property Type</option>
-                                            <option value="hotel">Hotel / Resort</option>
-                                            <option value="cruise">Cruise Line</option>
-                                            <option value="destination">Destination Marketing</option>
-                                        </select>
-                                        <button className="btn btn-primary" style={{ marginTop: '10px', width: '100%', padding: '15px' }}>
-                                            Register Interest <ArrowRight size={18} style={{ marginLeft: '10px' }} />
-                                        </button>
-                                    </form>
+                                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                                                <input type="text" name="firstName" placeholder="First Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                                <input type="text" name="lastName" placeholder="Last Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                            </div>
+                                            <input type="email" name="email" placeholder="Work Email" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                            <input type="text" name="company" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                            <select name="propertyType" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
+                                                <option value="">Property Type</option>
+                                                <option value="hotel">Hotel</option>
+                                                <option value="hostel">Hostel</option>
+                                                <option value="cruise">Cruise Operator</option>
+                                                <option value="resort">Resort</option>
+                                                <option value="landmark">Other Landmark</option>
+                                            </select>
+                                            <button className="btn btn-primary" type="submit" disabled={loading} style={{ marginTop: '10px', width: '100%', padding: '15px' }}>
+                                                {loading ? 'Sending...' : 'Register Interest'} <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                                            </button>
+                                        </form>
                                 </>
                             ) : (
                                 <div style={{ textAlign: 'center', padding: '2rem 0' }}>

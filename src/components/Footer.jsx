@@ -4,25 +4,34 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        companyType: '',
-        asset: ''
-    });
+    const [loading, setLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Simulate form submission
-        alert("Thank you. Our team will contact you shortly to schedule your demo.");
-        setFormData({ name: '', email: '', companyType: '', asset: '' });
-    };
+        setLoading(true);
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        const formData = new FormData(e.target);
+        
+        try {
+            const response = await fetch("https://formspree.io/f/xaqlrjor", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            alert("Connection error. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -66,25 +75,37 @@ const Footer = () => {
 
                     {/* Right: Partner Form */}
                     <div className="glass-card animate-fade-up delay-1" style={{ padding: '2.5rem', borderRadius: '24px', background: 'rgba(255,255,255,0.03)' }}>
-                        <h3 style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'white' }}>Become a beta partner</h3>
-                        <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>Fill out the form below and we'll be in touch</p>
-                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                                <input type="text" placeholder="First Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
-                                <input type="text" placeholder="Last Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
+                        {!submitted ? (
+                            <>
+                                <h3 style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'white' }}>Become a beta partner</h3>
+                                <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>Fill out the form below and we'll be in touch</p>
+                                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                                        <input type="text" name="firstName" placeholder="First Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
+                                        <input type="text" name="lastName" placeholder="Last Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
+                                    </div>
+                                    <input type="email" name="email" placeholder="Work Email" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
+                                    <input type="text" name="company" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
+                                    <select name="propertyType" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }}>
+                                        <option value="">Property Type</option>
+                                        <option value="hotel">Hotel</option>
+                                        <option value="hostel">Hostel</option>
+                                        <option value="cruise">Cruise Operator</option>
+                                        <option value="resort">Resort</option>
+                                        <option value="landmark">Other Landmark</option>
+                                    </select>
+                                    <button type="submit" disabled={loading} className="btn btn-primary" style={{ marginTop: '5px', width: '100%', padding: '12px' }}>
+                                        {loading ? 'Sending...' : 'Register Interest'} <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                                    </button>
+                                </form>
+                            </>
+                        ) : (
+                            <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+                                <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🎉</div>
+                                <h3 style={{ fontSize: '1.4rem', color: 'white', marginBottom: '0.5rem' }}>Thank You!</h3>
+                                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>We've received your request and will contact you shortly.</p>
                             </div>
-                            <input type="email" placeholder="Work Email" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
-                            <input type="text" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
-                            <select style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }}>
-                                <option value="">Property Type</option>
-                                <option value="hotel">Hotel / Resort</option>
-                                <option value="cruise">Cruise Line</option>
-                                <option value="destination">Destination Marketing</option>
-                            </select>
-                            <button type="submit" className="btn btn-primary" style={{ marginTop: '5px', width: '100%', padding: '12px' }}>
-                                Register Interest <ArrowRight size={18} style={{ marginLeft: '10px' }} />
-                            </button>
-                        </form>
+                        )}
                     </div>
 
                 </div>

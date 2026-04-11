@@ -15,7 +15,7 @@ const HowItWorksSection = () => {
                             <img src="/assets/hola_grab.png" alt="Influencer" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
                             <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                 <Smartphone size={14} className="text-gold" />
-                                <span style={{ fontSize: '0.7rem', fontWeight: 'bold', color: 'white' }}>Captured With Mobile</span>
+                                <span style={{ fontSize: '0.7rem', fontWeight: 'bold', color: 'white' }}>Created using Mobile</span>
                             </div>
                         </div>
                         
@@ -25,7 +25,7 @@ const HowItWorksSection = () => {
                                 <img src="/models/seacontainers.png" alt="Sea Containers" style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
                                 <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-cyan-neon)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                     <Camera size={14} className="text-cyan" />
-                                    <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: 'white' }}>Captured Using Action Camera</span>
+                                    <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: 'white' }}>Created using Action Camera</span>
                                 </div>
                             </div>
                             
@@ -34,7 +34,7 @@ const HowItWorksSection = () => {
                                 <img src="/models/beach.png" alt="Beach" style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
                                 <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                     <Zap size={14} className="text-gold" />
-                                    <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: 'white' }}>Captured using 2D photo</span>
+                                    <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: 'white' }}>Created using 2D photo</span>
                                 </div>
                             </div>
                         </div>

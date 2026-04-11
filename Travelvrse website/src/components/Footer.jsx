@@ -7,7 +7,7 @@ const Footer = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        companyType: '',
+        propertyType: '',
         asset: ''
     });
 
@@ -15,7 +15,7 @@ const Footer = () => {
         e.preventDefault();
         // Simulate form submission
         alert("Thank you. Our team will contact you shortly to schedule your demo.");
-        setFormData({ name: '', email: '', companyType: '', asset: '' });
+        setFormData({ name: '', email: '', propertyType: '', asset: '' });
     };
 
     const handleChange = (e) => {
@@ -76,20 +76,21 @@ const Footer = () => {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="companyType">Company Type</label>
+                                <label htmlFor="propertyType">Property Type</label>
                                 <select
-                                    id="companyType"
-                                    name="companyType"
-                                    value={formData.companyType}
+                                    id="propertyType"
+                                    name="propertyType"
+                                    value={formData.propertyType}
                                     onChange={handleChange}
                                     required
                                     className="form-select"
                                 >
                                     <option value="" disabled>Select your industry</option>
-                                    <option value="hotel">Hotel / Resort</option>
+                                    <option value="hotel">Hotel</option>
+                                    <option value="hostels">Hostels</option>
                                     <option value="cruise">Cruise Operator</option>
-                                    <option value="agency">Travel Agency</option>
-                                    <option value="other">Other</option>
+                                    <option value="resort">Resort</option>
+                                    <option value="landmark">Other Landmark</option>
                                 </select>
                             </div>
 

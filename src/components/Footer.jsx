@@ -86,10 +86,10 @@ const Footer = () => {
                                     </div>
                                     <input type="email" name="email" placeholder="Work Email" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
                                     <input type="text" name="company" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
-                                    <select name="propertyType" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }}>
+                                    <select name="propertyType" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }}>
                                         <option value="">Property Type</option>
                                         <option value="hotel">Hotel</option>
-                                        <option value="hostel">Hostel</option>
+                                        <option value="hostels">Hostels</option>
                                         <option value="cruise">Cruise Operator</option>
                                         <option value="resort">Resort</option>
                                         <option value="landmark">Other Landmark</option>

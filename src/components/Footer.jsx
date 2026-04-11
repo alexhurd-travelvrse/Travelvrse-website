@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send } from 'lucide-react';
+import { Send, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 

@@ -21,14 +21,16 @@ const Layout = ({ children }) => {
                             style={{ height: '60px', width: 'auto' }}
                         />
                         <span style={{ 
-                            fontSize: '0.7rem', 
+                            fontSize: '0.9rem', 
                             background: 'var(--color-gold)', 
                             color: 'black', 
-                            padding: '2px 6px', 
+                            padding: '3px 10px', 
                             borderRadius: '4px', 
-                            fontWeight: 'bold',
-                            letterSpacing: '1px',
-                            marginTop: '-20px'
+                            fontWeight: '900',
+                            letterSpacing: '1.5px',
+                            marginTop: '-25px',
+                            boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)',
+                            display: 'inline-block'
                         }}>BETA</span>
                     </Link>
                     <nav className="header-nav" style={{ 

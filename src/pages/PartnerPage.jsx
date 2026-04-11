@@ -20,30 +20,30 @@ const PartnerPage = () => {
                             <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.1' }}>
                                 Scale Your <span className="text-gold">Direct Revenue</span> via Experience Marketing
                             </h1>
-                            <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '600px' }}>
-                                Travel-vrse connects hotels, resorts, and cruise operators with a global marketplace of rewarded experiences. Futureproof your distribution and capture qualified guest profiles.
+                            <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: '1.6' }}>
+                                Travelvrse works with hotels, hostels, resorts and cruise operators to promote their iconic experiences as a hook to capture qualified guest profiles and make direct offers.
                             </p>
                             
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <ShieldCheck className="text-gold" size={24} />
                                     <div>
-                                        <h4 style={{ color: 'white', marginBottom: '5px' }}>Qualified Leads</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Capture high-intent guests before they look at OTAs</p>
+                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Target Next-Gen</h4>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>Millennials and GenZ will account for 70% of luxury hotel sales by 2029</p>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <TrendingUp className="text-cyan" size={24} />
                                     <div>
-                                        <h4 style={{ color: 'white', marginBottom: '5px' }}>On-site Monetization</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Promote spas, dining, and excursions directly</p>
+                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Increase Direct Bookings</h4>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>Capture high-intent guests before they look at OTAs</p>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <Users className="text-gold" size={24} />
                                     <div>
-                                        <h4 style={{ color: 'white', marginBottom: '5px' }}>Direct Relationships</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Build rich guest profiles via photorealistic challenges</p>
+                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Increase Upsell</h4>
+                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>Build rich guest profiles via photorealistic challenges</p>
                                     </div>
                                 </div>
                             </div>
@@ -52,8 +52,8 @@ const PartnerPage = () => {
                         <div className="glass-card animate-fade-up delay-1" style={{ padding: '3rem', borderRadius: '24px' }}>
                             {!submitted ? (
                                 <>
-                                    <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Get Started</h3>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Fill out the form below and our team will be in touch with a custom strategy</p>
+                                    <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Become a beta partner</h3>
+                                    <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Fill out the form below and we'll be in touch</p>
                                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
                                             <input type="text" placeholder="First Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />

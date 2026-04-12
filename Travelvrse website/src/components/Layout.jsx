@@ -10,10 +10,10 @@ const Layout = ({ children }) => {
                 <div className="container header-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                     <Link to="/" className="logo">
                         <img
-                            src="/models/travelvrse_logo.png"
+                            src="/models/travelvrse_logo_main.svg"
                             alt="Travelvrse"
                             className="nav-logo"
-                            style={{ height: '70px' }}
+                            style={{ height: '84px' }}
                         />
                     </Link>
                     <nav className="header-nav" style={{ display: 'flex', gap: '30px', color: 'white', fontWeight: 'bold', fontSize: '14px', alignItems: 'center', marginLeft: '40px' }}>

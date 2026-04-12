@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
                             src="/models/travelvrse_logo_main.svg"
                             alt="Travelvrse"
                             className="nav-logo"
-                            style={{ height: '45px', width: 'auto' }}
+                            style={{ height: '54px', width: 'auto' }}
                         />
 
                     </Link>

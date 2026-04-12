@@ -78,7 +78,7 @@ const GoToMarketSection = () => {
                                 <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/msc_home_preview.png) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 1</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Choose Experience</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Choose Experience and Reward</div>
                                     <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Guest List Access Roof Top Bar</div>
                                 </div>
                             </div>

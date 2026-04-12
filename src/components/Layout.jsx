@@ -15,23 +15,12 @@ const Layout = ({ children }) => {
                 }}>
                     <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
                         <img
-                            src="/models/travelvrse_logo.png"
+                            src="/models/travelvrse_logo_main.svg"
                             alt="Travelvrse"
                             className="nav-logo"
-                            style={{ height: '60px', width: 'auto' }}
+                            style={{ height: '45px', width: 'auto' }}
                         />
-                        <span style={{ 
-                            fontSize: '0.9rem', 
-                            background: 'var(--color-gold)', 
-                            color: 'black', 
-                            padding: '3px 10px', 
-                            borderRadius: '4px', 
-                            fontWeight: '900',
-                            letterSpacing: '1.5px',
-                            marginTop: '-25px',
-                            boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)',
-                            display: 'inline-block'
-                        }}>BETA</span>
+
                     </Link>
                     <nav className="header-nav" style={{ 
                         display: 'flex', 

@@ -7,6 +7,7 @@ const team = [
         role: "Co-Founder CEO",
         image: "/models/Alex_Hurd.jpg",
         linkedin: "https://www.linkedin.com/in/alexhurd/",
+        background: "Ex Play2Pay, Shazam, Indospace",
         advisor: false
     },
     {
@@ -21,6 +22,7 @@ const team = [
         role: "Chairman",
         image: "/models/Julianphoto.jpg",
         linkedin: "https://www.linkedin.com/in/julianhouchin/",
+        background: "Ex GLC Resorts and IO Resorts",
         advisor: false
     },
     {
@@ -39,7 +41,7 @@ const team = [
     },
     {
         name: "Alex Grant",
-        role: "Head of Hotel Solutions",
+        role: "Head of Hotel Solutions Travel Curious",
         image: "/models/Alex Grant.png",
         linkedin: "https://www.linkedin.com/in/grantalex/",
         advisor: true
@@ -62,7 +64,7 @@ const TeamSection = () => {
                         Our <span className="text-cyan">Team</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        A group of visionaries and industry experts dedicated to transforming the future of travel and immersive technology
+                        In an era where generic AI agents are replacing traditional search, the only way to win is through Deterministic Data. Our team brings a unique blend of cross-industry expertise to turn passive attention into monetizable assets
                     </p>
                 </div>
 
@@ -103,10 +105,10 @@ const TeamSection = () => {
                                 <p className="member-role text-gold" style={{ fontSize: '0.75rem', lineHeight: '1.4', fontWeight: '500' }}>
                                     {member.role}
                                 </p>
-                                {member.advisor && (
+                                {(member.advisor || member.background) && (
                                     <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                                         <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                                            Board Adviser
+                                            {member.advisor ? "Board Adviser" : member.background}
                                         </p>
                                     </div>
                                 )}

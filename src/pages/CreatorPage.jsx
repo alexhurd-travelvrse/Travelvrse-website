@@ -93,11 +93,13 @@ const CreatorPage = () => {
                                             </div>
                                         </div>
 
-                                        <select name="niche" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
-                                            <option value="">Primary Niche</option>
-                                            <option value="luxury">Luxury Travel</option>
-                                            <option value="adventure">Adventure / Outdoors</option>
-                                            <option value="lifestyle">Lifestyle & Tech</option>
+                                        <select name="propertyType" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
+                                            <option value="">Property Type</option>
+                                            <option value="hotels">Hotels</option>
+                                            <option value="hostels">Hostels</option>
+                                            <option value="resorts">Resorts</option>
+                                            <option value="cruise">Cruise Operator</option>
+                                            <option value="landmark">Landmark</option>
                                         </select>
 
                                         <button className="btn btn-outline" type="submit" disabled={loading} style={{ border: '1px solid var(--color-cyan-neon)', color: 'var(--color-cyan-neon)', marginTop: '10px', width: '100%', padding: '15px' }}>

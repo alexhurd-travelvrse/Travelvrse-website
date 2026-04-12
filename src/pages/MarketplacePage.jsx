@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 const cities = [
   { 
     name: 'Barcelona Cruises', 
-    img: 'https://images.unsplash.com/photo-1511527661048-7fe73d393d44?auto=format&fit=crop&q=80&w=800&v=2',
+    img: 'https://images.unsplash.com/photo-1583422409516-2895a77efead?auto=format&fit=crop&q=80&w=800',
     desc: 'Setting sail from the heart of Catalonia.',
     url: '/barcelona'
   },
@@ -16,7 +16,7 @@ const cities = [
   },
   { 
     name: 'Manchester', 
-    img: 'https://images.unsplash.com/photo-1549923333-a3d70f074d00?auto=format&fit=crop&q=80&w=800&v=2',
+    img: 'https://images.unsplash.com/photo-1515586838455-8f8f940d6853?auto=format&fit=crop&q=80&w=800',
     desc: 'The heart of British industrial heritage.'
   },
   { 

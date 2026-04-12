@@ -20,22 +20,25 @@ const Hero = () => {
 
             <div className="container hero-content">
                 <div className="hero-header-group animate-fade-up">
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <span style={{ 
+                            fontSize: '1rem', 
+                            background: 'var(--color-gold)', 
+                            color: '#050b14', 
+                            padding: '8px 20px', 
+                            borderRadius: '4px', 
+                            textTransform: 'uppercase',
+                            letterSpacing: '3px',
+                            fontWeight: '900',
+                            boxShadow: '0 0 20px rgba(255, 184, 0, 0.4)',
+                            display: 'inline-block'
+                        }}>BETA SERVICE</span>
+                    </div>
                     <h1 className="hero-title">
                         <span className="text-gradient">Futureproof Your Direct Revenue</span>
                     </h1>
-                    <h2 className="hero-strategy" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' }}>
+                    <h2 className="hero-strategy">
                         REWARDED EXPERIENCE MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS
-                        <span style={{ 
-                            fontSize: '0.65rem', 
-                            background: 'rgba(255, 184, 0, 0.1)', 
-                            color: 'var(--color-gold)', 
-                            padding: '4px 10px', 
-                            borderRadius: '20px', 
-                            border: '1px solid var(--color-gold)',
-                            textTransform: 'uppercase',
-                            letterSpacing: '2px',
-                            fontWeight: '800'
-                        }}>BETA SERVICE</span>
                     </h2>
                 </div>
 

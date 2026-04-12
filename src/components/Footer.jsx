@@ -77,7 +77,19 @@ const Footer = () => {
                     <div className="glass-card animate-fade-up delay-1" style={{ padding: '2.5rem', borderRadius: '24px', background: 'rgba(255,255,255,0.03)' }}>
                         {!submitted ? (
                             <>
-                                <h3 style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'white' }}>Become a beta partner</h3>
+                                <div style={{ marginBottom: '0.8rem' }}>
+                                    <span style={{ 
+                                        fontSize: '0.7rem', 
+                                        background: 'var(--color-gold)', 
+                                        color: '#050b14', 
+                                        padding: '3px 10px', 
+                                        borderRadius: '4px', 
+                                        fontWeight: '900',
+                                        textTransform: 'uppercase',
+                                        letterSpacing: '1.5px'
+                                    }}>Beta Phase</span>
+                                </div>
+                                <h3 style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'white' }}>Become a partner</h3>
                                 <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>Fill out the form below and we'll be in touch</p>
                                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>

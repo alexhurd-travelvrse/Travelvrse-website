@@ -75,7 +75,19 @@ const PartnerPage = () => {
                         <div className="glass-card animate-fade-up delay-1" style={{ padding: '3rem', borderRadius: '24px' }}>
                             {!submitted ? (
                                 <>
-                                    <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Become a beta partner</h3>
+                                    <div style={{ marginBottom: '1rem' }}>
+                                        <span style={{ 
+                                            fontSize: '0.75rem', 
+                                            background: 'var(--color-gold)', 
+                                            color: '#050b14', 
+                                            padding: '4px 12px', 
+                                            borderRadius: '4px', 
+                                            fontWeight: '900',
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '2px'
+                                        }}>Beta Phase</span>
+                                    </div>
+                                    <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Become a partner</h3>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Fill out the form below and we'll be in touch</p>
                                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>

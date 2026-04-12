@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 const cities = [
   { 
     name: 'Barcelona Cruises', 
-    img: 'https://images.unsplash.com/photo-1511527661048-7fe73d393d44?auto=format&fit=crop&q=80&w=800&v=2',
+    img: 'https://images.unsplash.com/photo-1583422409516-2895a77efead?auto=format&fit=crop&q=80&w=800',
     desc: 'Setting sail from the heart of Catalonia.',
     url: '/barcelona'
   },
@@ -16,7 +16,7 @@ const cities = [
   },
   { 
     name: 'Manchester', 
-    img: 'https://images.unsplash.com/photo-1549923333-a3d70f074d00?auto=format&fit=crop&q=80&w=800&v=2',
+    img: 'https://images.unsplash.com/photo-1515586838455-8f8f940d6853?auto=format&fit=crop&q=80&w=800',
     desc: 'The heart of British industrial heritage.'
   },
   { 
@@ -49,11 +49,12 @@ const MarketplacePage = () => {
                 <div className="container">
                     <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                         <h4 className="text-cyan animate-fade-up" style={{ letterSpacing: '2px', fontWeight: '800', marginBottom: '1rem' }}>DISCOVER</h4>
+                        <div className="beta-badge-premium">BETA</div>
                         <h1 className="hero-title animate-fade-up delay-1" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '20px' }}>
                             <span className="text-gradient">Global Marketplace</span>
                         </h1>
                         <p className="animate-fade-up delay-2" style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
-                            Explore curated virtual experiences from iconic destinations around the world.
+                            Explore rewarded experiences from iconic destinations around the world.
                         </p>
                     </div>
 

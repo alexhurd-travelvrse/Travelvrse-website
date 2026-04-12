@@ -7,7 +7,7 @@ const team = [
         role: "Co-Founder CEO",
         image: "/models/Alex_Hurd.jpg",
         linkedin: "https://www.linkedin.com/in/alexhurd/",
-        background: "Ex Play2Pay, Shazam, Indospace",
+        background: "Ex Play2Pay, Shazam, Infospace",
         advisor: false
     },
     {

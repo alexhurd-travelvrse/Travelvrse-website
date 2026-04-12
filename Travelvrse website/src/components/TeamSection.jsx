@@ -6,7 +6,7 @@ const team = [
         name: "Alex Hurd",
         role: "Co-Founder CEO",
         image: "/models/Alex_Hurd.jpg",
-        background: "Ex Play2Pay, Shazam, Indospace"
+        background: "Ex Play2Pay, Shazam, Infospace"
     },
     {
         name: "Lee Probert",

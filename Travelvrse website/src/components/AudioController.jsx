@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { useInfluencer } from '../context/InfluencerContext';
+import { useCreator } from '../context/CreatorContext';
 
 const AudioController = ({ experienceId, active, script }) => {
-    const { influencer } = useGame(); // Keep this if used for something else, otherwise remove
-    const { publicConfig } = useInfluencer();
+    const { creator } = useGame(); // Keep this if used for something else, otherwise remove
+    const { publicConfig } = useCreator();
     const currentIdRef = useRef(experienceId);
     const playedForThisRoom = useRef(false);
 

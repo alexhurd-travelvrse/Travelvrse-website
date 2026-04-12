@@ -1,10 +1,10 @@
 import React from 'react';
 import { useGame } from '../context/GameContext';
-import { useInfluencer } from '../context/InfluencerContext';
+import { useCreator } from '../context/CreatorContext';
 
 const OffersOverlay = ({ onClose }) => {
-    const { interestInsights, influencer, backpack, travelStatus } = useGame();
-    const { publicConfig } = useInfluencer();
+    const { interestInsights, creator, backpack, travelStatus } = useGame();
+    const { publicConfig } = useCreator();
     const brandingTitle = publicConfig?.home?.title?.toUpperCase() || "VIRTUAL EXPERIENCE";
 
     React.useEffect(() => {

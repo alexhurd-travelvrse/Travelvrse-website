@@ -61,7 +61,7 @@ const GoToMarketSection = () => {
                         </h2>
                         
                         <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '30px', maxWidth: '500px' }}>
-                            Our rewarded challenges are configurable for different guest journeys and to be set up and promoted by external or internal influencers
+                            Our rewarded challenges are configurable for different guest journeys and to be set up and promoted by external or internal creators
                         </p>
 
                         <JourneyLifecycle />
@@ -89,8 +89,8 @@ const GoToMarketSection = () => {
                                 <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 2</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Plan GTM</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Dining influencer on social media</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Plan Go to Market</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Dining creator on social media</div>
                                 </div>
                             </div>
 

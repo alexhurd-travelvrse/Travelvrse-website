@@ -1,11 +1,11 @@
 import React from 'react';
 import { Target, TrendingUp, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import './InfluencerPortal.css';
+import './CreatorPortal.css';
 
-const InfluencerPortal = () => {
+const CreatorPortal = () => {
     return (
-        <div className="influencer-portal min-h-screen">
+        <div className="creator-portal min-h-screen">
 
             {/* Navbar Minimalist */}
             <nav className="portal-nav container">
@@ -53,7 +53,7 @@ const InfluencerPortal = () => {
                     <div className="glass-card max-w-2xl mx-auto py-12 px-6">
                         <h2 className="mb-6">Apply to the Creator Network</h2>
                         <p className="text-muted mb-8 text-lg">
-                            We selectively partner with travel influencers who have highly engaged audiences seeking luxury, wellness, or unique cultural experiences.
+                            We selectively partner with travel creators who have highly engaged audiences seeking luxury, wellness, or unique cultural experiences.
                         </p>
                         <a href="mailto:creators@travelvrse.com" className="btn btn-primary px-8">Submit Your Media Kit</a>
                     </div>
@@ -64,4 +64,4 @@ const InfluencerPortal = () => {
     );
 };
 
-export default InfluencerPortal;
+export default CreatorPortal;

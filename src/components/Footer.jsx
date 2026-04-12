@@ -130,9 +130,9 @@ const Footer = () => {
                         <span className="footer-divider">|</span>
                         <a href="https://usgrant.travelvrse.com/terms" target="_blank" rel="noopener noreferrer" className="footer-link">Terms & Conditions</a>
                         <span className="footer-divider">|</span>
-                        {/* The Hidden Influencer Link */}
-                        <Link to="/influencer-portal" className="stealth-link" title="Influencer Portal">
-                            Influencers
+                        {/* The Hidden Creator Link */}
+                        <Link to="/creator-portal" className="stealth-link" title="Creator Portal">
+                            Creators
                         </Link>
                     </div>
                 </div>

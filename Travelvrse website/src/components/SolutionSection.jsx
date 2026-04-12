@@ -73,11 +73,11 @@ const IntentRevenueVisual = () => {
                 <div className="stage-media">
                     <div className="immersive-challenge-card" style={{ 
                         backgroundImage: 'url(/models/mscscreenshotfortravelvrse.png)',
-                    }} role="img" aria-label="Influencer challenge showing a photorealistic 3D resort deck">
+                    }} role="img" aria-label="Creator challenge showing a photorealistic 3D resort deck">
                         <div className="challenge-pulse"></div>
                     </div>
                 </div>
-                <div className="stage-caption">Influencers create and promote web based challenges featuring your property and local area.</div>
+                <div className="stage-caption">Creators create and promote web based challenges featuring your property and local area.</div>
             </div>
 
             <div className="journey-connector">

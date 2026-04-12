@@ -15,7 +15,7 @@ const AiSection = () => {
                         Interactive Experience Assets & Spatial SEO
                     </h2>
                     <h3 className="subtitle" style={{ color: 'var(--color-text-muted)', textAlign: 'left', marginTop: '0.5rem', fontSize: '1.2rem', textTransform: 'none', letterSpacing: 'normal' }}>
-                        B2B Training & Internal Influencer Tools
+                        B2B Training & Internal Creator Tools
                     </h3>
                 </div>
 
@@ -48,7 +48,7 @@ const AiSection = () => {
                                 </div>
                                 <div>
                                     <h4>Next-Gen Performance</h4>
-                                    <p>Influencers drive the traffic, but your 3D environment captures the lead. Engage guests on their favorite channels and pull them directly into a world you own, building a Guest Profile that bypasses the OTA middleman entirely.</p>
+                                    <p>Creators drive the traffic, but your 3D environment captures the lead. Engage guests on their favorite channels and pull them directly into a world you own, building a Guest Profile that bypasses the OTA middleman entirely.</p>
                                 </div>
                             </div>
                         </div>

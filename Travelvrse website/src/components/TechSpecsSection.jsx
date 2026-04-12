@@ -12,7 +12,7 @@ const TechSpecsSection = () => {
                         Frictionless <span className="text-cyan">Integration</span>
                     </h2>
                     <p className="subtitle">
-                        Use our self-serve tools to manage influencers, game creation and experience intent data.
+                        Use our self-serve tools to manage creators, game creation and experience intent data.
                     </p>
                 </div>
 
@@ -27,7 +27,7 @@ const TechSpecsSection = () => {
                             </div>
                         </div>
                         <p className="tool-description">
-                            Approve influencers, campaigns and experiences intent schemas from our dashboard.
+                            Approve creators, campaigns and experiences intent schemas from our dashboard.
                         </p>
                     </div>
 
@@ -44,7 +44,7 @@ const TechSpecsSection = () => {
                             </div>
                         </div>
                         <p className="tool-description">
-                            Influencers scan property on mobile, use our creators tools to gamify and publish on social media.
+                            Creators scan property on mobile, use our creators tools to gamify and publish on social media.
                         </p>
                     </div>
 

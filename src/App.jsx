@@ -11,6 +11,7 @@ import MarketplacePage from './pages/MarketplacePage';
 import BarcelonaPage from './pages/BarcelonaPage';
 import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
+import CreatorPortal from './pages/CreatorPortal';
 
 // ScrollToTop component ensures we start at the top when navigating between pages
 const ScrollToTop = () => {
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/barcelona" element={<BarcelonaPage />} />
         <Route path="/partner" element={<PartnerPage />} />
         <Route path="/creator" element={<CreatorPage />} />
+        <Route path="/creator-portal" element={<CreatorPortal />} />
       </Routes>
     </Router>
   );

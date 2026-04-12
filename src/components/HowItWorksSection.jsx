@@ -10,9 +10,9 @@ const HowItWorksSection = () => {
                     
                     {/* Visual Left - Expanded Image Stack */}
                     <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                        {/* Image 1: Influencer */}
+                        {/* Image 1: Creator */}
                         <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-                            <img src="/assets/hola_grab.png" alt="Influencer" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
+                            <img src="/assets/hola_grab.png" alt="Creator" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
                             <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                 <Smartphone size={14} className="text-gold" />
                                 <span style={{ fontSize: '0.7rem', fontWeight: 'bold', color: 'white' }}>Created using Mobile</span>
@@ -47,20 +47,20 @@ const HowItWorksSection = () => {
                         </h2>
                         
                         <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginBottom: '30px', lineHeight: '1.6' }}>
-                            Implementation is friction free and most of the work is done by influencers using a mobile/action camera or existing 2D photos
+                            Implementation is friction free and most of the work is done by creators using a mobile/action camera or existing 2D photos
                         </p>
  
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                 <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
                                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
-                                    Use self-serve tools to approve influencers, campaigns, rewards and profile schemas
+                                    Use self-serve tools to approve creators, campaigns, rewards and profile schemas
                                 </p>
                             </div>
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                 <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
                                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
-                                    Influencers scan property on mobile, use our influencer tools to gamify and publish social media
+                                    Creators scan property on mobile, use our creator tools to gamify and publish social media
                                 </p>
                             </div>
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
@@ -78,7 +78,7 @@ const HowItWorksSection = () => {
                         </div>
 
                         <Link to="/creator" className="btn btn-primary" style={{ padding: '15px 35px' }}>
-                            Become an Influencer <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                            Become a Creator <ArrowRight size={18} style={{ marginLeft: '10px' }} />
                         </Link>
                     </div>
 

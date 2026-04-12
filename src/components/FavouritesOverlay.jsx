@@ -1,11 +1,11 @@
 import React from 'react';
 import { useGame } from '../context/GameContext';
-import { useInfluencer } from '../context/InfluencerContext';
+import { useCreator } from '../context/CreatorContext';
 
 const FavouritesOverlay = ({ onClose }) => {
-    const { interestInsights, influencer, backpack, favourites, toggleFavourite, travelStatus } = useGame();
+    const { interestInsights, creator, backpack, favourites, toggleFavourite, travelStatus } = useGame();
     const profileScores = interestInsights || {};
-    const { publicConfig } = useInfluencer();
+    const { publicConfig } = useCreator();
     const brandingTitle = publicConfig?.home?.title?.toUpperCase() || "VIRTUAL EXPERIENCE";
 
     React.useEffect(() => {
@@ -135,12 +135,12 @@ const FavouritesOverlay = ({ onClose }) => {
                         </div>
                     </div>
 
-                    {/* Influencer Advice */}
-                    <div className="influencer-section glass-panel">
-                        <div className="influencer-avatar">
-                            <img src={influencer.image} alt={influencer.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    {/* Creator Advice */}
+                    <div className="creator-section glass-panel">
+                        <div className="creator-avatar">
+                            <img src={creator.image} alt={creator.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
-                        <h4 style={{ color: '#FFD700' }}>{influencer.name.toUpperCase()}'S ADVICE</h4>
+                        <h4 style={{ color: '#FFD700' }}>{creator.name.toUpperCase()}'S ADVICE</h4>
                         <p style={{ fontSize: '0.9rem', opacity: 0.8, maxWidth: '500px' }}>
                             "Yo! You're building a sick profile here. These spots are my absolute favorites. Keep exploring!"
                         </p>

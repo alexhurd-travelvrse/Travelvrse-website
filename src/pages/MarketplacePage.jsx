@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 const cities = [
   { 
     name: 'Barcelona Cruises', 
-    img: 'https://images.unsplash.com/photo-1583422409516-2895a77efead?auto=format&fit=crop&q=80&w=800',
+    img: 'https://images.unsplash.com/photo-1539108351558-4458577ad3f8?auto=format&fit=crop&q=80&w=800',
     desc: 'Setting sail from the heart of Catalonia.',
     url: '/barcelona'
   },

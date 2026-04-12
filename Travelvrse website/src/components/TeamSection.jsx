@@ -5,7 +5,8 @@ const team = [
     {
         name: "Alex Hurd",
         role: "Co-Founder CEO",
-        image: "/models/Alex_Hurd.jpg"
+        image: "/models/Alex_Hurd.jpg",
+        background: "Ex Play2Pay, Shazam, Indospace"
     },
     {
         name: "Lee Probert",
@@ -15,7 +16,8 @@ const team = [
     {
         name: "Julian Houchin",
         role: "Chairman",
-        image: "/models/Julianphoto.jpg"
+        image: "/models/Julianphoto.jpg",
+        background: "Ex GLC Resorts and IO Resorts"
     },
     {
         name: "Lindsay Kotas",
@@ -29,7 +31,7 @@ const team = [
     },
     {
         name: "Alex Grant",
-        role: "Board Advisor",
+        role: "Head of Hotel Solutions Travel Curious",
         image: "/models/Alex Grant.png"
     },
     {
@@ -48,7 +50,7 @@ const TeamSection = () => {
                         Our <span className="text-cyan">Team</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        A group of visionaries and industry experts dedicated to transforming the future of travel and immersive technology.
+                        In an era where generic AI agents are replacing traditional search, the only way to win is through Deterministic Data. Our team brings a unique blend of cross-industry expertise to turn passive attention into monetizable assets
                     </p>
                 </div>
 
@@ -61,6 +63,11 @@ const TeamSection = () => {
                             <div className="member-info">
                                 <h3>{member.name}</h3>
                                 <p className="member-role text-gold">{member.role}</p>
+                                {member.background && (
+                                    <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', marginTop: '8px', textTransform: 'uppercase' }}>
+                                        {member.background}
+                                    </p>
+                                )}
                             </div>
                         </div>
                     ))}

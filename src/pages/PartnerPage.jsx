@@ -98,11 +98,11 @@ const PartnerPage = () => {
                                             <input type="text" name="company" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
                                             <select name="propertyType" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
                                                 <option value="">Property Type</option>
-                                                <option value="hotel">Hotel</option>
+                                                <option value="hotels">Hotels</option>
                                                 <option value="hostels">Hostels</option>
+                                                <option value="resorts">Resorts</option>
                                                 <option value="cruise">Cruise Operator</option>
-                                                <option value="resort">Resort</option>
-                                                <option value="landmark">Other Landmark</option>
+                                                <option value="landmark">Landmark</option>
                                             </select>
                                             <button className="btn btn-primary" type="submit" disabled={loading} style={{ marginTop: '10px', width: '100%', padding: '15px' }}>
                                                 {loading ? 'Sending...' : 'Register Interest'} <ArrowRight size={18} style={{ marginLeft: '10px' }} />

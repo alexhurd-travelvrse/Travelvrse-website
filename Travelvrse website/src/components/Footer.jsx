@@ -86,11 +86,11 @@ const Footer = () => {
                                     className="form-select"
                                 >
                                     <option value="" disabled>Select your industry</option>
-                                    <option value="hotel">Hotel</option>
+                                    <option value="hotels">Hotels</option>
                                     <option value="hostels">Hostels</option>
+                                    <option value="resorts">Resorts</option>
                                     <option value="cruise">Cruise Operator</option>
-                                    <option value="resort">Resort</option>
-                                    <option value="landmark">Other Landmark</option>
+                                    <option value="landmark">Landmark</option>
                                 </select>
                             </div>
 

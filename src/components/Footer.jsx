@@ -100,11 +100,11 @@ const Footer = () => {
                                     <input type="text" name="company" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }} />
                                     <select name="propertyType" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '8px', color: 'white' }}>
                                         <option value="">Property Type</option>
-                                        <option value="hotel">Hotel</option>
+                                        <option value="hotels">Hotels</option>
                                         <option value="hostels">Hostels</option>
+                                        <option value="resorts">Resorts</option>
                                         <option value="cruise">Cruise Operator</option>
-                                        <option value="resort">Resort</option>
-                                        <option value="landmark">Other Landmark</option>
+                                        <option value="landmark">Landmark</option>
                                     </select>
                                     <button type="submit" disabled={loading} className="btn btn-primary" style={{ marginTop: '5px', width: '100%', padding: '12px' }}>
                                         {loading ? 'Sending...' : 'Register Interest'} <ArrowRight size={18} style={{ marginLeft: '10px' }} />

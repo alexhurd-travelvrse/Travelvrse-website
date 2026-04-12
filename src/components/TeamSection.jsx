@@ -64,7 +64,7 @@ const TeamSection = () => {
                         Our <span className="text-cyan">Team</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        In an era where generic AI agents are replacing traditional search, the only way to win is through Deterministic Data. Our team brings a unique blend of cross-industry expertise to turn passive attention into monetizable assets
+                        In an age of unpersonalized AI agents, we capture the deterministic data they lack. Our team blends expertise in Rewarded Gaming, Immersive Tech, and Travel Experiences to turn 3D discovery into high-intent, monetizable guest profiles
                     </p>
                 </div>
 

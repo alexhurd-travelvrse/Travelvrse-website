@@ -77,15 +77,18 @@ const PartnerPage = () => {
                                 <>
                                     <div style={{ marginBottom: '1rem' }}>
                                         <span style={{ 
-                                            fontSize: '0.75rem', 
-                                            background: 'var(--color-gold)', 
+                                            fontSize: '1rem', 
+                                            background: '#ffffff', 
                                             color: '#050b14', 
-                                            padding: '4px 12px', 
+                                            padding: '6px 20px', 
                                             borderRadius: '4px', 
                                             fontWeight: '900',
                                             textTransform: 'uppercase',
-                                            letterSpacing: '2px'
-                                        }}>Beta Phase</span>
+                                            letterSpacing: '4px',
+                                            boxShadow: '0 0 20px rgba(255, 255, 255, 0.4)',
+                                            border: '2px solid var(--color-gold)',
+                                            display: 'inline-block'
+                                        }}>BETA</span>
                                     </div>
                                     <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Become a partner</h3>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Fill out the form below and we'll be in touch</p>

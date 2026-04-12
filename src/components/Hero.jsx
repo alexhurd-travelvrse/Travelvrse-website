@@ -20,20 +20,7 @@ const Hero = () => {
 
             <div className="container hero-content">
                 <div className="hero-header-group animate-fade-up">
-                    <div style={{ marginBottom: '1.5rem' }}>
-                        <span style={{ 
-                            fontSize: '1rem', 
-                            background: 'var(--color-gold)', 
-                            color: '#050b14', 
-                            padding: '8px 20px', 
-                            borderRadius: '4px', 
-                            textTransform: 'uppercase',
-                            letterSpacing: '3px',
-                            fontWeight: '900',
-                            boxShadow: '0 0 20px rgba(255, 184, 0, 0.4)',
-                            display: 'inline-block'
-                        }}>BETA SERVICE</span>
-                    </div>
+                    <div className="beta-badge-premium">BETA</div>
                     <h1 className="hero-title">
                         <span className="text-gradient">Futureproof Your Direct Revenue</span>
                     </h1>

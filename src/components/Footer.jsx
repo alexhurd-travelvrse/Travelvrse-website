@@ -79,15 +79,18 @@ const Footer = () => {
                             <>
                                 <div style={{ marginBottom: '0.8rem' }}>
                                     <span style={{ 
-                                        fontSize: '0.7rem', 
-                                        background: 'var(--color-gold)', 
+                                        fontSize: '0.9rem', 
+                                        background: '#ffffff', 
                                         color: '#050b14', 
-                                        padding: '3px 10px', 
+                                        padding: '4px 15px', 
                                         borderRadius: '4px', 
                                         fontWeight: '900',
                                         textTransform: 'uppercase',
-                                        letterSpacing: '1.5px'
-                                    }}>Beta Phase</span>
+                                        letterSpacing: '3px',
+                                        boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)',
+                                        border: '2px solid var(--color-gold)',
+                                        display: 'inline-block'
+                                    }}>BETA</span>
                                 </div>
                                 <h3 style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'white' }}>Become a partner</h3>
                                 <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>Fill out the form below and we'll be in touch</p>

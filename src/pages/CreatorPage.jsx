@@ -75,6 +75,7 @@ const CreatorPage = () => {
                         <div className="glass-card animate-fade-up delay-1" style={{ padding: '3rem', borderRadius: '24px' }}>
                             {!submitted ? (
                                 <>
+                                    <div className="beta-badge-premium">BETA</div>
                                     <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Creator Sign-up</h3>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Connect your platforms and join the BETA program</p>
                                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>

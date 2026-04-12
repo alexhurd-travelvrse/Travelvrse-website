@@ -45,7 +45,7 @@ const Footer = () => {
                             Scale Your <span className="text-gold">Direct Revenue</span> via Experience Marketing
                         </h2>
                         <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: '1.6', textAlign: 'left' }}>
-                            Travelvrse works with hotels, hostels, resorts and cruise operators to promote their iconic experiences as a hook to capture qualified guest profiles and make direct offers.
+                            Travelvrse works with hotels, hostels, resorts, cruise operators, and landmark properties to promote their iconic experiences as a hook to capture qualified guest profiles.
                         </p>
                         
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', textAlign: 'left' }}>

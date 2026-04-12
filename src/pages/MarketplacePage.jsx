@@ -49,6 +49,7 @@ const MarketplacePage = () => {
                 <div className="container">
                     <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                         <h4 className="text-cyan animate-fade-up" style={{ letterSpacing: '2px', fontWeight: '800', marginBottom: '1rem' }}>DISCOVER</h4>
+                        <div className="beta-badge-premium">BETA</div>
                         <h1 className="hero-title animate-fade-up delay-1" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '20px' }}>
                             <span className="text-gradient">Global Marketplace</span>
                         </h1>

@@ -54,7 +54,7 @@ const MarketplacePage = () => {
                             <span className="text-gradient">Global Marketplace</span>
                         </h1>
                         <p className="animate-fade-up delay-2" style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
-                            Explore curated virtual experiences from iconic destinations around the world.
+                            Explore rewarded experiences from iconic destinations around the world.
                         </p>
                     </div>
 

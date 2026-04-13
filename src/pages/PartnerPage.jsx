@@ -41,7 +41,7 @@ const PartnerPage = () => {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
                         <div className="animate-fade-up">
                             <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.1' }}>
-                                Scale Your <span className="text-gold">Direct Revenue</span> via Experience Marketing
+                                Increase Your <span className="text-gold">Direct Revenue</span> via Experience Marketing
                             </h1>
                             <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: '1.6' }}>
                                 Travelvrse works with hotels, hostels, resorts, cruise operators, and landmark properties to promote their iconic experiences as a hook to capture qualified guest profiles.

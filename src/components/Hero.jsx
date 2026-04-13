@@ -22,7 +22,7 @@ const Hero = () => {
                 <div className="hero-header-group animate-fade-up">
                     <div className="beta-badge-premium">BETA</div>
                     <h1 className="hero-title">
-                        <span className="text-gradient">Futureproof Your Direct Revenue</span>
+                        <span className="text-gradient">Increase Your Direct Revenue</span>
                     </h1>
                     <h2 className="hero-strategy">
                         REWARDED EXPERIENCE MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS
@@ -35,7 +35,7 @@ const Hero = () => {
 
                 <div className="hero-cta-group animate-fade-up delay-2">
                     <Link to="/partner" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-                        Start Promoting Experiences
+                        Book 15 Min Demo
                     </Link>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />

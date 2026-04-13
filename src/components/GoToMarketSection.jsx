@@ -67,7 +67,7 @@ const GoToMarketSection = () => {
                         <JourneyLifecycle />
 
                         <Link to="/partner" className="btn btn-outline" style={{ marginTop: '40px', padding: '15px 30px', borderColor: 'var(--color-cyan-neon)', color: 'var(--color-cyan-neon)' }}>
-                            Start Promoting Experiences <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                            Book 15 Min Demo <ArrowRight size={18} style={{ marginLeft: '10px' }} />
                         </Link>
                     </div>
 

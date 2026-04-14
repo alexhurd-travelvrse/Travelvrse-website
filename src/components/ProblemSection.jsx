@@ -23,7 +23,7 @@ const ProblemSection = () => {
                         Rewarded Experience <span className="text-gold">Marketplace</span>
                     </h2>
                     <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                        75% of Next-Gen search for local experiences before rooms
+                        75% Millennials / Gen-Z (Next-Gen) Search For Local Experiences Before Rooms
                     </div>
                 </div>
 

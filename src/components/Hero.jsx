@@ -30,7 +30,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Promote Your Iconic Experiences to the fastest luxury segment, Next-Gen
+                    Promote Your Iconic Experiences To The Fastest Growing Travel Segment - Next-Gen
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">

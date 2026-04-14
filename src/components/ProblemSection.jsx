@@ -85,7 +85,7 @@ const ProblemSection = () => {
                                 <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-gold)', width: '50px', lineHeight: '1' }}>02</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Profile</h4>
-                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guests earn a reward and build a rich data profile</p>
+                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Earn a reward and build a rich data profile</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>

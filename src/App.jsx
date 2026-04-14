@@ -28,8 +28,8 @@ const B2BHome = () => {
     <Layout>
       <Hero />
       <ProblemSection />
-      <HowItWorksSection />
       <RevenueSection />
+      <HowItWorksSection />
       <GoToMarketSection />
       <TeamSection />
       <Footer />

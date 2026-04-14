@@ -42,9 +42,6 @@ const RevenueSection = () => {
                         <h2 style={{ fontSize: '2.8rem', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.1', color: 'white' }}>
                             Increase Your <span className="text-gold">Direct Revenue</span>
                         </h2>
-                        <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', lineHeight: '1.6' }}>
-                            Bridge the Experience Gap across the entire guest lifecycle, turning interactive discovery into high-margin direct bookings.
-                        </p>
                         
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>

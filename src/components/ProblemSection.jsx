@@ -22,8 +22,8 @@ const ProblemSection = () => {
                     <h2 style={{ fontSize: '3rem', lineHeight: '1.2', fontWeight: '800' }}>
                         Rewarded Experience <span className="text-gold">Marketplace</span>
                     </h2>
-                    <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                        75% Millennials / Gen-Z (Next-Gen) Search For Local Experiences Before Rooms
+                    <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px' }}>
+                        75% Millennials / Gen-Z (Next-Gen) search for local experiences before rooms
                     </div>
                 </div>
 

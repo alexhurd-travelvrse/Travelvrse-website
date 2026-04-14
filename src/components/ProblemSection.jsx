@@ -92,7 +92,7 @@ const ProblemSection = () => {
                                 <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1' }}>03</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Personalized direct booking offers and on-site upsells are triggered based on the guest profile</p>
+                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guest profile triggers personalised direct booking offers</p>
                                 </div>
                             </div>
                         </div>

@@ -12,6 +12,7 @@ import BarcelonaPage from './pages/BarcelonaPage';
 import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
 import CreatorPortal from './pages/CreatorPortal';
+import RevenueSection from './components/RevenueSection';
 
 // ScrollToTop component ensures we start at the top when navigating between pages
 const ScrollToTop = () => {
@@ -28,6 +29,7 @@ const B2BHome = () => {
       <Hero />
       <ProblemSection />
       <HowItWorksSection />
+      <RevenueSection />
       <GoToMarketSection />
       <TeamSection />
       <Footer />

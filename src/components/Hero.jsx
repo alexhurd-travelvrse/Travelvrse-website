@@ -27,6 +27,9 @@ const Hero = () => {
                     <h2 className="hero-strategy">
                         REWARDED EXPERIENCE MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS
                     </h2>
+                    <p className="hero-stat animate-fade-up" style={{ color: 'var(--color-gold)', fontWeight: '700', fontSize: '1.2rem', marginTop: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                        75% Millennials / Gen-Z (Next-Gen) Search For Local Experiences Before Rooms
+                    </p>
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">

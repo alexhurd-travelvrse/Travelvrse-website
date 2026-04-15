@@ -60,7 +60,7 @@ const GoToMarketSection = () => {
                             Go To <span className="text-cyan">Market</span>
                         </h2>
                         
-                        <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '30px', maxWidth: '500px' }}>
+                        <p style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6', marginBottom: '30px' }}>
                             Our rewarded challenges are configurable for different guest journeys and to be set up and promoted by external or internal creators
                         </p>
 

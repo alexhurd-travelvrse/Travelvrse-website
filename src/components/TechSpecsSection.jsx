@@ -44,7 +44,7 @@ const TechSpecsSection = () => {
                     <div className="tool-box glass-card">
                         <div className="tool-label">Creator Tools</div>
                         <div className="tool-media">
-                            <div className="tool-screenshot" style={{ backgroundImage: 'url(/models/travelvrse_mobile_scan.png)' }}>
+                            <div className="tool-screenshot" style={{ backgroundImage: 'url(/models/msc_mobile_scan.png)' }}>
                                 <div className="screenshot-overlay"></div>
                             </div>
                         </div>

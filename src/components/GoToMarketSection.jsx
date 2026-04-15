@@ -73,38 +73,35 @@ const GoToMarketSection = () => {
 
                     {/* Visual Right - Vertical Steps */}
                     <div className="animate-fade-up delay-1">
-                        <div style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-gold)', letterSpacing: '1px' }}>
-                            PRE-STAY EXAMPLE
-                        </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/models/travelvrse_hero_product.png) center/cover', flexShrink: 0 }}></div>
+                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/msc_home_preview.png) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 1: THE HOOK</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 1</div>
                                     <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Choose Experience and Reward</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Promote Space Guest List Access to Our Roof Top Bar</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Guest List Access Roof Top Bar</div>
                                 </div>
                             </div>
 
                             <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))', marginLeft: '85px' }}></div>
 
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-cyan-neon)' }}>
-                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/models/travelvrse_mobile_scan.png) center/cover', flexShrink: 0 }}></div>
+                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 2: DISTRIBUTION</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 2</div>
                                     <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Plan Go to Market</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600', lineHeight: '1.4' }}>Promote Using Space Nightlife focused creator on social media and our Concierge team using pre-stay email</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Dining creator on social media</div>
                                 </div>
                             </div>
 
                             <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold))', marginLeft: '85px' }}></div>
 
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/models/cabana.png) center/cover', flexShrink: 0 }}></div>
+                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/restaurant_preview.jpg) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 3: THE GOAL</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '1px' }}>STEP 3</div>
                                     <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', marginBottom: '4px' }}>Select Data and Direct Offers</div>
-                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Objective: Find guests interested in nightlife for onsite upsell offers</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-cyan-neon)', fontWeight: '600' }}>Objective: find guest interest in dining for package offer</div>
                                 </div>
                             </div>
                         </div>

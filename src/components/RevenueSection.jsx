@@ -49,7 +49,7 @@ const RevenueSection = () => {
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Target Next-Gen</h4>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
-                                        Capture the fastest growing segment. Millennials and GenZ will account for 70% of luxury hotel sales by 2029.
+                                        Capture the fastest growing segment - Millennials and GenZ will account for 70% of luxury hotel sales by 2029
                                     </p>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@ const RevenueSection = () => {
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Increase Direct Bookings</h4>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
-                                        Position your iconic experiences as the primary hook to capture high-intent guests before they look at OTAs.
+                                        Position your iconic experiences as the primary hook to capture high-intent guests before they look at OTAs
                                     </p>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@ const RevenueSection = () => {
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Increase Upsell</h4>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
-                                        Build rich guest profiles via photorealistic challenges to offer personalized, high-value ancillary upgrades.
+                                        Build rich guest profiles via photorealistic challenges to offer personalized, high-value ancillary upgrades
                                     </p>
                                 </div>
                             </div>

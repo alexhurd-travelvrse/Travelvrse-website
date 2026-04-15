@@ -91,7 +91,10 @@ const GoToMarketSection = () => {
                                 <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>CHANNEL</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>Nightlife focused creator on social media and our Concierge team using pre-stay email</div>
+                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>
+                                        <div style={{ marginBottom: '4px' }}>• Nightlife focused creator on social media</div>
+                                        <div>• Concierge team in pre-stay email</div>
+                                    </div>
                                 </div>
                             </div>
 

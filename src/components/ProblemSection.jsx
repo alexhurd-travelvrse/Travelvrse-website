@@ -23,7 +23,7 @@ const ProblemSection = () => {
                         Rewarded Experience <span className="text-gold">Marketplace</span>
                     </h2>
                     <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6' }}>
-                        We connect accommodation providers with creators to build and promote their onsite/local experiences.
+                        We connect accommodation providers with creators to build/promote their experiences.
                         <br />
                         <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>75% of Millennials / Gen-Z (Next-Gen) search for local experiences before accommodation</span>
                     </div>

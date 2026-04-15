@@ -22,8 +22,10 @@ const ProblemSection = () => {
                     <h2 style={{ fontSize: '3rem', lineHeight: '1.2', fontWeight: '800' }}>
                         Rewarded Experience <span className="text-gold">Marketplace</span>
                     </h2>
-                    <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px' }}>
-                        We connect accomodation providers with creators to build and promote their onsite/local experiences.
+                    <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6' }}>
+                        We connect accommodation providers with creators to build and promote their onsite/local experiences.
+                        <br />
+                        <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>75% of Millennials / Gen-Z (Next-Gen) search for local experiences before accommodation</span>
                     </div>
                 </div>
 

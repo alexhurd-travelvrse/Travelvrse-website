@@ -80,7 +80,7 @@ const GoToMarketSection = () => {
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
                                 <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/msc_home_preview.png) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>1) PROMOTION</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>PROMOTION</div>
                                     <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>Guest List Access to Our Roof Top Bar</div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ const GoToMarketSection = () => {
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-cyan-neon)' }}>
                                 <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>2) CHANNEL</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>CHANNEL</div>
                                     <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>Nightlife focused creator on social media and our Concierge team using pre-stay email</div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@ const GoToMarketSection = () => {
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
                                 <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/restaurant_preview.jpg) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>3) OBJECTIVE</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>OBJECTIVE</div>
                                     <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>Find guests interested in nightlife for onsite upsell offers</div>
                                 </div>
                             </div>

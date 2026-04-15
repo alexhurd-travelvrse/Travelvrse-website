@@ -3,10 +3,10 @@ import PasswordGate from '../components/PasswordGate';
 
 const BarcelonaPage = () => {
     useEffect(() => {
-        // Redirect to MSC Cruises if authorized
+        // Log authorized access
         const authorized = sessionStorage.getItem('travelvrse_authorized');
-        if (authorized === 'true') {
-            window.location.href = 'https://msc-cruises.vercel.app/';
+        if (authorized !== 'true') {
+            console.log('Unauthorized access attempt to destination experience');
         }
     }, []);
 
@@ -23,9 +23,9 @@ const BarcelonaPage = () => {
                 textAlign: 'center',
                 padding: '40px'
             }}>
-                <h1 style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>Barcelona Cruises</h1>
+                <h1 style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>Destination Experience</h1>
                 <p style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '600px', marginBottom: '30px' }}>
-                    Access authorized. Entering the Barcelona experience...
+                    Access authorized. Entering the interactive destination demo...
                 </p>
                 <div className="loader" style={{ 
                     border: '4px solid rgba(0, 229, 255, 0.1)',
@@ -42,11 +42,11 @@ const BarcelonaPage = () => {
                     }
                 `}</style>
                 <button 
-                    onClick={() => window.location.href = 'https://msc-cruises.vercel.app/'}
+                    onClick={() => window.location.href = '/marketplace'}
                     className="btn btn-primary"
                     style={{ marginTop: '40px' }}
                 >
-                    CLICK HERE IF NOT AUTOMATICALLY REDIRECTED
+                    BACK TO MARKETPLACE
                 </button>
             </div>
         </PasswordGate>

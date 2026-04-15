@@ -46,7 +46,7 @@ const HowItWorksSection = () => {
                             How It <span className="text-gold">Works</span>
                         </h2>
                         
-                        <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginBottom: '30px', lineHeight: '1.6' }}>
+                        <p style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6', marginBottom: '30px' }}>
                             Implementation is friction free and most of the work is done by creators using a mobile/action camera or existing 2D photos
                         </p>
  

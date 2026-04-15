@@ -25,7 +25,7 @@ const ProblemSection = () => {
                     <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6' }}>
                         We connect accommodation providers with creators to build/promote their experiences.
                         <br />
-                        <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>75% of Millennials / Gen-Z (Next-Gen) search for local experiences before accommodation</span>
+                        <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>75% of Next-Gen travelers search for experiences first</span>
                     </div>
                 </div>
 

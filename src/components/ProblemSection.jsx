@@ -23,7 +23,7 @@ const ProblemSection = () => {
                         Rewarded Experience <span className="text-gold">Marketplace</span>
                     </h2>
                     <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6' }}>
-                        We connect accommodation providers with creators to build/promote their experiences.
+                        We connect accommodation providers with creators to build/promote their experiences
                         <br />
                         <span style={{ fontSize: '1rem' }}>75% of Next-Gen travelers search for experiences first</span>
                     </div>

@@ -64,7 +64,7 @@ const TeamSection = () => {
                         Our <span className="text-cyan">Team</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        Our team blends expertise in Rewarded Gaming, Immersive Tech, Hospitality and Experiences.
+                        Our team blends expertise in Rewarded Gaming, Spatial Tech, Hospitality and Experiences.
                     </p>
                 </div>
 

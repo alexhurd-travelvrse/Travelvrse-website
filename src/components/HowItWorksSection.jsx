@@ -47,7 +47,7 @@ const HowItWorksSection = () => {
                         </h2>
                         
                         <p style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6', marginBottom: '30px' }}>
-                            Implementation is friction free. Creators build your immersive experiences using mobile scans, action camera footage, or your existing 2D photos
+                            Implementation is friction free. Creators build your photorealistic experiences using mobile scans, action camera footage, or your existing 2D photos
                         </p>
  
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>

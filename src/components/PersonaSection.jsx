@@ -35,7 +35,7 @@ const ResultsSection = () => {
                         From Vibe to Value: <span className="text-gold">The DNA-Driven Journey</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-4xl">
-                        We bridge the Experience Gap across the entire guest lifecycle, turning immersive play into high-margin revenue.
+                        We bridge the Experience Gap across the entire guest lifecycle, turning photorealistic play into high-margin revenue.
                     </p>
                 </div>
 

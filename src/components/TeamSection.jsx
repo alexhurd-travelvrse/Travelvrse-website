@@ -86,7 +86,7 @@ const TeamSection = () => {
                             flexDirection: 'column',
                             alignItems: 'center',
                             textAlign: 'center',
-                            minHeight: '260px'
+                            minHeight: '300px'
                         }}>
                             {member.linkedin && (
                                 <a 
@@ -119,10 +119,6 @@ const TeamSection = () => {
                     ))}
                 </div>
 
-                {/* Advisory Board - Starts with Amir */}
-                <div className="section-header text-center animate-fade-up" style={{ marginBottom: '30px' }}>
-                    <h3 style={{ fontSize: '1.2rem', color: 'var(--color-gold)', letterSpacing: '2px', textTransform: 'uppercase' }}>Advisory Board</h3>
-                </div>
 
                 <div className="team-grid" style={{ 
                     display: 'grid', 
@@ -140,7 +136,7 @@ const TeamSection = () => {
                             flexDirection: 'column',
                             alignItems: 'center',
                             textAlign: 'center',
-                            minHeight: '260px'
+                            minHeight: '300px'
                         }}>
                             {member.linkedin && (
                                 <a 

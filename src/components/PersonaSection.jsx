@@ -5,7 +5,7 @@ const journeyPhases = [
         experience: 'Local challenges led by creators or concierges.',
         dna: 'Identifies the Explorer vs. the Relaxer.',
         revenue: 'Direct Bookings bypassing OTA commissions.',
-        image: '/assets/msc_home_preview.png'
+        image: '/assets/property_home_preview.png'
     },
     {
         id: 'pre-arrival',

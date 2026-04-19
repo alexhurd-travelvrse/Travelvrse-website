@@ -34,7 +34,7 @@ const HowItWorksSection = () => {
                                 <img src="/models/beach.png" alt="Beach" style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
                                 <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                     <Zap size={14} className="text-gold" />
-                                    <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: 'white' }}>Created using 2D photo</span>
+                                    <span style={{ fontSize: '0.65rem', fontWeight: 'bold', color: 'white' }}>Built from existing 2D photos</span>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@ const HowItWorksSection = () => {
                         </h2>
                         
                         <p style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6', marginBottom: '30px' }}>
-                            Implementation is friction free and most of the work is done by creators using a mobile/action camera or existing 2D photos
+                            Implementation is friction free. We can build your immersive experiences using mobile scans, action camera footage, or your existing 2D photos.
                         </p>
  
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>

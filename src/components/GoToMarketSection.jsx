@@ -78,7 +78,7 @@ const GoToMarketSection = () => {
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                             <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/msc_home_preview.png) center/cover', flexShrink: 0 }}></div>
+                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/property_home_preview.png) center/cover', flexShrink: 0 }}></div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>PROMOTION</div>
                                     <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>Roof Top Bar Guest List Access</div>

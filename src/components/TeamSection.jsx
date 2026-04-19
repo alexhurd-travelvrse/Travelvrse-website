@@ -68,14 +68,70 @@ const TeamSection = () => {
                     </p>
                 </div>
 
+                {/* Core Team */}
                 <div className="team-grid" style={{ 
                     display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', 
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
+                    gap: '20px',
+                    justifyContent: 'center',
+                    marginBottom: '40px'
+                }}>
+                    {team.slice(0, 4).map((member, index) => (
+                        <div key={index} className="team-card glass-card animate-fade-up" style={{ 
+                            animationDelay: `${index * 0.1}s`, 
+                            position: 'relative',
+                            padding: '1.2rem',
+                            borderRadius: '16px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            minHeight: '260px'
+                        }}>
+                            {member.linkedin && (
+                                <a 
+                                    href={member.linkedin} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    style={{ position: 'absolute', top: '12px', right: '12px', zIndex: 10, color: 'rgba(255,255,255,0.3)', transition: 'color 0.3s' }}
+                                    className="linkedin-link"
+                                >
+                                    <Linkedin size={16} />
+                                </a>
+                            )}
+                            <div className="member-image-wrapper" style={{ width: '80px', height: '80px', marginBottom: '1rem' }}>
+                                <img src={member.image} alt={member.name} className="member-image" style={{ borderRadius: '50%' }} />
+                            </div>
+                            <div className="member-info" style={{ flex: 1, display: 'flex', flexDirection: 'column', width: '100%' }}>
+                                <h3 style={{ fontSize: '0.95rem', marginBottom: '6px', color: 'white', fontWeight: '700' }}>{member.name}</h3>
+                                <p className="member-role text-gold" style={{ fontSize: '0.75rem', lineHeight: '1.4', fontWeight: '500' }}>
+                                    {member.role}
+                                </p>
+                                {(member.advisor || member.background) && (
+                                    <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                                        <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                                            {member.advisor ? "Board Adviser" : member.background}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Advisory Board - Starts with Amir */}
+                <div className="section-header text-center animate-fade-up" style={{ marginBottom: '30px' }}>
+                    <h3 style={{ fontSize: '1.2rem', color: 'var(--color-gold)', letterSpacing: '2px', textTransform: 'uppercase' }}>Advisory Board</h3>
+                </div>
+
+                <div className="team-grid" style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
                     gap: '20px',
                     justifyContent: 'center'
                 }}>
-                    {team.map((member, index) => (
-                        <div key={index} className="team-card glass-card animate-fade-up" style={{ 
+                    {team.slice(4).map((member, index) => (
+                        <div key={index + 4} className="team-card glass-card animate-fade-up" style={{ 
                             animationDelay: `${index * 0.1}s`, 
                             position: 'relative',
                             padding: '1.2rem',

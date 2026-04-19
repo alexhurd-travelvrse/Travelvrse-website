@@ -44,12 +44,12 @@ const TechSpecsSection = () => {
                     <div className="tool-box glass-card">
                         <div className="tool-label">Creator Tools</div>
                         <div className="tool-media">
-                            <div className="tool-screenshot" style={{ backgroundImage: 'url(/models/msc_mobile_scan.png)' }}>
+                            <div className="tool-screenshot" style={{ backgroundImage: 'url(/models/creator_mobile_scan.png)' }}>
                                 <div className="screenshot-overlay"></div>
                             </div>
                         </div>
                         <p className="tool-description">
-                            Creators scan property on mobile, use our creators tools to gamify and publish on social media.
+                            Creators scan property on mobile or upload existing 2D photos. Use our tools to gamify and publish in minutes.
                         </p>
                     </div>
 

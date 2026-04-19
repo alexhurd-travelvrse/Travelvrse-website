@@ -28,7 +28,7 @@ const AiSection = () => {
                                 </div>
                                 <div>
                                     <h4>Own the Search (Spatial SEO)</h4>
-                                    <p>Unlike 2D photos that OTAs scrape and reuse, your 3D experience is a unique spatial asset. By hosting it on your domain, you claim the Spatial SEO credit, ensuring your property—not a third-party—ranks first when Next-Gen travelers search for their next experience.</p>
+                                    <p>While OTAs scrape and reuse your static 2D photos, we transform your existing photography into unique 3D spatial assets. By hosting these experiences on your domain, you claim the Spatial SEO credit—ensuring your property ranks first when Next-Gen travelers search for their next destination.</p>
                                 </div>
                             </div>
 

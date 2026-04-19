@@ -35,7 +35,7 @@ const ProblemSection = () => {
                     <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                         <div className="glass-card" style={{ padding: '0', overflow: 'hidden', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
                             <img 
-                                src="/models/mscscreenshotfortravelvrse.png" 
+                                src="/models/challenge_screenshot.png" 
                                 alt="Rewarded Experience Challenge" 
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
                             />

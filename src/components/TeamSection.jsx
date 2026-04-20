@@ -92,15 +92,13 @@ const TeamSection = () => {
                                     {member.role}
                                 </p>
                                 <div className="member-advisor-tag">
-                                    {member.advisor && (
-                                        <p style={{ fontSize: '0.7rem', color: 'rgba(5, 229, 255, 0.8)', fontWeight: 'bold', letterSpacing: '1px' }}>
-                                            BOARD ADVISOR
-                                        </p>
-                                    )}
+                                    {/* Spacer to align with cards that have backgrounds */}
                                 </div>
                                 <div className="member-background">
                                     {member.background ? (
                                         <p>{member.background}</p>
+                                    ) : member.advisor ? (
+                                        <p style={{ color: 'rgba(5, 229, 255, 0.8)', fontWeight: '800' }}>BOARD ADVISOR</p>
                                     ) : (
                                         <p style={{ opacity: 0.1 }}>—</p>
                                     )}

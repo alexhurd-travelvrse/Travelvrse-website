@@ -64,13 +64,12 @@ const TeamSection = () => {
                         Our <span className="text-cyan">Team</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-2xl">
-                        Our team blends expertise in Rewarded Gaming, Spatial Tech, Hospitality and Experiences.
+                        Our team blends expertise in Rewarded Gaming, Immersive Tech, Hospitality and Experiences.
                     </p>
                 </div>
 
-                {/* Team Grid */}
                 <div className="team-grid">
-                    {team.slice(0, 4).map((member, index) => (
+                    {team.map((member, index) => (
                         <div key={index} className="team-card glass-card animate-fade-up" style={{ 
                             animationDelay: `${index * 0.1}s`
                         }}>
@@ -88,48 +87,24 @@ const TeamSection = () => {
                                 <img src={member.image} alt={member.name} className="member-image" />
                             </div>
                             <div className="member-info">
-                                <h3 style={{ fontSize: '0.95rem', marginBottom: '6px', color: 'white', fontWeight: '700' }}>{member.name}</h3>
+                                <h3 className="member-name">{member.name}</h3>
                                 <p className="member-role text-gold">
                                     {member.role}
                                 </p>
-                                {member.background && (
-                                    <div className="member-background">
+                                <div className="member-advisor-tag">
+                                    {member.advisor && (
+                                        <p style={{ fontSize: '0.7rem', color: 'rgba(5, 229, 255, 0.8)', fontWeight: 'bold', letterSpacing: '1px' }}>
+                                            BOARD ADVISOR
+                                        </p>
+                                    )}
+                                </div>
+                                <div className="member-background">
+                                    {member.background ? (
                                         <p>{member.background}</p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="team-grid" style={{ marginTop: '20px' }}>
-                    {team.slice(4).map((member, index) => (
-                        <div key={index + 4} className="team-card glass-card animate-fade-up" style={{ 
-                            animationDelay: `${index * 0.1}s`
-                        }}>
-                            {member.linkedin && (
-                                <a 
-                                    href={member.linkedin} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    className="linkedin-link"
-                                >
-                                    <Linkedin size={16} />
-                                </a>
-                            )}
-                            <div className="member-image-wrapper">
-                                <img src={member.image} alt={member.name} className="member-image" />
-                            </div>
-                            <div className="member-info">
-                                <h3 style={{ fontSize: '0.95rem', marginBottom: '6px', color: 'white', fontWeight: '700' }}>{member.name}</h3>
-                                <p className="member-role text-gold">
-                                    {member.role}
-                                </p>
-                                {member.background && (
-                                    <div className="member-background">
-                                        <p>{member.background}</p>
-                                    </div>
-                                )}
+                                    ) : (
+                                        <p style={{ opacity: 0.1 }}>—</p>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     ))}

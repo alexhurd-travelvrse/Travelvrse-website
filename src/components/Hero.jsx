@@ -35,7 +35,7 @@ const Hero = () => {
 
                 <div className="hero-cta-group animate-fade-up delay-2">
                     <Link to="/partner" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-                        Book 15 Min Demo
+                        Get Started
                     </Link>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />

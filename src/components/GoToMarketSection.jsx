@@ -39,11 +39,7 @@ const JourneyLifecycle = () => {
                     <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'white' }}>During Stay</div>
                 </div>
             </div>
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px', textAlign: 'center' }}>
-                <p style={{ color: 'var(--color-gold)', fontWeight: '600', fontSize: '1rem', letterSpacing: '0.5px' }}>
-                    Use your experiences as a hook to drive direct offers
-                </p>
-            </div>
+
         </div>
     );
 };
@@ -67,7 +63,7 @@ const GoToMarketSection = () => {
                         <JourneyLifecycle />
 
                         <Link to="/partner" className="btn btn-outline" style={{ marginTop: '40px', padding: '15px 30px', borderColor: 'var(--color-cyan-neon)', color: 'var(--color-cyan-neon)' }}>
-                            Book 15 Min Demo <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                            Get Started <ArrowRight size={18} style={{ marginLeft: '10px' }} />
                         </Link>
                     </div>
 

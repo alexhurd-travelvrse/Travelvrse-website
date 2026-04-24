@@ -18,10 +18,10 @@ const ProblemSection = () => {
     return (
         <section className="section-padding" id="solution" style={{ background: '#050b14' }}>
             <div className="container">
-                <div className="responsive-grid">
+                <div className="problem-grid">
                     
-                    {/* Visual Column (Left) */}
-                    <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    {/* Visual Column (Left on Desktop, Bottom on Mobile) */}
+                    <div className="animate-fade-up visual-col" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                         <div 
                             className="glass-card" 
                             style={{ 
@@ -118,8 +118,8 @@ const ProblemSection = () => {
                         </div>
                     </div>
 
-                    {/* Text Column (Right) */}
-                    <div className="animate-fade-up delay-1 marketplace-header" style={{ paddingTop: '0' }}>
+                    {/* Text Column (Right on Desktop, Top on Mobile) */}
+                    <div className="animate-fade-up delay-1 marketplace-header text-col" style={{ paddingTop: '0' }}>
                         <div style={{ marginBottom: '2rem' }}>
                             <h2 style={{ fontWeight: '800', marginBottom: '15px' }}>
                                 Rewarded Experiences <span className="text-gold">Marketplace</span>

@@ -57,7 +57,7 @@
     font-weight: 600;
     margin-bottom: 0.5rem;
     text-align: center;
-    white-space: nowrap;
+    max-width: 90vw;
 }
 
 .hero-title {

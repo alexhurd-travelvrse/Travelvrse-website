@@ -18,86 +18,10 @@ const ProblemSection = () => {
     return (
         <section className="section-padding" id="solution" style={{ background: '#050b14' }}>
             <div className="container">
-                <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '60px', alignItems: 'start' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
                     
-                    {/* Text Column (Left) */}
-                    <div className="animate-fade-up" style={{ paddingTop: '0', marginTop: '-60px' }}>
-                        <div style={{ marginBottom: '2.5rem', marginTop: '0' }}>
-                            <h2 style={{ fontSize: '3rem', lineHeight: '1.1', fontWeight: '800', marginBottom: '25px' }}>
-                                Rewarded Experiences <br /><span className="text-gold">Marketplace</span>
-                            </h2>
-                            <div style={{ fontSize: '0.9rem', fontWeight: '800', color: 'rgba(255,255,255,0.4)', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '15px' }}>
-                                The Strategy
-                            </div>
-                            <div style={{ fontSize: '1.1rem', fontWeight: '500', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5', marginBottom: '30px' }}>
-                                We connect hotels with creators to promote their experiences
-                            </div>
-                            
-                            <div style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
-                                <div style={{ 
-                                    fontSize: '1.3rem', 
-                                    fontWeight: '900', 
-                                    color: 'var(--color-gold)', 
-                                    letterSpacing: '0.5px', 
-                                    lineHeight: '1.3',
-                                    paddingLeft: '30px',
-                                    borderLeft: '2px solid var(--color-gold)',
-                                    marginBottom: '10px'
-                                }}>
-                                    'Try Before You Stay' engagement <br /> captures deterministic intent for direct offers
-                                </div>
-                                <div style={{ paddingLeft: '30px', color: 'var(--color-gold)', marginBottom: '30px' }}>
-                                    <ChevronDown size={24} className="animate-bounce" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', position: 'relative', paddingLeft: '30px' }}>
-                            {/* Vertical Path Line */}
-                            <div style={{ 
-                                position: 'absolute', 
-                                left: '54px', 
-                                top: '-20px', 
-                                bottom: '40px', 
-                                width: '2px', 
-                                background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))',
-                                opacity: 0.3
-                            }}></div>
-
-                            <div style={{ display: 'flex', gap: '25px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
-                                <div style={{ 
-                                    fontSize: '1.8rem', 
-                                    fontWeight: '900', 
-                                    color: 'var(--color-cyan-neon)', 
-                                    width: '50px', 
-                                    lineHeight: '1',
-                                    background: '#050b14',
-                                    padding: '5px 0'
-                                }}>01</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Play photorealistic challenges of onsite/local experiences</p>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-gold)', width: '50px', lineHeight: '1' }}>02</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Profile</h4>
-                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Earn a reward and build a rich deterministic data profile</p>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1' }}>03</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guest profile triggers personalised direct booking offers</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Visual Column (Right) */}
-                    <div className="animate-fade-up delay-1" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    {/* Visual Column (Left) */}
+                    <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                         <div 
                             className="glass-card" 
                             style={{ 
@@ -195,6 +119,57 @@ const ProblemSection = () => {
                         </div>
                     </div>
 
+                    {/* Text Column (Right) */}
+                    <div className="animate-fade-up delay-1" style={{ paddingTop: '0', marginTop: '-10px' }}>
+                        <div style={{ marginBottom: '1rem' }}>
+                            <h2 style={{ fontSize: '2.5rem', lineHeight: '1.2', fontWeight: '800', marginBottom: '15px' }}>
+                                Rewarded Experiences <span className="text-gold">Marketplace</span>
+                            </h2>
+                            <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
+                                We connect hotels with creators to promote their experiences
+                                <br />
+                                'Try Before You Stay' engagement captures deterministic intent for direct offers
+                            </div>
+                            <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '10px' }}>
+                                <ChevronDown size={24} className="animate-bounce" />
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '35px', position: 'relative' }}>
+                            {/* Vertical Path Line */}
+                            <div style={{ 
+                                position: 'absolute', 
+                                left: '24px', 
+                                top: '-10px', 
+                                bottom: '40px', 
+                                width: '2px', 
+                                background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))',
+                                opacity: 0.3
+                            }}></div>
+
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1', background: '#050b14' }}>01</div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
+                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Play photorealistic challenges of onsite/local experiences</p>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-gold)', width: '50px', lineHeight: '1', background: '#050b14' }}>02</div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Profile</h4>
+                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Earn a reward and build a rich deterministic data profile</p>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1', background: '#050b14' }}>03</div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
+                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guest profile triggers personalised direct booking offers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

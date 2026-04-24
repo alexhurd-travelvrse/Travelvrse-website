@@ -19,18 +19,6 @@ const ProblemSection = () => {
         <section className="section-padding" id="solution" style={{ background: '#050b14' }}>
             <div className="container">
                 
-                {/* Horizontal Title at the top */}
-                <div className="animate-fade-up" style={{ marginBottom: '4rem' }}>
-                    <h2 style={{ fontSize: '3rem', lineHeight: '1.2', fontWeight: '800', marginBottom: '20px' }}>
-                        Rewarded Experiences <span className="text-gold">Marketplace</span>
-                    </h2>
-                    <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.6' }}>
-                        We connect hotels with creators to promote their experiences
-                        <br />
-                        'Try Before You Stay' engagement captures deterministic intent for direct offers
-                    </div>
-                </div>
-
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
                     
                     {/* Visual Column (Left) */}
@@ -133,6 +121,17 @@ const ProblemSection = () => {
 
                     {/* Text Column (Right) */}
                     <div className="animate-fade-up delay-1" style={{ paddingTop: '0' }}>
+                        <div style={{ marginBottom: '2.5rem', marginTop: '-10px' }}>
+                            <h2 style={{ fontSize: '2.5rem', lineHeight: '1.2', fontWeight: '800', marginBottom: '15px' }}>
+                                Rewarded Experiences <span className="text-gold">Marketplace</span>
+                            </h2>
+                            <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
+                                We connect hotels with creators to promote their experiences
+                                <br />
+                                'Try Before You Stay' engagement captures deterministic intent for direct offers
+                            </div>
+                        </div>
+
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '35px' }}>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1' }}>01</div>

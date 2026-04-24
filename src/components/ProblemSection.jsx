@@ -39,7 +39,6 @@ const ProblemSection = () => {
                             <video 
                                 src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
                                 style={{ width: '100%', height: 'auto', display: 'block', opacity: 1 }}
-                                loop
                                 muted
                                 autoPlay
                                 playsInline

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Target, TrendingUp, EyeOff, Waves, Hotel, Utensils, Wine, Zap, Camera, ArrowRight, X, Play } from 'lucide-react';
+import { Target, TrendingUp, EyeOff, Waves, Hotel, Utensils, Wine, Zap, Camera, ArrowRight, X, Play, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './ProblemSection.css';
 
@@ -23,32 +23,57 @@ const ProblemSection = () => {
                     {/* Text Column (Left) */}
                     <div className="animate-fade-up" style={{ paddingTop: '0', marginTop: '-60px' }}>
                         <div style={{ marginBottom: '2.5rem', marginTop: '0' }}>
-                            <h2 style={{ fontSize: '3rem', lineHeight: '1.1', fontWeight: '800', marginBottom: '15px' }}>
+                            <h2 style={{ fontSize: '3rem', lineHeight: '1.1', fontWeight: '800', marginBottom: '25px' }}>
                                 Rewarded Experiences <br /><span className="text-gold">Marketplace</span>
                             </h2>
-                            <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', lineHeight: '1.5', marginBottom: '20px' }}>
+                            <div style={{ fontSize: '0.9rem', fontWeight: '800', color: 'rgba(255,255,255,0.4)', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '15px' }}>
+                                The Strategy
+                            </div>
+                            <div style={{ fontSize: '1.1rem', fontWeight: '500', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5', marginBottom: '30px' }}>
                                 We connect hotels with creators to promote their experiences
                             </div>
                             
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', position: 'relative' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
                                 <div style={{ 
-                                    fontSize: '1.2rem', 
-                                    fontWeight: '800', 
+                                    fontSize: '1.3rem', 
+                                    fontWeight: '900', 
                                     color: 'var(--color-gold)', 
                                     letterSpacing: '0.5px', 
-                                    lineHeight: '1.4',
-                                    borderLeft: '4px solid var(--color-gold)',
-                                    paddingLeft: '20px',
-                                    marginBottom: '15px'
+                                    lineHeight: '1.3',
+                                    paddingLeft: '30px',
+                                    borderLeft: '2px solid var(--color-gold)',
+                                    marginBottom: '10px'
                                 }}>
                                     'Try Before You Stay' engagement <br /> captures deterministic intent for direct offers
+                                </div>
+                                <div style={{ paddingLeft: '30px', color: 'var(--color-gold)', marginBottom: '30px' }}>
+                                    <ChevronDown size={24} className="animate-bounce" />
                                 </div>
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '35px' }}>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1' }}>01</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', position: 'relative', paddingLeft: '30px' }}>
+                            {/* Vertical Path Line */}
+                            <div style={{ 
+                                position: 'absolute', 
+                                left: '54px', 
+                                top: '-20px', 
+                                bottom: '40px', 
+                                width: '2px', 
+                                background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))',
+                                opacity: 0.3
+                            }}></div>
+
+                            <div style={{ display: 'flex', gap: '25px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                                <div style={{ 
+                                    fontSize: '1.8rem', 
+                                    fontWeight: '900', 
+                                    color: 'var(--color-cyan-neon)', 
+                                    width: '50px', 
+                                    lineHeight: '1',
+                                    background: '#050b14',
+                                    padding: '5px 0'
+                                }}>01</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
                                     <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Play photorealistic challenges of onsite/local experiences</p>

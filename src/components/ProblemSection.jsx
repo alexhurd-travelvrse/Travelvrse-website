@@ -50,7 +50,7 @@ const ProblemSection = () => {
                     >
                         <video 
                             src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
-                            style={{ width: '100%', height: 'auto', display: 'block', opacity: 0.75 }}
+                            style={{ width: '100%', height: 'auto', display: 'block', opacity: 1 }}
                             loop
                             muted
                             autoPlay
@@ -64,8 +64,7 @@ const ProblemSection = () => {
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            background: 'rgba(5, 11, 20, 0.4)',
-                            backdropFilter: 'blur(4px)',
+                            background: 'linear-gradient(to top, rgba(5,11,20,0.8), transparent 60%)',
                             padding: '40px',
                             textAlign: 'center',
                             transition: 'all 0.4s ease',

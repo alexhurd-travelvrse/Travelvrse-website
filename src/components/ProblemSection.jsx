@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Target, TrendingUp, EyeOff, Waves, Hotel, Utensils, Wine, Zap, Camera, ArrowRight, X, Play, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './ProblemSection.css';
@@ -14,6 +14,31 @@ const verticals = [
 
 const ProblemSection = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting && videoRef.current) {
+                    videoRef.current.currentTime = 0;
+                    videoRef.current.pause();
+                } else if (entry.isIntersecting && videoRef.current) {
+                    videoRef.current.play().catch(() => {});
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => {
+            if (videoRef.current) {
+                observer.unobserve(videoRef.current);
+            }
+        };
+    }, []);
 
     return (
         <section className="section-padding" id="solution" style={{ background: '#050b14' }}>
@@ -36,13 +61,17 @@ const ProblemSection = () => {
                             onClick={() => setIsModalOpen(true)}
                         >
                             <video 
+                                ref={videoRef}
                                 src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
                                 style={{ width: '100%', height: 'auto', display: 'block', opacity: 1 }}
                                 muted
                                 autoPlay
                                 playsInline
                                 loop={false}
-                                onEnded={(e) => e.target.pause()}
+                                onEnded={(e) => {
+                                    e.target.currentTime = 0;
+                                    e.target.pause();
+                                }}
                                 preload="metadata"
                             />
                             <div style={{

@@ -21,7 +21,7 @@ const ProblemSection = () => {
                 <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '60px', alignItems: 'start' }}>
                     
                     {/* Text Column (Left) */}
-                    <div className="animate-fade-up" style={{ paddingTop: '0' }}>
+                    <div className="animate-fade-up" style={{ paddingTop: '0', marginTop: '-60px' }}>
                         <div style={{ marginBottom: '2.5rem', marginTop: '0' }}>
                             <h2 style={{ fontSize: '3rem', lineHeight: '1.1', fontWeight: '800', marginBottom: '15px' }}>
                                 Rewarded Experiences <br /><span className="text-gold">Marketplace</span>

@@ -1,4 +1,5 @@
 import { Compass, BellRing, MapPin, ChevronRight, ArrowRight, Trophy, Share2, Target } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './GoToMarketSection.css';
 
 const JourneyLifecycle = () => {

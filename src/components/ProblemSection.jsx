@@ -19,85 +19,73 @@ const ProblemSection = () => {
         <section className="section-padding" id="solution" style={{ background: '#050b14' }}>
             <div className="container">
                 
-                {/* Horizontal Title at the top */}
-                <div className="animate-fade-up" style={{ marginBottom: '3rem' }}>
-                    <h2 style={{ fontSize: '3rem', lineHeight: '1.2', fontWeight: '800' }}>
-                        Rewarded Experiences <span className="text-gold">Marketplace</span>
-                    </h2>
-                    <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6' }}>
-                        We connect hotels with creators to promote their experiences
-                        <br />
-                        'Try Before You Stay' engagement captures verified intent for direct offers
-                    </div>
-                </div>
-
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
                     
                     {/* Visual Column (Left) */}
                     <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                    <div 
-                        className="glass-card" 
-                        style={{ 
-                            padding: '0', 
-                            overflow: 'hidden', 
-                            borderRadius: '32px', 
-                            border: '1px solid rgba(255,255,255,0.1)', 
-                            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
-                            cursor: 'pointer',
-                            position: 'relative'
-                        }}
-                        onClick={() => setIsModalOpen(true)}
-                    >
-                        <video 
-                            src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
-                            style={{ width: '100%', height: 'auto', display: 'block', opacity: 1 }}
-                            loop
-                            muted
-                            autoPlay
-                            playsInline
-                            preload="metadata"
-                        />
-                        <div style={{
-                            position: 'absolute',
-                            inset: 0,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            background: 'linear-gradient(to top, rgba(5,11,20,0.8), transparent 60%)',
-                            padding: '40px',
-                            textAlign: 'center',
-                            transition: 'all 0.4s ease',
-                        }}>
-                            <h3 style={{ 
-                                color: 'white', 
-                                fontSize: '1.8rem', 
-                                fontWeight: '800', 
-                                marginBottom: '20px',
-                                textShadow: '0 4px 12px rgba(0,0,0,0.5)',
-                                maxWidth: '80%'
-                            }}>
-                                78% of Next-Gen Travelers research experiences <span className="text-cyan">before they ever look at a room</span>
-                            </h3>
-
+                        <div 
+                            className="glass-card" 
+                            style={{ 
+                                padding: '0', 
+                                overflow: 'hidden', 
+                                borderRadius: '32px', 
+                                border: '1px solid rgba(255,255,255,0.1)', 
+                                boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+                                cursor: 'pointer',
+                                position: 'relative'
+                            }}
+                            onClick={() => setIsModalOpen(true)}
+                        >
+                            <video 
+                                src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
+                                style={{ width: '100%', height: 'auto', display: 'block', opacity: 1 }}
+                                loop
+                                muted
+                                autoPlay
+                                playsInline
+                                preload="metadata"
+                            />
                             <div style={{
-                                width: '60px',
-                                height: '60px',
-                                borderRadius: '50%',
-                                background: 'rgba(0, 229, 255, 0.2)',
-                                backdropFilter: 'blur(10px)',
+                                position: 'absolute',
+                                inset: 0,
                                 display: 'flex',
+                                flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                border: '2px solid var(--color-cyan-neon)',
-                                marginTop: '10px'
+                                background: 'linear-gradient(to top, rgba(5,11,20,0.8), transparent 60%)',
+                                padding: '40px',
+                                textAlign: 'center',
+                                transition: 'all 0.4s ease',
                             }}>
-                                <Zap className="text-cyan" size={30} />
+                                <h3 style={{ 
+                                    color: 'white', 
+                                    fontSize: '1.8rem', 
+                                    fontWeight: '800', 
+                                    marginBottom: '20px',
+                                    textShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                                    maxWidth: '80%'
+                                }}>
+                                    78% of Next-Gen Travelers research experiences <span className="text-cyan">before they ever look at a room</span>
+                                </h3>
+
+                                <div style={{
+                                    width: '60px',
+                                    height: '60px',
+                                    borderRadius: '50%',
+                                    background: 'rgba(0, 229, 255, 0.2)',
+                                    backdropFilter: 'blur(10px)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    border: '2px solid var(--color-cyan-neon)',
+                                    marginTop: '10px'
+                                }}>
+                                    <Zap className="text-cyan" size={30} />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                        {/* Works for Every Touchpoint Panel - Now colorful */}
+                        {/* Works for Every Touchpoint Panel */}
                         <div className="glass-card" style={{ 
                             padding: '2rem', 
                             background: 'linear-gradient(135deg, rgba(5, 11, 20, 0.8) 0%, rgba(0, 229, 255, 0.05) 100%)', 
@@ -131,6 +119,17 @@ const ProblemSection = () => {
 
                     {/* Text Column (Right) */}
                     <div className="animate-fade-up delay-1" style={{ paddingTop: '0' }}>
+                        <div style={{ marginBottom: '2.5rem' }}>
+                            <h2 style={{ fontSize: '2.5rem', lineHeight: '1.2', fontWeight: '800', marginBottom: '15px' }}>
+                                Rewarded Experiences <span className="text-gold">Marketplace</span>
+                            </h2>
+                            <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
+                                We connect hotels with creators to promote their experiences
+                                <br />
+                                'Try Before You Stay' engagement captures verified intent for direct offers
+                            </div>
+                        </div>
+
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '35px' }}>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1' }}>01</div>

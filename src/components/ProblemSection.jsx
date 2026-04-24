@@ -128,7 +128,7 @@ const ProblemSection = () => {
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
                                 We connect hotels with creators to promote their experiences
                                 <br />
-                                'Try Before You Stay' engagement captures verified intent for direct offers
+                                'Try Before You Stay' engagement captures deterministic intent for direct offers
                             </div>
                         </div>
 

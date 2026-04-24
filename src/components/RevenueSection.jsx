@@ -1,12 +1,11 @@
-import React from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
-import './SolutionSection.css'; // Reusing established styles
+import './RevenueSection.css';
 
 const RevenueSection = () => {
     return (
-        <section className="section-padding" style={{ background: '#050b14', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <section className="section-padding revenue-section">
             <div className="container">
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
+                <div className="responsive-grid-reversed">
                     
                     {/* Visual Left - Compact Hero Video */}
                     <div className="animate-fade-up">
@@ -39,7 +38,7 @@ const RevenueSection = () => {
 
                     {/* Content Right */}
                     <div className="animate-fade-up delay-1">
-                        <h2 style={{ fontSize: '2.8rem', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.1', color: 'white' }}>
+                        <h2 className="revenue-title" style={{ fontWeight: '800', marginBottom: '1.5rem', color: 'white' }}>
                             Increase Your <span className="text-gold">Direct Revenue</span>
                         </h2>
                         

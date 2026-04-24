@@ -1,12 +1,12 @@
-import React from 'react';
 import { CheckCircle2, ArrowRight, Camera, Smartphone, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import './HowItWorksSection.css';
 
 const HowItWorksSection = () => {
     return (
-        <section className="section-padding" id="how-it-works" style={{ background: '#050b14' }}>
+        <section className="section-padding how-it-works-section" id="how-it-works">
             <div className="container">
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '80px', alignItems: 'center' }}>
+                <div className="responsive-grid-reversed">
                     
                     {/* Visual Left - Expanded Image Stack */}
                     <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -42,7 +42,7 @@ const HowItWorksSection = () => {
 
                     {/* Text Right */}
                     <div className="animate-fade-up delay-1">
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: '1.2' }}>
+                        <h2 className="section-title" style={{ fontWeight: '800', marginBottom: '1.5rem' }}>
                             How It <span className="text-gold">Works</span>
                         </h2>
                         

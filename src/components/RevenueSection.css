@@ -1,0 +1,30 @@
+.revenue-section {
+    background-color: #050b14;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.responsive-grid-reversed {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 992px) {
+    .responsive-grid-reversed {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+    }
+}
+
+.revenue-title {
+    font-size: 2.2rem;
+    line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+    .revenue-title {
+        font-size: 2.8rem;
+    }
+}

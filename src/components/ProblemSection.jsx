@@ -42,6 +42,8 @@ const ProblemSection = () => {
                                 muted
                                 autoPlay
                                 playsInline
+                                loop={false}
+                                onEnded={(e) => e.target.pause()}
                                 preload="metadata"
                             />
                             <div style={{

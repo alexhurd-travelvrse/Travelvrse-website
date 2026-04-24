@@ -44,7 +44,7 @@ const CreatorPage = () => {
                                 Earn by Creating <span className="text-cyan">Immersive Challenges</span>
                             </h1>
                             <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '600px' }}>
-                                Join the world's first Rewarded Experience Marketplace. Turn your travel content into interactive, photorealistic challenges and earn rewards from top hotels and cruise lines.
+                                Join the world's first Rewarded Experiences Marketplace. Turn your travel content into interactive, photorealistic challenges and earn rewards from top hotels and cruise lines.
                             </p>
                             
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>

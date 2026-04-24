@@ -1,5 +1,5 @@
-import React from 'react';
-import { Target, TrendingUp, EyeOff, Waves, Hotel, Utensils, Wine, Zap, Camera, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Target, TrendingUp, EyeOff, Waves, Hotel, Utensils, Wine, Zap, Camera, ArrowRight, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './ProblemSection.css';
 
@@ -13,6 +13,8 @@ const verticals = [
 ];
 
 const ProblemSection = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
         <section className="section-padding" id="solution" style={{ background: '#050b14' }}>
             <div className="container">
@@ -20,12 +22,12 @@ const ProblemSection = () => {
                 {/* Horizontal Title at the top */}
                 <div className="animate-fade-up" style={{ marginBottom: '3rem' }}>
                     <h2 style={{ fontSize: '3rem', lineHeight: '1.2', fontWeight: '800' }}>
-                        Rewarded Experience <span className="text-gold">Marketplace</span>
+                        Rewarded Experiences <span className="text-gold">Marketplace</span>
                     </h2>
                     <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6' }}>
-                        We connect accommodation providers with creators to build/promote their experiences
+                        We connect hotels with creators to promote their experiences
                         <br />
-                        <span style={{ fontSize: '1rem' }}>75% of Next-Gen travelers search for experiences first</span>
+                        'Try Before You Stay' engagement captures verified intent for direct offers
                     </div>
                 </div>
 
@@ -33,13 +35,52 @@ const ProblemSection = () => {
                     
                     {/* Visual Column (Left) */}
                     <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                        <div className="glass-card" style={{ padding: '0', overflow: 'hidden', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
-                            <img 
-                                src="/models/challenge_screenshot.png" 
-                                alt="Rewarded Experience Challenge" 
-                                style={{ width: '100%', height: 'auto', display: 'block' }}
-                            />
+                    <div 
+                        className="glass-card" 
+                        style={{ 
+                            padding: '0', 
+                            overflow: 'hidden', 
+                            borderRadius: '32px', 
+                            border: '1px solid rgba(255,255,255,0.1)', 
+                            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+                            cursor: 'pointer',
+                            position: 'relative'
+                        }}
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        <video 
+                            src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
+                            style={{ width: '100%', height: 'auto', display: 'block' }}
+                            loop
+                            muted
+                            autoPlay
+                            playsInline
+                            preload="metadata"
+                        />
+                        <div style={{
+                            position: 'absolute',
+                            inset: 0,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: 'rgba(0,0,0,0.1)',
+                            transition: 'opacity 0.3s ease',
+                        }}>
+                            <div style={{
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '50%',
+                                background: 'rgba(0, 229, 255, 0.2)',
+                                backdropFilter: 'blur(10px)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                border: '2px solid var(--color-cyan-neon)'
+                            }}>
+                                <Zap className="text-cyan" size={30} />
+                            </div>
                         </div>
+                    </div>
 
                         {/* Works for Every Touchpoint Panel - Now colorful */}
                         <div className="glass-card" style={{ 
@@ -102,6 +143,65 @@ const ProblemSection = () => {
 
                 </div>
             </div>
+
+            {/* Video Modal Overlay */}
+            {isModalOpen && (
+                <div 
+                    style={{ 
+                        position: 'fixed', 
+                        inset: 0, 
+                        background: 'rgba(5, 11, 20, 0.95)', 
+                        backdropFilter: 'blur(20px)',
+                        zIndex: 9999,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '40px'
+                    }}
+                    onClick={() => setIsModalOpen(false)}
+                >
+                    <button 
+                        onClick={(e) => { e.stopPropagation(); setIsModalOpen(false); }}
+                        style={{ 
+                            position: 'absolute', 
+                            top: '40px', 
+                            right: '40px', 
+                            background: 'rgba(255,255,255,0.1)', 
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            borderRadius: '50%',
+                            width: '50px',
+                            height: '50px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'white',
+                            cursor: 'pointer',
+                            zIndex: 10000
+                        }}
+                    >
+                        <X size={24} />
+                    </button>
+                    
+                    <div 
+                        style={{ 
+                            width: '100%', 
+                            maxWidth: '1200px', 
+                            borderRadius: '32px', 
+                            overflow: 'hidden',
+                            boxShadow: '0 0 100px rgba(0, 229, 255, 0.2)',
+                            border: '1px solid rgba(0, 229, 255, 0.3)'
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <video 
+                            src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
+                            style={{ width: '100%', height: 'auto', display: 'block' }}
+                            controls
+                            autoPlay
+                        />
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

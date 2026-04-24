@@ -37,7 +37,7 @@
 .hero-content {
     position: relative;
     z-index: 10;
-    max-width: 1000px;
+    max-width: 1200px;
     padding-top: 4rem;
 }
 
@@ -57,6 +57,7 @@
     font-weight: 600;
     margin-bottom: 0.5rem;
     text-align: center;
+    white-space: nowrap;
 }
 
 .hero-title {

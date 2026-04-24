@@ -25,7 +25,7 @@ const Hero = () => {
                         <span className="text-gradient">Increase Your Direct Revenue</span>
                     </h1>
                     <h2 className="hero-strategy">
-                        REWARDED EXPERIENCE MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS
+                        REWARDED EXPERIENCES MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS
                     </h2>
                 </div>
 

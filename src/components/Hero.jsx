@@ -12,7 +12,6 @@ const Hero = () => {
                     className="hero-video"
                     autoPlay 
                     muted 
-                    loop 
                     playsInline 
                 />
                 <div className="hero-overlay" />

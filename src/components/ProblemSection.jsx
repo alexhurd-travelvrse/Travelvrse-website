@@ -80,9 +80,9 @@ const ProblemSection = () => {
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                                justifyContent: 'center',
+                                justifyContent: 'flex-start',
                                 background: 'linear-gradient(to top, rgba(5,11,20,0.8), transparent 60%)',
-                                padding: '20px',
+                                padding: '100px 20px 20px',
                                 textAlign: 'center',
                                 transition: 'all 0.4s ease',
                             }}>
@@ -150,8 +150,8 @@ const ProblemSection = () => {
                     {/* Text Column (Right on Desktop, Top on Mobile) */}
                     <div className="animate-fade-up delay-1 marketplace-header text-col" style={{ paddingTop: '0' }}>
                         <div style={{ marginBottom: '2rem' }}>
-                            <h2 style={{ fontWeight: '800', marginBottom: '15px' }}>
-                                Rewarded Experiences <br /> <span className="text-gold">Marketplace</span>
+                            <h2 style={{ fontWeight: '800', marginBottom: '15px', lineHeight: '1.1' }}>
+                                <span style={{ whiteSpace: 'nowrap' }}>Rewarded Experiences</span> <br /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
                                 We let hotels, resorts and cruise operators lead with their most important assets - their onsite and local experiences

@@ -154,7 +154,7 @@ const ProblemSection = () => {
                                 Rewarded Experiences <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                We connect hotels with creators to promote their experiences
+                                We let hotels, resorts and cruise operators lead with their most important assets - their onsite and local experiences
                                 <br />
                                 'Try Before You Stay' engagement captures deterministic intent for direct offers
                             </div>

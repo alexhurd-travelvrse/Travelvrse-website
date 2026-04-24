@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
                         textTransform: 'uppercase',
                         letterSpacing: '1.5px'
                     }}>
-                        <a href="#solution" className="nav-link" style={{ transition: 'color 0.3s' }}>REWARDED EXPERIENCE MARKETPLACE</a>
+                        <a href="#solution" className="nav-link" style={{ transition: 'color 0.3s' }}>REWARDED EXPERIENCES</a>
                         <Link to="/creator" className="nav-link" style={{ transition: 'color 0.3s' }}>CREATOR SIGNUP/LOGIN</Link>
                         <a href="#team" className="nav-link" style={{ transition: 'color 0.3s' }}>OUR TEAM</a>
                     </nav>

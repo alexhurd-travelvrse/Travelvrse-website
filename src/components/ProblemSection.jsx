@@ -155,7 +155,7 @@ const ProblemSection = () => {
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
                                 We let hotels, resorts and cruise operators lead with their most important assets - their onsite and local experiences
-                                <br />
+                                <div style={{ height: '1px', width: '60px', background: 'var(--color-gold)', margin: '15px 0', opacity: 0.5 }}></div>
                                 'Try Before You Stay' engagement captures deterministic intent for direct offers
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>

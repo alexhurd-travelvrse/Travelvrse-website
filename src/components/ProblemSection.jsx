@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Target, TrendingUp, EyeOff, Waves, Hotel, Utensils, Wine, Zap, Camera, ArrowRight, X } from 'lucide-react';
+import { Target, TrendingUp, EyeOff, Waves, Hotel, Utensils, Wine, Zap, Camera, ArrowRight, X, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './ProblemSection.css';
 

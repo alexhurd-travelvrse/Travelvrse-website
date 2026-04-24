@@ -157,8 +157,6 @@ const ProblemSection = () => {
                     </div>
 
                 </div>
-
-                </div>
             </div>
 
             {/* Video Modal Overlay */}

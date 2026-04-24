@@ -1,5 +1,4 @@
-import React from 'react';
-import { Compass, BellRing, MapPin, ChevronRight, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Compass, BellRing, MapPin, ChevronRight, ArrowRight, Trophy, Share2, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './SolutionSection.css';
 
@@ -69,38 +68,54 @@ const GoToMarketSection = () => {
 
                     {/* Visual Right - Vertical Steps */}
                     <div className="animate-fade-up delay-1">
-                        <div style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-gold)', letterSpacing: '1px' }}>
+                        <div style={{ marginBottom: '30px', fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-gold)', letterSpacing: '1px' }}>
                             Pre-Stay Example
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/property_home_preview.png) center/cover', flexShrink: 0 }}></div>
+                        
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                            {/* Step 1: Challenge Reward */}
+                            <div className="glass-card" style={{ padding: '25px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,215,0,0.03)', border: '1px solid rgba(255,215,0,0.2)', borderRadius: '24px' }}>
+                                <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(255,215,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gold)', flexShrink: 0 }}>
+                                    <Trophy size={28} />
+                                </div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>PROMOTION</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>Roof Top Bar Guest List Access</div>
+                                    <div style={{ fontSize: '0.75rem', color: 'var(--color-gold)', fontWeight: '900', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>CHALLENGE REWARD</div>
+                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.15rem', lineHeight: '1.3' }}>Roof Top Bar Guest List Access</div>
                                 </div>
                             </div>
+ 
+                            <div style={{ height: '40px', width: '2px', background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))', marginLeft: '54px', opacity: 0.3 }}></div>
 
-                            <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))', marginLeft: '85px' }}></div>
-
-                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-cyan-neon)' }}>
-                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/hola_grab.png) center/cover', flexShrink: 0 }}></div>
+                            {/* Step 2: Channel */}
+                            <div className="glass-card" style={{ padding: '25px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(0, 229, 255, 0.03)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: '24px' }}>
+                                <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(0, 229, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-cyan-neon)', flexShrink: 0 }}>
+                                    <Share2 size={28} />
+                                </div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>CHANNEL</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>
-                                        <div style={{ marginBottom: '4px' }}>• Nightlife focused creator on social media</div>
-                                        <div>• Concierge team in pre-stay email</div>
+                                    <div style={{ fontSize: '0.75rem', color: 'var(--color-cyan-neon)', fontWeight: '900', letterSpacing: '2px', marginBottom: '10px', textTransform: 'uppercase' }}>CHANNEL</div>
+                                    <div style={{ fontWeight: '700', color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', lineHeight: '1.6' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                                            <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--color-cyan-neon)' }}></div>
+                                            Nightlife focused creator on social media
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                            <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--color-cyan-neon)' }}></div>
+                                            Concierge team in pre-stay email
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div style={{ height: '30px', width: '2px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold))', marginLeft: '85px' }}></div>
+                            <div style={{ height: '40px', width: '2px', background: 'linear-gradient(to bottom, var(--color-cyan-neon), var(--color-gold))', marginLeft: '54px', opacity: 0.3 }}></div>
 
-                            <div className="glass-card" style={{ padding: '15px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                                <div style={{ width: '140px', height: '90px', borderRadius: '12px', background: 'url(/assets/restaurant_preview.jpg) center/cover', flexShrink: 0 }}></div>
+                            {/* Step 3: Objective */}
+                            <div className="glass-card" style={{ padding: '25px', display: 'flex', gap: '25px', alignItems: 'center', background: 'rgba(255,215,0,0.03)', border: '1px solid rgba(255,215,0,0.1)', borderRadius: '24px' }}>
+                                <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(255,215,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gold)', opacity: 0.8, flexShrink: 0 }}>
+                                    <Target size={28} />
+                                </div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>OBJECTIVE</div>
-                                    <div style={{ fontWeight: '700', color: 'white', fontSize: '1rem', lineHeight: '1.4' }}>Find guests interested in nightlife for onsite upsell offers</div>
+                                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', fontWeight: '900', letterSpacing: '2px', marginBottom: '8px', textTransform: 'uppercase' }}>OBJECTIVE</div>
+                                    <div style={{ fontWeight: '600', color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.4' }}>Find guests interested in nightlife for onsite upsell offers</div>
                                 </div>
                             </div>
                         </div>

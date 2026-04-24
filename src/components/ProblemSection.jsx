@@ -18,7 +18,7 @@ const ProblemSection = () => {
     return (
         <section className="section-padding" id="solution" style={{ background: '#050b14' }}>
             <div className="container">
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
+                <div className="responsive-grid">
                     
                     {/* Visual Column (Left) */}
                     <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -53,24 +53,23 @@ const ProblemSection = () => {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 background: 'linear-gradient(to top, rgba(5,11,20,0.8), transparent 60%)',
-                                padding: '40px',
+                                padding: '20px',
                                 textAlign: 'center',
                                 transition: 'all 0.4s ease',
                             }}>
-                                <h3 style={{ 
+                                <h3 className="video-overlay-title" style={{ 
                                     color: 'white', 
-                                    fontSize: '1.8rem', 
                                     fontWeight: '800', 
                                     marginBottom: '20px',
                                     textShadow: '0 4px 12px rgba(0,0,0,0.5)',
-                                    maxWidth: '80%'
+                                    maxWidth: '90%'
                                 }}>
                                     78% of Next-Gen Travelers research experiences <span className="text-cyan">before they ever look at a room</span>
                                 </h3>
 
                                 <div style={{
-                                    width: '90px',
-                                    height: '90px',
+                                    width: '70px',
+                                    height: '70px',
                                     borderRadius: '50%',
                                     background: 'rgba(0, 229, 255, 0.25)',
                                     backdropFilter: 'blur(15px)',
@@ -79,36 +78,36 @@ const ProblemSection = () => {
                                     justifyContent: 'center',
                                     border: '3px solid var(--color-cyan-neon)',
                                     boxShadow: '0 0 30px rgba(0, 229, 255, 0.4)',
-                                    marginTop: '20px',
+                                    marginTop: '10px',
                                     transition: 'transform 0.3s ease'
                                 }}>
-                                    <Play className="text-cyan" size={40} fill="currentColor" style={{ marginLeft: '4px' }} />
+                                    <Play className="text-cyan" size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
                                 </div>
                             </div>
                         </div>
 
                         {/* Works for Every Touchpoint Panel */}
                         <div className="glass-card" style={{ 
-                            padding: '2rem', 
+                            padding: '1.5rem', 
                             background: 'linear-gradient(135deg, rgba(5, 11, 20, 0.8) 0%, rgba(0, 229, 255, 0.05) 100%)', 
                             border: '1px solid rgba(0, 229, 255, 0.2)', 
                             borderRadius: '24px',
                             boxShadow: 'inset 0 0 30px rgba(0, 229, 255, 0.05)'
                         }}>
-                            <div style={{ fontSize: '0.9rem', fontWeight: 'bold', letterSpacing: '2px', color: 'var(--color-cyan-neon)', marginBottom: '20px', textTransform: 'uppercase' }}>
+                            <div style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', color: 'var(--color-cyan-neon)', marginBottom: '15px', textTransform: 'uppercase' }}>
                                 Works for Every Touchpoint
                             </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '10px' }}>
                                 {verticals.map((v, i) => (
                                     <div key={i} style={{ 
                                         display: 'flex', 
                                         alignItems: 'center', 
-                                        gap: '10px', 
-                                        fontSize: '0.75rem', 
+                                        gap: '8px', 
+                                        fontSize: '0.7rem', 
                                         color: 'rgba(255,255,255,0.9)', 
-                                        padding: '10px',
+                                        padding: '8px',
                                         background: 'rgba(255,255,255,0.03)',
-                                        borderRadius: '12px',
+                                        borderRadius: '10px',
                                         border: '1px solid rgba(255,255,255,0.05)'
                                     }}>
                                         <span style={{ color: i % 2 === 0 ? 'var(--color-cyan-neon)' : 'var(--color-gold)' }}>{v.icon}</span>
@@ -120,9 +119,9 @@ const ProblemSection = () => {
                     </div>
 
                     {/* Text Column (Right) */}
-                    <div className="animate-fade-up delay-1" style={{ paddingTop: '0', marginTop: '-10px' }}>
-                        <div style={{ marginBottom: '1rem' }}>
-                            <h2 style={{ fontSize: '2.5rem', lineHeight: '1.2', fontWeight: '800', marginBottom: '15px' }}>
+                    <div className="animate-fade-up delay-1 marketplace-header" style={{ paddingTop: '0' }}>
+                        <div style={{ marginBottom: '2rem' }}>
+                            <h2 style={{ fontWeight: '800', marginBottom: '15px' }}>
                                 Rewarded Experiences <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
@@ -130,14 +129,14 @@ const ProblemSection = () => {
                                 <br />
                                 'Try Before You Stay' engagement captures deterministic intent for direct offers
                             </div>
-                            <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '10px' }}>
+                            <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '35px', position: 'relative' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', position: 'relative' }}>
                             {/* Vertical Path Line */}
-                            <div style={{ 
+                            <div className="path-line" style={{ 
                                 position: 'absolute', 
                                 left: '24px', 
                                 top: '-10px', 
@@ -148,24 +147,24 @@ const ProblemSection = () => {
                             }}></div>
 
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
-                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1', background: '#050b14' }}>01</div>
+                                <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>01</div>
                                 <div>
-                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Play photorealistic challenges of onsite/local experiences</p>
+                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Play photorealistic challenges of onsite/local experiences</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
-                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-gold)', width: '50px', lineHeight: '1', background: '#050b14' }}>02</div>
+                                <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-gold)', width: '45px', lineHeight: '1', background: '#050b14' }}>02</div>
                                 <div>
-                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Profile</h4>
-                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Earn a reward and build a rich deterministic data profile</p>
+                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Profile</h4>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Earn a reward and build a rich deterministic data profile</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
-                                <div style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '50px', lineHeight: '1', background: '#050b14' }}>03</div>
+                                <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>03</div>
                                 <div>
-                                    <h4 style={{ fontSize: '1.3rem', marginBottom: '8px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1.05rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guest profile triggers personalised direct booking offers</p>
+                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guest profile triggers personalised direct booking offers</p>
                                 </div>
                             </div>
                         </div>

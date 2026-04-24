@@ -4,48 +4,59 @@
     z-index: 2;
 }
 
-.problem-header {
-    max-width: 800px;
-    margin: 0 auto 1.5rem auto;
-}
-
-.problem-title {
-    margin-bottom: 1.5rem;
-}
-
-.problem-grid {
+.responsive-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 40px;
+    align-items: start;
 }
 
-@media (min-width: 768px) {
-    .problem-grid {
-        grid-template-columns: repeat(3, 1fr);
+@media (min-width: 992px) {
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
     }
 }
 
-.problem-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
+.marketplace-header h2 {
+    font-size: 2.2rem;
+    line-height: 1.2;
 }
 
-.card-icon-wrapper {
-    background: rgba(0, 229, 255, 0.1);
-    padding: 1rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.2);
+@media (min-width: 768px) {
+    .marketplace-header h2 {
+        font-size: 3rem;
+    }
 }
 
-.problem-card h3 {
-    color: var(--color-gold-champagne);
-    margin-bottom: 1rem;
+.lead-in-text {
+    font-size: 1.1rem;
+    line-height: 1.4;
 }
 
-.problem-card p {
-    margin-bottom: 0;
-    font-size: 1rem;
+@media (min-width: 768px) {
+    .lead-in-text {
+        font-size: 1.3rem;
+    }
+}
+
+.video-overlay-title {
+    font-size: 1.3rem !important;
+}
+
+@media (min-width: 768px) {
+    .video-overlay-title {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* Ensure the path line works on mobile */
+.path-line {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .path-line {
+        display: block;
+    }
 }

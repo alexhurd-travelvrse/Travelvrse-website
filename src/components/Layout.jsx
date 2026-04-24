@@ -24,17 +24,23 @@ const Layout = ({ children }) => {
                     </Link>
                     <nav className="header-nav" style={{ 
                         display: 'flex', 
-                        gap: '30px', 
+                        gap: '20px', 
                         color: 'white', 
-                        fontSize: '14px', 
+                        fontSize: '12px', 
                         fontWeight: '700', 
                         alignItems: 'center',
                         textTransform: 'uppercase',
-                        letterSpacing: '1.5px'
+                        letterSpacing: '1px',
+                        overflowX: 'auto',
+                        whiteSpace: 'nowrap',
+                        padding: '5px 0',
+                        maxWidth: 'calc(100vw - 120px)',
+                        msOverflowStyle: 'none',
+                        scrollbarWidth: 'none'
                     }}>
-                        <a href="#solution" className="nav-link" style={{ transition: 'color 0.3s' }}>REWARDED EXPERIENCES MARKETPLACE</a>
-                        <Link to="/creator" className="nav-link" style={{ transition: 'color 0.3s' }}>CREATOR SIGNUP/LOGIN</Link>
-                        <a href="#team" className="nav-link" style={{ transition: 'color 0.3s' }}>OUR TEAM</a>
+                        <a href="#solution" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>REWARDED EXPERIENCES MARKETPLACE</a>
+                        <Link to="/creator" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>CREATOR SIGNUP/LOGIN</Link>
+                        <a href="#team" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>OUR TEAM</a>
                     </nav>
                 </div>
             </header>

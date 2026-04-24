@@ -1,0 +1,52 @@
+.go-to-market-section {
+    background-color: #0a1628;
+    position: relative;
+}
+
+.responsive-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 992px) {
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+    }
+}
+
+.section-title {
+    font-size: 2.2rem;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
+}
+
+.journey-step-card {
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .journey-step-card {
+        padding: 25px;
+    }
+}
+
+/* Ensure icons and text align well on mobile */
+.step-icon-wrapper {
+    width: 50px;
+    height: 50px;
+}
+
+@media (min-width: 768px) {
+    .step-icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+}

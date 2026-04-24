@@ -61,11 +61,26 @@ const ProblemSection = () => {
                             position: 'absolute',
                             inset: 0,
                             display: 'flex',
+                            flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            background: 'rgba(0,0,0,0.1)',
-                            transition: 'opacity 0.3s ease',
+                            background: 'rgba(5, 11, 20, 0.4)',
+                            backdropFilter: 'blur(4px)',
+                            padding: '40px',
+                            textAlign: 'center',
+                            transition: 'all 0.4s ease',
                         }}>
+                            <h3 style={{ 
+                                color: 'white', 
+                                fontSize: '1.8rem', 
+                                fontWeight: '800', 
+                                marginBottom: '20px',
+                                textShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                                maxWidth: '80%'
+                            }}>
+                                78% of Next-Gen Travelers research experiences <span className="text-cyan">before they ever look at a room</span>
+                            </h3>
+
                             <div style={{
                                 width: '60px',
                                 height: '60px',
@@ -75,7 +90,8 @@ const ProblemSection = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                border: '2px solid var(--color-cyan-neon)'
+                                border: '2px solid var(--color-cyan-neon)',
+                                marginTop: '10px'
                             }}>
                                 <Zap className="text-cyan" size={30} />
                             </div>

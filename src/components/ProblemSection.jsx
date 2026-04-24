@@ -151,7 +151,7 @@ const ProblemSection = () => {
                     <div className="animate-fade-up delay-1 marketplace-header text-col" style={{ paddingTop: '0' }}>
                         <div style={{ marginBottom: '2rem' }}>
                             <h2 style={{ fontWeight: '800', marginBottom: '15px', lineHeight: '1.1' }}>
-                                <span style={{ whiteSpace: 'nowrap' }}>Rewarded Experiences</span> <br /> <span className="text-gold">Marketplace</span>
+                                Rewarded <br /> Experiences <br /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
                                 We let hotels, resorts and cruise operators lead with their most important assets - their onsite and local experiences

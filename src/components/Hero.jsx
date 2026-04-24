@@ -40,7 +40,7 @@ const Hero = () => {
                     </Link>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />
-                        Try The Experience
+                        Visit Marketplace
                     </Link>
                 </div>
             </div>

@@ -69,18 +69,20 @@ const ProblemSection = () => {
                                 </h3>
 
                                 <div style={{
-                                    width: '60px',
-                                    height: '60px',
+                                    width: '90px',
+                                    height: '90px',
                                     borderRadius: '50%',
-                                    background: 'rgba(0, 229, 255, 0.2)',
-                                    backdropFilter: 'blur(10px)',
+                                    background: 'rgba(0, 229, 255, 0.25)',
+                                    backdropFilter: 'blur(15px)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    border: '2px solid var(--color-cyan-neon)',
-                                    marginTop: '10px'
+                                    border: '3px solid var(--color-cyan-neon)',
+                                    boxShadow: '0 0 30px rgba(0, 229, 255, 0.4)',
+                                    marginTop: '20px',
+                                    transition: 'transform 0.3s ease'
                                 }}>
-                                    <Zap className="text-cyan" size={30} />
+                                    <Play className="text-cyan" size={40} fill="currentColor" style={{ marginLeft: '4px' }} />
                                 </div>
                             </div>
                         </div>

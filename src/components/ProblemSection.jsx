@@ -26,10 +26,23 @@ const ProblemSection = () => {
                             <h2 style={{ fontSize: '3rem', lineHeight: '1.1', fontWeight: '800', marginBottom: '15px' }}>
                                 Rewarded Experiences <br /><span className="text-gold">Marketplace</span>
                             </h2>
-                            <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
+                            <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', lineHeight: '1.5', marginBottom: '20px' }}>
                                 We connect hotels with creators to promote their experiences
-                                <br />
-                                'Try Before You Stay' engagement captures deterministic intent for direct offers
+                            </div>
+                            
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', position: 'relative' }}>
+                                <div style={{ 
+                                    fontSize: '1.2rem', 
+                                    fontWeight: '800', 
+                                    color: 'var(--color-gold)', 
+                                    letterSpacing: '0.5px', 
+                                    lineHeight: '1.4',
+                                    borderLeft: '4px solid var(--color-gold)',
+                                    paddingLeft: '20px',
+                                    marginBottom: '15px'
+                                }}>
+                                    'Try Before You Stay' engagement <br /> captures deterministic intent for direct offers
+                                </div>
                             </div>
                         </div>
 

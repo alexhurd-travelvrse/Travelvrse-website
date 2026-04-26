@@ -13,8 +13,7 @@ const Hero = () => {
                     autoPlay 
                     muted 
                     playsInline 
-                    loop={false}
-                    onEnded={(e) => e.target.pause()}
+                    loop 
                 />
                 <div className="hero-overlay" />
             </div>

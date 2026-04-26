@@ -37,7 +37,9 @@
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 10;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    -webkit-font-smoothing: antialiased;
+    transform: translateZ(0);
 }
 
 .linkedin-link:hover {

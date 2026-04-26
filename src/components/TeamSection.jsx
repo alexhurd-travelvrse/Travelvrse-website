@@ -80,7 +80,7 @@ const TeamSection = () => {
                                     rel="noopener noreferrer" 
                                     className="linkedin-link"
                                 >
-                                    <Linkedin size={18} />
+                                    <Linkedin size={18} strokeWidth={2.5} />
                                 </a>
                             )}
                             <div className="member-image-wrapper">

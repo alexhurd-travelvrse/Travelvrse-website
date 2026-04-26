@@ -26,12 +26,12 @@ const Hero = () => {
                         <span className="text-gradient">Increase Your Direct Revenue</span>
                     </h1>
                     <h2 className="hero-strategy">
-                        REWARDED EXPERIENCES MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS
+                        EXPERIENCES MARKETPLACE for HOTELS, RESORTS AND CRUISE OPERATORS
                     </h2>
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Target The 78% Of Next-Gen Travelers Who Research Experiences First
+                    Reward Guests To Try Out Your Iconic Experiences
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">

@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
                         msOverflowStyle: 'none',
                         scrollbarWidth: 'none'
                     }}>
-                        <a href="#solution" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>REWARDED EXPERIENCES MARKETPLACE</a>
+                        <a href="#solution" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>EXPERIENCES MARKETPLACE</a>
                         <Link to="/creator" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>CREATOR SIGNUP/LOGIN</Link>
                         <a href="#team" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>OUR TEAM</a>
                     </nav>

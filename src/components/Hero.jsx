@@ -30,7 +30,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Reward Guests To Try Out Your Iconic Experiences
+                    Reward Guests To Try Out Your Iconic Experiences Virtually
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">

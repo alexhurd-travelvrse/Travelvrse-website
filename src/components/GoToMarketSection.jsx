@@ -1,4 +1,4 @@
-import { Compass, BellRing, MapPin, ChevronRight, ArrowRight, Trophy, Share2, Target } from 'lucide-react';
+import { Compass, BellRing, MapPin, ChevronRight, ArrowRight, Trophy, Share2, Target, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './GoToMarketSection.css';
 
@@ -88,7 +88,7 @@ const GoToMarketSection = () => {
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>THE REWARD</div>
-                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Guest List Access For Exploring 5 experiences</div>
+                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Guest list access for completing virtual bar challenge</div>
                                 </div>
                             </div>
 
@@ -108,13 +108,13 @@ const GoToMarketSection = () => {
                             <div style={{ height: '20px', width: '2px', background: 'var(--color-gold)', marginLeft: '45px', opacity: 0.2 }}></div>
 
                             {/* Step 4: ROI */}
-                            <div className="glass-card journey-step-card" style={{ display: 'flex', gap: '20px', alignItems: 'center', background: 'linear-gradient(to right, rgba(212,175,55,0.1), transparent)', border: '1px solid var(--color-gold)', borderRadius: '24px' }}>
-                                <div className="step-icon-wrapper" style={{ borderRadius: '16px', background: 'var(--color-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-navy-deep)', flexShrink: 0 }}>
-                                    <ArrowRight size={24} />
+                            <div className="glass-card journey-step-card" style={{ display: 'flex', gap: '20px', alignItems: 'center', background: 'linear-gradient(135deg, rgba(0, 229, 255, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%)', border: '2px solid var(--color-cyan-neon)', borderRadius: '24px', boxShadow: '0 0 20px rgba(0, 229, 255, 0.2)' }}>
+                                <div className="step-icon-wrapper" style={{ borderRadius: '16px', background: 'var(--color-cyan-neon)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#050b14', flexShrink: 0, boxShadow: '0 0 15px var(--color-cyan-neon)' }}>
+                                    <TrendingUp size={24} />
                                 </div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>THE ROI</div>
-                                    <div style={{ fontWeight: '900', color: 'white', fontSize: '1.1rem', lineHeight: '1.3' }}>Combined Room and Entertainment package</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>THE ROI</div>
+                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Combined Room and high margin ancillary package using deterministic data</div>
                                 </div>
                             </div>
                         </div>

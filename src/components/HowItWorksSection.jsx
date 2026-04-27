@@ -54,7 +54,7 @@ const HowItWorksSection = () => {
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                 <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
                                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
-                                    Use self-serve tools to approve creators, campaigns, rewards and profile schemas
+                                    Use self-serve tools to approve creators, campaigns, rewards and the guest data you want to collect
                                 </p>
                             </div>
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
@@ -72,7 +72,7 @@ const HowItWorksSection = () => {
                             <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                 <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
                                 <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
-                                    Profile enriched lead details passed into existing booking engine
+                                    Profile enriched lead details (including deterministic intent) passed into existing booking engine
                                 </p>
                             </div>
                         </div>

@@ -1,49 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import './Layout.css';
+
 
 const Layout = ({ children }) => {
     const location = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <>
-            <header className="main-header" style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000, padding: '0.75rem 0', background: 'rgba(5, 11, 20, 0.9)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <div className="container header-content" style={{ 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
-                    alignItems: 'center', 
-                    height: '100%'
-                }}>
-                    <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+            <header className="main-header">
+                <div className="container header-content">
+                    <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
                         <img
                             src="/models/travelvrse_logo_main.svg"
                             alt="Travelvrse"
                             className="nav-logo"
-                            style={{ height: '54px', width: 'auto' }}
                         />
-
                     </Link>
-                    <nav className="header-nav" style={{ 
-                        display: 'flex', 
-                        gap: '20px', 
-                        color: 'white', 
-                        fontSize: '12px', 
-                        fontWeight: '700', 
-                        alignItems: 'center',
-                        textTransform: 'uppercase',
-                        letterSpacing: '1px',
-                        overflowX: 'auto',
-                        whiteSpace: 'nowrap',
-                        padding: '5px 0',
-                        maxWidth: 'calc(100vw - 120px)',
-                        msOverflowStyle: 'none',
-                        scrollbarWidth: 'none'
-                    }}>
-                        <a href="#solution" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>EXPERIENCES MARKETPLACE</a>
-                        <Link to="/creator" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>CREATOR SIGNUP/LOGIN</Link>
-                        <a href="#team" className="nav-link" style={{ transition: 'color 0.3s', flexShrink: 0 }}>OUR TEAM</a>
+
+                    {/* Mobile Menu Button */}
+                    <button 
+                        className="mobile-menu-btn" 
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
+                    </button>
+
+                    <nav className={`header-nav ${isMenuOpen ? 'open' : ''}`}>
+                        <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>EXPERIENCES MARKETPLACE</a>
+                        <Link to="/creator" className="nav-link" onClick={() => setIsMenuOpen(false)}>CREATOR SIGNUP/LOGIN</Link>
+                        <a href="#team" className="nav-link" onClick={() => setIsMenuOpen(false)}>OUR TEAM</a>
                     </nav>
                 </div>
             </header>
+
             <main className="main-content" style={{ marginTop: '80px' }}>
                 {children}
             </main>

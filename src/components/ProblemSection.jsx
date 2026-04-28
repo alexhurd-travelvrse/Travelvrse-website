@@ -82,7 +82,7 @@ const ProblemSection = () => {
                                 alignItems: 'center',
                                 justifyContent: 'flex-start',
                                 background: 'linear-gradient(to top, rgba(5,11,20,0.8), transparent 60%)',
-                                padding: '100px 20px 20px',
+                                padding: '60px 20px 20px',
                                 textAlign: 'center',
                                 transition: 'all 0.4s ease',
                             }}>
@@ -151,7 +151,7 @@ const ProblemSection = () => {
                     <div className="animate-fade-up delay-1 marketplace-header text-col" style={{ paddingTop: '0' }}>
                         <div style={{ marginBottom: '2rem' }}>
                             <h2 style={{ fontWeight: '800', marginBottom: '15px', lineHeight: '1.1' }}>
-                                Experiences <span className="text-gold">Marketplace</span>
+                                Experiences <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
                                 We let hotels, resorts and cruise operators lead with their most important assets - their onsite and local experiences
@@ -179,21 +179,21 @@ const ProblemSection = () => {
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>01</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Play photorealistic challenges of onsite/local experiences</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>We turn your iconic onsite assets into photorealistic, playable virtual challenges</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-gold)', width: '45px', lineHeight: '1', background: '#050b14' }}>02</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Profile</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Earn a reward and build a first-party experiences based profile</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>As guests play, we capture deterministic intent—building rich, first-party data profiles</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>03</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guest profile triggers personalised direct booking offers</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>These profiles trigger personalized direct booking offers straight into your existing engine</p>
                                 </div>
                             </div>
                         </div>

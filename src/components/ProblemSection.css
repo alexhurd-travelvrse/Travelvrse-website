@@ -28,6 +28,24 @@
     }
 }
 
+/* Visibility Utilities */
+.desktop-only {
+    display: none !important;
+}
+
+.mobile-only {
+    display: block !important;
+}
+
+@media (min-width: 992px) {
+    .desktop-only {
+        display: block !important;
+    }
+    .mobile-only {
+        display: none !important;
+    }
+}
+
 @media (min-width: 992px) {
     .problem-grid {
         display: grid;
@@ -48,13 +66,15 @@
 }
 
 .marketplace-header h2 {
-    font-size: 2.2rem;
-    line-height: 1.2;
+    font-size: 2.8rem;
+    line-height: 1.1;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    letter-spacing: -1px;
 }
 
 @media (min-width: 768px) {
     .marketplace-header h2 {
-        font-size: 3rem;
+        font-size: 4rem;
     }
 }
 

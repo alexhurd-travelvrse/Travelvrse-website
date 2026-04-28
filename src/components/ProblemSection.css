@@ -62,7 +62,13 @@
 }
 
 .marketplace-header {
-    margin-top: -5rem;
+    margin-top: 0;
+}
+
+@media (min-width: 992px) {
+    .marketplace-header {
+        margin-top: -5rem;
+    }
 }
 
 .marketplace-header h2 {

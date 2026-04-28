@@ -7,7 +7,7 @@
 .problem-grid {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 60px;
 }
 
 .problem-grid .text-col {
@@ -32,7 +32,7 @@
     .problem-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 60px;
+        gap: 80px;
         align-items: start;
     }
     .problem-grid .text-col {

@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import ProblemSection from './components/ProblemSection';
 import HowItWorksSection from './components/HowItWorksSection';
 import GoToMarketSection from './components/GoToMarketSection';
+import BlogJournal from './components/BlogJournal';
 import TeamSection from './components/TeamSection';
 import Footer from './components/Footer';
 import MarketplacePage from './pages/MarketplacePage';
@@ -13,6 +14,7 @@ import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
 import CreatorPortal from './pages/CreatorPortal';
 import RevenueSection from './components/RevenueSection';
+import { HelmetProvider } from 'react-helmet-async';
 
 // ScrollToTop component ensures we start at the top when navigating between pages
 const ScrollToTop = () => {
@@ -31,6 +33,7 @@ const B2BHome = () => {
       <RevenueSection />
       <HowItWorksSection />
       <GoToMarketSection />
+      <BlogJournal />
       <TeamSection />
       <Footer />
     </Layout>
@@ -39,17 +42,19 @@ const B2BHome = () => {
 
 const App = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<B2BHome />} />
-        <Route path="/marketplace" element={<MarketplacePage />} />
-        <Route path="/barcelona" element={<BarcelonaPage />} />
-        <Route path="/partner" element={<PartnerPage />} />
-        <Route path="/creator" element={<CreatorPage />} />
-        <Route path="/creator-portal" element={<CreatorPortal />} />
-      </Routes>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<B2BHome />} />
+          <Route path="/marketplace" element={<MarketplacePage />} />
+          <Route path="/barcelona" element={<BarcelonaPage />} />
+          <Route path="/partner" element={<PartnerPage />} />
+          <Route path="/creator" element={<CreatorPage />} />
+          <Route path="/creator-portal" element={<CreatorPortal />} />
+        </Routes>
+      </Router>
+    </HelmetProvider>
   );
 };
 

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
+import { Helmet } from 'react-helmet-async';
 import { Camera, Zap, Wallet, ArrowRight, Instagram, Youtube } from 'lucide-react';
 
 const CreatorPage = () => {
@@ -38,10 +38,14 @@ const CreatorPage = () => {
         <Layout>
             <section className="section-padding" style={{ background: 'linear-gradient(to top, #050b14, #0a1628)', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
                 <div className="container">
+                    <Helmet>
+                        <title>Travel Creator Marketplace | Monetize 3D Content | Travelvrse</title>
+                        <meta name="description" content="Join the world's first Rewarded Experience Marketplace for travel influencers. Turn 3D property scans into interactive challenges and earn rewards." />
+                    </Helmet>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
                         <div className="animate-fade-up">
                             <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.1' }}>
-                                Earn by Creating <span className="text-cyan">Immersive Challenges</span>
+                                Travel Creator Marketplace: <span className="text-cyan">Earn with 3D Challenges</span>
                             </h1>
                             <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '600px' }}>
                                 Join the world's first Rewarded Experiences Marketplace. Turn your travel content into interactive, photorealistic challenges and earn rewards from top hotels and cruise lines.

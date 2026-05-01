@@ -13,26 +13,52 @@ const RevenueSection = () => {
                             position: 'relative', 
                             borderRadius: '24px', 
                             overflow: 'hidden', 
-                            boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-                            border: '1px solid rgba(255,255,255,0.1)',
-                            aspectRatio: '16/9'
+                            boxShadow: '0 20px 60px rgba(0, 229, 255, 0.15)',
+                            border: '1px solid rgba(212, 175, 55, 0.3)',
+                            aspectRatio: '16/9',
+                            background: 'linear-gradient(135deg, var(--color-navy-light) 0%, var(--color-navy-deep) 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: 'relative'
                         }}>
-                            <video 
-                                src="/models/Generic_Luxury_Travel_Video_Creation.mp4" 
-                                autoPlay 
-                                muted 
-                                loop 
-                                playsInline 
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
+                            {/* Subtle animated background elements */}
+                            <div style={{
+                                position: 'absolute',
+                                width: '150%',
+                                height: '150%',
+                                background: 'radial-gradient(circle at center, rgba(0, 229, 255, 0.05) 0%, transparent 70%)',
+                                animation: 'pulse 8s infinite ease-in-out'
+                            }} />
+                            
+                            <h2 style={{ 
+                                fontSize: 'clamp(3rem, 8vw, 6rem)', 
+                                fontWeight: '900', 
+                                letterSpacing: '-2px',
+                                margin: 0,
+                                textAlign: 'center',
+                                lineHeight: 1,
+                                zIndex: 2,
+                                filter: 'drop-shadow(0 0 30px rgba(212, 175, 55, 0.3))'
+                            }}>
+                                <span className="text-gradient" style={{ display: 'block' }}>Go OTA</span>
+                                <span style={{ color: 'white' }}>FREE</span>
+                            </h2>
+
                             <div style={{ 
                                 position: 'absolute', 
-                                top: 0, 
-                                left: 0, 
-                                width: '100%', 
-                                height: '100%', 
-                                background: 'linear-gradient(to top, rgba(5,11,20,0.6), transparent)' 
-                            }} />
+                                bottom: '20px', 
+                                left: '50%', 
+                                transform: 'translateX(-50%)',
+                                letterSpacing: '4px',
+                                fontSize: '0.7rem',
+                                fontWeight: '800',
+                                color: 'var(--color-gold-champagne)',
+                                opacity: 0.6,
+                                zIndex: 2
+                            }}>
+                                THE FUTURE OF DIRECT REVENUE
+                            </div>
                         </div>
                     </div>
 

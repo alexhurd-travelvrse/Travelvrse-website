@@ -1,6 +1,6 @@
-import React from 'react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
+import { Helmet } from 'react-helmet-async';
 
 const cities = [
   { 
@@ -47,14 +47,18 @@ const MarketplacePage = () => {
                 position: 'relative'
             }}>
                 <div className="container">
+                    <Helmet>
+                        <title>3D Hotel Experience Marketplace | Travelvrse</title>
+                        <meta name="description" content="Discover and explore rewarded 3D hotel experiences from around the world. Connect with iconic destinations and earn exclusive travel rewards." />
+                    </Helmet>
                     <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                         <h4 className="text-cyan animate-fade-up" style={{ letterSpacing: '2px', fontWeight: '800', marginBottom: '1rem' }}>DISCOVER</h4>
                         <div className="beta-badge-premium">BETA</div>
                         <h1 className="hero-title animate-fade-up delay-1" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '20px' }}>
-                            <span className="text-gradient">Global Marketplace</span>
+                            <span className="text-gradient">3D Experience Marketplace</span>
                         </h1>
                         <p className="animate-fade-up delay-2" style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
-                            Explore rewarded experiences from iconic destinations around the world.
+                            Explore rewarded immersive experiences from iconic hotels and destinations.
                         </p>
                     </div>
 

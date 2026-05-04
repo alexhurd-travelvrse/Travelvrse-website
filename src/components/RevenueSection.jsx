@@ -108,6 +108,9 @@ const RevenueSection = () => {
                                 </div>
                             </div>
                         </div>
+                        <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-primary" style={{ marginTop: '40px', padding: '15px 40px', display: 'inline-block' }}>
+                            Audit My Vibe
+                        </a>
                     </div>
 
                 </div>

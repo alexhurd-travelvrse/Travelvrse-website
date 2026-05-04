@@ -193,13 +193,14 @@ const ProblemSection = () => {
                                     <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>As guests play, we capture deterministic intent—building rich, first-party data profiles</p>
                                 </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>03</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
                                     <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>These profiles trigger personalized direct booking offers straight into your existing engine</p>
                                 </div>
-                    </div>
+                            </div>
+                        </div>
 
 
                         {/* Works for Every Touchpoint Panel (Mobile Only - Moved here to show below 03 on mobile) */}

@@ -158,6 +158,8 @@
     border: 2px solid var(--color-gold);
     animation: beta-pulse 4s infinite ease-in-out;
     margin-bottom: 1.5rem;
+}
+
 .progressive-item {
     display: inline-block;
     opacity: 0;

@@ -43,21 +43,6 @@ const RevenueSection = () => {
                                 <span className="text-gradient" style={{ display: 'block' }}>Go OTA</span>
                                 <span style={{ color: 'white' }}>FREE</span>
                             </h2>
-
-                            <div style={{ 
-                                position: 'absolute', 
-                                bottom: '20px', 
-                                left: '50%', 
-                                transform: 'translateX(-50%)',
-                                letterSpacing: '4px',
-                                fontSize: '0.7rem',
-                                fontWeight: '800',
-                                color: 'var(--color-gold-champagne)',
-                                opacity: 0.6,
-                                zIndex: 2
-                            }}>
-                                THE FUTURE OF DIRECT REVENUE
-                            </div>
                         </div>
                     </div>
 

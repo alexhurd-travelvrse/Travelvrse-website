@@ -145,6 +145,9 @@ const ProblemSection = () => {
                                 ))}
                             </div>
                         </div>
+                        <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-primary desktop-only" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
+                            Audit My Vibe
+                        </a>
                     </div>
 
 
@@ -196,11 +199,8 @@ const ProblemSection = () => {
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
                                     <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>These profiles trigger personalized direct booking offers straight into your existing engine</p>
                                 </div>
-                        </div>
-                        <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-primary" style={{ marginTop: '40px', padding: '15px 40px', display: 'inline-block' }}>
-                            Audit My Vibe
-                        </a>
                     </div>
+
 
                         {/* Works for Every Touchpoint Panel (Mobile Only - Moved here to show below 03 on mobile) */}
                         <div className="glass-card mobile-only" style={{ 
@@ -233,6 +233,9 @@ const ProblemSection = () => {
                                 ))}
                             </div>
                         </div>
+                        <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-primary mobile-only" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
+                            Audit My Vibe
+                        </a>
                     </div>
                 </div>
             </div>

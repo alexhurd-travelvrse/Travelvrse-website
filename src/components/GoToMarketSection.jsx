@@ -56,9 +56,9 @@ const GoToMarketSection = () => {
 
                         <JourneyLifecycle />
 
-                        <Link to="/partner" className="btn btn-outline" style={{ marginTop: '30px', padding: '12px 25px', borderColor: 'var(--color-cyan-neon)', color: 'var(--color-cyan-neon)', fontSize: '0.9rem' }}>
+                        <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-outline" style={{ marginTop: '30px', padding: '12px 25px', borderColor: 'var(--color-cyan-neon)', color: 'var(--color-cyan-neon)', fontSize: '0.9rem' }}>
                             Get Started <ArrowRight size={18} style={{ marginLeft: '10px' }} />
-                        </Link>
+                        </a>
                     </div>
 
                     {/* Visual Right - Vertical Steps */}

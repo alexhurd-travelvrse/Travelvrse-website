@@ -39,9 +39,9 @@ const Hero = () => {
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">
-                    <Link to="/partner" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
+                    <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         Get Started
-                    </Link>
+                    </a>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />
                         Visit Marketplace

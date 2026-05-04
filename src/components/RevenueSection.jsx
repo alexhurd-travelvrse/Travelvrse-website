@@ -19,8 +19,7 @@ const RevenueSection = () => {
                             background: 'linear-gradient(135deg, var(--color-navy-light) 0%, var(--color-navy-deep) 100%)',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center',
-                            position: 'relative'
+                            justifyContent: 'center'
                         }}>
                             {/* Subtle animated background elements */}
                             <div style={{

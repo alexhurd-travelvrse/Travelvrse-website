@@ -34,11 +34,15 @@ const Hero = () => {
                     </h2>
                 </div>
 
-                <p className="hero-subtitle animate-fade-up delay-1">
-                    Reward Guests To Try Your Experiences - Capture Preferences - Increase Direct Revenue
+                <p className="hero-subtitle">
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Reward Experiences</span>
+                    <span className="progressive-arrow" style={{ animationDelay: '1.4s' }}>→</span>
+                    <span className="progressive-item" style={{ animationDelay: '1.8s' }}>Capture Preferences</span>
+                    <span className="progressive-arrow" style={{ animationDelay: '2.4s' }}>→</span>
+                    <span className="progressive-item" style={{ animationDelay: '2.8s' }}>Increase Direct Revenue</span>
                 </p>
 
-                <div className="hero-cta-group animate-fade-up delay-2">
+                <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>
                     <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         Audit My Vibe
                     </a>

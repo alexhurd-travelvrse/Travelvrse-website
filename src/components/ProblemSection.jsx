@@ -157,7 +157,7 @@ const ProblemSection = () => {
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
                                 We let hotels, resorts and cruise operators lead with their most important assets - their onsite and local experiences
                                 <div style={{ height: '1px', width: '60px', background: 'var(--color-gold)', margin: '15px 0', opacity: 0.5 }}></div>
-                                Rewarded virtual engagement automatically captures guest preferences straight into your booking system via API
+                                Rewarded engagement seamlessly captures guest preferences and creates personalised offers straight from your booking system
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />

@@ -35,7 +35,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle animate-fade-up delay-1">
-                    Capture Qualified Guest Data & Direct Bookings via Immersive Discovery
+                    Reward Guests To Try Your Experiences - Capture Data - Increase Direct Revenue
                 </p>
 
                 <div className="hero-cta-group animate-fade-up delay-2">

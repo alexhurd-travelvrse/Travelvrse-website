@@ -21,6 +21,7 @@ const Layout = ({ children }) => {
                         <a href="#solution" style={{ color: 'white', textDecoration: 'none' }}>Interactive Experiences Marketing</a>
                         <a href="#ai" style={{ color: 'white', textDecoration: 'none' }}>Go OTA Free</a>
                         <Link to="/marketplace" style={{ color: 'white', textDecoration: 'none' }}>Marketplace</Link>
+                        <a href="#journal" style={{ color: 'white', textDecoration: 'none' }}>Journal</a>
                         <a href="#team" style={{ color: 'white', textDecoration: 'none' }}>Our Team</a>
                     </nav>
                 </div>

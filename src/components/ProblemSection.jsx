@@ -145,7 +145,7 @@ const ProblemSection = () => {
                                 ))}
                             </div>
                         </div>
-                        <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-primary desktop-only" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
+                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary desktop-only" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
                             Audit My Vibe
                         </a>
                     </div>
@@ -232,7 +232,7 @@ const ProblemSection = () => {
                                 ))}
                             </div>
                         </div>
-                        <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-primary mobile-only" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
+                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary mobile-only" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
                             Audit My Vibe
                         </a>
                     </div>

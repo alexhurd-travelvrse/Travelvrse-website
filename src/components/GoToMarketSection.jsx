@@ -56,7 +56,7 @@ const GoToMarketSection = () => {
 
                         <JourneyLifecycle />
 
-                        <a href="https://travel-vrse-25hrs.vercel.app/onboarding" className="btn btn-outline" style={{ marginTop: '30px', padding: '12px 25px', borderColor: 'var(--color-cyan-neon)', color: 'var(--color-cyan-neon)', fontSize: '0.9rem' }}>
+                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-outline" style={{ marginTop: '30px', padding: '12px 25px', borderColor: 'var(--color-cyan-neon)', color: 'var(--color-cyan-neon)', fontSize: '0.9rem' }}>
                             Audit My Vibe <ArrowRight size={18} style={{ marginLeft: '10px' }} />
                         </a>
                     </div>

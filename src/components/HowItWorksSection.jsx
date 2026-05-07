@@ -42,44 +42,80 @@ const HowItWorksSection = () => {
 
                     {/* Text Right */}
                     <div className="animate-fade-up delay-1">
-                        <h2 className="section-title" style={{ fontWeight: '800', marginBottom: '1.5rem' }}>
-                            How It <span className="text-gold">Works</span>
+                        <h2 className="section-title" style={{ fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.2' }}>
+                            Implementation is <span className="text-gold">friction free</span>
                         </h2>
                         
-                        <p style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6', marginBottom: '30px' }}>
-                            Implementation is friction free. Creators build your photorealistic experiences using mobile scans, action camera footage, or your existing 2D photos
-                        </p>
- 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
-                            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
-                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
-                                    Use self-serve tools to approve creators, campaigns, rewards and the guest data you want to collect
-                                </p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', marginBottom: '40px', marginTop: '30px' }}>
+                            {/* Step 1 */}
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: 'rgba(181, 148, 45, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(181, 148, 45, 0.3)', flexShrink: 0 }}>
+                                    <Zap size={20} className="text-gold" />
+                                </div>
+                                <div>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Complete our 1 min Vibe Audit</h3>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                        Match your existing onsite experiences against local trends.
+                                    </p>
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
-                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
-                                    Creators scan property on mobile, use our creator tools to gamify and publish social media
-                                </p>
+
+                            {/* Step 2 */}
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: 'rgba(0, 229, 255, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(0, 229, 255, 0.3)', flexShrink: 0 }}>
+                                    <CheckCircle2 size={20} className="text-cyan" />
+                                </div>
+                                <div>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Sign-up and set budget</h3>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                        Agree brief, reward incentive and give us access to offers 
+                                    </p>
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
-                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
-                                    Play is available on any PC or mobile browser
-                                </p>
+
+                            {/* Step 3 */}
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: 'rgba(181, 148, 45, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(181, 148, 45, 0.3)', flexShrink: 0 }}>
+                                    <Smartphone size={20} className="text-gold" />
+                                </div>
+                                <div>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Local creators build</h3>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                        Scanning your property with a mobile phone / action camera
+                                    </p>
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                <CheckCircle2 size={22} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
-                                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
-                                    Profile enriched lead details (including deterministic intent) passed into existing booking engine
-                                </p>
+
+                            {/* Step 4 */}
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: 'rgba(0, 229, 255, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(0, 229, 255, 0.3)', flexShrink: 0 }}>
+                                    <Camera size={20} className="text-cyan" />
+                                </div>
+                                <div>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Market using influencers</h3>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                        Browser based app featuring 3 onsite 2 local experiences
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Step 5 */}
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                                <div style={{ background: 'rgba(181, 148, 45, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(181, 148, 45, 0.3)', flexShrink: 0 }}>
+                                    <ArrowRight size={20} className="text-gold" />
+                                </div>
+                                <div>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Drive conversion</h3>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                        Guest preferences are matched with your offers onsite
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <Link to="/creator" className="btn btn-primary" style={{ padding: '15px 35px' }}>
-                            Become a Creator <ArrowRight size={18} style={{ marginLeft: '10px' }} />
-                        </Link>
+                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary" style={{ padding: '15px 35px' }}>
+                            Audit My Vibe <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                        </a>
                     </div>
 
                 </div>

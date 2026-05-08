@@ -35,7 +35,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Reward Experiences</span>
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Reward Engagement</span>
                     <span className="progressive-arrow" style={{ animationDelay: '1.4s' }}>→</span>
                     <span className="progressive-item" style={{ animationDelay: '1.8s' }}>Capture Preferences</span>
                     <span className="progressive-arrow" style={{ animationDelay: '2.4s' }}>→</span>

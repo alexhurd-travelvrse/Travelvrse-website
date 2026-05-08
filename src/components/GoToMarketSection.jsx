@@ -1,4 +1,4 @@
-import { Compass, BellRing, MapPin, ChevronRight, ArrowRight, Trophy, Share2, Target, TrendingUp } from 'lucide-react';
+import { Compass, BellRing, MapPin, ChevronRight, ArrowRight, Trophy, Share2, Target, TrendingUp, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './GoToMarketSection.css';
 
@@ -122,6 +122,19 @@ const GoToMarketSection = () => {
                             </div>
 
                             <div style={{ height: '20px', width: '2px', background: 'var(--color-gold)', marginLeft: '45px', opacity: 0.2 }}></div>
+
+                            {/* Step 4: Data */}
+                            <div className="glass-card journey-step-card" style={{ display: 'flex', gap: '20px', alignItems: 'center', background: 'rgba(181, 148, 45, 0.03)', border: '1px solid rgba(181, 148, 45, 0.2)', borderRadius: '24px' }}>
+                                <div className="step-icon-wrapper" style={{ borderRadius: '16px', background: 'rgba(181, 148, 45, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gold)', flexShrink: 0 }}>
+                                    <Database size={24} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>THE DATA</div>
+                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Wellness focused travelers</div>
+                                </div>
+                            </div>
+
+                            <div style={{ height: '20px', width: '2px', background: 'var(--color-cyan-neon)', marginLeft: '45px', opacity: 0.2 }}></div>
 
                             {/* Step 4: ROI */}
                             <div className="glass-card journey-step-card" style={{ display: 'flex', gap: '20px', alignItems: 'center', background: 'linear-gradient(135deg, rgba(0, 229, 255, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%)', border: '2px solid var(--color-cyan-neon)', borderRadius: '24px', boxShadow: '0 0 20px rgba(0, 229, 255, 0.2)' }}>

@@ -107,7 +107,7 @@ const HowItWorksSection = () => {
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Drive conversion</h3>
                                     <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
-                                        Guest preferences are matched with your offers onsite
+                                        Guest preferences are matched with your offers in-app
                                     </p>
                                 </div>
                             </div>

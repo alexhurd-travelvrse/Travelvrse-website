@@ -143,7 +143,7 @@ const GoToMarketSection = () => {
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-cyan-neon)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>THE ROI</div>
-                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Combined Room and high margin ancillary package using deterministic data</div>
+                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Combined Room and Spa package</div>
                                 </div>
                             </div>
                         </div>

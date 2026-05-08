@@ -68,7 +68,7 @@ const HowItWorksSection = () => {
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Sign-up and set budget</h3>
                                     <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
-                                        Agree brief, reward incentive and give us access to offers 
+                                        Agree brief, reward incentive and provide access to offers 
                                     </p>
                                 </div>
                             </div>

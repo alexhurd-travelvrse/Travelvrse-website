@@ -63,7 +63,23 @@ const GoToMarketSection = () => {
 
                     {/* Visual Right - Vertical Steps */}
                     <div className="animate-fade-up delay-1">
-                        <div style={{ marginBottom: '25px', fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-gold)', letterSpacing: '1px' }}>
+                        <div style={{ 
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '10px',
+                            padding: '10px 24px',
+                            background: 'rgba(181, 148, 45, 0.1)',
+                            border: '1px solid var(--color-gold)',
+                            borderRadius: '100px',
+                            marginBottom: '35px',
+                            fontSize: '0.9rem',
+                            fontWeight: '900',
+                            color: 'var(--color-gold)',
+                            letterSpacing: '3px',
+                            textTransform: 'uppercase',
+                            boxShadow: '0 0 20px rgba(181, 148, 45, 0.1)'
+                        }}>
+                            <Target size={18} />
                             Pre-Booking Example
                         </div>
                         

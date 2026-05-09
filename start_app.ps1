@@ -1,2 +1,2 @@
 $env:Path += ";C:\Program Files\nodejs"
-npm run dev -- --host --port 5175
+npm run dev:msc -- --host --port 5173

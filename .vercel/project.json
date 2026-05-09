@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_eB3b8EGTGO9e9v4TCE3ZGvATp4KO",
+  "orgId": "team_C5PwLo0ZG9yy7BPf4NOHSQF4",
+  "projectName": "travel-vrse-25hrs",
+  "settings": {
+    "createdAt": 1777472695940,
+    "framework": "vite",
+    "devCommand": null,
+    "installCommand": "npm install --legacy-peer-deps",
+    "buildCommand": "vite build --mode 25hours",
+    "outputDirectory": null,
+    "rootDirectory": "msc-cruises-main",
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}

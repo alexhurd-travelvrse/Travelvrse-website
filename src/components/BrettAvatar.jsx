@@ -27,11 +27,11 @@ const BrettAvatar = ({ position, onClick }) => {
             position={position}
             onClick={(e) => {
                 e.stopPropagation();
-                onClick();
+                if (onClick) onClick();
             }}
             onPointerDown={(e) => {
                 e.stopPropagation();
-                onClick();
+                if (onClick) onClick();
             }}
         >
             <Billboard>
@@ -56,7 +56,7 @@ const BrettAvatar = ({ position, onClick }) => {
                 </mesh>
 
                 {/* Avatar text */}
-                <Text
+                <Text font="/assets/Inter.ttf"
                     position={[0, 0, 0.01]}
                     fontSize={0.15}
                     color="#050510"
@@ -69,7 +69,7 @@ const BrettAvatar = ({ position, onClick }) => {
             </Billboard>
 
             {/* Speaker Indicator */}
-            <Text
+            <Text font="/assets/Inter.ttf"
                 position={[0, 0.8, 0]}
                 fontSize={0.08}
                 color="#FFD700"

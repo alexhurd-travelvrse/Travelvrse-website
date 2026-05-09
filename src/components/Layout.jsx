@@ -1,47 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import './Layout.css';
-
+import { useInfluencer } from '../context/InfluencerContext';
 
 const Layout = ({ children }) => {
     const location = useLocation();
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const isExperiencePage = location.pathname.startsWith('/experience');
+    const influencerContext = useInfluencer();
+    
+    if (!influencerContext) return <div style={{ background: '#05050a', height: '100dvh' }} />;
+
+    const { publicConfig } = influencerContext;
+    const propertyName = publicConfig?.home?.propertyName?.toUpperCase() || "25 HOURS HOTEL";
+    const brandingTitle = publicConfig?.home?.title?.toUpperCase() || "VIRTUAL EXPERIENCE";
 
     return (
-        <>
-            <header className="main-header">
-                <div className="container header-content">
-                    <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
-                        <img
-                            src="/models/travelvrse_logo_main.svg"
-                            alt="Travelvrse"
-                            className="nav-logo"
-                        />
-                    </Link>
-
-                    {/* Mobile Menu Button */}
-                    <button 
-                        className="mobile-menu-btn" 
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
-                    </button>
-
-                    <nav className={`header-nav ${isMenuOpen ? 'open' : ''}`}>
-                        <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>EXPERIENCES MARKETPLACE</a>
-                        <Link to="/creator" className="nav-link" onClick={() => setIsMenuOpen(false)}>CREATOR SIGNUP/LOGIN</Link>
-                        <a href="#journal" className="nav-link" onClick={() => setIsMenuOpen(false)}>JOURNAL</a>
-                        <a href="#team" className="nav-link" onClick={() => setIsMenuOpen(false)}>OUR TEAM</a>
-                    </nav>
-                </div>
-            </header>
-
-            <main className="main-content" style={{ marginTop: '80px' }}>
+        <div className="mobile-container">
+            {!isExperiencePage && (
+                <header className="main-header">
+                    <div className="container header-content" style={{ display: 'flex', justifyContent: 'flex-start', width: '100%' }}>
+                        <Link to="/" className="logo">
+                            <img
+                                src="/models/travelvrse logo.png"
+                                alt="Travelvrse"
+                                className="nav-logo-img"
+                            />
+                        </Link>
+                    </div>
+                </header>
+            )}
+            <main className="main-content">
                 {children}
             </main>
-        </>
+        </div>
     );
 };
 

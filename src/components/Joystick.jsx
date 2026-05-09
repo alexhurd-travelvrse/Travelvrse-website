@@ -12,7 +12,9 @@ const Joystick = ({ size = 120, color = '#00e5ff' }) => {
     };
 
     const handleMove = (e) => {
-        if (!isActive && e.type !== 'touchstart') return;
+        // Ensure we handle the very first touch/click event by checking event type
+        const isInitialTouch = e.type === 'touchstart' || e.type === 'mousedown';
+        if (!isActive && !isInitialTouch) return;
 
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;

@@ -1,61 +1,75 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { InfluencerProvider } from './context/InfluencerContext';
+import { GameProvider } from './context/GameContext';
+import { VoiceProvider } from './context/VoiceContext';
 import Layout from './components/Layout';
-import Hero from './components/Hero';
-import ProblemSection from './components/ProblemSection';
-import HowItWorksSection from './components/HowItWorksSection';
-import GoToMarketSection from './components/GoToMarketSection';
-import BlogJournal from './components/BlogJournal';
-import TeamSection from './components/TeamSection';
-import Footer from './components/Footer';
-import MarketplacePage from './pages/MarketplacePage';
-import BarcelonaPage from './pages/BarcelonaPage';
-import PartnerPage from './pages/PartnerPage';
-import CreatorPage from './pages/CreatorPage';
-import CreatorPortal from './pages/CreatorPortal';
-import RevenueSection from './components/RevenueSection';
-import { HelmetProvider } from 'react-helmet-async';
+import ErrorBoundary from './components/ErrorBoundary';
 
-// ScrollToTop component ensures we start at the top when navigating between pages
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-};
+// Lazy load pages for performance
+const B2BPortalPage = lazy(() => import('./pages/B2BPortalPage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const TeleportPage = lazy(() => import('./pages/TeleportPage'));
+const RankingPage = lazy(() => import('./pages/RankingPage'));
+const ExperiencePage = lazy(() => import('./pages/ExperiencePage'));
+const CompletionPage = lazy(() => import('./pages/CompletionPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const LoginPage = lazy(() => import('./pages/admin/LoginPage'));
+const ConfigDashboard = lazy(() => import('./pages/admin/ConfigDashboard'));
 
-const B2BHome = () => {
+const PageLoader = () => (
+  <div style={{ background: '#050510', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#00e5ff' }}>
+    <div style={{ letterSpacing: '4px', fontSize: '0.8rem', fontWeight: 800 }}>INITIALIZING VRSE...</div>
+  </div>
+);
+
+function App() {
   return (
-    <Layout>
-      <Hero />
-      <ProblemSection />
-      <RevenueSection />
-      <HowItWorksSection />
-      <GoToMarketSection />
-      <BlogJournal />
-      <TeamSection />
-      <Footer />
-    </Layout>
-  );
-};
-
-const App = () => {
-  return (
-    <HelmetProvider>
+    <ErrorBoundary>
       <Router>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<B2BHome />} />
-          <Route path="/marketplace" element={<MarketplacePage />} />
-          <Route path="/barcelona" element={<BarcelonaPage />} />
-          <Route path="/partner" element={<PartnerPage />} />
-          <Route path="/creator" element={<CreatorPage />} />
-          <Route path="/creator-portal" element={<CreatorPortal />} />
-        </Routes>
+        <InfluencerProvider>
+          <GameProvider>
+            <VoiceProvider>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  {/* New Canonical Audit Path */}
+                  <Route path="/vibeaudit" element={<B2BPortalPage />} />
+                  
+                  {/* Internal Aliases */}
+                  <Route path="/b2b" element={<B2BPortalPage />} />
+                  <Route path="/onboarding" element={<B2BPortalPage />} />
+
+                  {/* Admin Infrastructure */}
+                  <Route path="/admin/login" element={<LoginPage />} />
+                  <Route path="/admin" element={<AdminLayout />}>
+                    <Route path="config" element={<ConfigDashboard />} />
+                    <Route index element={<Navigate to="config" replace />} />
+                  </Route>
+
+                  {/* Main Application Wildcard */}
+                  <Route path="*" element={
+                    <Layout>
+                      <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/teleport" element={<TeleportPage />} />
+                        <Route path="/ranking" element={<RankingPage />} />
+                        <Route path="/experience/:id" element={<ExperiencePage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
+                        <Route path="/completion" element={<CompletionPage />} />
+                      </Routes>
+                    </Layout>
+                  } />
+                </Routes>
+              </Suspense>
+            </VoiceProvider>
+          </GameProvider>
+        </InfluencerProvider>
       </Router>
-    </HelmetProvider>
+    </ErrorBoundary>
   );
-};
+}
 
 export default App;
+
+

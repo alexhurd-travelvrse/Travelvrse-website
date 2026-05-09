@@ -1,8 +1,17 @@
 import React from 'react';
 
-const StartOverlay = ({ onStart, title, subtitle }) => {
+const StartOverlay = ({ onStart, title, subtitle, isVisible }) => {
+    // Use CSS opacity instead of unmounting so the overlay fades out without
+    // causing a layout repaint at the exact moment the staggered timers begin.
     return (
-        <div className="overlay-container">
+        <div
+            className="overlay-container"
+            style={{
+                opacity: isVisible ? 1 : 0,
+                pointerEvents: isVisible ? 'auto' : 'none',
+                transition: 'opacity 0.3s ease-out',
+            }}
+        >
             <div className="overlay-content animate-fade-in">
                 <h1 className="overlay-title">
                     {title || "VIRTUAL RESORT EXPERIENCE"}
@@ -41,7 +50,11 @@ const StartOverlay = ({ onStart, title, subtitle }) => {
                 </div>
 
                 <button
-                    onClick={onStart}
+                    onClick={(e) => {
+                        e.currentTarget.disabled = true;
+                        e.currentTarget.innerText = "ENTERING EXPERIENCE...";
+                        onStart();
+                    }}
                     className="btn-primary btn-large"
                 >
                     START CHALLENGE

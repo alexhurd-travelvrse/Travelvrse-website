@@ -1,0 +1,260 @@
+{
+    "client_metadata": {
+        "hotel_name": "25 Hours Hotel Indre Copenhagen",
+        "slug": "25-hours-copenhagen",
+        "brand_assets": {
+            "hotel_logo_url": "/models/25hrslogo.jpg",
+            "primary_color": "#FF5733",
+            "hero_image_url": "/models/25hoursmp4.mp4",
+            "hero_poster_url": "/assets/balcony_new.png",
+            "hero_text": "Get 10% off All Hotel Experiences",
+            "mission_statement": "Experience the eclectic soul of Copenhagen",
+            "cta_primary": "Earn 10% Off",
+            "cta_secondary": "Explore Indre By",
+            "benefits": [
+                "🏷️ Coffees, drinks, spa, restaurants +++ Local excursions",
+                "🎵 Collect exclusive soundtracks and Copenhagen guides",
+                ""
+            ],
+            "highlighted_benefit": "2 Chances to Win 20% OFF"
+        }
+    },
+    "creator_metadata": {
+        "creator_name": "Studio-X",
+        "orb_image_url": "/assets/Alexhurd1.jpg",
+        "orb_bio": "Capturing the eclectic vibe of Indre By.",
+        "voiceovers": {
+            "home": "/assets/audio/25h_home.mp3",
+            "teleport": "/assets/audio/25h_teleport.mp3",
+            "completion": "/assets/audio/25h_completion.mp3"
+        }
+    },
+    "concierge_configuration": {
+        "music_question": "Would you like me to explore local gigs for your stay?",
+        "music_guide_text": "• Jazz at Montmartre (20:00)\n• Vega: Local Indie Night (21:30)\n• Loppen: Underground Rock (22:00)"
+    },
+    "challenge_configuration": {
+        "total_experiences": 5,
+        "experiences": [
+            {
+                "exp_id": "1",
+                "name": "Retro Vinyl Session Room",
+                "splat_url": "/models/music_lounge.spz",
+                "thumbnail": "/models/vinylroom.jpg",
+                "script": "Mission = Find the hidden music tracks",
+                "music_player": {
+                    "active": true,
+                    "tracks": [
+                        {
+                            "title": "Groovy Indre By",
+                            "url": "/models/Experience_Revolution.mp3"
+                        },
+                        {
+                            "title": "Copenhagen Chill",
+                            "url": "/models/Salt_and_Soft_Light.mp3"
+                        }
+                    ]
+                },
+                "backpack_icons": [
+                    {
+                        "id": "music-player",
+                        "reward_label": "Start Sessions",
+                        "content_type": "activity",
+                        "data_tag": "music_lover",
+                        "discoveryMode": "sonic",
+                        "coordinates": {
+                            "x": 0.4944758198221995,
+                            "y": 1.778304627025089,
+                            "z": -7.631982041201379
+                        },
+                        "description": "Drop the needle and feel the 25h vibe.",
+                        "rotation": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "startPos": [
+                    0.4944758198221995,
+                    1.778304627025089,
+                    -1.0703891915206076
+                ],
+                "startRot": [
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "exp_id": "2",
+                "name": "The Bar",
+                "script": "Mission = Click on the Coaster, tell us your travel dates and spin to win even bigger",
+                "splat_url": "/models/bar_lounge.spz",
+                "thumbnail": "/models/bar_scan.png",
+                "backpack_icons": [
+                    {
+                        "id": "lucky-coaster",
+                        "name": "Lucky Coaster",
+                        "reward_label": "Flip & Win",
+                        "content_type": "activity",
+                        "data_tag": "coaster_flip",
+                        "coordinates": {
+                            "x": 0,
+                            "y": 1.093752775739988,
+                            "z": -5.4517455819738325
+                        },
+                        "description": "A mysterious coaster on the bar. Fortune favors the curious.",
+                        "rotation": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "startPos": [
+                    0,
+                    1.093752775739988,
+                    0.4782286613557532
+                ],
+                "startRot": [
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "exp_id": "3",
+                "name": "The Spa",
+                "script": "Mission = Find the towel, watch the 15 sec vid and let us know what you think",
+                "splat_url": "/models/Modern Wooden Sauna Interior.spz",
+                "thumbnail": "/models/sauna_scan.png",
+                "backpack_icons": [
+                    {
+                        "id": "item3-1",
+                        "coordinates": {
+                            "x": 0,
+                            "y": 1,
+                            "z": 0
+                        },
+                        "content_type": "collectible",
+                        "data_tag": "culture_seeker",
+                        "reward_label": "Spa Ready Guide",
+                        "media": "https://www.youtube.com/shorts/aG8kCQ5D_yQ"
+                    },
+                    {
+                        "id": "item3-2",
+                        "coordinates": {
+                            "x": 1.5,
+                            "y": 1.1,
+                            "z": -1.2
+                        },
+                        "content_type": "collectible",
+                        "data_tag": "wellness_enthusiast",
+                        "reward_label": "Wellness Rituals",
+                        "description": "Discover the secrets of Scandinavian relaxation."
+                    }
+                ],
+                "startPos": [
+                    0,
+                    1.8036621666143569,
+                    0.7706583130046937
+                ],
+                "startRot": [
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "exp_id": "4",
+                "name": "Luxury Suite",
+                "splat_url": "/models/hotel_room_2.spz",
+                "thumbnail": "/models/suite_scan.png",
+                "backpack_icons": [
+                    {
+                        "id": "item4-1",
+                        "coordinates": {
+                            "x": 0.5,
+                            "y": 1.2,
+                            "z": -1.5
+                        },
+                        "content_type": "info",
+                        "data_tag": "design_lover",
+                        "reward_label": "Danish Design",
+                        "description": "The soul of Copenhagen's minimalist aesthetic."
+                    },
+                    {
+                        "id": "item4-2",
+                        "coordinates": {
+                            "x": -1.2,
+                            "y": 1,
+                            "z": 0.8
+                        },
+                        "content_type": "collectible",
+                        "data_tag": "social_foodie",
+                        "reward_label": "Turndown Secret",
+                        "description": "A little something extra for your evening stay."
+                    }
+                ],
+                "startPos": [
+                    1.0194030692503786,
+                    1.1072753956122852,
+                    1.3933519896069557
+                ],
+                "startRot": [
+                    19.600458661880484,
+                    -0.6861083388443254,
+                    0.24431105897719407
+                ]
+            },
+            {
+                "exp_id": "5",
+                "name": "Rosenborg Gardens",
+                "splat_url": "/models/park_pathway.spz",
+                "thumbnail": "/models/beach_bar_scan.png",
+                "backpack_icons": [
+                    {
+                        "id": "lucky-coaster",
+                        "coordinates": {
+                            "x": 0.8,
+                            "y": 1.05,
+                            "z": -1.5
+                        },
+                        "content_type": "collectible",
+                        "data_tag": "adventurer",
+                        "reward_label": "Beach Discovery"
+                    }
+                ],
+                "startPos": [
+                    0,
+                    1.7,
+                    0
+                ],
+                "startRot": [
+                    0,
+                    0,
+                    0
+                ]
+            }
+        ]
+    },
+    "teleport_configuration": {
+        "hero_image_url": "/models/vinylroom.jpg",
+        "data_requirements": [
+            {
+                "id": "design",
+                "label": "🎨 Design Lover",
+                "tag": "design_enthusiast"
+            },
+            {
+                "id": "music",
+                "label": "🎵 Vinyl Fan",
+                "tag": "music_lover"
+            }
+        ]
+    },
+    "teleport": {
+        "heroImage": "/models/vinylroom.jpg"
+    }
+}

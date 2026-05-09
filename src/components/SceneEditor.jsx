@@ -1,21 +1,111 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useInfluencer } from '../context/InfluencerContext';
 
-const SceneEditor = ({
+function CoordinateAxisInput({ axis, i, selectedObj, transformMode }) {
+    const isRot = transformMode === 'rotate';
+    const currentVal = isRot ? (selectedObj.rot?.[i] || 0) : selectedObj.pos?.[i];
+    
+    // We use a local state for the input text so user can type decimals like "0."
+    const [inputValue, setInputValue] = React.useState(currentVal?.toFixed(isRot ? 1 : 3) || '0');
+    const isFocused = React.useRef(false);
+
+    // Sync from props only when NOT focused
+    React.useLayoutEffect(() => {
+        if (!isFocused.current && currentVal !== undefined) {
+            setInputValue(currentVal.toFixed(isRot ? 1 : 3));
+        }
+    }, [currentVal, isRot]);
+
+    return (
+        <div key={axis}>
+            <label style={{ fontSize: '0.65rem', color: '#888', display: 'block', marginBottom: '4px' }}>
+                {axis.toUpperCase()}{isRot ? '°' : ''}
+            </label>
+            <input
+                type="text"
+                value={inputValue}
+                onFocus={() => { isFocused.current = true; }}
+                onBlur={() => { isFocused.current = false; }}
+                onChange={(e) => {
+                    const raw = e.target.value;
+                    setInputValue(raw);
+                    
+                    const newVal = parseFloat(raw);
+                    if (!isNaN(newVal)) {
+                        const field = isRot ? 'rot' : 'pos';
+                        const currentArr = isRot ? (selectedObj.rot || [0, 0, 0]) : (selectedObj.pos || [0, 0, 0]);
+                        const newArr = [...currentArr];
+                        newArr[i] = newVal;
+                        
+                        // Use specialized event for camera to move the actual 3D view
+                        if (selectedObj.id === 'camera') {
+                            window.dispatchEvent(new CustomEvent('camera-manual-update', {
+                                detail: { [field]: newArr }
+                            }));
+                        } else {
+                            window.dispatchEvent(new CustomEvent('scene-editor-manual-update', {
+                                detail: { id: selectedObj.id, [field]: newArr }
+                            }));
+                        }
+                    }
+                }}
+                style={{
+                    width: '100%',
+                    background: 'rgba(255, 215, 0, 0.05)',
+                    border: '1px solid rgba(255, 215, 0, 0.2)',
+                    color: '#FFD700',
+                    padding: '10px 8px',
+                    borderRadius: '6px',
+                    fontSize: '0.85rem',
+                    fontFamily: 'monospace',
+                    outline: 'none',
+                    textAlign: 'center'
+                }}
+            />
+        </div>
+    );
+}
+
+function SceneEditor({
     activeObject,
     setActiveObject,
     objects = [],
     isEditorMode,
     setIsEditorMode,
-    onExport
-}) => {
+    onExport,
+    onSaveToContext,
+    onDownloadConfig,
+    onResetToTruth
+}) {
+    const { activeWhitelabelId } = useInfluencer();
     const [copied, setCopied] = React.useState(false);
-    const [saved, setSaved] = React.useState(false);
+    const [localSaved, setLocalSaved] = React.useState(false);
+    const [publishSaved, setPublishSaved] = React.useState(false);
     const [saveError, setSaveError] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(false);
     const [transformMode, setTransformMode] = React.useState('translate'); // 'translate' | 'rotate'
+    
+    // MSC MASTER: Use a Ref to track latest coordinates instantly, bypassing React state lag for the final save
+    const latestObjectsRef = React.useRef(objects);
+    
+    React.useEffect(() => {
+        latestObjectsRef.current = objects;
+    }, [objects]);
 
-    console.log("[SceneEditor] Prop check:", { objectsCount: objects?.length, isEditorMode, activeObject, transformMode });
-    console.log("[SceneEditor] React version:", React.version, "React instance:", React);
+    React.useEffect(() => {
+        const handleManualSync = (e) => {
+            const { id: objId, pos, rot } = e.detail;
+            latestObjectsRef.current = latestObjectsRef.current.map(obj => {
+                if (obj.id === objId) {
+                    return { ...obj, ...(pos && { pos }), ...(rot && { rot }) };
+                }
+                return obj;
+            });
+        };
+        window.addEventListener('scene-editor-manual-sync', handleManualSync);
+        return () => window.removeEventListener('scene-editor-manual-sync', handleManualSync);
+    }, []);
+
 
     if (!isEditorMode) {
         return (
@@ -29,88 +119,115 @@ const SceneEditor = ({
                 gap: '10px'
             }}>
                 <button
-                    onClick={() => window.dispatchEvent(new CustomEvent('recenter-camera'))}
+                    onClick={() => window.dispatchEvent(new CustomEvent('force-camera-reset'))}
                     style={{
                         padding: '10px 20px',
-                        background: 'rgba(0, 200, 83, 0.85)',
-                        color: 'white',
-                        border: '1px solid #00E676',
-                        borderRadius: '8px',
+                        background: 'rgba(255, 215, 0, 0.1)',
+                        color: '#FFD700',
+                        border: '1px solid rgba(255, 215, 0, 0.3)',
+                        borderRadius: '2px', // Leica Hard Edge
                         cursor: 'pointer',
-                        fontSize: '0.8rem',
-                        fontWeight: 'bold',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-                        transition: 'all 0.2s ease',
-                        backdropFilter: 'blur(5px)',
+                        fontSize: '0.7rem',
+                        fontWeight: '400',
+                        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        backdropFilter: 'blur(10px)',
                         textTransform: 'uppercase',
-                        letterSpacing: '1px'
+                        letterSpacing: '0.2em',
+                        fontFamily: 'Outfit, sans-serif'
                     }}
                 >
                     🎯 RECENTER
                 </button>
-                <button
-                    onClick={() => setIsEditorMode(true)}
-                    style={{
-                        padding: '12px 24px',
-                        background: 'rgba(0, 0, 0, 0.85)',
-                        color: '#FFD700',
-                        border: '1px solid #FFD700',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        fontSize: '0.9rem',
-                        fontWeight: 'bold',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-                        transition: 'all 0.2s ease',
-                        backdropFilter: 'blur(5px)'
-                    }}
-                >
-                    ⚙️ OPEN EDITOR
-                </button>
+                {window.location.search.includes('editor=true') && (
+                    <button
+                        onClick={() => setIsEditorMode(true)}
+                        style={{
+                            padding: '12px 24px',
+                            background: 'rgba(0, 0, 0, 0.85)',
+                            color: '#FFD700',
+                            border: '1px solid #FFD700',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontSize: '0.9rem',
+                            fontWeight: 'bold',
+                            boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                            transition: 'all 0.2s ease',
+                            backdropFilter: 'blur(5px)'
+                        }}
+                    >
+                        ⚙️ OPEN EDITOR
+                    </button>
+                )}
             </div>
         );
     }
 
+
     const handleCopy = () => {
-        onExport();
+        if(onExport) onExport();
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const handleSave = async () => {
+    const handleLocalSave = async () => {
         try {
             setSaveError(null);
-
-            // Get experience ID from URL or context
-            const experienceId = window.location.pathname.split('/').pop();
-
-            const response = await fetch('/api/save-config', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    experienceId,
-                    objects: objects.map(obj => ({
-                        id: obj.id,
-                        pos: obj.pos,
-                        rot: obj.rot
-                    }))
-                })
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                setSaved(true);
-                setTimeout(() => setSaved(false), 3000);
-            } else {
-                setSaveError(result.error || 'Failed to save');
+            if (onSaveToContext) {
+                const result = await onSaveToContext(objects);
+                if (result && result.success) {
+                    setLocalSaved(true);
+                    setTimeout(() => setLocalSaved(false), 3000);
+                } else {
+                    setSaveError('Failed to save to Influencer Context');
+                }
             }
         } catch (error) {
-            console.error('Save error:', error);
+            console.error('Local save error:', error);
             setSaveError(error.message);
         }
     };
 
-    const selectedObj = objects.find(o => o.id === activeObject);
+    const handlePublishToDisk = async () => {
+        try {
+            setSaveError(null);
+            
+            const pathSegments = window.location.pathname.split('/').filter(Boolean);
+            const experienceId = pathSegments.pop() || '1';
+            
+            // Collect all objects including the camera if it was moved
+            // MSC MASTER: Always pull from the Ref to get the absolute latest coordinates
+            const saveObjects = latestObjectsRef.current.map(obj => ({
+                id: obj.id,
+                pos: obj.pos,
+                rot: obj.rot,
+                discoveryMode: obj.discoveryMode
+            }));
+
+            console.log("[SceneEditor] BURNING TO DISK:", saveObjects);
+            
+            const response = await fetch('/api/save-config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    companyId: activeWhitelabelId,
+                    experienceId,
+                    objects: saveObjects
+                })
+            });
+            const result = await response.json();
+            if (response.ok) {
+                setPublishSaved(true);
+                setTimeout(() => setPublishSaved(false), 3000);
+                alert(`🚀 SUCCESS!\n\nCoordinates for Experience ${experienceId} (${activeWhitelabelId}) have been burned to the manifest.\n\nStart Position: ${window.latestCameraPos.map(v => v.toFixed(2)).join(', ')}`);
+            } else {
+                setSaveError(result.error || 'Failed to save to project files');
+            }
+        } catch (error) {
+            console.error('Publish error:', error);
+            setSaveError(error.message);
+        }
+    };
 
     // Communicate mode change to 3D Scene
     const updateMode = (mode) => {
@@ -118,23 +235,31 @@ const SceneEditor = ({
         window.dispatchEvent(new CustomEvent('scene-editor-mode-change', { detail: { mode } }));
     };
 
+    const selectedObj = (objects || []).find(o => o.id === activeObject);
+
     return (
-        <div style={{
-            position: 'fixed',
-            bottom: '20px',
-            left: '20px',
-            width: '320px',
-            background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.98), rgba(5, 5, 20, 0.98))',
-            border: '1px solid rgba(255, 215, 0, 0.4)',
-            borderRadius: '16px',
-            padding: '24px',
-            color: 'white',
-            zIndex: 10000,
-            fontFamily: 'Outfit, Inter, sans-serif',
-            backdropFilter: 'blur(20px)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
-            animation: 'slideUp 0.3s ease-out'
-        }}>
+        <div 
+            onPointerDown={e => e.stopPropagation()}
+            onPointerMove={e => e.stopPropagation()}
+            onPointerUp={e => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
+            style={{
+                position: 'fixed',
+                bottom: '20px',
+                left: '20px',
+                width: '320px',
+                background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.98), rgba(5, 5, 20, 0.98))',
+                border: '1px solid rgba(255, 215, 0, 0.4)',
+                borderRadius: '16px',
+                padding: '24px',
+                color: 'white',
+                zIndex: 10000,
+                fontFamily: 'Outfit, Inter, sans-serif',
+                backdropFilter: 'blur(20px)',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
+                animation: 'slideUp 0.3s ease-out'
+            }}
+        >
             <style>
                 {`
                     @keyframes slideUp {
@@ -149,94 +274,124 @@ const SceneEditor = ({
                 `}
             </style>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '25px', alignItems: 'center' }}>
-                <h3 style={{ margin: 0, color: '#FFD700', fontSize: '1.1rem', letterSpacing: '1px', fontWeight: '800' }}>
-                    SCENE EDITOR ({objects.length})
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, color: '#FFD700', fontSize: '1rem', letterSpacing: '1px', fontWeight: '800' }}>
+                    SCENE EDITOR
                 </h3>
                 <button
                     onClick={() => setIsEditorMode(false)}
-                    style={{ background: 'rgba(255,255,255,0.05)', border: 'none', color: '#ff4444', width: '30px', height: '30px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ background: 'rgba(255,255,255,0.05)', border: 'none', color: '#ff4444', width: '24px', height: '24px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
                     ✕
                 </button>
             </div>
 
-            {/* Mode Toggle */}
-            <div style={{ display: 'flex', marginBottom: '20px' }}>
-                <button className={`tab-btn ${transformMode === 'translate' ? 'active' : ''}`} onClick={() => updateMode('translate')}>MOVE</button>
-                <button className={`tab-btn ${transformMode === 'rotate' ? 'active' : ''}`} onClick={() => updateMode('rotate')}>ROTATE</button>
-            </div>
-
-            <div style={{ marginBottom: '20px', position: 'relative' }}>
-                <label style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                    Select Object to {transformMode === 'translate' ? 'Move' : 'Rotate'}
+            {/* Main Selection Dropdown */}
+            <div style={{ marginBottom: '15px' }}>
+                <label style={{ fontSize: '0.7rem', color: '#888', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                    Select Activity to Change
                 </label>
-
-                <div
+                <div 
                     onClick={() => setIsOpen(!isOpen)}
                     style={{
-                        width: '100%',
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,215,0,0.2)',
-                        color: selectedObj ? '#FFD700' : 'white',
-                        padding: '12px 15px',
+                        padding: '12px',
+                        background: 'rgba(255, 215, 0, 0.05)',
+                        border: '1px solid rgba(255, 215, 0, 0.3)',
                         borderRadius: '8px',
+                        color: activeObject ? '#FFD700' : '#888',
                         cursor: 'pointer',
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        fontSize: '0.95rem'
+                        fontSize: '0.9rem',
+                        fontWeight: 'bold'
                     }}
                 >
-                    <span>{selectedObj ? selectedObj.name : 'Choose an object...'}</span>
+                    <span>
+                        {activeObject === 'camera' ? '🎥 Camera Start Position' : 
+                         (objects.find(o => o.id === activeObject)?.name || 'Choose target...')}
+                    </span>
                     <span style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0)', transition: '0.2s' }}>▾</span>
                 </div>
 
                 {isOpen && (
                     <div style={{
                         position: 'absolute',
-                        top: '100%',
-                        left: 0,
-                        right: 0,
+                        top: '120px',
+                        left: '24px',
+                        right: '24px',
                         background: '#1a1a2e',
                         border: '1px solid rgba(255,215,0,0.3)',
                         borderRadius: '8px',
-                        marginTop: '5px',
                         zIndex: 10001,
-                        maxHeight: '200px',
-                        overflowY: 'auto',
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+                        overflow: 'hidden',
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.8)'
                     }}>
-                        <div
+                        <div 
                             className="editor-item"
-                            onClick={() => { setActiveObject(null); setIsOpen(false); }}
-                            style={{ padding: '12px 15px', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.05)', transition: '0.2s' }}
+                            onClick={() => { setActiveObject('camera'); setIsOpen(false); }}
+                            style={{ padding: '12px', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.05)', transition: '0.2s', color: activeObject === 'camera' ? '#FFD700' : 'white' }}
                         >
-                            None (Deactivate Gizmo)
+                            🎥 Camera Start Position
                         </div>
-                        {objects.map(obj => (
-                            <div
+                        {objects.filter(o => o.id !== 'camera').map((obj, i) => (
+                            <div 
                                 key={obj.id}
                                 className="editor-item"
                                 onClick={() => { setActiveObject(obj.id); setIsOpen(false); }}
-                                style={{
-                                    padding: '12px 15px',
-                                    cursor: 'pointer',
-                                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                                style={{ 
+                                    padding: '12px', 
+                                    cursor: 'pointer', 
+                                    borderBottom: i === objects.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.05)', 
                                     transition: '0.2s',
-                                    color: activeObject === obj.id ? '#FFD700' : 'white',
-                                    fontWeight: activeObject === obj.id ? 'bold' : 'normal'
+                                    color: activeObject === obj.id ? '#FFD700' : 'white'
                                 }}
                             >
-                                {obj.name}
+                                {obj.id === 'music-player' ? `🎵 ACTIVITY: ${obj.name}` : 
+                                 (obj.id.startsWith('special-') ? '🪙 Golden Medal (Coin)' : `🎒 ${obj.name}`)}
                             </div>
                         ))}
                     </div>
                 )}
             </div>
 
+            {/* Snap To View Action */}
+            <div style={{ marginBottom: '20px' }}>
+                <button
+                    onClick={() => {
+                        const camPos = window.latestCameraPos;
+                        if (!camPos) return;
+
+                        if (activeObject) {
+                            // Use the global event that handles camera forward alignment
+                            // This event gives control to Scene3D which has access to the real Three.js camera
+                            window.dispatchEvent(new CustomEvent('scene-editor-use-camera-pos', {
+                                 detail: { id: activeObject }
+                            }));
+                            
+                            const objName = isCamera ? 'Camera Position' : (objects.find(o => o.id === activeObject)?.name || activeObject);
+                            alert(`📍 Position Captured for ${objName}! Look around to verify or click SAVE TO PRODUCTION to apply permanently.`);
+                        }
+                    }}
+                    disabled={!activeObject}
+                    style={{
+                        width: '100%',
+                        padding: '12px',
+                        background: activeObject ? 'rgba(0, 229, 255, 0.2)' : 'rgba(255,255,255,0.05)',
+                        border: `1px solid ${activeObject ? '#00E676' : '#444'}`,
+                        color: activeObject ? '#00E676' : '#666',
+                        borderRadius: '8px',
+                        fontWeight: '900',
+                        cursor: activeObject ? 'pointer' : 'not-allowed',
+                        letterSpacing: '1px',
+                        fontSize: '0.8rem'
+                    }}
+                >
+                    📍 PLACE AT CURRENT VIEW
+                </button>
+            </div>
+
             {selectedObj && (
-                <>
                 <div style={{
                     marginBottom: '20px',
                     padding: '15px',
@@ -244,146 +399,133 @@ const SceneEditor = ({
                     borderRadius: '10px',
                     border: '1px solid rgba(255,255,255,0.05)'
                 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
+                        <button className={`tab-btn ${transformMode === 'translate' ? 'active' : ''}`} onClick={() => updateMode('translate')}>MOVE</button>
+                        <button className={`tab-btn ${transformMode === 'rotate' ? 'active' : ''}`} onClick={() => updateMode('rotate')}>ROTATE</button>
+                    </div>
+
                     <div style={{ fontSize: '0.8rem', marginBottom: '12px', color: '#aaa', display: 'flex', justifyContent: 'space-between' }}>
                         <span>{transformMode.toUpperCase()} ({selectedObj.name})</span>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
-                        {['x', 'y', 'z'].map((axis, i) => {
-                            const isRot = transformMode === 'rotate';
-                            const val = isRot ? (selectedObj.rot ? selectedObj.rot[i] : 0) : selectedObj.pos[i];
+                        {['x', 'y', 'z'].map((axis, i) => (
+                            <CoordinateAxisInput 
+                                key={`${selectedObj.id}-${axis}-${transformMode}`}
+                                axis={axis}
+                                i={i}
+                                selectedObj={selectedObj}
+                                transformMode={transformMode}
+                            />
+                        ))}
+                    </div>
 
-                            return (
-                                <div key={axis}>
-                                    <label style={{ fontSize: '0.65rem', color: '#666', display: 'block', marginBottom: '4px' }}>
-                                        {axis.toUpperCase()}{isRot ? '°' : ''}
+                    {selectedObj.id !== 'camera' && selectedObj.id !== 'coin' && !selectedObj.id.startsWith('extra-') && (
+                        <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                            <label style={{ fontSize: '0.7rem', color: '#888', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                                Discovery Mode (Lead Magnet)
+                            </label>
+                            <select 
+                                value={selectedObj.discoveryMode || 'instant'}
+                                onChange={(e) => {
+                                    window.dispatchEvent(new CustomEvent('scene-editor-manual-update', {
+                                        detail: { id: selectedObj.id, discoveryMode: e.target.value }
+                                    }));
+                                }}
+                                style={{ 
+                                    width: '100%', 
+                                    padding: '10px', 
+                                    background: 'rgba(0,0,0,0.5)', 
+                                    color: '#00e5ff', 
+                                    border: '1px solid rgba(0,229,255,0.3)', 
+                                    borderRadius: '6px',
+                                    outline: 'none',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                <option value="instant">Instant (Passive Interest)</option>
+                                <option value="scan">Scan / Magnifying Glass (High Intent)</option>
+                                <option value="sonic">Sonic Proximity (Sensory Lead)</option>
+                            </select>
+
+                            {selectedObj.discoveryMode === 'sonic' && (
+                                <div style={{ marginTop: '15px' }}>
+                                    <label style={{ fontSize: '0.7rem', color: '#FFD700', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                                        Sensory Audio MP3 Path
                                     </label>
-                                    <input
-                                        type="number"
-                                        step={isRot ? "1" : "0.01"}
-                                        value={val?.toFixed(isRot ? 1 : 3) || 0}
+                                    <input 
+                                        type="text" 
+                                        placeholder="/assets/my_audio.mp3"
+                                        value={selectedObj.audioUrl || ''}
                                         onChange={(e) => {
-                                            const newVal = parseFloat(e.target.value);
-                                            if (!isNaN(newVal)) {
-                                                const field = isRot ? 'rot' : 'pos';
-                                                const currentArr = isRot ? (selectedObj.rot || [0, 0, 0]) : selectedObj.pos;
-                                                const newArr = [...currentArr];
-                                                newArr[i] = newVal;
-                                                window.dispatchEvent(new CustomEvent('scene-editor-manual-update', {
-                                                    detail: { id: selectedObj.id, [field]: newArr }
-                                                }));
-                                            }
+                                            window.dispatchEvent(new CustomEvent('scene-editor-manual-update', {
+                                                detail: { id: selectedObj.id, audioUrl: e.target.value }
+                                            }));
                                         }}
-                                        style={{
-                                            width: '100%',
-                                            background: 'rgba(0,0,0,0.3)',
-                                            border: '1px solid rgba(255,255,255,0.1)',
-                                            color: '#FFD700',
-                                            padding: '5px',
-                                            borderRadius: '4px',
-                                            fontSize: '0.8rem',
-                                            fontFamily: 'monospace'
+                                        style={{ 
+                                            width: '100%', 
+                                            padding: '10px', 
+                                            background: 'rgba(0,0,0,0.5)', 
+                                            color: '#fff', 
+                                            border: '1px solid rgba(255,215,0,0.3)', 
+                                            borderRadius: '6px',
+                                            outline: 'none',
+                                            fontSize: '0.8rem'
                                         }}
                                     />
+                                    <div style={{ fontSize: '0.65rem', color: '#aaa', marginTop: '6px' }}>
+                                        E.g "/assets/my_sound.mp3"
+                                    </div>
                                 </div>
-                            );
-                        })}
-                    </div>
+                            )}
+                        </div>
+                    )}
                 </div>
-
-                {/* Targeted Position Update (Requested by User) */}
-                <div style={{ marginBottom: '20px', padding: '0 15px' }}>
-                    <button
-                        onClick={() => {
-                            window.dispatchEvent(new CustomEvent('scene-editor-use-camera-pos', {
-                                detail: { id: selectedObj.id }
-                            }));
-                        }}
-                        style={{
-                            width: '100%',
-                            padding: '14px',
-                            background: 'rgba(0, 200, 83, 0.95)',
-                            color: 'white',
-                            border: '1px solid #00E676',
-                            borderRadius: '10px',
-                            cursor: 'pointer',
-                            fontSize: '0.9rem',
-                            fontWeight: '800',
-                            boxShadow: '0 4px 15px rgba(0, 200, 83, 0.4)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '10px',
-                            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.target.style.background = '#00C853';
-                            e.target.style.transform = 'translateY(-2px)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.target.style.background = 'rgba(0, 200, 83, 0.95)';
-                            e.target.style.transform = 'translateY(0)';
-                        }}
-                        onMouseDown={(e) => e.target.style.transform = 'scale(0.96)'}
-                        onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
-                    >
-                        🎯 USE THIS POSITION
-                    </button>
-                    <p style={{ fontSize: '0.7rem', color: '#888', marginTop: '8px', textAlign: 'center', fontWeight: '500' }}>
-                        Snap "{selectedObj.name}" to your current camera position.
-                    </p>
-                </div>
-            </>
             )}
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ display: 'flex', gap: '12px' }}>
-                    <button
-                        onClick={handleSave}
-                        style={{
-                            flex: 1,
-                            padding: '14px',
-                            background: saved ? 'linear-gradient(to right, #00C853, #00E676)' : 'linear-gradient(to right, #2196F3, #03A9F4)',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '8px',
-                            fontWeight: '900',
-                            cursor: 'pointer',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px',
-                            boxShadow: saved ? '0 4px 15px rgba(0, 200, 83, 0.4)' : '0 4px 15px rgba(33, 150, 243, 0.3)',
-                            transition: 'all 0.3s'
-                        }}
-                        onMouseDown={(e) => e.target.style.transform = 'scale(0.98)'}
-                        onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
-                    >
-                        {saved ? '✓ SAVED TO CONFIG' : '💾 SAVE TO CONFIG'}
-                    </button>
-
-                    <button
-                        onClick={handleCopy}
-                        style={{
-                            flex: 1,
-                            padding: '14px',
-                            background: 'linear-gradient(to right, #FFD700, #FFA500)',
-                            color: 'black',
-                            border: 'none',
-                            borderRadius: '8px',
-                            fontWeight: '900',
-                            cursor: 'pointer',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px',
-                            boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)',
-                            transition: 'transform 0.1s'
-                        }}
-                        onMouseDown={(e) => e.target.style.transform = 'scale(0.98)'}
-                        onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
-                    >
-                        {copied ? '✓ COPIED TO CLIPBOARD' : 'COPY SCENE CONFIG'}
-                    </button>
+                <div style={{ padding: '10px', background: 'rgba(0, 229, 255, 0.1)', border: '1px solid rgba(0, 229, 255, 0.3)', borderRadius: '8px', fontSize: '0.75rem', textAlign: 'center', marginBottom: '5px' }}>
+                    🎥 <b>CURRENT CAMERA VIEW</b> WILL BE SAVED
                 </div>
+                
+                <button
+                    onClick={handleLocalSave}
+                    style={{
+                        padding: '16px',
+                        background: localSaved ? '#00c853' : 'rgba(255, 215, 0, 0.1)',
+                        color: localSaved ? 'white' : '#FFD700',
+                        border: '1px solid #FFD700',
+                        borderRadius: '12px',
+                        fontWeight: '900',
+                        cursor: 'pointer',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        fontSize: '0.85rem',
+                        transition: '0.3s'
+                    }}
+                >
+                    {localSaved ? '✓ LIVE DEMO READY' : '1. UPDATE LIVE PREVIEW (NO CACHE)'}
+                </button>
+
+                <button
+                    onClick={handlePublishToDisk}
+                    style={{
+                        padding: '16px',
+                        background: publishSaved ? '#7000FF' : 'linear-gradient(to right, #7000FF, #00e5ff)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '12px',
+                        fontWeight: '900',
+                        cursor: 'pointer',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        boxShadow: '0 8px 25px rgba(0, 229, 255, 0.4)',
+                        transition: 'all 0.3s',
+                        fontSize: '0.85rem'
+                    }}
+                >
+                    {publishSaved ? '✓ SAVED TO DISK' : '2. BURN TO HARD DRIVE (PERMANENT)'}
+                </button>
 
                 {saveError && (
                     <div style={{
@@ -401,10 +543,10 @@ const SceneEditor = ({
             </div>
 
             <p style={{ fontSize: '0.7rem', marginTop: '20px', color: '#666', textAlign: 'center', lineHeight: '1.4' }}>
-                Toggle <b>MOVE</b> or <b>ROTATE</b> mode. Click <b>SAVE TO CONFIG</b> to write changes directly, or <b>COPY</b> to manually update <code>sceneConfig.js</code>.
+                Use <b>Update Live Preview</b> to test your changes instantly in the current tab. Once perfect, hit <b>Burn to Hard Drive</b> to permanently save the JSON logic!
             </p>
         </div>
     );
-};
+}
 
 export default SceneEditor;

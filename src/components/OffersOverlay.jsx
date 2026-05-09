@@ -1,10 +1,10 @@
 import React from 'react';
 import { useGame } from '../context/GameContext';
-import { useCreator } from '../context/CreatorContext';
+import { useInfluencer } from '../context/InfluencerContext';
 
 const OffersOverlay = ({ onClose }) => {
-    const { interestInsights, creator, backpack, travelStatus } = useGame();
-    const { publicConfig } = useCreator();
+    const { interestInsights, influencer, backpack, travelStatus } = useGame();
+    const { publicConfig } = useInfluencer();
     const brandingTitle = publicConfig?.home?.title?.toUpperCase() || "VIRTUAL EXPERIENCE";
 
     React.useEffect(() => {
@@ -12,14 +12,14 @@ const OffersOverlay = ({ onClose }) => {
     }, [backpack]);
 
     const vibeCategories = [
-        { id: 'luxuryRoom', title: 'Residence', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=150&q=80' },
-        { id: 'wellness', title: 'Wellness', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=150&q=80' },
-        { id: 'dining', title: 'Dining', image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=150&q=80' },
-        { id: 'kidsActivities', title: 'Kids Activities', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=150&q=80' },
-        { id: 'culture', title: 'Culture', image: 'https://images.unsplash.com/photo-1518911710364-17ec553bde5d?auto=format&fit=crop&w=150&q=80' },
-        { id: 'entertainment', title: 'Shows', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=150&q=80' },
-        { id: 'nightlife', title: 'Nightlife', image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=150&q=80' },
-        { id: 'fineWine', title: 'Wines', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=150&q=80' },
+        { id: 'Wellness Voyager', title: 'Wellness Voyager', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=150&q=80' },
+        { id: 'Culture Seeker', title: 'Culture Seeker', image: 'https://images.unsplash.com/photo-1518911710364-17ec553bde5d?auto=format&fit=crop&w=150&q=80' },
+        { id: 'Family Planner', title: 'Family Planner', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=150&q=80' },
+        { id: 'Work from Sea', title: 'Work from Sea', image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=150&q=80' },
+        { id: 'Social Foodie', title: 'Social Foodie', image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=150&q=80' },
+        { id: 'The Alchemist', title: 'The Alchemist', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=150&q=80' },
+        { id: 'Social Storyteller', title: 'Social Storyteller', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=150&q=80' },
+        { id: 'The Sovereign', title: 'The Sovereign', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=150&q=80' },
     ];
 
     return (

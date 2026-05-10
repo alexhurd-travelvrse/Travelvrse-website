@@ -51,7 +51,14 @@ const ExperienceCanvas = React.memo(({
                 background: '#050510',
                 filter: 'brightness(1.3) contrast(1.08) saturate(1.05)' // Sharpened contrast for clarity
             }}
-            dpr={0.75} // Matches proven performance profile from MSC master
+            // PERFORMANCE: Aggressive capping for Android/Mobile stability
+            dpr={(() => {
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                const isAndroid = /Android/i.test(navigator.userAgent);
+                if (isAndroid) return 0.5; // Critical cap for Android stability
+                if (isMobile) return 0.7; // Standard mobile cap
+                return 1.0; // Desktop
+            })()}
             gl={{
                 antialias: false, 
                 alpha: false,
@@ -59,9 +66,9 @@ const ExperienceCanvas = React.memo(({
                 stencil: false, 
                 powerPreference: 'high-performance',
                 preserveDrawingBuffer: false,
-                failIfMajorPerformanceCaveat: false,
+                failIfMajorPerformanceCaveat: true, // Fail gracefully instead of crashing system
                 logarithmicDepthBuffer: false,
-                precision: 'highp'
+                precision: (/Android/i.test(navigator.userAgent)) ? 'mediump' : 'highp' // Lower precision for Android drivers
             }}
             onCreated={({ gl }) => {
                 const canvas = gl.domElement;

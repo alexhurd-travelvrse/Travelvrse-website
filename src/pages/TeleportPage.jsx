@@ -169,57 +169,56 @@ const TeleportPage = () => {
 
             <AudioController audioKey="teleport" active={!isArriving && !isFinalMode} />
 
-            {/* Robust CSS/HTML Influencer Orb Overlay - Moved to Top Right Corner */}
+            {/* Robust CSS/HTML Influencer Orb Overlay - Scaled down and moved to top right */}
             <div style={{
                 position: 'fixed',
-                top: '20px',
-                right: '80px', // Offset from backpack button
-                zIndex: 10000
+                top: '10px',
+                right: '10px',
+                zIndex: 10000,
+                transform: 'scale(0.75)',
+                transformOrigin: 'top right'
             }}>
                 <DigitalGuideOverlay 
                     avatarUrl={publicInfluencer?.avatar || '/assets/Alexhurd1.jpg'} 
-                    name={`${curatorName} - Digital Guide`}
+                    name=""
                     isVisible={!isArriving}
-                    positionStyle={{ position: 'relative', bottom: '0', left: '0' }}
+                    positionStyle={{ position: 'relative' }}
                 />
             </div>
 
 
-            <div className="teleport-content container" style={{ height: '100dvh', display: 'flex', flexDirection: 'column', padding: '1rem' }}>
-                <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', zIndex: 10 }}>
-                    <div className="status-panel" style={{ 
-                        padding: '1rem 1.5rem', 
-                        flex: 1, 
-                        textAlign: 'left', 
+            <div className="teleport-content container" style={{ height: '100dvh', display: 'flex', flexDirection: 'column', padding: '1rem', paddingTop: '60px' }}>
+                <header style={{ 
+                    display: 'flex', 
+                    justifyContent: 'flex-start', 
+                    alignItems: 'center', 
+                    marginBottom: '1rem', 
+                    zIndex: 10,
+                    padding: '0 0.5rem'
+                }}>
+                    <div className="status-panel-minimal" style={{ 
+                        padding: '8px 16px', 
                         borderRadius: '4px',
-                        background: 'rgba(45, 52, 54, 0.9)', /* Achievement Charcoal */
-                        borderLeft: '4px solid #D4AF37', /* Achievement Gold */
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+                        background: 'rgba(45, 52, 54, 0.8)',
+                        borderLeft: '3px solid #D4AF37',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px'
                     }}>
-                        <h2 className="metadata-label" style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)', letterSpacing: '2px', marginBottom: '4px' }}>
-                            {isFinalMode ? 'MISSION COMPLETE' : 'CHALLENGE SELECT'}
-                        </h2>
-                        <div className="status-timer" style={{ fontSize: '1.4rem', fontWeight: '900', color: '#D4AF37' }}>
+                        <div style={{ fontSize: '1rem', fontWeight: '900', color: '#D4AF37', letterSpacing: '1px' }}>
                             {isFinalMode ? '5/5 COLLECTED' : `${timeLeft}S REMAINING`}
                         </div>
                     </div>
-                    <button
-                        ref={backpackBtnRef}
-                        className="glass-btn-circle"
-                        onClick={() => setShowFavourites(true)}
-                        style={{ marginLeft: '1rem', width: '50px', height: '50px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.2)' }}
-                    >
-                        🎒
-                    </button>
                 </header>
 
                 <div className="experience-grid-no-scroll" style={{ 
                     flex: 1, 
                     overflowY: 'auto', 
+                    paddingTop: '20px',
                     paddingBottom: '2rem', 
                     display: 'grid', 
                     gridTemplateColumns: 'repeat(2, 1fr)', 
-                    gap: '15px' 
+                    gap: '20px' 
                 }}>
                     {experiences.map((exp) => {
                         const isSelected = selected.includes(exp.id);
@@ -228,7 +227,7 @@ const TeleportPage = () => {
                                 key={exp.id}
                                 onClick={() => toggleExperience(exp.id)}
                                 className={`experience-card-small ${isSelected ? 'selected' : ''}`}
-                                style={{ height: '140px', borderRadius: '16px', position: 'relative', overflow: 'hidden' }}
+                                style={{ height: '150px', borderRadius: '16px', position: 'relative', overflow: 'hidden' }}
                             >
                                 <LazyImage 
                                     src={exp.img} 
@@ -268,12 +267,12 @@ const TeleportPage = () => {
                     })}
                 </div>
 
-                <div className="thumb-zone">
+                <div className="thumb-zone" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                     <button 
                         onClick={handleFinish} 
                         className="btn-primary"
                         style={{ 
-                            width: '100%', 
+                            flex: 1,
                             padding: '1.5rem', 
                             borderRadius: '4px',
                             backgroundColor: '#D4AF37', /* High Prominence Achievement Gold */
@@ -287,6 +286,23 @@ const TeleportPage = () => {
                         }}
                     >
                         {selected.length > 0 ? `START ${selected.length} CHALLENGES` : 'START EXPERIENCE'}
+                    </button>
+
+                    <button
+                        ref={backpackBtnRef}
+                        className={`glass-btn-circle ${isBackpackPinging ? 'backpack-glow' : ''}`}
+                        onClick={() => setShowFavourites(true)}
+                        style={{ 
+                            width: '70px', 
+                            height: '70px', 
+                            background: 'rgba(0,0,0,0.7)', 
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            flexShrink: 0,
+                            fontSize: '1.8rem',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+                        }}
+                    >
+                        🎒
                     </button>
                 </div>
             </div>

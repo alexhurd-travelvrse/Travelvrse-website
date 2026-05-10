@@ -108,7 +108,6 @@ const HomePage = () => {
                     loop 
                     playsInline 
                     preload="auto"
-                    poster={publicConfig.home?.heroPoster || "/assets/balcony_new.png"}
                     style={{ 
                         width: '100%', 
                         height: '100%', 
@@ -130,16 +129,6 @@ const HomePage = () => {
                     zIndex: 1, 
                     pointerEvents: 'none',
                     backdropFilter: 'blur(1px)' // Subtle focus effect
-                }} />
-                
-                {/* Fallback Background Image if video fails or is static */}
-                <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundImage: `url(${publicConfig.home?.heroPoster || "/assets/balcony_new.png"})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    zIndex: -1
                 }} />
             </div>
 
@@ -170,7 +159,7 @@ const HomePage = () => {
                     }}
                     style={{
                         position: 'fixed',
-                        bottom: '20px',
+                        bottom: '100px', 
                         left: '20px',
                         transform: 'none',
                         background: 'rgba(0, 229, 255, 0.2)',

@@ -5,7 +5,7 @@ import {
   scrapeLocalSignals, 
   auditDiscoverability, 
   generatePropulsionQuest
-} from './personaEngine';
+} from '../engine/personaEngine';
 import './B2BLeadGenOnboarding.css';
 
 const B2BLeadGenOnboarding = ({ initialStep = 'input' }) => {

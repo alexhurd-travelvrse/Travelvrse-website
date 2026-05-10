@@ -23,7 +23,7 @@ const DISCOVERY_SOURCES = {
   LOCAL: "site:timeout.com OR site:theinfatuation.com OR site:eater.com OR site:ra.co OR site:lonelyplanet.com OR site:opentable.com OR site:designmynight.com OR site:getyourguide.com OR site:cntraveler.com OR site:travelandleisure.com OR site:nytimes.com/style"
 };
 
-import VIBE_CACHE_RAW from './engine/vibeCache.json';
+import VIBE_CACHE_RAW from './vibeCache.json';
 
 const VIBE_CACHE = { ...VIBE_CACHE_RAW };
 const ENGINE_VERSION = "v5.1";

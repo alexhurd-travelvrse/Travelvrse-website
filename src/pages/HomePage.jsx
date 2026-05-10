@@ -272,7 +272,7 @@ const HomePage = () => {
                         fontWeight: '600',
                         opacity: 0.6
                     }}>
-                        Influencer Sign-in
+                        Influencer Sign-in <span style={{ opacity: 0.3, fontSize: '0.5rem' }}>[SYNC: 22:07]</span>
                     </Link>
                 </div>
             </div>

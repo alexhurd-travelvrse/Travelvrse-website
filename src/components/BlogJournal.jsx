@@ -1,8 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Calendar, BookOpen } from 'lucide-react';
 import './BlogJournal.css';
 
 const BlogJournal = () => {
+    const [livePosts, setLivePosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchSubstack = async () => {
+            try {
+                const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://travelvrse.substack.com/feed');
+                const data = await response.json();
+                
+                if (data && data.status === 'ok' && data.items && data.items.length > 0) {
+                    const formattedPosts = data.items.slice(0, 3).map((item, index) => {
+                        let imageUrl = item.thumbnail;
+                        if (!imageUrl) {
+                            const imgMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
+                            imageUrl = imgMatch ? imgMatch[1] : '/restaurant_preview.jpg';
+                        }
+                        
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = item.description;
+                        let text = tempDiv.textContent || tempDiv.innerText || '';
+                        let excerpt = text.substring(0, 100).trim() + '...';
+
+                        return {
+                            id: `live-${index}`,
+                            title: item.title,
+                            excerpt: excerpt,
+                            date: new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+                            image: imageUrl,
+                            link: item.link
+                        };
+                    });
+                    setLivePosts(formattedPosts);
+                }
+            } catch (error) {
+                console.error("Failed to fetch Substack feed", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchSubstack();
+    }, []);
+
     // Placeholder posts - these will be replaced by live data once Substack is ready
     const posts = [
         {
@@ -24,9 +67,12 @@ const BlogJournal = () => {
             title: "Experiences vs. Amenities: The Shift",
             excerpt: "Analyzing the data behind the trillion-dollar experience economy.",
             date: "March 2026",
-            image: "/spa_grab.png"
+            image: "/spa_grab.png",
+            link: "#"
         }
     ];
+
+    const displayPosts = livePosts.length > 0 ? livePosts : posts;
 
     return (
         <section id="journal" className="journal-section section-padding">
@@ -42,7 +88,7 @@ const BlogJournal = () => {
                 </div>
 
                 <div className="journal-grid">
-                    {posts.map((post, index) => (
+                    {displayPosts.map((post, index) => (
                         <div key={post.id} className={`glass-card journal-card animate-fade-up delay-${index + 1}`}>
                             <div className="card-image-container">
                                 <img src={post.image} alt={post.title} className="card-image" />
@@ -55,7 +101,7 @@ const BlogJournal = () => {
                                 </div>
                                 <h3 className="card-title">{post.title}</h3>
                                 <p className="card-excerpt">{post.excerpt}</p>
-                                <a href="#" className="btn-text">
+                                <a href={post.link} target={post.link !== '#' ? '_blank' : '_self'} rel={post.link !== '#' ? 'noopener noreferrer' : ''} className="btn-text">
                                     Read Insights <ArrowRight size={18} />
                                 </a>
                             </div>
@@ -70,7 +116,9 @@ const BlogJournal = () => {
                             <p>Subscribe to our Substack for exclusive industry deep-dives and Travelvrse updates.</p>
                         </div>
                         <div className="cta-action">
-                            <button className="btn btn-primary">Subscribe on Substack</button>
+                            <a href="https://travelvrse.substack.com" target="_blank" rel="noopener noreferrer">
+                                <button className="btn btn-primary">Subscribe on Substack</button>
+                            </a>
                         </div>
                     </div>
                 </div>

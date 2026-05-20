@@ -9,14 +9,14 @@ const BlogJournal = () => {
     useEffect(() => {
         const fetchSubstack = async () => {
             try {
-                const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://travelvrse.substack.com/feed');
+                const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://travelvrse.substack.com/feed', { cache: 'no-store' });
                 const data = await response.json();
                 
                 if (data && data.status === 'ok' && data.items && data.items.length > 0) {
                     const formattedPosts = data.items.slice(0, 3).map((item, index) => {
-                        let imageUrl = item.thumbnail;
+                        let imageUrl = item.enclosure?.link || item.thumbnail;
                         if (!imageUrl) {
-                            const imgMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
+                            const imgMatch = item.content?.match(/<img[^>]+src="([^">]+)"/) || item.description?.match(/<img[^>]+src="([^">]+)"/);
                             imageUrl = imgMatch ? imgMatch[1] : '/restaurant_preview.jpg';
                         }
                         

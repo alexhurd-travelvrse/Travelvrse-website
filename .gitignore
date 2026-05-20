@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel
+final_url.txt
+start_dev_tunnel.ps1
+tunnel_dev.log
+

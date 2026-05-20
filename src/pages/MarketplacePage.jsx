@@ -4,6 +4,12 @@ import { Helmet } from 'react-helmet-async';
 
 const cities = [
   { 
+    name: 'Copenhagen', 
+    img: '/assets/vinylroom.jpg',
+    desc: 'Vibrant Scandinavian design and cozy vinyl vibes.',
+    url: 'https://travel-vrse-25hrs.vercel.app/'
+  },
+  { 
     name: 'Barcelona City Explore', 
     img: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800',
     desc: 'Setting sail from the heart of Catalonia.',
@@ -28,11 +34,6 @@ const cities = [
     name: 'Palm Springs', 
     img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=800',
     desc: 'A desert oasis of mid-century modern style.'
-  },
-  { 
-    name: 'Vienna', 
-    img: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&q=80&w=800',
-    desc: 'Imperial grandeur and classical music.'
   }
 ];
 
@@ -55,10 +56,10 @@ const MarketplacePage = () => {
                         <h4 className="text-cyan animate-fade-up" style={{ letterSpacing: '2px', fontWeight: '800', marginBottom: '1rem' }}>DISCOVER</h4>
                         <div className="beta-badge-premium">BETA</div>
                         <h1 className="hero-title animate-fade-up delay-1" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '20px' }}>
-                            <span className="text-gradient">3D Experience Marketplace</span>
+                            <span className="text-gradient">Virtual Experiences Marketplace</span>
                         </h1>
                         <p className="animate-fade-up delay-2" style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
-                            Explore rewarded immersive experiences from iconic hotels and destinations.
+                            Get rewarded to check out hotels and resorts with the best local vibes
                         </p>
                     </div>
 

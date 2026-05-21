@@ -53,7 +53,7 @@ const HowItWorksSection = () => {
                                     <Zap size={20} className="text-gold" />
                                 </div>
                                 <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Complete our 1 min Vibe Audit</h3>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Complete a 1 min Vibe Audit</h3>
                                     <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
                                         Match your existing onsite experiences against local trends
                                     </p>

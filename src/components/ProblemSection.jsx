@@ -158,7 +158,7 @@ const ProblemSection = () => {
                                 Experiences <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                We let hotels, resorts and cruise operators market their onsite and local vibe - rather than just rooms
+                                We let hotels, resorts and cruise operators showcase their onsite and local vibe - rather than just rooms
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />

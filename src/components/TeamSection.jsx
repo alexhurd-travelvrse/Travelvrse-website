@@ -64,7 +64,7 @@ const TeamSection = () => {
                         Our <span className="text-cyan">Team</span>
                     </h2>
                     <p className="subtitle mx-auto max-w-3xl">
-                        We combine the psychology of Rewarded Gaming, the authenticity of Travel Experiences, and the precision of AI Data Personalisation
+                        Experts in Rewarded Engagement, Next-Gen Discovery, Travel Experiences and Hotel Operations
                     </p>
                 </div>
 

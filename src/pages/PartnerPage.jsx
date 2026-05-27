@@ -56,7 +56,7 @@ const PartnerPage = () => {
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <ShieldCheck className="text-gold" size={24} />
                                     <div>
-                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Target Next-Gen</h4>
+                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Target Next-Gen On Mobile</h4>
                                         <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>Millennials and GenZ will account for 70% of luxury hotel sales by 2029</p>
                                     </div>
                                 </div>

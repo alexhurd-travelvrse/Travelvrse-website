@@ -8,8 +8,8 @@ const Hero = () => {
     return (
         <section className="hero-section">
             <Helmet>
-                <title>Travelvrse | Virtual Experiences Marketplace for Hotels, Resorts & Cruise Operators</title>
-                <meta name="description" content="Discover the world's first Virtual Experiences Marketplace. Drive direct revenue for hotels, resorts, and cruise operators via immersive 3D discovery." />
+                <title>Travelvrse | Travel Experiences Marketplace for Hotels, Resorts & Cruise Operators</title>
+                <meta name="description" content="Discover the world's first Travel Experiences Marketplace. Drive direct revenue for hotels, resorts, and cruise operators via immersive 3D discovery." />
             </Helmet>
             <div className="hero-bg-container">
                 <video 
@@ -27,7 +27,7 @@ const Hero = () => {
                 <div className="hero-header-group animate-fade-up">
                     <div className="beta-badge-premium">BETA</div>
                     <h1 className="hero-title">
-                        <span className="text-gradient">Virtual Experiences Marketplace</span>
+                        <span className="text-gradient">Travel Experiences Marketplace</span>
                     </h1>
                     <h2 className="hero-strategy">
                         FOR HOTELS, RESORTS AND CRUISE OPERATORS
@@ -35,9 +35,9 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Reward Engagement</span>
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Promote Your Vibe</span>
                     <span className="progressive-arrow" style={{ animationDelay: '1.4s' }}>→</span>
-                    <span className="progressive-item" style={{ animationDelay: '1.8s' }}>Capture Vibe Preferences</span>
+                    <span className="progressive-item" style={{ animationDelay: '1.8s' }}>Capture Preferences</span>
                     <span className="progressive-arrow" style={{ animationDelay: '2.4s' }}>→</span>
                     <span className="progressive-item" style={{ animationDelay: '2.8s' }}>Increase Direct Revenue</span>
                 </p>

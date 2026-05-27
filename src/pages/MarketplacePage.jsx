@@ -56,7 +56,7 @@ const MarketplacePage = () => {
                         <h4 className="text-cyan animate-fade-up" style={{ letterSpacing: '2px', fontWeight: '800', marginBottom: '1rem' }}>DISCOVER</h4>
                         <div className="beta-badge-premium">BETA</div>
                         <h1 className="hero-title animate-fade-up delay-1" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '20px' }}>
-                            <span className="text-gradient">Virtual Experiences Marketplace</span>
+                            <span className="text-gradient">Travel Experiences Marketplace</span>
                         </h1>
                         <p className="animate-fade-up delay-2" style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
                             Get rewarded to check out hotels and resorts with the best local vibes

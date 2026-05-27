@@ -94,7 +94,7 @@ const HowItWorksSection = () => {
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Market using influencers</h3>
                                     <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
-                                        Browser based app featuring 3 onsite 2 local experiences
+                                        Connect with Influencers in our marketplace
                                     </p>
                                 </div>
                             </div>

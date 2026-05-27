@@ -56,7 +56,7 @@ const RevenueSection = () => {
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                                 <div className="text-gold" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
                                 <div>
-                                    <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Target Next-Gen</h4>
+                                    <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Target Next-Gen On Mobile</h4>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
                                         Capture the fastest growing segment - Millennials and GenZ will account for 70% of luxury hotel sales by 2029
                                     </p>

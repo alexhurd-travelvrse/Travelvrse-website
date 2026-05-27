@@ -158,7 +158,7 @@ const ProblemSection = () => {
                                 Experiences <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                We let hotels, resorts and cruise operators lead with their onsite and local vibe rather than rooms
+                                We let hotels, resorts and cruise operators market their onsite and local vibe - rather than just rooms
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />
@@ -181,7 +181,7 @@ const ProblemSection = () => {
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>01</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>We turn your iconic onsite assets and key local experiences into photorealistic virtual challenges</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>We turn your iconic onsite assets and local experiences into photorealistic virtual challenges - accessible on mobile</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>

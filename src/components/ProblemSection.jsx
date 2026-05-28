@@ -62,7 +62,7 @@ const ProblemSection = () => {
                         >
                             <video 
                                 ref={videoRef}
-                                src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
+                                src="/models/travelvrsehomepagevideovr2.mp4" 
                                 style={{ width: '100%', height: 'auto', display: 'block', opacity: 1 }}
                                 muted
                                 autoPlay
@@ -289,7 +289,7 @@ const ProblemSection = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <video 
-                            src="/models/Travelvrsefinalversion - 1776977909459.mp4" 
+                            src="/models/travelvrsehomepagevideovr2.mp4" 
                             style={{ width: '100%', height: 'auto', display: 'block' }}
                             controls
                             autoPlay

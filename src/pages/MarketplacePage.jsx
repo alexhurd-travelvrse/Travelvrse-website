@@ -16,9 +16,10 @@ const cities = [
     url: '/barcelona'
   },
   { 
-    name: 'Miami', 
-    img: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?auto=format&fit=crop&q=80&w=800',
-    desc: 'Sun-drenched beaches and vibrant culture.'
+    name: 'Las Vegas', 
+    img: 'https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?auto=format&fit=crop&q=80&w=800',
+    desc: 'Iconic entertainment and luxury at the Virgin Hotel.',
+    url: 'https://travel-vrse-virginhotel.vercel.app/'
   },
   { 
     name: 'Manchester', 

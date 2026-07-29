@@ -92,11 +92,13 @@
     flex: 1;
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
+    height: 300px;
     aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .cyber-circle {
@@ -143,9 +145,10 @@
     to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 900px) {
     .ai-visual {
-        max-width: 300px;
-        height: 300px;
+        max-width: 400px;
+        height: auto;
+        margin: 0;
     }
 }

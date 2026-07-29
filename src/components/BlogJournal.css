@@ -5,7 +5,7 @@
 
 .journal-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: 1fr;
     gap: 2.5rem;
     margin-bottom: 4rem;
 }
@@ -106,9 +106,11 @@
 
 .substack-cta {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
     align-items: center;
-    padding: 3rem;
+    padding: 2rem;
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(0, 229, 255, 0.05) 100%);
     border: 1px solid rgba(212, 175, 55, 0.2);
 }
@@ -123,15 +125,15 @@
     font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .substack-cta {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-        padding: 2rem;
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+        padding: 3rem;
     }
     
     .journal-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     }
 }

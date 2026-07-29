@@ -24,6 +24,7 @@
   /* Glass/Cards */
   --glass-bg: rgba(17, 34, 64, 0.6);
   --glass-border: 1px solid rgba(212, 175, 55, 0.15);
+  --site-padding-x: clamp(1rem, 4vw, 3rem);
 }
 
 * {
@@ -71,8 +72,19 @@ body::after {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--site-padding-x);
   width: 100%;
+}
+
+button,
+.btn,
+a.btn,
+a.cta-button,
+input,
+select,
+.form-input-field {
+  min-height: 44px;
+  touch-action: manipulation;
 }
 
 .text-gradient {

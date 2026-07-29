@@ -7,7 +7,7 @@ const cities = [
     name: 'Copenhagen', 
     img: '/assets/vinylroom.jpg',
     desc: 'Vibrant Scandinavian design and cozy vinyl vibes.',
-    url: 'https://travel-vrse-25hrs.vercel.app/'
+    url: 'https://travel-vrse-25hrs.vercel.app/25-hours-copenhagen'
   },
   { 
     name: 'Barcelona City Explore', 
@@ -29,7 +29,8 @@ const cities = [
   { 
     name: 'London', 
     img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800',
-    desc: 'The historic capital of England.'
+    desc: 'The historic capital of England.',
+    url: 'https://travel-vrse-25hrs.vercel.app/sea-containers'
   },
   { 
     name: 'Palm Springs', 

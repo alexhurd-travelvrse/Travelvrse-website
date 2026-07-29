@@ -30,14 +30,14 @@ const Hero = () => {
                         <span className="text-gradient">Travel Experiences Marketplace</span>
                     </h1>
                     <h2 className="hero-strategy">
-                        FOR HOTELS, RESORTS AND CRUISE OPERATORS
+                        FOR HOTELS, CRUISE AND TOUR OPERATORS
                     </h2>
                 </div>
 
                 <p className="hero-subtitle">
                     <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Showcase Your Vibe</span>
                     <span className="progressive-arrow" style={{ animationDelay: '1.4s' }}>→</span>
-                    <span className="progressive-item" style={{ animationDelay: '1.8s' }}>Capture Preferences</span>
+                    <span className="progressive-item" style={{ animationDelay: '1.8s' }}>Capture Intent-Based Leads</span>
                     <span className="progressive-arrow" style={{ animationDelay: '2.4s' }}>→</span>
                     <span className="progressive-item" style={{ animationDelay: '2.8s' }}>Increase Direct Revenue</span>
                 </p>

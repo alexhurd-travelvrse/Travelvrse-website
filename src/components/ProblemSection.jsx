@@ -158,7 +158,7 @@ const ProblemSection = () => {
                                 Experiences <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                We work with creators to build Vibe Challenges to let hotels, cruise and tour operators showcase their amazing experiences to Next-Gen travellers
+                                We partner with creators to build interactive Vibe Challenges that showcase your best experiences to Next-Gen travellers. Using real-time market data
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />

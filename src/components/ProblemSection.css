@@ -11,11 +11,11 @@
 }
 
 .problem-grid .text-col {
-    order: 2;
+    order: 1;
 }
 
 .problem-grid .visual-col {
-    order: 1;
+    order: 2;
 }
 
 .mobile-break {

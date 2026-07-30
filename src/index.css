@@ -6,9 +6,9 @@
   --color-navy-base: #0A192F;
   --color-navy-light: #112240;
 
-  --color-gold: #D4AF37;
-  --color-gold-champagne: #D4AF37; /* Stronger luxury gold for better contrast on mobile */
-  --color-gold-hover: #F3E5AB;
+  --color-gold: #FFD700;
+  --color-gold-champagne: #FFD700; /* Pure bright gold for maximum contrast on mobile/video */
+  --color-gold-hover: #FFF176;
 
   --color-cyan-neon: #00e5ff;
   --color-cyan-glow: rgba(0, 229, 255, 0.4);

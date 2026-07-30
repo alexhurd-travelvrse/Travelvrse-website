@@ -161,18 +161,29 @@
 }
 
 .progressive-item {
-    display: inline-block;
+    display: block;
+    margin-bottom: 0.8rem;
     opacity: 0;
     transform: translateY(10px);
     animation: fadeInSlide 0.8s forwards;
 }
 
 .progressive-arrow {
-    margin: 0 15px;
-    color: var(--color-gold);
-    display: inline-block;
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .progressive-item {
+        display: inline-block;
+        margin-bottom: 0;
+    }
+    .progressive-arrow {
+        margin: 0 15px;
+        color: var(--color-gold);
+        display: inline-block;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+    }
 }
 
 @keyframes fadeInSlide {

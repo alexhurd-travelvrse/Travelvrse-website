@@ -2,18 +2,17 @@
     position: relative;
     min-height: 100dvh;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 100px;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
 .hero-bg-container {
-    position: relative;
-    width: 100%;
-    flex: 1;
-    min-height: 350px;
-    order: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 0;
 }
 
@@ -38,35 +37,8 @@
 .hero-content {
     position: relative;
     z-index: 10;
-    width: 100%;
-    order: 1;
     max-width: 1200px;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-@media (min-width: 900px) {
-    .hero-section {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding-top: 0;
-    }
-    
-    .hero-bg-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-    }
-    
-    .hero-content {
-        order: unset;
-        padding-top: 4rem;
-        padding-bottom: 0;
-    }
+    padding-top: 4rem;
 }
 
 .hero-header-group {

@@ -66,9 +66,9 @@ const HowItWorksSection = () => {
                                     <CheckCircle2 size={20} className="text-cyan" />
                                 </div>
                                 <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Sign-up and set budget</h3>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Agree creator brief</h3>
                                     <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
-                                        Agree brief, reward incentive and provide access to offers 
+                                        We dynamically recommend the top 5 trending onsite and local experiences 
                                     </p>
                                 </div>
                             </div>
@@ -92,9 +92,9 @@ const HowItWorksSection = () => {
                                     <Camera size={20} className="text-cyan" />
                                 </div>
                                 <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Market using influencers</h3>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Market on social media using influencers</h3>
                                     <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
-                                        Connect with Influencers in our marketplace
+                                        Connect with influencers in our marketplace and/or set up your own internal influencers
                                     </p>
                                 </div>
                             </div>
@@ -105,9 +105,9 @@ const HowItWorksSection = () => {
                                     <ArrowRight size={20} className="text-gold" />
                                 </div>
                                 <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Drive conversion</h3>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Drive direct conversion</h3>
                                     <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
-                                        Guest preferences are matched with your offers in-app
+                                        Target travellers with offers from your CRM system
                                     </p>
                                 </div>
                             </div>

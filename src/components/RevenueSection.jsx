@@ -68,7 +68,7 @@ const RevenueSection = () => {
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Enhance Search Visibility</h4>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
-                                        Rank higher versus OTAs. Unique content that matches vibe based search and Agentic AI queries
+                                        Rank higher versus OTAs. Unique content that matches vibe based AI search and links hotels to their local area
                                     </p>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@ const RevenueSection = () => {
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Increase Upsell</h4>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
-                                        Build rich guest profiles via photorealistic challenges to offer personalized, high-value ancillary upgrades
+                                        Target personalised, high-value ancillary upgrade offers based on traveller preferences
                                     </p>
                                 </div>
                             </div>

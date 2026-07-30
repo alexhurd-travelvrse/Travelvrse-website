@@ -26,8 +26,8 @@ const Hero = () => {
             <div className="container hero-content">
                 <div className="hero-header-group animate-fade-up">
                     <div className="beta-badge-premium">BETA</div>
-                    <h1 className="hero-title">
-                        <span className="text-gradient">Travel Experiences Marketplace</span>
+                    <h1 className="hero-title" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8)' }}>
+                        Travel Experiences Marketplace
                     </h1>
                     <h2 className="hero-strategy">
                         FOR HOTELS, CRUISE AND TOUR OPERATORS

@@ -115,8 +115,8 @@ const ProblemSection = () => {
                             </div>
                         </div>
 
-                        {/* Works for Every Touchpoint Panel (Desktop Only) */}
-                        <div className="glass-card desktop-only" style={{ 
+                        {/* Works for Every Touchpoint Panel */}
+                        <div className="glass-card" style={{ 
                             padding: '1.5rem', 
                             background: 'linear-gradient(135deg, rgba(5, 11, 20, 0.8) 0%, rgba(0, 229, 255, 0.05) 100%)', 
                             border: '1px solid rgba(0, 229, 255, 0.2)', 
@@ -145,7 +145,7 @@ const ProblemSection = () => {
                                 ))}
                             </div>
                         </div>
-                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary desktop-only" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
+                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
                             Audit My Vibe
                         </a>
                     </div>
@@ -201,40 +201,7 @@ const ProblemSection = () => {
                         </div>
 
 
-                        {/* Works for Every Touchpoint Panel (Mobile Only - Moved here to show below 03 on mobile) */}
-                        <div className="glass-card mobile-only" style={{ 
-                            marginTop: '40px',
-                            padding: '1.5rem', 
-                            background: 'linear-gradient(135deg, rgba(5, 11, 20, 0.8) 0%, rgba(0, 229, 255, 0.05) 100%)', 
-                            border: '1px solid rgba(0, 229, 255, 0.2)', 
-                            borderRadius: '24px',
-                            boxShadow: 'inset 0 0 30px rgba(0, 229, 255, 0.05)'
-                        }}>
-                            <div style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', color: 'var(--color-cyan-neon)', marginBottom: '15px', textTransform: 'uppercase' }}>
-                                Works for Every Touchpoint
-                            </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '10px' }}>
-                                {verticals.map((v, i) => (
-                                    <div key={i} style={{ 
-                                        display: 'flex', 
-                                        alignItems: 'center', 
-                                        gap: '8px', 
-                                        fontSize: '0.7rem', 
-                                        color: 'rgba(255,255,255,0.9)', 
-                                        padding: '8px',
-                                        background: 'rgba(255,255,255,0.03)',
-                                        borderRadius: '10px',
-                                        border: '1px solid rgba(255,255,255,0.05)'
-                                    }}>
-                                        <span style={{ color: i % 2 === 0 ? 'var(--color-cyan-neon)' : 'var(--color-gold)' }}>{v.icon}</span>
-                                        {v.label}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary mobile-only" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
-                            Audit My Vibe
-                        </a>
+
                     </div>
                 </div>
             </div>

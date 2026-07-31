@@ -58,7 +58,7 @@ const RevenueSection = () => {
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Target Next-Gen On Mobile</h4>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
-                                        Capture the fastest growing segment - Millennials and GenZ will account for 70% of luxury hotel sales by 2029
+                                        Capture the fastest growing segment - Millennials and GenZ will account for 70% of luxury travel sales by 2029
                                     </p>
                                 </div>
                             </div>

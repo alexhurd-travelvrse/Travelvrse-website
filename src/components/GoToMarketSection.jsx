@@ -51,7 +51,7 @@ const GoToMarketSection = () => {
                         </h2>
                         
                         <p style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6', marginBottom: '20px' }}>
-                            Our rewarded challenges are configurable for different guest journeys and to be set up and promoted by external or internal creators
+                            Our Vibe Challenges are configurable for different guest journeys and to be set up and promoted by external or internal creators
                         </p>
 
                         <JourneyLifecycle />

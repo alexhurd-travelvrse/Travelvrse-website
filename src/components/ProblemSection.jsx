@@ -195,7 +195,7 @@ const ProblemSection = () => {
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>03</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Traveller details, preferred dates, party size, and intent profiles are pushed directly to your CRM for direct revenue</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Traveller details, preferred dates and location specific intent profiles are pushed directly to your CRM for direct revenue</p>
                                 </div>
                             </div>
                         </div>

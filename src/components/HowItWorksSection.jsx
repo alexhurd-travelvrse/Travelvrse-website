@@ -81,7 +81,7 @@ const HowItWorksSection = () => {
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Local creators build</h3>
                                     <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
-                                        Scanning your property with a mobile phone / action camera
+                                        Scanning your property with a mobile phone / action camera and our creator tools
                                     </p>
                                 </div>
                             </div>

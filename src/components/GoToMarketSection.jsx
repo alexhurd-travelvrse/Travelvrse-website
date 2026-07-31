@@ -103,8 +103,8 @@ const GoToMarketSection = () => {
                                     <Trophy size={24} />
                                 </div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>THE CHALLENGE</div>
-                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Try 5 experiences for 10% spa voucher</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>The CHALLENGE</div>
+                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Try 5 Experiences for £5 Off Treatment</div>
                                 </div>
                             </div>
 

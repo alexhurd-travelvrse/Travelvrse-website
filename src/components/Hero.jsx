@@ -35,11 +35,9 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Showcase Your Vibe</span>
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Connect Your Experiences to the Local Vibe</span>
                     <span className="progressive-arrow" style={{ animationDelay: '1.4s' }}>→</span>
-                    <span className="progressive-item" style={{ animationDelay: '1.8s' }}>Capture Intent-Based Leads</span>
-                    <span className="progressive-arrow" style={{ animationDelay: '2.4s' }}>→</span>
-                    <span className="progressive-item" style={{ animationDelay: '2.8s' }}>Increase Direct Revenue</span>
+                    <span className="progressive-item" style={{ animationDelay: '1.8s' }}>Drive Next-Gen Direct Revenue</span>
                 </p>
 
                 <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>

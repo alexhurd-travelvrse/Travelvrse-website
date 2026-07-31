@@ -42,7 +42,7 @@ const Hero = () => {
 
                 <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>
                     <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-                        Audit My Vibe
+                        Bypass OTAs TODAY
                     </a>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />

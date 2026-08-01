@@ -35,7 +35,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Drive Next-Gen Direct Bookings With Vibe Challenges Before the OTA Search</span>
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Bypass the OTA Search. Drive Next-Gen Direct Bookings with Vibe Challenges</span>
                 </p>
 
                 <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>

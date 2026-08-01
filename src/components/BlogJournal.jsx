@@ -58,7 +58,7 @@ const BlogJournal = () => {
         {
             id: 2,
             title: "Navigating the New Digital Concierge",
-            excerpt: "Why travelers are demanding more than just a booking engine in 2026.",
+            excerpt: "Why travellers are demanding more than just a booking engine in 2026.",
             date: "April 2026",
             image: "/balcony_preview.jpg"
         },

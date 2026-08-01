@@ -130,7 +130,7 @@ const GoToMarketSection = () => {
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>THE DATA</div>
-                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Wellness focused travelers</div>
+                                    <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Wellness focused travellers</div>
                                 </div>
                             </div>
 

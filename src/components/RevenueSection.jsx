@@ -68,7 +68,7 @@ const RevenueSection = () => {
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Increase Direct Bookings</h4>
                                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
-                                        Convert travelers as part of experiences booking journey before they look at OTAs
+                                        Convert travellers as part of experiences booking journey before they look at OTAs
                                     </p>
                                 </div>
                             </div>

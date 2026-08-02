@@ -158,7 +158,7 @@ const ProblemSection = () => {
                                 Experiences <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                Next-Gen travellers search for experiences first<br />We build creator-led Local Vibe Challenges that pair your offerings with neighborhood vibes—capturing early intent to bypass OTAs on real-time data
+                                Next-Gen travellers search for experiences first. We build creator-led Local Vibe Challenges that pair your offerings with neighborhood vibes—capturing early intent to bypass OTAs using real-time data
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />
@@ -181,21 +181,21 @@ const ProblemSection = () => {
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>01</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Travellers explore top local vibes—showcasing your amenities and tours alongside hidden gems</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Travellers explore top 5 local vibes—showcasing your amenities and tours alongside hidden gems</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-gold)', width: '45px', lineHeight: '1', background: '#050b14' }}>02</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Preferences</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guests earn digital rewards while you seamlessly capture intent-based preferences</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guests earn digital rewards and a personalised itinerary while you seamlessly capture intent-based preferences</p>
                                 </div>
                             </div>
                              <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>03</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Traveller details, dates, and intent profiles stream directly to your CRM for direct revenue</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Traveller details, dates, and intent profiles stream directly to your CRM for direct bookings</p>
                                 </div>
                             </div>
                         </div>

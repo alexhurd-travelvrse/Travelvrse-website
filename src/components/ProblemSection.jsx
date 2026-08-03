@@ -158,7 +158,7 @@ const ProblemSection = () => {
                                 Experiences <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                Next-Gen travellers search for experiences first. We build creator-led Local Vibe Challenges that pair your offerings with neighborhood vibes—capturing early intent to bypass OTAs using real-time data
+                                Next-Gen travellers search for experiences first. We build creator-led Vibe Challenges that pair your offerings with neighborhood vibes—capturing early intent using real-time local data
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />

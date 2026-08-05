@@ -27,7 +27,7 @@ const Hero = () => {
                 <div className="hero-header-group animate-fade-up">
                     <div className="beta-badge-premium">BETA</div>
                     <h1 className="hero-title" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8)' }}>
-                        Travel Experiences Marketplace
+                        TRAVEL EXPERIENCES MARKETPLACE
                     </h1>
                     <h2 className="hero-strategy">
                         FOR HOTELS, CRUISE AND TOUR OPERATORS
@@ -35,16 +35,16 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Convert Next-Gen Direct Bookings Earlier with Local Vibe Challenges</span>
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Capture Next-Gen Direct Bookings Earlier with Local Vibe Challenges</span>
                 </p>
 
                 <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>
                     <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-                        Bypass OTAs TODAY
+                        Start Bypassing OTAs
                     </a>
                     <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
                         <Play size={20} style={{ marginRight: '8px' }} />
-                        Visit Marketplace
+                        Explore Creator Marketplace
                     </Link>
                 </div>
             </div>

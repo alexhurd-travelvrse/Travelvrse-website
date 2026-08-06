@@ -158,7 +158,7 @@ const ProblemSection = () => {
                                 Experiences <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                Next-Gen travellers search for experiences first. We build creator-led Vibe Challenges that pair your offerings with neighborhood vibes—capturing early intent using real-time local data
+                                Next-Gen travellers search for vibes first. Travelvrse creator-led Vibe Challenges put your venue or tour at the front of the queue—pairing your experiences with real-time local vibes. Seamlessly capturing guest intent
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />
@@ -195,7 +195,7 @@ const ProblemSection = () => {
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>03</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Traveller details, dates, and intent profiles stream directly to your CRM for direct bookings</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Traveller details, dates, and intent preferences stream directly to your CRM for direct booking offers</p>
                                 </div>
                             </div>
                         </div>

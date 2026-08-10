@@ -20,7 +20,7 @@ const cities = [
   { 
     name: 'London',
     vibe: 'Ted Lasso, Richmond',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Paved_Court%2C_Richmond%2C_London_%284504252235%29.jpg/800px-Paved_Court%2C_Richmond%2C_London_%284504252235%29.jpg',
+    img: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?auto=format&fit=crop&q=80&w=800',
     desc: 'Explore the charming neighborhood of Richmond.',
     url: 'https://travel-vrse-25hrs.vercel.app/vibe/london/richmond/ted-lasso/'
   },

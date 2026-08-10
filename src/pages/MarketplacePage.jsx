@@ -20,7 +20,7 @@ const cities = [
   { 
     name: 'London',
     vibe: 'Ted Lasso, Richmond',
-    img: '/assets/paved-court.jpg',
+    img: 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&q=80&w=800',
     desc: 'Explore the charming neighborhood of Richmond.',
     url: 'https://travel-vrse-25hrs.vercel.app/vibe/london/richmond/ted-lasso/'
   },
@@ -84,7 +84,7 @@ const MarketplacePage = () => {
                     }}>
                         {cities.map((city, index) => (
                             <div 
-                                key={city.name} 
+                                key={`${city.name}-${city.vibe || 'base'}`} 
                                 className={`glass-card animate-fade-up delay-${(index % 3) + 1}`}
                                 style={{ 
                                     padding: '0',

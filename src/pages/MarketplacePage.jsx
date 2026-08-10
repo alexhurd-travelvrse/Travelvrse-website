@@ -4,33 +4,44 @@ import { Helmet } from 'react-helmet-async';
 
 const cities = [
   { 
-    name: 'Copenhagen', 
+    name: 'Copenhagen',
+    vibe: 'Indre By',
     img: '/assets/vinylroom.jpg',
     desc: 'Vibrant Scandinavian design and cozy vinyl vibes.',
     url: 'https://travel-vrse-25hrs.vercel.app/25-hours-copenhagen'
   },
   { 
-    name: 'Barcelona City Explore', 
-    img: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800',
-    desc: 'Setting sail from the heart of Catalonia.',
-    url: '/barcelona'
+    name: 'London',
+    vibe: 'South Bank',
+    img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800',
+    desc: 'The historic capital of England.',
+    url: 'https://travel-vrse-25hrs.vercel.app/play/sea-containers/'
   },
   { 
-    name: 'Las Vegas', 
+    name: 'London',
+    vibe: 'Ted Lasso, Richmond',
+    img: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?auto=format&fit=crop&q=80&w=800',
+    desc: 'Explore the charming neighborhood of Richmond.',
+    url: 'https://travel-vrse-25hrs.vercel.app/vibe/london/richmond/ted-lasso/'
+  },
+  { 
+    name: 'Las Vegas',
+    vibe: 'East of the Strip',
     img: 'https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?auto=format&fit=crop&q=80&w=800',
     desc: 'Iconic entertainment and luxury at the Virgin Hotel.',
     url: 'https://travel-vrse-virginhotel.vercel.app/'
   },
   { 
+    name: 'Barcelona',
+    vibe: 'Cruise',
+    img: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800',
+    desc: 'Setting sail from the heart of Catalonia.',
+    url: '/barcelona'
+  },
+  { 
     name: 'Manchester', 
     img: 'https://images.pexels.com/photos/2884144/pexels-photo-2884144.jpeg?auto=compress&cs=tinysrgb&w=800',
     desc: 'The heart of British industrial heritage.'
-  },
-  { 
-    name: 'London', 
-    img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800',
-    desc: 'The historic capital of England.',
-    url: 'https://travel-vrse-25hrs.vercel.app/sea-containers'
   },
   { 
     name: 'Palm Springs', 
@@ -120,6 +131,11 @@ const MarketplacePage = () => {
                                         padding: '30px'
                                     }}>
                                         <h3 style={{ color: 'white', margin: 0, fontSize: '2rem' }}>{city.name}</h3>
+                                        {city.vibe && (
+                                            <div style={{ color: 'var(--color-cyan-neon)', fontWeight: 'bold', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '4px' }}>
+                                                {city.vibe}
+                                            </div>
+                                        )}
                                         <p style={{ color: 'rgba(255,255,255,0.7)', margin: '5px 0 0', fontSize: '1rem' }}>{city.desc}</p>
                                     </div>
                                 </div>

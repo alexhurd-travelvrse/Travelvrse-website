@@ -8,7 +8,7 @@ const RevenueSection = () => {
                 <div className="responsive-grid-reversed">
                     
                     {/* Visual Left - Compact Hero Video */}
-                    <div className="animate-fade-up">
+                    <div className="animate-fade-up" style={{ containerType: 'inline-size' }}>
                         <div style={{ 
                             position: 'relative', 
                             borderRadius: '24px', 
@@ -31,7 +31,7 @@ const RevenueSection = () => {
                             }} />
                             
                             <h2 style={{ 
-                                fontSize: 'clamp(3rem, 8vw, 6rem)', 
+                                fontSize: 'clamp(2rem, 15cqi, 6rem)', 
                                 fontWeight: '900', 
                                 letterSpacing: '-2px',
                                 margin: 0,

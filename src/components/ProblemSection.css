@@ -96,12 +96,12 @@
 }
 
 .video-overlay-title {
-    font-size: 0.9rem !important;
+    font-size: 0.9rem;
 }
 
 @media (min-width: 768px) {
     .video-overlay-title {
-        font-size: 1.4rem !important;
+        font-size: 1.4rem;
     }
 }
 

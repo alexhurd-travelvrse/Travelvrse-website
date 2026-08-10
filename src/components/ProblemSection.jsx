@@ -56,7 +56,8 @@ const ProblemSection = () => {
                                 border: '1px solid rgba(255,255,255,0.1)', 
                                 boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
                                 cursor: 'pointer',
-                                position: 'relative'
+                                position: 'relative',
+                                containerType: 'inline-size'
                             }}
                             onClick={() => setIsModalOpen(true)}
                         >
@@ -91,7 +92,8 @@ const ProblemSection = () => {
                                     fontWeight: '800', 
                                     marginBottom: '20px',
                                     textShadow: '0 4px 12px rgba(0,0,0,0.5)',
-                                    maxWidth: '90%'
+                                    maxWidth: '90%',
+                                    fontSize: 'clamp(1rem, 5cqi, 2rem)'
                                 }}>
                                     78% of Next-Gen travellers research experiences <span className="text-cyan">before they ever look at a room</span>
                                 </h3>

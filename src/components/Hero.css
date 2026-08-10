@@ -18,14 +18,9 @@
 
 .hero-video {
     width: 100%;
-    height: auto;
-    max-height: 100vh;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
     opacity: 0.8;
-    /* Ensure video scales with container */
-    @media (min-width: 640px) {
-      height: 100%;
-    }
 }
 
 .hero-overlay {
@@ -89,9 +84,8 @@
 .hero-subtitle {
     font-size: clamp(1.1rem, 4vw, 1.4rem);
     font-weight: 400;
-    margin-bottom: 2.5rem;
+    margin: 0 auto 2.5rem auto;
     max-width: 95vw;
-    margin: 0 auto;
     text-align: center;
     color: var(--color-text-main);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);

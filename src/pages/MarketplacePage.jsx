@@ -128,6 +128,8 @@ const MarketplacePage = () => {
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'flex-end',
+                                        alignItems: 'center',
+                                        textAlign: 'center',
                                         padding: '30px'
                                     }}>
                                         <h3 style={{ color: 'white', margin: 0, fontSize: '2rem' }}>{city.name}</h3>

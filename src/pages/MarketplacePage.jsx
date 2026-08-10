@@ -144,7 +144,7 @@ const MarketplacePage = () => {
                                 <div style={{ padding: '30px', flexGrow: 1, display: 'flex', alignItems: 'flex-end' }}>
                                     {city.url ? (
                                         <button className="btn btn-primary" style={{ width: '100%' }}>
-                                            Visit Experience
+                                            Visit Challenge
                                         </button>
                                     ) : (
                                         <button className="btn btn-outline" style={{ width: '100%', opacity: 0.6, cursor: 'not-allowed', borderStyle: 'dashed' }}>

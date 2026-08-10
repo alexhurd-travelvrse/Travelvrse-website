@@ -133,11 +133,20 @@ const MarketplacePage = () => {
                                         padding: '30px'
                                     }}>
                                         <h3 style={{ color: 'white', margin: 0, fontSize: '2rem' }}>{city.name}</h3>
-                                        {city.vibe && (
-                                            <div style={{ color: 'var(--color-cyan-neon)', fontWeight: 'bold', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '4px' }}>
-                                                {city.vibe}
-                                            </div>
-                                        )}
+                                        <div style={{ 
+                                            color: 'var(--color-cyan-neon)', 
+                                            fontWeight: 'bold', 
+                                            fontSize: '1.1rem', 
+                                            textTransform: 'uppercase', 
+                                            letterSpacing: '1px', 
+                                            marginTop: '4px',
+                                            minHeight: '1.4rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                            {city.vibe || '\u00A0'}
+                                        </div>
                                         <p style={{ color: 'rgba(255,255,255,0.7)', margin: '5px 0 0', fontSize: '1rem' }}>{city.desc}</p>
                                     </div>
                                 </div>

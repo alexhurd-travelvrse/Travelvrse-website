@@ -4,7 +4,7 @@ const journeyPhases = [
         phase: 'Pre-Booking',
         experience: 'Local challenges led by creators or concierges.',
         dna: 'Identifies the Explorer vs. the Relaxer.',
-        revenue: 'Direct Bookings bypassing OTA commissions.',
+        revenue: 'Direct Revenue bypassing OTA commissions.',
         image: '/assets/property_home_preview.png'
     },
     {

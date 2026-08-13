@@ -63,7 +63,7 @@ const PartnerPage = () => {
                                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                                     <TrendingUp className="text-cyan" size={24} />
                                     <div>
-                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Increase Direct Bookings</h4>
+                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Increase Direct Revenue</h4>
                                         <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>Capture high-intent guests before they look at OTAs</p>
                                     </div>
                                 </div>

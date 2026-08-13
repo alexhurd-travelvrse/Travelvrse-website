@@ -160,7 +160,7 @@ const ProblemSection = () => {
                                 Experiences <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                Next-Gen travellers search for vibes first. Travelvrse creator-led Vibe Challenges put your venue or tour at the front of the queue—pairing your experiences with real-time local vibes. Seamlessly capturing guest intent
+                                Travelvrse Vibe Challenges capture travellers in the inspiration stage before they look at OTAs. We pair your experiences with real-time local vibes. Seamlessly capturing guest intent
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />

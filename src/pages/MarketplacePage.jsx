@@ -29,7 +29,7 @@ const cities = [
     vibe: 'East of the Strip',
     img: 'https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?auto=format&fit=crop&q=80&w=800',
     desc: 'Iconic entertainment and luxury at the Virgin Hotel',
-    url: 'https://travel-vrse-virginhotel.vercel.app/'
+    url: 'https://travel-vrse-virginhotel.vercel.app/vibe/london/richmond/ted-lasso/'
   },
   { 
     name: 'Barcelona',

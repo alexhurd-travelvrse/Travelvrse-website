@@ -8,7 +8,7 @@ const Hero = () => {
     return (
         <section className="hero-section">
             <Helmet>
-                <title>Travelvrse | Customer Acquisition Marketplace for Hotels, Resorts & Cruise Operators</title>
+                <title>Travelvrse | Guest Acquisition Marketplace for Hotels, Resorts & Cruise Operators</title>
                 <meta name="description" content="Discover the world's first Travel Experiences Marketplace. Drive direct revenue for hotels, resorts, and cruise operators via immersive 3D discovery." />
             </Helmet>
             <div className="hero-bg-container">
@@ -27,7 +27,7 @@ const Hero = () => {
                 <div className="hero-header-group animate-fade-up">
                     <div className="beta-badge-premium">BETA</div>
                     <h1 className="hero-title" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8)' }}>
-                        CUSTOMER ACQUISITION MARKETPLACE
+                        GUEST ACQUISITION MARKETPLACE
                     </h1>
                     <h2 className="hero-strategy">
                         FOR HOTELS, CRUISE AND TOUR OPERATORS

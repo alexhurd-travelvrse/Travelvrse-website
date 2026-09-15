@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
                     </button>
 
                     <nav className={`header-nav ${isMenuOpen ? 'open' : ''}`}>
-                        <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>EXPERIENCES DISCOVERY MARKETPLACE</a>
+                        <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>VIBE CHALLENGE MARKETPLACE</a>
                         <Link to="/creator" className="nav-link" onClick={() => setIsMenuOpen(false)}>CREATOR SIGNUP/LOGIN</Link>
                         <a href="#journal" className="nav-link" onClick={() => setIsMenuOpen(false)}>JOURNAL</a>
                         <a href="#team" className="nav-link" onClick={() => setIsMenuOpen(false)}>OUR TEAM</a>

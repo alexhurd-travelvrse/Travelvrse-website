@@ -8,7 +8,7 @@ const Hero = () => {
     return (
         <section className="hero-section">
             <Helmet>
-                <title>Travelvrse | Experiences Discovery Marketplace for Hotels, Resorts & Cruise Operators</title>
+                <title>Travelvrse | Vibe Challenge Marketplace for Hotels, Resorts & Cruise Operators</title>
                 <meta name="description" content="Discover the world's first Travel Experiences Marketplace. Drive direct revenue for hotels, resorts, and cruise operators via immersive 3D discovery." />
             </Helmet>
             <div className="hero-bg-container">
@@ -27,7 +27,7 @@ const Hero = () => {
                 <div className="hero-header-group animate-fade-up">
                     <div className="beta-badge-premium">BETA</div>
                     <h1 className="hero-title" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8)' }}>
-                        EXPERIENCES DISCOVERY MARKETPLACE
+                        VIBE CHALLENGE MARKETPLACE
                     </h1>
                     <h2 className="hero-strategy">
                         FOR HOTELS, CRUISE AND TOUR OPERATORS
@@ -35,7 +35,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Turn Creator-Captured Local Vibes into Direct Revenue</span>
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Turn Creator-Built Local Challenges into Direct Revenue</span>
                 </p>
 
                 <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>

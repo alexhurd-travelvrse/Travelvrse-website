@@ -35,7 +35,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Turn Creator Content and Immersive Local Vibe Into Direct Revenue</span>
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Turn Creator-Captured Local Vibes into Direct Revenue</span>
                 </p>
 
                 <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>

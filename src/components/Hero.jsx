@@ -8,7 +8,7 @@ const Hero = () => {
     return (
         <section className="hero-section">
             <Helmet>
-                <title>Travelvrse | Travel Experiences Marketplace for Hotels, Resorts & Cruise Operators</title>
+                <title>Travelvrse | Lead Generation Marketplace for Hotels, Resorts & Cruise Operators</title>
                 <meta name="description" content="Discover the world's first Travel Experiences Marketplace. Drive direct revenue for hotels, resorts, and cruise operators via immersive 3D discovery." />
             </Helmet>
             <div className="hero-bg-container">

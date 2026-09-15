@@ -27,7 +27,7 @@ const Hero = () => {
                 <div className="hero-header-group animate-fade-up">
                     <div className="beta-badge-premium">BETA</div>
                     <h1 className="hero-title" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8)' }}>
-                        TRAVEL EXPERIENCES MARKETPLACE
+                        LEAD GENERATION MARKETPLACE
                     </h1>
                     <h2 className="hero-strategy">
                         FOR HOTELS, CRUISE AND TOUR OPERATORS
@@ -35,7 +35,7 @@ const Hero = () => {
                 </div>
 
                 <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Turn Local Vibes Into Direct Revenue</span>
+                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Turn Creator Content and Immersive Vibe Into Direct Revenue</span>
                 </p>
 
                 <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>

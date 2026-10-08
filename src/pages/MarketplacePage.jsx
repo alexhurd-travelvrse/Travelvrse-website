@@ -8,35 +8,35 @@ const cities = [
     vibe: 'Indre By',
     img: '/assets/vinylroom.jpg',
     desc: 'Vibrant Scandinavian design and cozy vinyl vibes',
-    url: 'https://travel-vrse-25hrs.vercel.app/25-hours-copenhagen'
+    url: 'http://localhost:5174/vibe/copenhagen/indre-by/25-hours-copenhagen'
   },
   { 
     name: 'London',
     vibe: 'South Bank',
     img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800',
     desc: 'The historic capital of England',
-    url: 'https://travel-vrse-25hrs.vercel.app/play/sea-containers/'
+    url: 'http://localhost:5174/vibe/london/south-bank/sea-containers'
   },
   { 
     name: 'London',
     vibe: 'Ted Lasso, Richmond',
     img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800',
     desc: 'Explore the charming neighborhood of Richmond',
-    url: 'https://travel-vrse-25hrs.vercel.app/vibe/london/richmond/ted-lasso/'
+    url: 'http://localhost:5174/vibe/london/richmond/ted-lasso'
   },
   { 
     name: 'Las Vegas',
     vibe: 'East of the Strip',
     img: 'https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?auto=format&fit=crop&q=80&w=800',
     desc: 'Iconic entertainment and luxury at the Virgin Hotel',
-    url: 'https://travel-vrse-virginhotel.vercel.app/vibe/london/richmond/ted-lasso/'
+    url: 'http://localhost:5174/vibe/las-vegas/the-strip/virgin-hotel-las-vegas'
   },
   { 
     name: 'Barcelona',
     vibe: 'Cruise',
     img: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800',
     desc: 'Setting sail from the heart of Catalonia',
-    url: '/barcelona'
+    url: 'http://localhost:5174/vibe/mediterranean/cruise/msc-europa'
   },
   { 
     name: 'Manchester', 

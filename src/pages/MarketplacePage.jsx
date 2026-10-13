@@ -39,14 +39,16 @@ const cities = [
     url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/mediterranean/cruise/msc-europa'
   },
   { 
+    name: 'Seoul',
+    vibe: 'Namdaemun & ENA Suite',
+    img: 'https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&q=80&w=800',
+    desc: 'Modern luxury suites, 600-year market heritage, and mountain summit vistas',
+    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/seoul/namdaemun/ena-suite-seoul'
+  },
+  { 
     name: 'Manchester', 
     img: 'https://images.pexels.com/photos/2884144/pexels-photo-2884144.jpeg?auto=compress&cs=tinysrgb&w=800',
     desc: 'The heart of British industrial heritage'
-  },
-  { 
-    name: 'Palm Springs', 
-    img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=800',
-    desc: 'A desert oasis of mid-century modern style'
   }
 ];
 

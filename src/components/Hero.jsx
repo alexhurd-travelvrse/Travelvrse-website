@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import './Hero.css';
@@ -25,26 +25,28 @@ const Hero = () => {
 
             <div className="container hero-content">
                 <div className="hero-header-group animate-fade-up">
-                    <div className="beta-badge-premium">BETA</div>
-                    <h1 className="hero-title" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8)' }}>
-                        VIBE CHALLENGE MARKETPLACE
+                    <div className="hero-executive-badge">
+                        <span className="badge-status-dot"></span>
+                        <span className="badge-tag">AI READY</span>
+                        <span className="badge-divider"></span>
+                        <span className="badge-text">VIBE CHALLENGES FOR HOTELS, CRUISE AND TOUR OPERATORS</span>
+                        <span className="badge-beta-pill">BETA</span>
+                    </div>
+
+                    <h1 className="hero-headline">
+                        Turn Creator-Built Local Challenges into Direct Revenue
                     </h1>
-                    <h2 className="hero-strategy">
-                        FOR HOTELS, CRUISE AND TOUR OPERATORS
-                    </h2>
+
+                    <p className="hero-subheadline">
+                        We pair your experiences with real-time local vibes. Seamlessly capturing guest intent
+                    </p>
                 </div>
 
-                <p className="hero-subtitle">
-                    <span className="progressive-item" style={{ animationDelay: '0.8s' }}>Turn Creator-Built Local Challenges into Direct Revenue</span>
-                </p>
-
-                <div className="hero-cta-group animate-fade-up" style={{ animationDelay: '3.4s' }}>
-                    <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-                        Bypass OTAs Today
-                    </a>
-                    <Link to="/marketplace" className="btn btn-outline" style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-                        <Play size={20} style={{ marginRight: '8px' }} />
-                        Explore Creator Marketplace
+                {/* Phased Entry Call to Action: Reveals smoothly a couple of seconds after initial load */}
+                <div className="hero-action-container hero-phased-entry">
+                    <Link to="/marketplace" className="hero-search-btn" title="Explore Creator Marketplace">
+                        <span>Explore Creator Marketplace</span>
+                        <ArrowRight size={18} />
                     </Link>
                 </div>
             </div>

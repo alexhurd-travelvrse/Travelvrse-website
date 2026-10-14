@@ -38,7 +38,7 @@ const Hero = () => {
                     </h1>
 
                     <p className="hero-subheadline">
-                        TravelVrse creates realistic challenges showcasing your best experiences and what is trending locally. Positioning you as the ideal gateway to your neighbourhood. Seamlessly capturing leads with guest intent
+                        Travelvrse turns your signature experiences and trending local culture into interactive 3D challenges. Position your brand as the ultimate destination launchpad—capturing high-intent guest leads before they check OTAs.
                     </p>
                 </div>
 

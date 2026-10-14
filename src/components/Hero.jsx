@@ -34,7 +34,7 @@ const Hero = () => {
                     </div>
 
                     <h1 className="hero-headline">
-                        Turn Local Challenges into Direct Revenue
+                        Turn Local Vibe into Direct Revenue
                     </h1>
 
                     <p className="hero-subheadline">

@@ -78,9 +78,52 @@ const TeamSection = () => {
                     }}>
                         Our <span className="text-cyan">Team</span>
                     </h2>
-                    <p className="subtitle mx-auto max-w-3xl" style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', color: 'rgba(230, 241, 255, 0.85)', lineHeight: '1.6', maxWidth: '720px', margin: '0 auto' }}>
-                        Experts in Rewarded Engagement, Next-Gen Discovery, Travel Experiences and Hotel Operations
-                    </p>
+
+                    <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '10px',
+                        maxWidth: '850px',
+                        margin: '1.25rem auto 0 auto'
+                    }}>
+                        {[
+                            'Rewarded Engagement',
+                            'Next-Gen Discovery',
+                            'Travel Experiences',
+                            'Hotel Operations'
+                        ].map((domain, i) => (
+                            <span 
+                                key={i}
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '8px',
+                                    padding: '7px 18px',
+                                    background: 'rgba(10, 18, 30, 0.72)',
+                                    backdropFilter: 'blur(16px)',
+                                    WebkitBackdropFilter: 'blur(16px)',
+                                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                                    borderRadius: '999px',
+                                    fontSize: '0.86rem',
+                                    fontWeight: '600',
+                                    color: 'rgba(240, 246, 255, 0.92)',
+                                    letterSpacing: '0.02em',
+                                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.35)'
+                                }}
+                            >
+                                <span style={{ 
+                                    width: '6px', 
+                                    height: '6px', 
+                                    borderRadius: '50%', 
+                                    background: i % 2 === 0 ? 'var(--color-cyan-neon, #00e5ff)' : 'var(--color-gold, #ffd700)',
+                                    boxShadow: i % 2 === 0 ? '0 0 8px rgba(0, 229, 255, 0.7)' : '0 0 8px rgba(255, 215, 0, 0.7)'
+                                }}></span>
+                                {domain}
+                            </span>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="team-grid">

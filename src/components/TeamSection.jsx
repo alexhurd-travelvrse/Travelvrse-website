@@ -4,54 +4,51 @@ import './TeamSection.css';
 const team = [
     {
         name: "Alex Hurd",
-        role: "Co-Founder CEO",
+        role: "Founder & CEO",
         image: "/models/Alex_Hurd.jpg",
         linkedin: "https://www.linkedin.com/in/alexhurd/",
-        background: "Ex Play2Pay, Shazam, Infospace, Orange",
-        advisor: false
+        background: "Ex Play2Pay, Shazam, Infospace, Orange"
     },
     {
         name: "Lee Probert",
         role: "CTO",
         image: "/models/lee Probert.png",
-        linkedin: "https://www.linkedin.com/in/leeprobert/",
-        advisor: false
+        linkedin: "https://www.linkedin.com/in/leeprobert/"
     },
     {
         name: "Julian Houchin",
         role: "Chairman",
         image: "/models/Julianphoto.jpg",
         linkedin: "https://www.linkedin.com/in/julianhouchin/",
-        background: "Ex GLC Resorts, IO Resort, Radisson Blu and Carlson Rezidor",
-        advisor: false
+        background: "Ex GLC Resorts, IO Resort, Radisson Blu and Carlson Rezidor"
     },
     {
         name: "Lindsay Kotas",
-        role: "Insignia Event Services, Ex Marriott",
+        role: "Board Advisor",
         image: "/models/LindsayKotas.jpg",
         linkedin: "https://www.linkedin.com/in/lindsay-kotas/",
-        advisor: true
+        background: "Insignia Event Services, Ex Marriott"
     },
     {
         name: "Amir Azulay",
-        role: "CEO Travel Curious",
+        role: "Board Advisor",
         image: "/models/Amir Azulay.png",
         linkedin: "https://www.linkedin.com/in/amirazulay/",
-        advisor: true
+        background: "CEO Travel Curious"
     },
     {
         name: "Alex Grant",
-        role: "Head of Hotel Solutions Travel Curious",
+        role: "Board Advisor",
         image: "/models/Alex Grant.png",
         linkedin: "https://www.linkedin.com/in/grantalex/",
-        advisor: true
+        background: "Head of Hotel Solutions Travel Curious"
     },
     {
         name: "Tristan Gadsby",
-        role: "CEO Alliants",
+        role: "Board Advisor",
         image: "/models/tristan.jpg",
         linkedin: "https://www.linkedin.com/in/tristangadsby/",
-        advisor: true
+        background: "CEO Alliants"
     }
 ];
 
@@ -149,16 +146,11 @@ const TeamSection = () => {
                                 <p className="member-role text-gold">
                                     {member.role}
                                 </p>
-                                <div className="member-advisor-tag">
-                                    {/* Spacer to align with cards that have backgrounds */}
-                                </div>
                                 <div className="member-background">
                                     {member.background ? (
                                         <p>{member.background}</p>
-                                    ) : member.advisor ? (
-                                        <p style={{ color: 'rgba(5, 229, 255, 0.8)', fontWeight: '800' }}>BOARD ADVISOR</p>
                                     ) : (
-                                        <p style={{ opacity: 0.1 }}>—</p>
+                                        <p style={{ opacity: 0.2 }}>—</p>
                                     )}
                                 </div>
                             </div>

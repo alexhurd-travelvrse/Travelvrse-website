@@ -44,8 +44,8 @@ const Hero = () => {
 
                 {/* Phased Entry Call to Action: Reveals smoothly a couple of seconds after initial load */}
                 <div className="hero-action-container hero-phased-entry">
-                    <Link to="/marketplace" className="hero-search-btn" title="Explore Creator Marketplace">
-                        <span>Explore Creator Marketplace</span>
+                    <Link to="/marketplace" className="hero-search-btn" title="Explore Marketplace">
+                        <span>Explore Marketplace</span>
                         <ArrowRight size={18} />
                     </Link>
                 </div>

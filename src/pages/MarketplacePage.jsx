@@ -139,8 +139,8 @@ const MarketplacePage = () => {
 
                     <div style={{ 
                         display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
-                        gap: '26px',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+                        gap: '35px',
                         padding: '10px'
                     }}>
                         {cities.map((city, index) => (
@@ -149,34 +149,34 @@ const MarketplacePage = () => {
                                 className={`glass-card animate-fade-up delay-${(index % 3) + 1}`}
                                 style={{ 
                                     padding: '0',
-                                    borderRadius: '20px', 
+                                    borderRadius: '24px', 
                                     overflow: 'hidden',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     background: 'rgba(10, 18, 30, 0.75)',
                                     backdropFilter: 'blur(16px)',
                                     border: '1px solid rgba(255, 255, 255, 0.12)',
-                                    boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4)',
+                                    boxShadow: '0 16px 40px rgba(0, 0, 0, 0.4)',
                                     transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                                     cursor: city.url ? 'pointer' : 'default'
                                 }}
                                 onClick={(e) => handleExperienceClick(city, e)}
                                 onMouseOver={(e) => {
                                     if (city.url) {
-                                        e.currentTarget.style.transform = 'translateY(-6px)';
-                                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 229, 255, 0.22), 0 0 20px rgba(255, 215, 0, 0.15)';
+                                        e.currentTarget.style.transform = 'translateY(-8px)';
+                                        e.currentTarget.style.boxShadow = '0 25px 50px rgba(0, 229, 255, 0.22), 0 0 25px rgba(255, 215, 0, 0.15)';
                                         e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.35)';
                                     }
                                 }}
                                 onMouseOut={(e) => {
                                     if (city.url) {
                                         e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.4)';
+                                        e.currentTarget.style.boxShadow = '0 16px 40px rgba(0, 0, 0, 0.4)';
                                         e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
                                     }
                                 }}
                             >
-                                <div style={{ height: '225px', position: 'relative', overflow: 'hidden' }}>
+                                <div style={{ height: '300px', position: 'relative', overflow: 'hidden' }}>
                                     <img 
                                         src={city.img} 
                                         alt={city.name} 
@@ -197,13 +197,13 @@ const MarketplacePage = () => {
                                         justifyContent: 'flex-end',
                                         alignItems: 'center',
                                         textAlign: 'center',
-                                        padding: '20px'
+                                        padding: '28px'
                                     }}>
                                         <h3 style={{ 
                                             fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
                                             color: '#ffffff', 
                                             margin: 0, 
-                                            fontSize: '1.65rem',
+                                            fontSize: '2rem',
                                             fontWeight: '800',
                                             letterSpacing: '-0.02em',
                                             textShadow: '0 2px 10px rgba(0,0,0,0.6)'
@@ -214,11 +214,11 @@ const MarketplacePage = () => {
                                         <div style={{ 
                                             color: 'var(--color-gold-champagne, #FFD700)', 
                                             fontWeight: '700', 
-                                            fontSize: '0.85rem', 
+                                            fontSize: '0.95rem', 
                                             textTransform: 'uppercase', 
                                             letterSpacing: '0.08em', 
-                                            marginTop: '4px',
-                                            minHeight: '1.2rem',
+                                            marginTop: '6px',
+                                            minHeight: '1.4rem',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -228,10 +228,10 @@ const MarketplacePage = () => {
 
                                         <p style={{ 
                                             color: 'rgba(230, 241, 255, 0.78)', 
-                                            margin: '4px 0 0', 
-                                            fontSize: '0.86rem',
-                                            lineHeight: '1.4',
-                                            minHeight: '2.4rem',
+                                            margin: '6px 0 0', 
+                                            fontSize: '0.94rem',
+                                            lineHeight: '1.45',
+                                            minHeight: '2.8rem',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -241,39 +241,41 @@ const MarketplacePage = () => {
                                     </div>
                                 </div>
 
-                                <div style={{ padding: '18px 20px', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: '6px' }}>
+                                {/* Compact 25% smaller Try on Mobile action container */}
+                                <div style={{ padding: '16px 24px', flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '6px' }}>
                                     {city.url ? (
                                         <>
                                             <button 
                                                 className="btn btn-primary" 
                                                 style={{ 
-                                                    width: '100%', 
-                                                    display: 'flex', 
+                                                    width: 'auto',
+                                                    minWidth: '220px',
+                                                    display: 'inline-flex', 
                                                     alignItems: 'center', 
                                                     justifyContent: 'center', 
                                                     gap: '8px',
-                                                    padding: '0.65rem 1.15rem',
-                                                    fontSize: '0.86rem',
+                                                    padding: '0.58rem 1.3rem',
+                                                    fontSize: '0.84rem',
                                                     fontWeight: '800',
                                                     borderRadius: '999px'
                                                 }}
                                             >
-                                                <Smartphone size={15} />
-                                                <span>Experience on Mobile</span>
-                                                <QrCode size={14} style={{ opacity: 0.8 }} />
+                                                <Smartphone size={14} />
+                                                <span>Try on Mobile</span>
+                                                <QrCode size={13} style={{ opacity: 0.8 }} />
                                             </button>
                                             <span style={{ 
                                                 textAlign: 'center', 
-                                                fontSize: '0.68rem', 
+                                                fontSize: '0.67rem', 
                                                 color: 'rgba(230, 241, 255, 0.55)',
                                                 fontWeight: '600',
                                                 letterSpacing: '0.03em'
                                             }}>
-                                                Scan QR on desktop or tap to play
+                                                Scan QR on desktop or tap to launch
                                             </span>
                                         </>
                                     ) : (
-                                        <button className="btn btn-outline" style={{ width: '100%', opacity: 0.5, cursor: 'not-allowed', borderStyle: 'dashed', borderRadius: '999px', padding: '0.65rem 1.15rem', fontSize: '0.86rem' }}>
+                                        <button className="btn btn-outline" style={{ width: 'auto', minWidth: '180px', opacity: '0.5', cursor: 'not-allowed', borderStyle: 'dashed', borderRadius: '999px', padding: '0.58rem 1.3rem', fontSize: '0.84rem' }}>
                                             Coming Soon
                                         </button>
                                     )}

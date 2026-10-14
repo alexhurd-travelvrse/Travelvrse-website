@@ -94,7 +94,9 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    height: 2.2rem;
+    min-height: 2.2rem;
+    height: auto;
+    line-height: 1.35;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,7 +136,8 @@
         gap: 30px;
     }
     .team-card {
-        height: 340px;
+        min-height: 340px;
+        height: auto;
         padding: 20px;
     }
     .member-image-wrapper {

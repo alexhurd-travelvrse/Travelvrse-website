@@ -34,11 +34,11 @@ const Hero = () => {
                     </div>
 
                     <h1 className="hero-headline">
-                        Turn Creator-Built Local Challenges into Direct Revenue
+                        Turn Local Challenges into Direct Revenue
                     </h1>
 
                     <p className="hero-subheadline">
-                        We pair your experiences with real-time local vibes. Seamlessly capturing guest intent
+                        TravelVrse creates realistic challenges showcasing your best experiences and what is trending locally. Positioning you as the ideal gateway to your neighbourhood. Seamlessly capturing leads with guest intent
                     </p>
                 </div>
 

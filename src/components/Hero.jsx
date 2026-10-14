@@ -38,7 +38,7 @@ const Hero = () => {
                     </h1>
 
                     <p className="hero-subheadline">
-                        Travelvrse turns your signature experiences and trending local culture into interactive 3D challenges. Position your brand as the ultimate destination launchpad—capturing high-intent guest leads before they check OTAs.
+                        Travelvrse turns your signature experiences and trending local culture into interactive challenges. Position your brand as the ultimate destination launchpad—capturing high-intent guest leads before they check OTAs
                     </p>
                 </div>
 

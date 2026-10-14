@@ -13,7 +13,8 @@ const team = [
         name: "Lee Probert",
         role: "Technical Advisor",
         image: "/models/lee Probert.png",
-        linkedin: "https://www.linkedin.com/in/leeprobert/"
+        linkedin: "https://www.linkedin.com/in/leeprobert/",
+        background: "Weald Creative"
     },
     {
         name: "Julian Houchin",

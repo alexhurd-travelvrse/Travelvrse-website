@@ -139,8 +139,8 @@ const MarketplacePage = () => {
 
                     <div style={{ 
                         display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-                        gap: '35px',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
+                        gap: '26px',
                         padding: '10px'
                     }}>
                         {cities.map((city, index) => (
@@ -149,34 +149,34 @@ const MarketplacePage = () => {
                                 className={`glass-card animate-fade-up delay-${(index % 3) + 1}`}
                                 style={{ 
                                     padding: '0',
-                                    borderRadius: '26px', 
+                                    borderRadius: '20px', 
                                     overflow: 'hidden',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     background: 'rgba(10, 18, 30, 0.75)',
                                     backdropFilter: 'blur(16px)',
                                     border: '1px solid rgba(255, 255, 255, 0.12)',
-                                    boxShadow: '0 16px 40px rgba(0, 0, 0, 0.4)',
+                                    boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4)',
                                     transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                                     cursor: city.url ? 'pointer' : 'default'
                                 }}
                                 onClick={(e) => handleExperienceClick(city, e)}
                                 onMouseOver={(e) => {
                                     if (city.url) {
-                                        e.currentTarget.style.transform = 'translateY(-8px)';
-                                        e.currentTarget.style.boxShadow = '0 25px 50px rgba(0, 229, 255, 0.22), 0 0 25px rgba(255, 215, 0, 0.15)';
+                                        e.currentTarget.style.transform = 'translateY(-6px)';
+                                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 229, 255, 0.22), 0 0 20px rgba(255, 215, 0, 0.15)';
                                         e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.35)';
                                     }
                                 }}
                                 onMouseOut={(e) => {
                                     if (city.url) {
                                         e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = '0 16px 40px rgba(0, 0, 0, 0.4)';
+                                        e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.4)';
                                         e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
                                     }
                                 }}
                             >
-                                <div style={{ height: '300px', position: 'relative', overflow: 'hidden' }}>
+                                <div style={{ height: '225px', position: 'relative', overflow: 'hidden' }}>
                                     <img 
                                         src={city.img} 
                                         alt={city.name} 
@@ -197,13 +197,13 @@ const MarketplacePage = () => {
                                         justifyContent: 'flex-end',
                                         alignItems: 'center',
                                         textAlign: 'center',
-                                        padding: '28px'
+                                        padding: '20px'
                                     }}>
                                         <h3 style={{ 
                                             fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
                                             color: '#ffffff', 
                                             margin: 0, 
-                                            fontSize: '2rem',
+                                            fontSize: '1.65rem',
                                             fontWeight: '800',
                                             letterSpacing: '-0.02em',
                                             textShadow: '0 2px 10px rgba(0,0,0,0.6)'
@@ -214,11 +214,11 @@ const MarketplacePage = () => {
                                         <div style={{ 
                                             color: 'var(--color-gold-champagne, #FFD700)', 
                                             fontWeight: '700', 
-                                            fontSize: '0.95rem', 
+                                            fontSize: '0.85rem', 
                                             textTransform: 'uppercase', 
                                             letterSpacing: '0.08em', 
-                                            marginTop: '6px',
-                                            minHeight: '1.4rem',
+                                            marginTop: '4px',
+                                            minHeight: '1.2rem',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -228,10 +228,10 @@ const MarketplacePage = () => {
 
                                         <p style={{ 
                                             color: 'rgba(230, 241, 255, 0.78)', 
-                                            margin: '6px 0 0', 
-                                            fontSize: '0.94rem',
-                                            lineHeight: '1.45',
-                                            minHeight: '2.8rem',
+                                            margin: '4px 0 0', 
+                                            fontSize: '0.86rem',
+                                            lineHeight: '1.4',
+                                            minHeight: '2.4rem',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -241,7 +241,7 @@ const MarketplacePage = () => {
                                     </div>
                                 </div>
 
-                                <div style={{ padding: '24px 28px', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: '8px' }}>
+                                <div style={{ padding: '18px 20px', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: '6px' }}>
                                     {city.url ? (
                                         <>
                                             <button 
@@ -251,29 +251,29 @@ const MarketplacePage = () => {
                                                     display: 'flex', 
                                                     alignItems: 'center', 
                                                     justifyContent: 'center', 
-                                                    gap: '10px',
-                                                    padding: '0.85rem 1.5rem',
-                                                    fontSize: '0.98rem',
+                                                    gap: '8px',
+                                                    padding: '0.65rem 1.15rem',
+                                                    fontSize: '0.86rem',
                                                     fontWeight: '800',
                                                     borderRadius: '999px'
                                                 }}
                                             >
-                                                <Smartphone size={18} />
+                                                <Smartphone size={15} />
                                                 <span>Experience on Mobile</span>
-                                                <QrCode size={16} style={{ opacity: 0.8 }} />
+                                                <QrCode size={14} style={{ opacity: 0.8 }} />
                                             </button>
                                             <span style={{ 
                                                 textAlign: 'center', 
-                                                fontSize: '0.72rem', 
+                                                fontSize: '0.68rem', 
                                                 color: 'rgba(230, 241, 255, 0.55)',
                                                 fontWeight: '600',
-                                                letterSpacing: '0.04em'
+                                                letterSpacing: '0.03em'
                                             }}>
                                                 Scan QR on desktop or tap to play
                                             </span>
                                         </>
                                     ) : (
-                                        <button className="btn btn-outline" style={{ width: '100%', opacity: 0.5, cursor: 'not-allowed', borderStyle: 'dashed', borderRadius: '999px' }}>
+                                        <button className="btn btn-outline" style={{ width: '100%', opacity: 0.5, cursor: 'not-allowed', borderStyle: 'dashed', borderRadius: '999px', padding: '0.65rem 1.15rem', fontSize: '0.86rem' }}>
                                             Coming Soon
                                         </button>
                                     )}
@@ -306,12 +306,12 @@ const MarketplacePage = () => {
                             background: 'rgba(10, 18, 30, 0.95)',
                             backdropFilter: 'blur(24px)',
                             border: '1px solid rgba(255, 215, 0, 0.3)',
-                            borderRadius: '28px',
-                            maxWidth: '460px',
+                            borderRadius: '22px',
+                            maxWidth: '350px',
                             width: '100%',
-                            padding: '32px 28px',
+                            padding: '24px 20px',
                             position: 'relative',
-                            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 229, 255, 0.12)',
+                            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 229, 255, 0.12)',
                             textAlign: 'center',
                             animation: 'modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                         }}
@@ -322,13 +322,13 @@ const MarketplacePage = () => {
                             onClick={() => setSelectedModalCity(null)}
                             style={{
                                 position: 'absolute',
-                                top: '18px',
-                                right: '18px',
+                                top: '14px',
+                                right: '14px',
                                 background: 'rgba(255, 255, 255, 0.08)',
                                 border: '1px solid rgba(255, 255, 255, 0.15)',
                                 color: '#ffffff',
-                                width: '36px',
-                                height: '36px',
+                                width: '30px',
+                                height: '30px',
                                 borderRadius: '50%',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -340,24 +340,24 @@ const MarketplacePage = () => {
                             onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
                             aria-label="Close"
                         >
-                            <X size={18} />
+                            <X size={15} />
                         </button>
 
                         {/* Eyebrow Badge */}
-                        <div className="hero-executive-badge" style={{ marginBottom: '1rem', padding: '4px 14px' }}>
+                        <div className="hero-executive-badge" style={{ marginBottom: '0.75rem', padding: '3px 12px' }}>
                             <span className="badge-status-dot"></span>
-                            <span className="badge-tag">MOBILE-FIRST 3D</span>
+                            <span className="badge-tag" style={{ fontSize: '0.65rem' }}>MOBILE-FIRST 3D</span>
                             <span className="badge-divider"></span>
-                            <span className="badge-text">{selectedModalCity.name}</span>
+                            <span className="badge-text" style={{ fontSize: '0.67rem' }}>{selectedModalCity.name}</span>
                         </div>
 
                         {/* Title & Vibe */}
                         <h2 style={{
                             fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
-                            fontSize: '1.8rem',
+                            fontSize: '1.45rem',
                             fontWeight: '800',
                             color: '#ffffff',
-                            margin: '0 0 6px 0',
+                            margin: '0 0 4px 0',
                             lineHeight: '1.2'
                         }}>
                             {selectedModalCity.name} Vibe Challenge
@@ -366,20 +366,20 @@ const MarketplacePage = () => {
                         <div style={{
                             color: 'var(--color-gold-champagne, #FFD700)',
                             fontWeight: '700',
-                            fontSize: '0.88rem',
+                            fontSize: '0.8rem',
                             textTransform: 'uppercase',
                             letterSpacing: '0.06em',
-                            marginBottom: '14px'
+                            marginBottom: '10px'
                         }}>
                             {selectedModalCity.vibe}
                         </div>
 
                         <p style={{
                             color: 'rgba(230, 241, 255, 0.8)',
-                            fontSize: '0.92rem',
-                            lineHeight: '1.5',
-                            margin: '0 auto 22px auto',
-                            maxWidth: '360px'
+                            fontSize: '0.82rem',
+                            lineHeight: '1.45',
+                            margin: '0 auto 16px auto',
+                            maxWidth: '300px'
                         }}>
                             Optimised for smartphone spatial audio, motion gyro &amp; touch interaction. Point your phone camera to launch instantly:
                         </p>
@@ -390,39 +390,39 @@ const MarketplacePage = () => {
                             flexDirection: 'column',
                             alignItems: 'center',
                             background: '#ffffff',
-                            padding: '14px',
-                            borderRadius: '20px',
-                            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 215, 0, 0.3)',
-                            border: '3px solid var(--color-gold, #FFD700)',
-                            marginBottom: '20px'
+                            padding: '10px',
+                            borderRadius: '16px',
+                            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.25)',
+                            border: '2.5px solid var(--color-gold, #FFD700)',
+                            marginBottom: '16px'
                         }}>
                             <img 
-                                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=4&color=050B14&bgcolor=FFFFFF&data=${encodeURIComponent(selectedModalCity.url)}`}
+                                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=3&color=050B14&bgcolor=FFFFFF&data=${encodeURIComponent(selectedModalCity.url)}`}
                                 alt={`QR Code for ${selectedModalCity.name}`}
-                                style={{ width: '190px', height: '190px', display: 'block' }}
+                                style={{ width: '145px', height: '145px', display: 'block' }}
                             />
                         </div>
 
                         {/* Action buttons */}
-                        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '18px' }}>
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '14px' }}>
                             <button
                                 onClick={handleCopyLink}
                                 style={{
                                     display: 'inline-flex',
                                     alignItems: 'center',
-                                    gap: '8px',
-                                    padding: '8px 16px',
+                                    gap: '6px',
+                                    padding: '6px 13px',
                                     background: copied ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.08)',
                                     border: `1px solid ${copied ? 'rgba(16, 185, 129, 0.5)' : 'rgba(255, 255, 255, 0.18)'}`,
                                     color: copied ? '#10b981' : '#ffffff',
                                     borderRadius: '999px',
-                                    fontSize: '0.82rem',
+                                    fontSize: '0.78rem',
                                     fontWeight: '700',
                                     cursor: 'pointer',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                {copied ? <Check size={14} /> : <Copy size={14} />}
+                                {copied ? <Check size={13} /> : <Copy size={13} />}
                                 <span>{copied ? 'Link Copied!' : 'Copy Link'}</span>
                             </button>
 
@@ -433,20 +433,20 @@ const MarketplacePage = () => {
                                 style={{
                                     display: 'inline-flex',
                                     alignItems: 'center',
-                                    gap: '8px',
-                                    padding: '8px 16px',
+                                    gap: '6px',
+                                    padding: '6px 13px',
                                     background: 'rgba(37, 211, 102, 0.15)',
                                     border: '1px solid rgba(37, 211, 102, 0.4)',
                                     color: '#25D366',
                                     borderRadius: '999px',
-                                    fontSize: '0.82rem',
+                                    fontSize: '0.78rem',
                                     fontWeight: '700',
                                     textDecoration: 'none',
                                     cursor: 'pointer',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <Share2 size={14} />
+                                <Share2 size={13} />
                                 <span>WhatsApp</span>
                             </a>
                         </div>

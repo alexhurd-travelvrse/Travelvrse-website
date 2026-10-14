@@ -1,4 +1,4 @@
-import { Send, CheckCircle2 } from 'lucide-react';
+import { Send, CheckCircle2, ArrowRight } from 'lucide-react';
 import './RevenueSection.css';
 
 const RevenueSection = () => {
@@ -48,7 +48,22 @@ const RevenueSection = () => {
 
                     {/* Content Right */}
                     <div className="animate-fade-up delay-1">
-                        <h2 className="revenue-title" style={{ fontWeight: '800', marginBottom: '1.5rem', color: 'white' }}>
+                        <div className="hero-executive-badge" style={{ marginBottom: '1.25rem' }}>
+                            <span className="badge-status-dot"></span>
+                            <span className="badge-tag">DIRECT REVENUE</span>
+                            <span className="badge-divider"></span>
+                            <span className="badge-text">ZERO-COMMISSION UPGRADES</span>
+                        </div>
+
+                        <h2 className="revenue-title" style={{ 
+                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
+                            fontSize: 'clamp(2.4rem, 4.5vw, 3.5rem)',
+                            fontWeight: '800', 
+                            letterSpacing: '-0.02em',
+                            lineHeight: '1.15',
+                            marginBottom: '1.5rem', 
+                            color: '#ffffff' 
+                        }}>
                             Increase Your <span className="text-gold">Direct Revenue</span>
                         </h2>
                         
@@ -93,8 +108,9 @@ const RevenueSection = () => {
                                 </div>
                             </div>
                         </div>
-                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary" style={{ marginTop: '40px', padding: '15px 40px', display: 'inline-block' }}>
-                            Audit My Vibe
+                        <a href="https://vibe-audit-engine.vercel.app/" className="hero-search-btn" style={{ marginTop: '35px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                            <span>Audit My Vibe</span>
+                            <ArrowRight size={18} />
                         </a>
                     </div>
 

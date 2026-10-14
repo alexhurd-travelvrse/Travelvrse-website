@@ -42,7 +42,22 @@ const HowItWorksSection = () => {
 
                     {/* Text Right */}
                     <div className="animate-fade-up delay-1">
-                        <h2 className="section-title" style={{ fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.2' }}>
+                        <div className="hero-executive-badge" style={{ marginBottom: '1.25rem' }}>
+                            <span className="badge-status-dot"></span>
+                            <span className="badge-tag">1-MIN DEPLOYMENT</span>
+                            <span className="badge-divider"></span>
+                            <span className="badge-text">FRICTIONLESS IMPLEMENTATION</span>
+                        </div>
+
+                        <h2 className="section-title" style={{ 
+                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
+                            fontSize: 'clamp(2.4rem, 4.5vw, 3.5rem)',
+                            fontWeight: '800', 
+                            letterSpacing: '-0.02em',
+                            lineHeight: '1.15',
+                            marginBottom: '1.5rem', 
+                            color: '#ffffff' 
+                        }}>
                             Implementation is <span className="text-gold">friction free</span>
                         </h2>
                         
@@ -113,8 +128,9 @@ const HowItWorksSection = () => {
                             </div>
                         </div>
 
-                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary" style={{ padding: '15px 35px' }}>
-                            Audit My Vibe <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                        <a href="https://vibe-audit-engine.vercel.app/" className="hero-search-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                            <span>Audit My Vibe</span>
+                            <ArrowRight size={18} />
                         </a>
                     </div>
 

@@ -59,11 +59,26 @@ const TeamSection = () => {
     return (
         <section className="section-padding team-section" id="team">
             <div className="container">
-                <div className="section-header text-center animate-fade-up">
-                    <h2 className="team-title">
+                <div className="section-header text-center animate-fade-up" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+                    <div className="hero-executive-badge" style={{ marginBottom: '1.25rem' }}>
+                        <span className="badge-status-dot"></span>
+                        <span className="badge-tag">OPERATORS</span>
+                        <span className="badge-divider"></span>
+                        <span className="badge-text">LEADERSHIP &amp; ADVISORS</span>
+                    </div>
+
+                    <h2 className="team-title" style={{ 
+                        fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
+                        fontSize: 'clamp(2.4rem, 4.5vw, 3.5rem)',
+                        fontWeight: '800', 
+                        letterSpacing: '-0.02em',
+                        lineHeight: '1.15',
+                        marginBottom: '1rem', 
+                        color: '#ffffff' 
+                    }}>
                         Our <span className="text-cyan">Team</span>
                     </h2>
-                    <p className="subtitle mx-auto max-w-3xl">
+                    <p className="subtitle mx-auto max-w-3xl" style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', color: 'rgba(230, 241, 255, 0.85)', lineHeight: '1.6', maxWidth: '720px', margin: '0 auto' }}>
                         Experts in Rewarded Engagement, Next-Gen Discovery, Travel Experiences and Hotel Operations
                     </p>
                 </div>

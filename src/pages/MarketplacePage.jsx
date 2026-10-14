@@ -1,6 +1,8 @@
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
+import { Smartphone, QrCode, Copy, Check, ExternalLink, X, ArrowRight, Share2 } from 'lucide-react';
 
 const cities = [
   { 
@@ -53,12 +55,46 @@ const cities = [
 ];
 
 const MarketplacePage = () => {
+    const [selectedModalCity, setSelectedModalCity] = useState(null);
+    const [copied, setCopied] = useState(false);
+
+    // Close modal on Escape key
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') setSelectedModalCity(null);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
+    const handleExperienceClick = (city, e) => {
+        if (!city.url) return;
+        
+        // If user is already on a mobile/tablet touch device, open directly
+        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+        
+        if (isMobileDevice) {
+            window.open(city.url, '_blank');
+        } else {
+            e?.preventDefault();
+            setSelectedModalCity(city);
+            setCopied(false);
+        }
+    };
+
+    const handleCopyLink = () => {
+        if (!selectedModalCity?.url) return;
+        navigator.clipboard.writeText(selectedModalCity.url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+    };
+
     return (
         <Layout>
             <div className="marketplace-page" style={{ 
-                background: 'var(--color-navy-deep)', 
+                background: 'var(--color-navy-deep, #050B14)', 
                 minHeight: '100vh',
-                paddingTop: '150px',
+                paddingTop: '140px',
                 paddingBottom: '100px',
                 position: 'relative'
             }}>
@@ -67,22 +103,45 @@ const MarketplacePage = () => {
                         <title>3D Hotel Experience Marketplace | Travelvrse</title>
                         <meta name="description" content="Discover and explore rewarded 3D hotel experiences from around the world. Connect with iconic destinations and earn exclusive travel rewards." />
                     </Helmet>
-                    <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-                        <h4 className="text-cyan animate-fade-up" style={{ letterSpacing: '2px', fontWeight: '800', marginBottom: '1rem' }}>DISCOVER</h4>
-                        <div className="beta-badge-premium">BETA</div>
-                        <h1 className="hero-title animate-fade-up delay-1" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '20px' }}>
+
+                    <div style={{ textAlign: 'center', marginBottom: '70px' }}>
+                        <div className="hero-executive-badge animate-fade-up" style={{ marginBottom: '1.25rem' }}>
+                            <span className="badge-status-dot"></span>
+                            <span className="badge-tag">EXPLORE</span>
+                            <span className="badge-divider"></span>
+                            <span className="badge-text">LOCAL VIBE CHALLENGES</span>
+                            <span className="badge-beta-pill">BETA</span>
+                        </div>
+
+                        <h1 className="hero-title animate-fade-up delay-1" style={{ 
+                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
+                            fontSize: 'clamp(2.6rem, 5.5vw, 4.2rem)', 
+                            fontWeight: '800',
+                            letterSpacing: '-0.02em',
+                            lineHeight: '1.1',
+                            marginBottom: '20px',
+                            color: '#ffffff',
+                            textShadow: '0 4px 20px rgba(0,0,0,0.5)'
+                        }}>
                             <span className="text-gradient">Vibe Challenge Marketplace</span>
                         </h1>
-                        <p className="animate-fade-up delay-2" style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
-                            Get rewarded to check out hotels and resorts with the best local vibes
+
+                        <p className="animate-fade-up delay-2" style={{ 
+                            color: 'rgba(230, 241, 255, 0.85)', 
+                            fontSize: 'clamp(1rem, 1.4vw, 1.2rem)', 
+                            maxWidth: '750px', 
+                            margin: '0 auto',
+                            lineHeight: '1.6'
+                        }}>
+                            Designed for mobile exploration: check out hotels, resorts &amp; cruise destinations paired with real-time local vibes.
                         </p>
                     </div>
 
                     <div style={{ 
                         display: 'grid', 
                         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-                        gap: '40px',
-                        padding: '20px'
+                        gap: '35px',
+                        padding: '10px'
                     }}>
                         {cities.map((city, index) => (
                             <div 
@@ -90,24 +149,30 @@ const MarketplacePage = () => {
                                 className={`glass-card animate-fade-up delay-${(index % 3) + 1}`}
                                 style={{ 
                                     padding: '0',
-                                    borderRadius: '24px', 
+                                    borderRadius: '26px', 
                                     overflow: 'hidden',
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                    background: 'rgba(10, 18, 30, 0.75)',
+                                    backdropFilter: 'blur(16px)',
+                                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                                    boxShadow: '0 16px 40px rgba(0, 0, 0, 0.4)',
+                                    transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                                     cursor: city.url ? 'pointer' : 'default'
                                 }}
-                                onClick={() => city.url && window.open(city.url, '_blank')}
+                                onClick={(e) => handleExperienceClick(city, e)}
                                 onMouseOver={(e) => {
                                     if (city.url) {
-                                        e.currentTarget.style.transform = 'translateY(-10px)';
-                                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,229,255,0.2)';
+                                        e.currentTarget.style.transform = 'translateY(-8px)';
+                                        e.currentTarget.style.boxShadow = '0 25px 50px rgba(0, 229, 255, 0.22), 0 0 25px rgba(255, 215, 0, 0.15)';
+                                        e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.35)';
                                     }
                                 }}
                                 onMouseOut={(e) => {
                                     if (city.url) {
                                         e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = 'none';
+                                        e.currentTarget.style.boxShadow = '0 16px 40px rgba(0, 0, 0, 0.4)';
+                                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
                                     }
                                 }}
                             >
@@ -119,29 +184,40 @@ const MarketplacePage = () => {
                                             width: '100%', 
                                             height: '100%', 
                                             objectFit: 'cover',
-                                            transition: 'transform 0.5s ease'
+                                            transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
                                         }} 
                                         className="city-image"
                                     />
                                     <div style={{ 
                                         position: 'absolute', 
                                         inset: 0, 
-                                        background: 'linear-gradient(to top, rgba(5,11,20,0.9) 0%, transparent 60%)',
+                                        background: 'linear-gradient(to top, rgba(5, 11, 20, 0.95) 0%, rgba(5, 11, 20, 0.4) 50%, transparent 100%)',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'flex-end',
                                         alignItems: 'center',
                                         textAlign: 'center',
-                                        padding: '30px'
+                                        padding: '28px'
                                     }}>
-                                        <h3 style={{ color: 'white', margin: 0, fontSize: '2rem' }}>{city.name}</h3>
+                                        <h3 style={{ 
+                                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
+                                            color: '#ffffff', 
+                                            margin: 0, 
+                                            fontSize: '2rem',
+                                            fontWeight: '800',
+                                            letterSpacing: '-0.02em',
+                                            textShadow: '0 2px 10px rgba(0,0,0,0.6)'
+                                        }}>
+                                            {city.name}
+                                        </h3>
+
                                         <div style={{ 
-                                            color: 'var(--color-cyan-neon)', 
-                                            fontWeight: 'bold', 
-                                            fontSize: '1.1rem', 
+                                            color: 'var(--color-gold-champagne, #FFD700)', 
+                                            fontWeight: '700', 
+                                            fontSize: '0.95rem', 
                                             textTransform: 'uppercase', 
-                                            letterSpacing: '1px', 
-                                            marginTop: '4px',
+                                            letterSpacing: '0.08em', 
+                                            marginTop: '6px',
                                             minHeight: '1.4rem',
                                             display: 'flex',
                                             alignItems: 'center',
@@ -149,10 +225,12 @@ const MarketplacePage = () => {
                                         }}>
                                             {city.vibe || '\u00A0'}
                                         </div>
+
                                         <p style={{ 
-                                            color: 'rgba(255,255,255,0.7)', 
-                                            margin: '5px 0 0', 
-                                            fontSize: '1rem',
+                                            color: 'rgba(230, 241, 255, 0.78)', 
+                                            margin: '6px 0 0', 
+                                            fontSize: '0.94rem',
+                                            lineHeight: '1.45',
                                             minHeight: '2.8rem',
                                             display: 'flex',
                                             alignItems: 'center',
@@ -162,13 +240,40 @@ const MarketplacePage = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div style={{ padding: '30px', flexGrow: 1, display: 'flex', alignItems: 'flex-end' }}>
+
+                                <div style={{ padding: '24px 28px', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: '8px' }}>
                                     {city.url ? (
-                                        <button className="btn btn-primary" style={{ width: '100%' }}>
-                                            Visit Challenge
-                                        </button>
+                                        <>
+                                            <button 
+                                                className="btn btn-primary" 
+                                                style={{ 
+                                                    width: '100%', 
+                                                    display: 'flex', 
+                                                    alignItems: 'center', 
+                                                    justifyContent: 'center', 
+                                                    gap: '10px',
+                                                    padding: '0.85rem 1.5rem',
+                                                    fontSize: '0.98rem',
+                                                    fontWeight: '800',
+                                                    borderRadius: '999px'
+                                                }}
+                                            >
+                                                <Smartphone size={18} />
+                                                <span>Experience on Mobile</span>
+                                                <QrCode size={16} style={{ opacity: 0.8 }} />
+                                            </button>
+                                            <span style={{ 
+                                                textAlign: 'center', 
+                                                fontSize: '0.72rem', 
+                                                color: 'rgba(230, 241, 255, 0.55)',
+                                                fontWeight: '600',
+                                                letterSpacing: '0.04em'
+                                            }}>
+                                                Scan QR on desktop or tap to play
+                                            </span>
+                                        </>
                                     ) : (
-                                        <button className="btn btn-outline" style={{ width: '100%', opacity: 0.6, cursor: 'not-allowed', borderStyle: 'dashed' }}>
+                                        <button className="btn btn-outline" style={{ width: '100%', opacity: 0.5, cursor: 'not-allowed', borderStyle: 'dashed', borderRadius: '999px' }}>
                                             Coming Soon
                                         </button>
                                     )}
@@ -178,6 +283,201 @@ const MarketplacePage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Option A: Desktop-to-Mobile QR Handoff Modal */}
+            {selectedModalCity && (
+                <div 
+                    style={{
+                        position: 'fixed',
+                        inset: 0,
+                        backgroundColor: 'rgba(5, 11, 20, 0.88)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                        zIndex: 9999,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '20px'
+                    }}
+                    onClick={() => setSelectedModalCity(null)}
+                >
+                    <div 
+                        style={{
+                            background: 'rgba(10, 18, 30, 0.95)',
+                            backdropFilter: 'blur(24px)',
+                            border: '1px solid rgba(255, 215, 0, 0.3)',
+                            borderRadius: '28px',
+                            maxWidth: '460px',
+                            width: '100%',
+                            padding: '32px 28px',
+                            position: 'relative',
+                            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 229, 255, 0.12)',
+                            textAlign: 'center',
+                            animation: 'modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Close button */}
+                        <button 
+                            onClick={() => setSelectedModalCity(null)}
+                            style={{
+                                position: 'absolute',
+                                top: '18px',
+                                right: '18px',
+                                background: 'rgba(255, 255, 255, 0.08)',
+                                border: '1px solid rgba(255, 255, 255, 0.15)',
+                                color: '#ffffff',
+                                width: '36px',
+                                height: '36px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+                            onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
+                            aria-label="Close"
+                        >
+                            <X size={18} />
+                        </button>
+
+                        {/* Eyebrow Badge */}
+                        <div className="hero-executive-badge" style={{ marginBottom: '1rem', padding: '4px 14px' }}>
+                            <span className="badge-status-dot"></span>
+                            <span className="badge-tag">MOBILE-FIRST 3D</span>
+                            <span className="badge-divider"></span>
+                            <span className="badge-text">{selectedModalCity.name}</span>
+                        </div>
+
+                        {/* Title & Vibe */}
+                        <h2 style={{
+                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
+                            fontSize: '1.8rem',
+                            fontWeight: '800',
+                            color: '#ffffff',
+                            margin: '0 0 6px 0',
+                            lineHeight: '1.2'
+                        }}>
+                            {selectedModalCity.name} Vibe Challenge
+                        </h2>
+
+                        <div style={{
+                            color: 'var(--color-gold-champagne, #FFD700)',
+                            fontWeight: '700',
+                            fontSize: '0.88rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.06em',
+                            marginBottom: '14px'
+                        }}>
+                            {selectedModalCity.vibe}
+                        </div>
+
+                        <p style={{
+                            color: 'rgba(230, 241, 255, 0.8)',
+                            fontSize: '0.92rem',
+                            lineHeight: '1.5',
+                            margin: '0 auto 22px auto',
+                            maxWidth: '360px'
+                        }}>
+                            Optimised for smartphone spatial audio, motion gyro &amp; touch interaction. Point your phone camera to launch instantly:
+                        </p>
+
+                        {/* QR Code Container */}
+                        <div style={{
+                            display: 'inline-flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            background: '#ffffff',
+                            padding: '14px',
+                            borderRadius: '20px',
+                            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 215, 0, 0.3)',
+                            border: '3px solid var(--color-gold, #FFD700)',
+                            marginBottom: '20px'
+                        }}>
+                            <img 
+                                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=4&color=050B14&bgcolor=FFFFFF&data=${encodeURIComponent(selectedModalCity.url)}`}
+                                alt={`QR Code for ${selectedModalCity.name}`}
+                                style={{ width: '190px', height: '190px', display: 'block' }}
+                            />
+                        </div>
+
+                        {/* Action buttons */}
+                        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '18px' }}>
+                            <button
+                                onClick={handleCopyLink}
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '8px',
+                                    padding: '8px 16px',
+                                    background: copied ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                                    border: `1px solid ${copied ? 'rgba(16, 185, 129, 0.5)' : 'rgba(255, 255, 255, 0.18)'}`,
+                                    color: copied ? '#10b981' : '#ffffff',
+                                    borderRadius: '999px',
+                                    fontSize: '0.82rem',
+                                    fontWeight: '700',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s ease'
+                                }}
+                            >
+                                {copied ? <Check size={14} /> : <Copy size={14} />}
+                                <span>{copied ? 'Link Copied!' : 'Copy Link'}</span>
+                            </button>
+
+                            <a
+                                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out the ${selectedModalCity.name} 3D Vibe Challenge on Travelvrse: ` + selectedModalCity.url)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '8px',
+                                    padding: '8px 16px',
+                                    background: 'rgba(37, 211, 102, 0.15)',
+                                    border: '1px solid rgba(37, 211, 102, 0.4)',
+                                    color: '#25D366',
+                                    borderRadius: '999px',
+                                    fontSize: '0.82rem',
+                                    fontWeight: '700',
+                                    textDecoration: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s ease'
+                                }}
+                            >
+                                <Share2 size={14} />
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+
+                        {/* Desktop Fallback Option */}
+                        <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '14px' }}>
+                            <a
+                                href={selectedModalCity.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    color: 'rgba(230, 241, 255, 0.65)',
+                                    fontSize: '0.82rem',
+                                    fontWeight: '500',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.2s ease'
+                                }}
+                                onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'}
+                                onMouseOut={(e) => e.currentTarget.style.color = 'rgba(230, 241, 255, 0.65)'}
+                            >
+                                <span>Or open preview in desktop browser anyway</span>
+                                <ExternalLink size={12} />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <Footer />
         </Layout>
     );

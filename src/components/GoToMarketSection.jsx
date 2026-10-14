@@ -46,18 +46,34 @@ const GoToMarketSection = () => {
                     
                     {/* Text Left */}
                     <div className="animate-fade-up">
-                        <h2 className="section-title" style={{ fontWeight: '800', marginBottom: '1.5rem' }}>
+                        <div className="hero-executive-badge" style={{ marginBottom: '1.25rem' }}>
+                            <span className="badge-status-dot"></span>
+                            <span className="badge-tag">GO-TO-MARKET</span>
+                            <span className="badge-divider"></span>
+                            <span className="badge-text">CREATOR NETWORK ROLLOUT</span>
+                        </div>
+
+                        <h2 className="section-title" style={{ 
+                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
+                            fontSize: 'clamp(2.4rem, 4.5vw, 3.5rem)',
+                            fontWeight: '800', 
+                            letterSpacing: '-0.02em',
+                            lineHeight: '1.15',
+                            marginBottom: '1.5rem', 
+                            color: '#ffffff' 
+                        }}>
                             Go To <span className="text-cyan">Market</span>
                         </h2>
                         
-                        <p style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', lineHeight: '1.6', marginBottom: '20px' }}>
-                            Our Vibe Challenges are configurable for different guest journeys and to be set up and promoted by external or internal creators
+                        <p style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)', fontWeight: '500', color: 'rgba(230, 241, 255, 0.88)', marginTop: '10px', letterSpacing: '0.02em', lineHeight: '1.6', marginBottom: '20px' }}>
+                            Our Vibe Challenges are configurable across diverse guest journeys and can be launched and promoted seamlessly by external or internal creators.
                         </p>
 
                         <JourneyLifecycle />
 
-                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-outline" style={{ marginTop: '30px', padding: '12px 25px', borderColor: 'var(--color-cyan-neon)', color: 'var(--color-cyan-neon)', fontSize: '0.9rem' }}>
-                            Audit My Vibe <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                        <a href="https://vibe-audit-engine.vercel.app/" className="hero-search-btn" style={{ marginTop: '30px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                            <span>Audit My Vibe</span>
+                            <ArrowRight size={18} />
                         </a>
                     </div>
 

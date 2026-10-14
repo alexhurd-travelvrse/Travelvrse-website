@@ -94,9 +94,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    min-height: 2.2rem;
-    height: auto;
-    line-height: 1.35;
+    height: 2.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,11 +112,9 @@
 .member-background {
     margin-top: auto;
     padding-top: 10px;
-    padding-bottom: 6px;
     border-top: 1px solid rgba(255,255,255,0.05);
     width: 100%;
-    min-height: 3.8rem;
-    height: auto;
+    height: 3.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,7 +126,6 @@
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
-    line-height: 1.4;
 }
 
 @media (min-width: 769px) {
@@ -139,8 +134,7 @@
         gap: 30px;
     }
     .team-card {
-        min-height: 340px;
-        height: auto;
+        height: 340px;
         padding: 20px;
     }
     .member-image-wrapper {

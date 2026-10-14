@@ -27,7 +27,7 @@ const team = [
     },
     {
         name: "Lindsay Kotas",
-        role: "VP Operations Insignia Event Services, Ex Marriott",
+        role: "Insignia Event Services, Ex Marriott",
         image: "/models/LindsayKotas.jpg",
         linkedin: "https://www.linkedin.com/in/lindsay-kotas/",
         advisor: true

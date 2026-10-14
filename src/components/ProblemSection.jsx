@@ -156,11 +156,17 @@ const ProblemSection = () => {
                     {/* Text Column (Right on Desktop, Top on Mobile) */}
                     <div className="animate-fade-up delay-1 marketplace-header text-col" style={{ paddingTop: '0' }}>
                         <div style={{ marginBottom: '2rem' }}>
-                            <h2 style={{ fontWeight: '800', marginBottom: '15px', lineHeight: '1.1' }}>
+                            <div className="hero-executive-badge" style={{ marginBottom: '1rem' }}>
+                                <span className="badge-status-dot"></span>
+                                <span className="badge-tag">GUEST ACQUISITION</span>
+                                <span className="badge-divider"></span>
+                                <span className="badge-text">DISINTERMEDIATE OTAS</span>
+                            </div>
+                            <h2 style={{ fontFamily: "'Outfit', system-ui, -apple-system, sans-serif", fontWeight: '800', fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '15px', lineHeight: '1.1', letterSpacing: '-0.02em', color: '#ffffff' }}>
                                 Vibe Challenge <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
-                            <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-gold)', letterSpacing: '1px', lineHeight: '1.5' }}>
-                                Travelvrse Vibe Challenges capture travellers in the inspiration stage before they look at OTAs. We pair your experiences with real-time local vibes. Seamlessly capturing guest intent
+                            <div style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', fontWeight: '500', color: 'rgba(230, 241, 255, 0.88)', letterSpacing: '0.02em', lineHeight: '1.6' }}>
+                                Travelvrse Vibe Challenges capture travellers in the inspiration stage before they look at OTAs. We pair your experiences with real-time local vibes—seamlessly capturing guest intent.
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />

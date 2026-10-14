@@ -11,7 +11,7 @@ const team = [
     },
     {
         name: "Lee Probert",
-        role: "CTO",
+        role: "Technical Advisor",
         image: "/models/lee Probert.png",
         linkedin: "https://www.linkedin.com/in/leeprobert/"
     },

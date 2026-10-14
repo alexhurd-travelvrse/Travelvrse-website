@@ -22,7 +22,7 @@ const team = [
         role: "Chairman",
         image: "/models/Julianphoto.jpg",
         linkedin: "https://www.linkedin.com/in/julianhouchin/",
-        background: "Ex GLC Resorts and IO Resorts",
+        background: "Ex GLC Resorts, IO Resort, Radisson Blu and Carlson Rezidor",
         advisor: false
     },
     {

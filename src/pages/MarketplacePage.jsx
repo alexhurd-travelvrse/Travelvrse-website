@@ -49,8 +49,27 @@ const cities = [
   },
   { 
     name: 'Manchester', 
+    vibe: 'Northern Quarter',
     img: 'https://images.pexels.com/photos/2884144/pexels-photo-2884144.jpeg?auto=compress&cs=tinysrgb&w=800',
     desc: 'The heart of British industrial heritage'
+  },
+  { 
+    name: 'London',
+    vibe: 'Fulham Pier',
+    img: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?auto=format&fit=crop&q=80&w=800',
+    desc: 'Thames riverfront destination, luxury wellness, and terrace dining'
+  },
+  { 
+    name: 'Dubai',
+    vibe: 'Jumeirah Beach',
+    img: 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&q=80&w=800',
+    desc: 'Iconic Arabian Gulf coastline, beach clubs, and ultra-luxury hospitality'
+  },
+  { 
+    name: 'Chichester',
+    vibe: 'The Witterings',
+    img: 'https://images.unsplash.com/photo-1509233725247-49e657c54213?auto=format&fit=crop&q=80&w=800',
+    desc: 'Pristine coastal dunes, golden sandbars, and quintessential English surf culture'
   }
 ];
 

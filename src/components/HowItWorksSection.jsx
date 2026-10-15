@@ -128,10 +128,10 @@ const HowItWorksSection = () => {
                             </div>
                         </div>
 
-                        <a href="https://vibe-audit-engine.vercel.app/" className="hero-search-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                            <span>Audit My Vibe</span>
+                        <Link to="/partner" className="hero-search-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                            <span>Become a Partner</span>
                             <ArrowRight size={18} />
-                        </a>
+                        </Link>
                     </div>
 
                 </div>

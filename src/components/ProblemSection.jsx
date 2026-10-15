@@ -147,9 +147,9 @@ const ProblemSection = () => {
                                 ))}
                             </div>
                         </div>
-                        <a href="https://vibe-audit-engine.vercel.app/" className="btn btn-primary" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
-                            Audit My Vibe
-                        </a>
+                        <Link to="/partner" className="btn btn-primary" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
+                            Become a Partner
+                        </Link>
                     </div>
 
 

@@ -1,4 +1,5 @@
 import { Send, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './RevenueSection.css';
 
 const RevenueSection = () => {
@@ -108,10 +109,10 @@ const RevenueSection = () => {
                                 </div>
                             </div>
                         </div>
-                        <a href="https://vibe-audit-engine.vercel.app/" className="hero-search-btn" style={{ marginTop: '35px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                            <span>Audit My Vibe</span>
+                        <Link to="/partner" className="hero-search-btn" style={{ marginTop: '35px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                            <span>Become a Partner</span>
                             <ArrowRight size={18} />
-                        </a>
+                        </Link>
                     </div>
 
                 </div>

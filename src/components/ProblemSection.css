@@ -67,21 +67,15 @@
 
 @media (min-width: 992px) {
     .marketplace-header {
-        margin-top: -5rem;
+        margin-top: 0;
     }
 }
 
 .marketplace-header h2 {
-    font-size: 2.8rem;
-    line-height: 1.1;
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    line-height: 1.15;
     text-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    letter-spacing: -1px;
-}
-
-@media (min-width: 768px) {
-    .marketplace-header h2 {
-        font-size: 4rem;
-    }
+    letter-spacing: -0.02em;
 }
 
 .lead-in-text {

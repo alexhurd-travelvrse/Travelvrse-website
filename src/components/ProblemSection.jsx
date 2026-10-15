@@ -147,10 +147,6 @@ const ProblemSection = () => {
                                 ))}
                             </div>
                         </div>
-                        <Link to="/partner" className="hero-search-btn" style={{ marginTop: '25px', display: 'inline-flex', alignItems: 'center', gap: '8px', width: 'fit-content' }}>
-                            <span>Become a Partner</span>
-                            <ArrowRight size={18} />
-                        </Link>
                     </div>
 
 
@@ -163,55 +159,96 @@ const ProblemSection = () => {
                                 <span className="badge-divider"></span>
                                 <span className="badge-text">DISINTERMEDIATE OTAS</span>
                             </div>
-                            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: '800', fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '15px', lineHeight: '1.1', letterSpacing: '-0.02em', color: '#ffffff' }}>
-                                Challenge <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
+                            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: '800', fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', marginBottom: '16px', lineHeight: '1.15', letterSpacing: '-0.02em', color: '#ffffff' }}>
+                                Challenge <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', fontWeight: '500', color: 'rgba(240, 246, 255, 0.92)', letterSpacing: '0.01em', lineHeight: '1.65' }}>
                                 Reach prospective guests during trip inspiration—long before they search an OTA. We connect your on-site amenities with local cultural highlights into interactive discovery journeys.
                             </div>
-                            <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
-                                <ChevronDown size={24} className="animate-bounce" />
-                            </div>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', position: 'relative' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', position: 'relative' }}>
                             {/* Vertical Path Line */}
                             <div className="path-line" style={{ 
                                 position: 'absolute', 
-                                left: '24px', 
-                                top: '-10px', 
+                                left: '20px', 
+                                top: '10px', 
                                 bottom: '40px', 
                                 width: '2px', 
                                 background: 'linear-gradient(to bottom, var(--color-gold), var(--color-cyan-neon))',
-                                opacity: 0.3
+                                opacity: 0.25
                             }}></div>
 
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
-                                <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>01</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)' }}>Travellers explore your rooms, dining, and neighborhood highlights through gamified 3D and mobile discovery</p>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                                <div style={{ 
+                                    width: '42px', 
+                                    height: '42px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(0, 229, 255, 0.12)', 
+                                    border: '1px solid rgba(0, 229, 255, 0.35)', 
+                                    color: 'var(--color-cyan-neon)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    fontSize: '0.95rem', 
+                                    fontWeight: '800',
+                                    flexShrink: 0
+                                }}>01</div>
+                                <div style={{ flex: 1 }}>
+                                    <h4 style={{ fontSize: '1.15rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
+                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>Travellers explore your rooms, dining, and neighborhood highlights through gamified 3D and mobile discovery</p>
                                 </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
-                                <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-gold)', width: '45px', lineHeight: '1', background: '#050b14' }}>02</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Value Exchange</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)' }}>Visitors unlock exclusive on-property perks, curated city guides, and playlists by sharing their upcoming travel timeline</p>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                                <div style={{ 
+                                    width: '42px', 
+                                    height: '42px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(255, 215, 0, 0.12)', 
+                                    border: '1px solid rgba(255, 215, 0, 0.35)', 
+                                    color: 'var(--color-gold)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    fontSize: '0.95rem', 
+                                    fontWeight: '800',
+                                    flexShrink: 0
+                                }}>02</div>
+                                <div style={{ flex: 1 }}>
+                                    <h4 style={{ fontSize: '1.15rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Value Exchange</h4>
+                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>Visitors unlock exclusive on-property perks, curated city guides, and playlists by sharing their upcoming travel timeline</p>
                                 </div>
                             </div>
-                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
-                                <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>03</div>
-                                <div>
-                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)' }}>First-party guest profiles sync directly with your CRM, empowering you to secure high-value stays with zero OTA commissions</p>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                                <div style={{ 
+                                    width: '42px', 
+                                    height: '42px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(0, 229, 255, 0.12)', 
+                                    border: '1px solid rgba(0, 229, 255, 0.35)', 
+                                    color: 'var(--color-cyan-neon)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    fontSize: '0.95rem', 
+                                    fontWeight: '800',
+                                    flexShrink: 0
+                                }}>03</div>
+                                <div style={{ flex: 1 }}>
+                                    <h4 style={{ fontSize: '1.15rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
+                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>First-party guest profiles sync directly with your CRM, empowering you to secure high-value stays with zero OTA commissions</p>
                                 </div>
                             </div>
                         </div>
 
-
-
+                        <div style={{ marginTop: '35px' }}>
+                            <Link to="/partner" className="hero-search-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', width: 'fit-content' }}>
+                                <span>Become a Partner</span>
+                                <ArrowRight size={18} />
+                            </Link>
+                        </div>
                     </div>
+
                 </div>
             </div>
 

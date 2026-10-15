@@ -38,8 +38,27 @@ const Hero = () => {
                     </h1>
 
                     <p className="hero-subheadline">
-                        Travelvrse turns your signature experiences and trending local culture into interactive challenges. Position your brand as the ultimate destination launchpad—capturing high-intent guest leads before they check OTAs
+                        Interactive destination challenges that turn local culture into qualified, direct hotel bookings.
                     </p>
+
+                    {/* 3 Executive Value Points */}
+                    <div className="hero-value-strip">
+                        <div className="hero-value-pill">
+                            <span className="pill-dot pill-dot-cyan"></span>
+                            <span className="pill-label">Engage</span>
+                            <span className="pill-desc">Turn amenities &amp; local gems into playable mobile challenges</span>
+                        </div>
+                        <div className="hero-value-pill">
+                            <span className="pill-dot pill-dot-gold"></span>
+                            <span className="pill-label">Capture</span>
+                            <span className="pill-desc">Stream verified guest dates &amp; trip intent directly to your CRM</span>
+                        </div>
+                        <div className="hero-value-pill">
+                            <span className="pill-dot pill-dot-cyan"></span>
+                            <span className="pill-label">Disintermediate</span>
+                            <span className="pill-desc">Win high-value direct bookings before guests check OTAs</span>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Phased Entry Call to Action: Reveals smoothly a couple of seconds after initial load */}

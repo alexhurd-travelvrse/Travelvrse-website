@@ -56,7 +56,7 @@ const cities = [
   { 
     name: 'London',
     vibe: 'Fulham Pier',
-    img: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?auto=format&fit=crop&q=80&w=800',
+    img: '/assets/putney_riverside.jpg',
     desc: 'Thames riverfront destination, luxury wellness, and terrace dining'
   },
   { 

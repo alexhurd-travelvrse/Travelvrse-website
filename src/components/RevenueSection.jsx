@@ -73,7 +73,7 @@ const RevenueSection = () => {
                                 <div className="text-gold" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Target Next-Gen On Mobile</h4>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '1rem', lineHeight: '1.6' }}>
                                         Capture the fastest growing segment - Millennials and GenZ will account for 70% of luxury travel sales by 2029
                                     </p>
                                 </div>
@@ -83,7 +83,7 @@ const RevenueSection = () => {
                                 <div className="text-cyan" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Increase Direct Bookings</h4>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '1rem', lineHeight: '1.6' }}>
                                         Convert travellers in the inspiration phase before they look at OTAs
                                     </p>
                                 </div>
@@ -93,7 +93,7 @@ const RevenueSection = () => {
                                 <div className="text-gold" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Increase Upsell</h4>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '1rem', lineHeight: '1.6' }}>
                                         Target personalised, high-value upgrade offers based on traveller location specific preferences
                                     </p>
                                 </div>
@@ -103,7 +103,7 @@ const RevenueSection = () => {
                                 <div className="text-cyan" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
                                 <div>
                                     <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Enhance Search Visibility</h4>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: '1.5' }}>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '1rem', lineHeight: '1.6' }}>
                                         Rank higher versus OTAs. Unique content that matches vibe based AI search and links travel brands to their local area
                                     </p>
                                 </div>

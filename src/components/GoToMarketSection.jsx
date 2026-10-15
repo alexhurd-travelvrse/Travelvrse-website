@@ -5,7 +5,7 @@ import './GoToMarketSection.css';
 const JourneyLifecycle = () => {
     return (
         <div className="glass-card" style={{ padding: '2rem 1.5rem', marginTop: '30px', background: 'rgba(255,255,255,0.02)', borderRadius: '24px' }}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 'bold', letterSpacing: '2px', color: 'rgba(255,255,255,0.5)', marginBottom: '25px', textTransform: 'uppercase', textAlign: 'center' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', color: 'rgba(226, 232, 240, 0.8)', marginBottom: '25px', textTransform: 'uppercase', textAlign: 'center' }}>
                 SUPPORTED GUEST JOURNEYS
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
@@ -106,7 +106,7 @@ const GoToMarketSection = () => {
                                     <Target size={24} />
                                 </div>
                                 <div style={{ flex: 1 }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>MY GOAL</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'rgba(226, 232, 240, 0.8)', fontWeight: '900', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>MY GOAL</div>
                                     <div style={{ fontWeight: '800', color: 'white', fontSize: '1.05rem', lineHeight: '1.3' }}>Promote spa to target local wellness vibe</div>
                                 </div>
                             </div>

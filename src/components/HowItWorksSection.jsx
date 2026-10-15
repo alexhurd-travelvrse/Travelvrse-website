@@ -69,7 +69,7 @@ const HowItWorksSection = () => {
                                 </div>
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Complete a 1 min Vibe Audit</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
                                         Match your existing onsite experiences against local trends
                                     </p>
                                 </div>
@@ -82,7 +82,7 @@ const HowItWorksSection = () => {
                                 </div>
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Agree creator brief</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
                                         We use search/social media data to dynamically recommend the top 5 trending onsite and local experiences
                                     </p>
                                 </div>
@@ -95,7 +95,7 @@ const HowItWorksSection = () => {
                                 </div>
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Local creators build</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
                                         Scanning your property with a mobile phone / action camera and our creator tools
                                     </p>
                                 </div>
@@ -108,7 +108,7 @@ const HowItWorksSection = () => {
                                 </div>
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Market on social media using influencers</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
                                         Connect with influencers in our marketplace and/or set up your own internal influencers
                                     </p>
                                 </div>
@@ -121,7 +121,7 @@ const HowItWorksSection = () => {
                                 </div>
                                 <div>
                                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Drive direct conversion</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>
+                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
                                         Target travellers with offers from your CRM system
                                     </p>
                                 </div>

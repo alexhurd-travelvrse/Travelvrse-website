@@ -147,8 +147,9 @@ const ProblemSection = () => {
                                 ))}
                             </div>
                         </div>
-                        <Link to="/partner" className="btn btn-primary" style={{ marginTop: '30px', padding: '15px 40px', display: 'inline-block', width: 'fit-content' }}>
-                            Become a Partner
+                        <Link to="/partner" className="hero-search-btn" style={{ marginTop: '25px', display: 'inline-flex', alignItems: 'center', gap: '8px', width: 'fit-content' }}>
+                            <span>Become a Partner</span>
+                            <ArrowRight size={18} />
                         </Link>
                     </div>
 
@@ -162,10 +163,10 @@ const ProblemSection = () => {
                                 <span className="badge-divider"></span>
                                 <span className="badge-text">DISINTERMEDIATE OTAS</span>
                             </div>
-                            <h2 style={{ fontFamily: "'Outfit', system-ui, -apple-system, sans-serif", fontWeight: '800', fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '15px', lineHeight: '1.1', letterSpacing: '-0.02em', color: '#ffffff' }}>
+                            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: '800', fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '15px', lineHeight: '1.1', letterSpacing: '-0.02em', color: '#ffffff' }}>
                                 Challenge <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
-                            <div style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', fontWeight: '500', color: 'rgba(230, 241, 255, 0.88)', letterSpacing: '0.02em', lineHeight: '1.6' }}>
+                            <div style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', fontWeight: '500', color: 'rgba(240, 246, 255, 0.92)', letterSpacing: '0.01em', lineHeight: '1.65' }}>
                                 Travelvrse Destination Challenges capture travellers in the inspiration stage before they look at OTAs. We pair your experiences with real-time local vibes—seamlessly capturing guest intent.
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
@@ -189,21 +190,21 @@ const ProblemSection = () => {
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>01</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Travellers have fun exploring your top 5 local vibes—a playful, gamified experience showcasing your amenities and tours alongside hidden gems</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)' }}>Travellers have fun exploring your top 5 local vibes—a playful, gamified experience showcasing your amenities and tours alongside hidden gems</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-gold)', width: '45px', lineHeight: '1', background: '#050b14' }}>02</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Value Exchange</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Guests unlock a real-world reward, curated vibe checklist, and local Spotify playlist—while you capture trip-specific guest intent in real time</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)' }}>Guests unlock a real-world reward, curated vibe checklist, and local Spotify playlist—while you capture trip-specific guest intent in real time</p>
                                 </div>
                             </div>
                              <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
                                 <div style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-cyan-neon)', width: '45px', lineHeight: '1', background: '#050b14' }}>03</div>
                                 <div>
                                     <h4 style={{ fontSize: '1.2rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.7)' }}>Traveller details, dates, and verified intent stream directly to your CRM for direct revenue offers</p>
+                                    <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)' }}>Traveller details, dates, and verified intent stream directly to your CRM for direct revenue offers</p>
                                 </div>
                             </div>
                         </div>

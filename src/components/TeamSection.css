@@ -95,15 +95,15 @@
 }
 
 .member-role {
-    font-size: 0.68rem !important;
-    font-weight: 600;
+    font-size: 0.72rem !important;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.4px;
+    letter-spacing: 1.2px;
     height: 1.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .member-background {
@@ -118,12 +118,12 @@
 }
 
 .member-background p {
-    font-size: 0.62rem;
-    color: rgba(5, 229, 255, 0.85);
-    font-weight: 800;
+    font-size: 0.68rem;
+    color: rgba(0, 229, 255, 0.95);
+    font-weight: 700;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    line-height: 1.35;
+    line-height: 1.4;
     margin: 0;
     padding: 0 6px;
 }

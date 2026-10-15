@@ -41,7 +41,7 @@ const PartnerPage = () => {
                 <div className="container">
                     <Helmet>
                         <title>Destination Challenges for Hotels &amp; Cruise | Travelvrse</title>
-                        <meta name="description" content="Launch branded destination challenges for hotels, resorts, and cruise operators. Increase direct revenue, capture qualified guest data, and disintermediate OTAs." />
+                        <meta name="description" content="Launch branded destination challenges for hotels, resorts, and cruise operators. Increase direct revenue, capture high-intent guest data, and disintermediate OTAs." />
                     </Helmet>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
                          <div className="animate-fade-up">

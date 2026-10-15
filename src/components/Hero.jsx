@@ -27,9 +27,7 @@ const Hero = () => {
                 <div className="hero-header-group animate-fade-up">
                     <div className="hero-executive-badge">
                         <span className="badge-status-dot"></span>
-                        <span className="badge-tag">AI READY</span>
-                        <span className="badge-divider"></span>
-                        <span className="badge-text">DESTINATION CHALLENGES FOR HOTELS &amp; CRUISE</span>
+                        <span className="badge-text">DESTINATION CHALLENGES FOR HOTELS, CRUISE AND TOUR OPERATORS</span>
                         <span className="badge-beta-pill">BETA</span>
                     </div>
 

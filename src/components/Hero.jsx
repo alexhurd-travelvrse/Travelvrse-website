@@ -29,7 +29,7 @@ const Hero = () => {
                         <span className="badge-status-dot"></span>
                         <span className="badge-tag">AI READY</span>
                         <span className="badge-divider"></span>
-                        <span className="badge-text">VIBE CHALLENGES FOR HOTELS, CRUISE AND TOUR OPERATORS</span>
+                        <span className="badge-text">DESTINATION CHALLENGES FOR HOTELS &amp; CRUISE</span>
                         <span className="badge-beta-pill">BETA</span>
                     </div>
 
@@ -38,7 +38,7 @@ const Hero = () => {
                     </h1>
 
                     <p className="hero-subheadline">
-                        Interactive destination challenges that turn local culture into qualified, direct hotel bookings
+                        Interactive Destination Challenges that turn local culture into qualified, direct hotel bookings
                     </p>
                 </div>
 

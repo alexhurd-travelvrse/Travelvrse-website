@@ -40,16 +40,16 @@ const PartnerPage = () => {
             <section className="section-padding" style={{ background: 'linear-gradient(to bottom, #050b14, #0a1628)', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
                 <div className="container">
                     <Helmet>
-                        <title>Hotel Partnership Program | Increase Direct Revenue | Travelvrse</title>
-                        <meta name="description" content="Join Travelvrse as a hotel or cruise partner. Increase direct revenue, capture qualified guest data, and market your iconic experiences in 3D." />
+                        <title>Destination Challenges for Hotels &amp; Cruise | Travelvrse</title>
+                        <meta name="description" content="Launch branded destination challenges for hotels, resorts, and cruise operators. Increase direct revenue, capture qualified guest data, and disintermediate OTAs." />
                     </Helmet>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
                          <div className="animate-fade-up">
                             <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.1' }}>
-                                Increase Direct <span className="text-gold">Hotel Revenue</span> with Experience Marketing
+                                Destination Challenges for <span className="text-gold">Hotels &amp; Resorts</span>
                             </h1>
                             <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: '1.6' }}>
-                                Travelvrse works with hotels, hostels, resorts, cruise operators, and landmark properties to promote their iconic experiences as a hook to capture qualified guest profiles.
+                                Launch branded, interactive destination challenges that capture high-intent guests before they check OTAs—turning your signature amenities and local culture into direct revenue.
                             </p>
                             
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>

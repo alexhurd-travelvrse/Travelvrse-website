@@ -43,68 +43,72 @@ const PartnerPage = () => {
                         <title>Destination Challenges for Hotels &amp; Cruise | Travelvrse</title>
                         <meta name="description" content="Launch branded destination challenges for hotels, resorts, and cruise operators. Increase direct revenue, capture high-intent guest data, and disintermediate OTAs." />
                     </Helmet>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '50px', alignItems: 'center' }}>
                          <div className="animate-fade-up">
-                            <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.1' }}>
+                            <div className="hero-executive-badge" style={{ marginBottom: '1.25rem' }}>
+                                <span className="badge-status-dot"></span>
+                                <span className="badge-tag">B2B PARTNERSHIP</span>
+                                <span className="badge-divider"></span>
+                                <span className="badge-text">HOSPITALITY PROGRAM</span>
+                            </div>
+
+                            <h1 style={{ fontFamily: "var(--font-display)", fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)', fontWeight: '800', marginBottom: '1.25rem', lineHeight: '1.15', letterSpacing: '-0.02em', color: '#ffffff' }}>
                                 Destination Challenges for <span className="text-gold">Hotels &amp; Resorts</span>
                             </h1>
-                            <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: '1.6' }}>
+                            <p style={{ fontSize: '1.05rem', color: 'rgba(240, 246, 255, 0.9)', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: '1.65' }}>
                                 Launch branded, interactive destination challenges that capture high-intent guests before they check OTAs—turning your signature amenities and local culture into direct revenue.
                             </p>
                             
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                    <ShieldCheck className="text-gold" size={24} />
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+                                <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                                    <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(255, 215, 0, 0.12)', border: '1px solid rgba(255, 215, 0, 0.35)', color: 'var(--color-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                        <ShieldCheck size={20} />
+                                    </div>
                                     <div>
-                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Target Next-Gen On Mobile</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>Millennials and GenZ will account for 70% of luxury hotel sales by 2029</p>
+                                        <h4 style={{ color: 'white', marginBottom: '4px', fontSize: '1.1rem', fontWeight: 700 }}>Target Next-Gen On Mobile</h4>
+                                        <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>Millennials and GenZ will account for 70% of luxury hotel sales by 2029</p>
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                    <TrendingUp className="text-cyan" size={24} />
+                                <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                                    <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(0, 229, 255, 0.12)', border: '1px solid rgba(0, 229, 255, 0.35)', color: 'var(--color-cyan-neon)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                        <TrendingUp size={20} />
+                                    </div>
                                     <div>
-                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Increase Direct Revenue</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>Capture high-intent guests before they look at OTAs</p>
+                                        <h4 style={{ color: 'white', marginBottom: '4px', fontSize: '1.1rem', fontWeight: 700 }}>Increase Direct Revenue</h4>
+                                        <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>Capture high-intent guests before they look at OTAs</p>
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                    <Users className="text-gold" size={24} />
+                                <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                                    <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(255, 215, 0, 0.12)', border: '1px solid rgba(255, 215, 0, 0.35)', color: 'var(--color-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                        <Users size={20} />
+                                    </div>
                                     <div>
-                                        <h4 style={{ color: 'white', marginBottom: '5px', fontSize: '1.1rem' }}>Increase Upsell</h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>Build rich guest profiles via photorealistic challenges</p>
+                                        <h4 style={{ color: 'white', marginBottom: '4px', fontSize: '1.1rem', fontWeight: 700 }}>Increase Upsell</h4>
+                                        <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>Build rich guest profiles via photorealistic challenges</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="glass-card animate-fade-up delay-1" style={{ padding: '3rem', borderRadius: '24px' }}>
+                        <div className="glass-card animate-fade-up delay-1" style={{ padding: '2.5rem', borderRadius: '24px' }}>
                             {!submitted ? (
                                 <>
-                                    <div style={{ marginBottom: '1rem' }}>
-                                        <span style={{ 
-                                            fontSize: '1rem', 
-                                            background: '#ffffff', 
-                                            color: '#050b14', 
-                                            padding: '6px 20px', 
-                                            borderRadius: '4px', 
-                                            fontWeight: '900',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '4px',
-                                            boxShadow: '0 0 20px rgba(255, 255, 255, 0.4)',
-                                            border: '2px solid var(--color-gold)',
-                                            display: 'inline-block'
-                                        }}>BETA</span>
+                                    <div className="hero-executive-badge" style={{ marginBottom: '1.25rem' }}>
+                                        <span className="badge-status-dot"></span>
+                                        <span className="badge-tag">APPLICATIONS OPEN</span>
+                                        <span className="badge-divider"></span>
+                                        <span className="badge-text">BETA COHORT</span>
                                     </div>
-                                    <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Become a partner</h3>
-                                    <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem' }}>Fill out the form below and we'll be in touch</p>
-                                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                                                <input type="text" name="firstName" placeholder="First Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
-                                                <input type="text" name="lastName" placeholder="Last Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                    <h3 style={{ fontFamily: "var(--font-display)", fontSize: '1.6rem', fontWeight: '800', marginBottom: '0.5rem', color: '#ffffff' }}>Become a Partner</h3>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.82)', marginBottom: '1.75rem', fontSize: '0.95rem' }}>Fill out the form below and our partnerships team will be in touch</p>
+                                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '15px' }}>
+                                                <input type="text" name="firstName" placeholder="First Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                                <input type="text" name="lastName" placeholder="Last Name" required className="form-input-premium" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
                                             </div>
-                                            <input type="email" name="email" placeholder="Work Email" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
-                                            <input type="text" name="company" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
-                                            <select name="propertyType" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
+                                            <input type="email" name="email" placeholder="Work Email" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                            <input type="text" name="company" placeholder="Company Name" required style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', padding: '12px 16px', borderRadius: '8px', color: 'white' }} />
+                                            <select name="propertyType" required style={{ background: '#0a192f', border: '1px solid rgba(255,255,255,0.12)', padding: '12px 16px', borderRadius: '8px', color: 'white' }}>
                                                 <option value="">Property Type</option>
                                                 <option value="hotels">Hotels</option>
                                                 <option value="hostels">Hostels</option>
@@ -112,8 +116,9 @@ const PartnerPage = () => {
                                                 <option value="cruise">Cruise Operator</option>
                                                 <option value="landmark">Landmark</option>
                                             </select>
-                                            <button className="btn btn-primary" type="submit" disabled={loading} style={{ marginTop: '10px', width: '100%', padding: '15px' }}>
-                                                {loading ? 'Sending...' : 'Register Interest'} <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                                            <button className="hero-search-btn" type="submit" disabled={loading} style={{ marginTop: '10px', width: '100%', justifyContent: 'center' }}>
+                                                <span>{loading ? 'Sending...' : 'Register Interest'}</span>
+                                                <ArrowRight size={18} />
                                             </button>
                                         </form>
                                 </>

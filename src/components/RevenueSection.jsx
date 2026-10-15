@@ -57,8 +57,8 @@ const RevenueSection = () => {
                         </div>
 
                         <h2 className="revenue-title" style={{ 
-                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
-                            fontSize: 'clamp(2.4rem, 4.5vw, 3.5rem)',
+                            fontFamily: "var(--font-display)",
+                            fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
                             fontWeight: '800', 
                             letterSpacing: '-0.02em',
                             lineHeight: '1.15',
@@ -68,42 +68,94 @@ const RevenueSection = () => {
                             Increase Your <span className="text-gold">Direct Revenue</span>
                         </h2>
                         
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div className="text-gold" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
-                                <div>
-                                    <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Target Next-Gen On Mobile</h4>
-                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '1rem', lineHeight: '1.6' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '40px', 
+                                    height: '40px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(255, 215, 0, 0.12)', 
+                                    border: '1px solid rgba(255, 215, 0, 0.35)', 
+                                    color: 'var(--color-gold)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
+                                    <CheckCircle2 size={20} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <h4 style={{ color: 'white', marginBottom: '6px', fontSize: '1.15rem', fontWeight: '700' }}>Target Next-Gen On Mobile</h4>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.98rem', lineHeight: '1.6', margin: 0 }}>
                                         Capture the fastest growing segment - Millennials and GenZ will account for 70% of luxury travel sales by 2029
                                     </p>
                                 </div>
                             </div>
 
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div className="text-cyan" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
-                                <div>
-                                    <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Increase Direct Bookings</h4>
-                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '1rem', lineHeight: '1.6' }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '40px', 
+                                    height: '40px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(0, 229, 255, 0.12)', 
+                                    border: '1px solid rgba(0, 229, 255, 0.35)', 
+                                    color: 'var(--color-cyan-neon)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
+                                    <CheckCircle2 size={20} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <h4 style={{ color: 'white', marginBottom: '6px', fontSize: '1.15rem', fontWeight: '700' }}>Increase Direct Bookings</h4>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.98rem', lineHeight: '1.6', margin: 0 }}>
                                         Convert travellers in the inspiration phase before they look at OTAs
                                     </p>
                                 </div>
                             </div>
 
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div className="text-gold" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
-                                <div>
-                                    <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Increase Upsell</h4>
-                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '1rem', lineHeight: '1.6' }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '40px', 
+                                    height: '40px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(255, 215, 0, 0.12)', 
+                                    border: '1px solid rgba(255, 215, 0, 0.35)', 
+                                    color: 'var(--color-gold)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
+                                    <CheckCircle2 size={20} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <h4 style={{ color: 'white', marginBottom: '6px', fontSize: '1.15rem', fontWeight: '700' }}>Increase Upsell</h4>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.98rem', lineHeight: '1.6', margin: 0 }}>
                                         Target personalised, high-value upgrade offers based on traveller location specific preferences
                                     </p>
                                 </div>
                             </div>
 
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div className="text-cyan" style={{ marginTop: '5px' }}><CheckCircle2 size={28} /></div>
-                                <div>
-                                    <h4 style={{ color: 'white', marginBottom: '8px', fontSize: '1.2rem', fontWeight: '700' }}>Enhance Search Visibility</h4>
-                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '1rem', lineHeight: '1.6' }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '40px', 
+                                    height: '40px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(0, 229, 255, 0.12)', 
+                                    border: '1px solid rgba(0, 229, 255, 0.35)', 
+                                    color: 'var(--color-cyan-neon)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
+                                    <CheckCircle2 size={20} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <h4 style={{ color: 'white', marginBottom: '6px', fontSize: '1.15rem', fontWeight: '700' }}>Enhance Search Visibility</h4>
+                                    <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.98rem', lineHeight: '1.6', margin: 0 }}>
                                         Rank higher versus OTAs. Unique content that matches vibe based AI search and links travel brands to their local area
                                     </p>
                                 </div>

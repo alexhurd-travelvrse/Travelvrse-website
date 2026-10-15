@@ -54,8 +54,8 @@ const GoToMarketSection = () => {
                         </div>
 
                         <h2 className="section-title" style={{ 
-                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
-                            fontSize: 'clamp(2.4rem, 4.5vw, 3.5rem)',
+                            fontFamily: "var(--font-display)",
+                            fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
                             fontWeight: '800', 
                             letterSpacing: '-0.02em',
                             lineHeight: '1.15',

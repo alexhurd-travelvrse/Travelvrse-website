@@ -103,8 +103,32 @@ select,
   color: var(--color-gold-champagne);
 }
 
+.text-gold-gradient,
+h1 .text-gold,
+h2 .text-gold,
+h3 .text-gold {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
 .text-cyan {
   color: var(--color-cyan-neon);
+}
+
+.section-title,
+.marketplace-header h2,
+.revenue-title,
+.journal-title,
+.team-title {
+  font-family: var(--font-display) !important;
+  font-size: clamp(2rem, 3.2vw, 2.75rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 1.25rem;
 }
 
 .section-padding {

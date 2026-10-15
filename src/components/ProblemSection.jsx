@@ -163,7 +163,7 @@ const ProblemSection = () => {
                                 Challenge <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', fontWeight: '500', color: 'rgba(240, 246, 255, 0.92)', letterSpacing: '0.01em', lineHeight: '1.65' }}>
-                                Reach prospective guests during trip inspiration—long before they search an OTA. We connect your on-site amenities with local cultural highlights into interactive discovery journeys.
+                                Reach prospective guests during trip inspiration—long before they search an OTA
                             </div>
                         </div>
 
@@ -196,7 +196,7 @@ const ProblemSection = () => {
                                 }}>01</div>
                                 <div style={{ flex: 1 }}>
                                     <h4 style={{ fontSize: '1.15rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>Travellers explore your rooms, dining, and neighborhood highlights through gamified 3D and mobile discovery</p>
+                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>Travellers explore your rooms, dining, and neighborhood highlights through gamified mobile discovery</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
@@ -216,7 +216,7 @@ const ProblemSection = () => {
                                 }}>02</div>
                                 <div style={{ flex: 1 }}>
                                     <h4 style={{ fontSize: '1.15rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Value Exchange</h4>
-                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>Visitors unlock exclusive on-property perks, curated city guides, and playlists by sharing their upcoming travel timeline</p>
+                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>Guests unlock a real-world reward, curated vibe checklist, and local Spotify playlist—while you capture trip-specific guest intent in real time</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
@@ -236,7 +236,7 @@ const ProblemSection = () => {
                                 }}>03</div>
                                 <div style={{ flex: 1 }}>
                                     <h4 style={{ fontSize: '1.15rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Convert</h4>
-                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>First-party guest profiles sync directly with your CRM, empowering you to secure high-value stays with zero OTA commissions</p>
+                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>First-party guest profiles sync directly with your CRM</p>
                                 </div>
                             </div>
                         </div>

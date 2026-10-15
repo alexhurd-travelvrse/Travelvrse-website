@@ -94,10 +94,10 @@ const BlogJournal = () => {
                     </div>
 
                     <h2 className="journal-title" style={{ 
-                        fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
-                        fontSize: 'clamp(2.4rem, 5vw, 3.8rem)', 
+                        fontFamily: "var(--font-display)",
+                        fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', 
                         fontWeight: '800', 
-                        lineHeight: '1.1',
+                        lineHeight: '1.15',
                         letterSpacing: '-0.02em',
                         color: '#ffffff',
                         marginBottom: '1rem',

@@ -50,8 +50,8 @@ const HowItWorksSection = () => {
                         </div>
 
                         <h2 className="section-title" style={{ 
-                            fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
-                            fontSize: 'clamp(2.4rem, 4.5vw, 3.5rem)',
+                            fontFamily: "var(--font-display)",
+                            fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
                             fontWeight: '800', 
                             letterSpacing: '-0.02em',
                             lineHeight: '1.15',
@@ -61,67 +61,117 @@ const HowItWorksSection = () => {
                             Implementation is <span className="text-gold">friction free</span>
                         </h2>
                         
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', marginBottom: '40px', marginTop: '30px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px', marginBottom: '35px', marginTop: '25px' }}>
                             {/* Step 1 */}
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ background: 'rgba(181, 148, 45, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(181, 148, 45, 0.3)', flexShrink: 0 }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '42px', 
+                                    height: '42px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(255, 215, 0, 0.12)', 
+                                    border: '1px solid rgba(255, 215, 0, 0.35)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
                                     <Zap size={20} className="text-gold" />
                                 </div>
-                                <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Complete a 1 min Vibe Audit</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
+                                <div style={{ flex: 1 }}>
+                                    <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Complete a 1 min Vibe Audit</h3>
+                                    <p style={{ fontSize: '0.98rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6', margin: 0 }}>
                                         Match your existing onsite experiences against local trends
                                     </p>
                                 </div>
                             </div>
 
                             {/* Step 2 */}
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ background: 'rgba(0, 229, 255, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(0, 229, 255, 0.3)', flexShrink: 0 }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '42px', 
+                                    height: '42px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(0, 229, 255, 0.12)', 
+                                    border: '1px solid rgba(0, 229, 255, 0.35)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
                                     <CheckCircle2 size={20} className="text-cyan" />
                                 </div>
-                                <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Agree creator brief</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
+                                <div style={{ flex: 1 }}>
+                                    <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Agree creator brief</h3>
+                                    <p style={{ fontSize: '0.98rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6', margin: 0 }}>
                                         We use search/social media data to dynamically recommend the top 5 trending onsite and local experiences
                                     </p>
                                 </div>
                             </div>
 
                             {/* Step 3 */}
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ background: 'rgba(181, 148, 45, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(181, 148, 45, 0.3)', flexShrink: 0 }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '42px', 
+                                    height: '42px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(255, 215, 0, 0.12)', 
+                                    border: '1px solid rgba(255, 215, 0, 0.35)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
                                     <Smartphone size={20} className="text-gold" />
                                 </div>
-                                <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Local creators build</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
+                                <div style={{ flex: 1 }}>
+                                    <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Local creators build</h3>
+                                    <p style={{ fontSize: '0.98rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6', margin: 0 }}>
                                         Scanning your property with a mobile phone / action camera and our creator tools
                                     </p>
                                 </div>
                             </div>
 
                             {/* Step 4 */}
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ background: 'rgba(0, 229, 255, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(0, 229, 255, 0.3)', flexShrink: 0 }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '42px', 
+                                    height: '42px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(0, 229, 255, 0.12)', 
+                                    border: '1px solid rgba(0, 229, 255, 0.35)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
                                     <Camera size={20} className="text-cyan" />
                                 </div>
-                                <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Market on social media using influencers</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
+                                <div style={{ flex: 1 }}>
+                                    <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Market on social media using influencers</h3>
+                                    <p style={{ fontSize: '0.98rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6', margin: 0 }}>
                                         Connect with influencers in our marketplace and/or set up your own internal influencers
                                     </p>
                                 </div>
                             </div>
 
                             {/* Step 5 */}
-                            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ background: 'rgba(181, 148, 45, 0.1)', padding: '10px', borderRadius: '12px', border: '1px solid rgba(181, 148, 45, 0.3)', flexShrink: 0 }}>
+                            <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
+                                <div style={{ 
+                                    width: '42px', 
+                                    height: '42px', 
+                                    borderRadius: '12px', 
+                                    background: 'rgba(255, 215, 0, 0.12)', 
+                                    border: '1px solid rgba(255, 215, 0, 0.35)', 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'center', 
+                                    flexShrink: 0 
+                                }}>
                                     <ArrowRight size={20} className="text-gold" />
                                 </div>
-                                <div>
-                                    <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Drive direct conversion</h3>
-                                    <p style={{ fontSize: '1rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6' }}>
+                                <div style={{ flex: 1 }}>
+                                    <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>Drive direct conversion</h3>
+                                    <p style={{ fontSize: '0.98rem', color: 'rgba(226, 232, 240, 0.88)', lineHeight: '1.6', margin: 0 }}>
                                         Target travellers with offers from your CRM system
                                     </p>
                                 </div>

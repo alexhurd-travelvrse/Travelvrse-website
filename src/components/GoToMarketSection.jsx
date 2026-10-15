@@ -66,7 +66,7 @@ const GoToMarketSection = () => {
                         </h2>
                         
                         <p style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)', fontWeight: '500', color: 'rgba(230, 241, 255, 0.88)', marginTop: '10px', letterSpacing: '0.02em', lineHeight: '1.6', marginBottom: '20px' }}>
-                            Our Vibe Challenges are configurable across diverse guest journeys and can be launched and promoted seamlessly by external or internal creators.
+                            Our Destination Challenges are configurable across diverse guest journeys and can be launched and promoted seamlessly by external or internal creators.
                         </p>
 
                         <JourneyLifecycle />

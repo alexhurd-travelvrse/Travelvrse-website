@@ -163,10 +163,10 @@ const ProblemSection = () => {
                                 <span className="badge-text">DISINTERMEDIATE OTAS</span>
                             </div>
                             <h2 style={{ fontFamily: "'Outfit', system-ui, -apple-system, sans-serif", fontWeight: '800', fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', marginBottom: '15px', lineHeight: '1.1', letterSpacing: '-0.02em', color: '#ffffff' }}>
-                                Vibe Challenge <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
+                                Challenge <br className="mobile-break" /> <span className="text-gold">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', fontWeight: '500', color: 'rgba(230, 241, 255, 0.88)', letterSpacing: '0.02em', lineHeight: '1.6' }}>
-                                Travelvrse Vibe Challenges capture travellers in the inspiration stage before they look at OTAs. We pair your experiences with real-time local vibes—seamlessly capturing guest intent.
+                                Travelvrse Destination Challenges capture travellers in the inspiration stage before they look at OTAs. We pair your experiences with real-time local vibes—seamlessly capturing guest intent.
                             </div>
                             <div style={{ color: 'var(--color-gold)', marginTop: '20px', marginBottom: '20px' }}>
                                 <ChevronDown size={24} className="animate-bounce" />

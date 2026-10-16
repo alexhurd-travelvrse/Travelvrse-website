@@ -40,8 +40,8 @@ const PartnerPage = () => {
             <section className="section-padding" style={{ background: 'linear-gradient(to bottom, #050b14, #0a1628)', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
                 <div className="container">
                     <Helmet>
-                        <title>Destination Challenges for Hotels &amp; Cruise | Travelvrse</title>
-                        <meta name="description" content="Launch branded destination challenges for hotels, resorts, and cruise operators. Increase direct revenue, capture high-intent guest data, and disintermediate OTAs." />
+                        <title>Travelvrse | Destination Challenges for Hotels, Cruise and Tour Operators</title>
+                        <meta name="description" content="Launch branded Destination Challenges for hotels, cruise lines, and tour operators. Increase direct revenue, capture high-intent guest data, and disintermediate OTAs." />
                     </Helmet>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '50px', alignItems: 'center' }}>
                          <div className="animate-fade-up">

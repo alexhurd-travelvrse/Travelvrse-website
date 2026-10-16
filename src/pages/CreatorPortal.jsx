@@ -16,10 +16,10 @@ const CreatorPortal = () => {
             <section className="portal-hero section-padding">
                 <div className="container text-center">
                     <h1 className="animate-fade-up">
-                        Monetize your <span className="text-cyan">Influence</span>.
+                        Monetize your <span className="text-gold">Influence</span>.
                     </h1>
                     <p className="subtitle mx-auto max-w-2xl animate-fade-up delay-1">
-                        Stop sending empty top-of-funnel traffic. Use Travelvrse 3D challenges to qualify your leads and earn significantly higher affiliate commissions.
+                        Stop sending empty top-of-funnel traffic. Use Travelvrse Destination Challenges to qualify your leads and earn significantly higher affiliate commissions.
                     </p>
                 </div>
             </section>
@@ -30,7 +30,7 @@ const CreatorPortal = () => {
                     <div className="glass-card feature-card animate-fade-up delay-1">
                         <Target size={36} className="text-cyan mb-4" />
                         <h3>1. Deep Qualification</h3>
-                        <p>Instead of generic link tracking, our platform tracks how they interact with the luxury 3D resort splat. We score their intent so you deliver validated leads to the brand.</p>
+                        <p>Instead of generic link tracking, our platform tracks how guests explore the resort and local highlights. We score their intent so you deliver validated leads to the brand.</p>
                     </div>
 
                     <div className="glass-card feature-card animate-fade-up delay-2">

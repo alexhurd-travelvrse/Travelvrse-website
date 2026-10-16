@@ -40,8 +40,8 @@ const CreatorPage = () => {
             <section className="section-padding" style={{ background: 'linear-gradient(to top, #050b14, #0a1628)', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
                 <div className="container">
                     <Helmet>
-                        <title>Travel Creator Marketplace | Monetize 3D Content | Travelvrse</title>
-                        <meta name="description" content="Join the world's first Rewarded Experience Marketplace for travel influencers. Turn 3D property scans into interactive challenges and earn rewards." />
+                        <title>Travel Creator Marketplace | Destination Challenges | Travelvrse</title>
+                        <meta name="description" content="Partner with leading hotels, cruise lines, and tour operators. Turn destination content into interactive mobile challenges and earn qualified rewards." />
                     </Helmet>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '50px', alignItems: 'center' }}>
                         <div className="animate-fade-up">

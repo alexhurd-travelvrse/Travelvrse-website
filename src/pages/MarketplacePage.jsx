@@ -119,8 +119,8 @@ const MarketplacePage = () => {
             }}>
                 <div className="container">
                     <Helmet>
-                        <title>3D Hotel Experience Marketplace | Travelvrse</title>
-                        <meta name="description" content="Discover and explore rewarded 3D hotel experiences from around the world. Connect with iconic destinations and earn exclusive travel rewards." />
+                        <title>Destination Challenges Marketplace | Hotels, Cruise &amp; Tour Experiences | Travelvrse</title>
+                        <meta name="description" content="Explore live Destination Challenges featuring Sea Containers London, Virgin Hotels Las Vegas, MSC Cruises, Ted Lasso Richmond, and ENA Suite Seoul. Mobile discovery paired with real-time local vibes." />
                     </Helmet>
 
                     <div style={{ textAlign: 'center', marginBottom: '70px' }}>
@@ -367,7 +367,7 @@ const MarketplacePage = () => {
                         {/* Eyebrow Badge */}
                         <div className="hero-executive-badge" style={{ marginBottom: '0.75rem', padding: '3px 12px' }}>
                             <span className="badge-status-dot"></span>
-                            <span className="badge-tag" style={{ fontSize: '0.65rem' }}>MOBILE-FIRST 3D</span>
+                            <span className="badge-tag" style={{ fontSize: '0.65rem' }}>MOBILE-FIRST</span>
                             <span className="badge-divider"></span>
                             <span className="badge-text" style={{ fontSize: '0.67rem' }}>{selectedModalCity.name}</span>
                         </div>
@@ -448,7 +448,7 @@ const MarketplacePage = () => {
                             </button>
 
                             <a
-                                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out the ${selectedModalCity.name} 3D Vibe Challenge on Travelvrse: ` + selectedModalCity.url)}`}
+                                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out the ${selectedModalCity.name} Vibe Challenge on Travelvrse: ` + selectedModalCity.url)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{

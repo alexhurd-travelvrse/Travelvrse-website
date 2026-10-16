@@ -28,8 +28,8 @@ const BarcelonaPage = () => {
             }}>
                 <div className="container" style={{ paddingTop: '150px', textAlign: 'center' }}>
                 <Helmet>
-                    <title>Barcelona City Explore | 3D Rewarded Experience | Travelvrse</title>
-                    <meta name="description" content="Explore Barcelona in immersive 3D. Join the Rewarded Experience challenge and discover iconic Catalonia from your browser." />
+                    <title>Barcelona City Explore | Destination Challenge | Travelvrse</title>
+                    <meta name="description" content="Explore Barcelona with Travelvrse. Join the Destination Challenge and discover iconic Catalonia and Mediterranean cruise experiences from your mobile browser." />
                 </Helmet>
                 <h4 className="text-cyan animate-fade-up">DESTINATION</h4>
                 <h1 className="hero-title animate-fade-up delay-1" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginTop: '10px' }}>

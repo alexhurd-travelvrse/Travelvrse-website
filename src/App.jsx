@@ -14,6 +14,7 @@ import CreatorPage from './pages/CreatorPage';
 import CreatorPortal from './pages/CreatorPortal';
 import RevenueSection from './components/RevenueSection';
 import { HelmetProvider } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
 
 // ScrollToTop component ensures we start at the top when navigating between pages
 const ScrollToTop = () => {
@@ -52,6 +53,22 @@ const App = () => {
           <Route path="/creator-portal" element={<CreatorPortal />} />
         </Routes>
       </Router>
+      <Analytics
+        beforeSend={(event) => {
+          if (typeof window !== 'undefined') {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('ignore_analytics') === 'true') {
+              localStorage.setItem('ignore_analytics', 'true');
+            } else if (urlParams.get('ignore_analytics') === 'false') {
+              localStorage.removeItem('ignore_analytics');
+            }
+            if (localStorage.getItem('ignore_analytics') === 'true') {
+              return null; // Exclude event from tracking
+            }
+          }
+          return event;
+        }}
+      />
     </HelmetProvider>
   );
 };

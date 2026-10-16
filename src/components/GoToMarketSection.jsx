@@ -62,7 +62,7 @@ const GoToMarketSection = () => {
                             marginBottom: '1.5rem', 
                             color: '#ffffff' 
                         }}>
-                            Go To <span className="text-cyan">Market</span>
+                            Go To <span className="text-gold">Market</span>
                         </h2>
                         
                         <p style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)', fontWeight: '500', color: 'rgba(230, 241, 255, 0.88)', marginTop: '10px', letterSpacing: '0.02em', lineHeight: '1.6', marginBottom: '20px' }}>

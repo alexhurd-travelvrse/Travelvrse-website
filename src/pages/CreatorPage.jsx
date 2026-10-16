@@ -53,7 +53,7 @@ const CreatorPage = () => {
                             </div>
 
                             <h1 style={{ fontFamily: "var(--font-display)", fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)', fontWeight: '800', marginBottom: '1.25rem', lineHeight: '1.15', letterSpacing: '-0.02em', color: '#ffffff' }}>
-                                Travel Creator Marketplace: <span className="text-cyan">Earn with Destination Challenges</span>
+                                Travel Creator Marketplace: <span className="text-gold">Earn with Destination Challenges</span>
                             </h1>
                             <p style={{ fontSize: '1.05rem', color: 'rgba(240, 246, 255, 0.9)', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: '1.65' }}>
                                 Join the world's first Rewarded Experiences Marketplace. Turn your travel content into interactive destination challenges and earn rewards from top hotels and cruise lines.

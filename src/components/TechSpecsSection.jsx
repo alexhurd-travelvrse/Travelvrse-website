@@ -9,7 +9,7 @@ const TechSpecsSection = () => {
 
                 <div className="section-header animate-fade-up">
                     <h2>
-                        Frictionless <span className="text-cyan">Integration</span>
+                        Frictionless <span className="text-gold">Integration</span>
                     </h2>
                     <p className="subtitle">
                         Use our self-serve tools to manage creators, rewarded discovery, and first-party intent data.

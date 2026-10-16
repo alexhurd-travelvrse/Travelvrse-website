@@ -152,7 +152,7 @@ const MarketplacePage = () => {
                             margin: '0 auto',
                             lineHeight: '1.6'
                         }}>
-                            Designed for mobile exploration: check out hotels, resorts &amp; cruise destinations paired with real-time local vibes.
+                            Designed for mobile exploration: check out hotels, resorts &amp; cruise destinations paired with real-time local vibes
                         </p>
                     </div>
 

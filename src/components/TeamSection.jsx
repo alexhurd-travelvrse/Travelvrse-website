@@ -74,7 +74,7 @@ const TeamSection = () => {
                         marginBottom: '1rem', 
                         color: '#ffffff' 
                     }}>
-                        Our <span className="text-cyan">Team</span>
+                        Our <span className="text-gold">Team</span>
                     </h2>
 
                     <div style={{

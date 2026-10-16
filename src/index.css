@@ -120,6 +120,19 @@ h3 .text-gold {
   color: var(--color-cyan-neon);
 }
 
+.text-cyan-gradient,
+h1 .text-cyan,
+h2 .text-cyan,
+h3 .text-cyan,
+.vibe-title-accent,
+.teaser-title-accent {
+  background: linear-gradient(135deg, #e6f9ff 10%, #00e5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
 .section-title,
 .marketplace-header h2,
 .revenue-title,

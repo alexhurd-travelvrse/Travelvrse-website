@@ -103,7 +103,7 @@ const BlogJournal = () => {
                         marginBottom: '1rem',
                         textShadow: '0 4px 20px rgba(0,0,0,0.5)'
                     }}>
-                        Our <span className="text-gold">Journal</span>
+                        Our <span className="text-cyan">Journal</span>
                     </h2>
 
                     <p className="subtitle" style={{ 

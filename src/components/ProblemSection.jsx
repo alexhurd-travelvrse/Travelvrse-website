@@ -160,7 +160,7 @@ const ProblemSection = () => {
                                 <span className="badge-text">DISINTERMEDIATE OTAS</span>
                             </div>
                             <h2 style={{ fontFamily: "var(--font-display)", fontWeight: '800', fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', marginBottom: '16px', lineHeight: '1.15', letterSpacing: '-0.02em', color: '#ffffff' }}>
-                                Challenge <span className="text-gold">Marketplace</span>
+                                Challenge <span className="text-cyan">Marketplace</span>
                             </h2>
                             <div style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', fontWeight: '500', color: 'rgba(240, 246, 255, 0.92)', letterSpacing: '0.01em', lineHeight: '1.65' }}>
                                 Reach prospective guests during trip inspiration—long before they search an OTA

@@ -58,7 +58,7 @@ const HowItWorksSection = () => {
                             marginBottom: '1.5rem', 
                             color: '#ffffff' 
                         }}>
-                            Implementation Is <span className="text-gold">Friction-Free</span>
+                            Implementation Is <span className="text-cyan">Friction-Free</span>
                         </h2>
                         
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '22px', marginBottom: '35px', marginTop: '25px' }}>

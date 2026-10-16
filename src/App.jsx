@@ -12,6 +12,7 @@ import MarketplacePage from './pages/MarketplacePage';
 import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
 import CreatorPortal from './pages/CreatorPortal';
+import BarcelonaPage from './pages/BarcelonaPage';
 import RevenueSection from './components/RevenueSection';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/partner" element={<PartnerPage />} />
           <Route path="/creator" element={<CreatorPage />} />
           <Route path="/creator-portal" element={<CreatorPortal />} />
+          <Route path="/barcelona" element={<BarcelonaPage />} />
         </Routes>
       </Router>
       <Analytics

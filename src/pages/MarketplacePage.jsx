@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
-import { Smartphone, QrCode, Copy, Check, ExternalLink, X, ArrowRight, Share2 } from 'lucide-react';
+import { Smartphone, QrCode, Copy, Check, ExternalLink, X, ArrowRight, Share2, Lock } from 'lucide-react';
+import PasswordGate from '../components/PasswordGate';
 
 const cities = [
   { 
@@ -38,7 +39,8 @@ const cities = [
     vibe: 'Cruise',
     img: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800',
     desc: 'Setting sail from the heart of Catalonia',
-    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/mediterranean/cruise/msc-europa'
+    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/mediterranean/cruise/msc-europa',
+    isProtected: true
   },
   { 
     name: 'Seoul',
@@ -75,23 +77,23 @@ const cities = [
 
 const MarketplacePage = () => {
     const [selectedModalCity, setSelectedModalCity] = useState(null);
+    const [showGateForCity, setShowGateForCity] = useState(null);
     const [copied, setCopied] = useState(false);
 
     // Close modal on Escape key
     useEffect(() => {
         const handleKeyDown = (e) => {
-            if (e.key === 'Escape') setSelectedModalCity(null);
+            if (e.key === 'Escape') {
+                setSelectedModalCity(null);
+                setShowGateForCity(null);
+            }
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
-    const handleExperienceClick = (city, e) => {
-        if (!city.url) return;
-        
-        // If user is already on a mobile/tablet touch device, open directly
+    const launchCityExperience = (city, e) => {
         const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-        
         if (isMobileDevice) {
             window.open(city.url, '_blank');
         } else {
@@ -99,6 +101,22 @@ const MarketplacePage = () => {
             setSelectedModalCity(city);
             setCopied(false);
         }
+    };
+
+    const handleExperienceClick = (city, e) => {
+        if (!city.url) return;
+
+        // Check password protection for gated experiences
+        if (city.isProtected) {
+            const isAuth = sessionStorage.getItem('travelvrse_authorized') === 'true';
+            if (!isAuth) {
+                e?.preventDefault();
+                setShowGateForCity(city);
+                return;
+            }
+        }
+        
+        launchCityExperience(city, e);
     };
 
     const handleCopyLink = () => {
@@ -196,6 +214,30 @@ const MarketplacePage = () => {
                                 }}
                             >
                                 <div style={{ height: '300px', position: 'relative', overflow: 'hidden' }}>
+                                    {city.isProtected && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '16px',
+                                            right: '16px',
+                                            background: 'rgba(5, 11, 20, 0.88)',
+                                            border: '1px solid rgba(255, 215, 0, 0.5)',
+                                            color: '#ffd700',
+                                            fontSize: '0.72rem',
+                                            fontWeight: '800',
+                                            letterSpacing: '0.08em',
+                                            padding: '4px 12px',
+                                            borderRadius: '999px',
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '5px',
+                                            backdropFilter: 'blur(10px)',
+                                            boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
+                                            zIndex: 2
+                                        }}>
+                                            <Lock size={11} />
+                                            <span>EXCLUSIVE ACCESS</span>
+                                        </div>
+                                    )}
                                     <img 
                                         src={city.img} 
                                         alt={city.name} 
@@ -276,11 +318,17 @@ const MarketplacePage = () => {
                                                     padding: '0.58rem 1.3rem',
                                                     fontSize: '0.84rem',
                                                     fontWeight: '800',
-                                                    borderRadius: '999px'
+                                                    borderRadius: '999px',
+                                                    ...(city.isProtected ? {
+                                                        background: 'linear-gradient(135deg, #ffd700 0%, #ffb300 100%)',
+                                                        color: '#050b14',
+                                                        border: 'none',
+                                                        boxShadow: '0 4px 20px rgba(255, 215, 0, 0.3)'
+                                                    } : {})
                                                 }}
                                             >
-                                                <Smartphone size={14} />
-                                                <span>Try on Mobile</span>
+                                                {city.isProtected ? <Lock size={14} /> : <Smartphone size={14} />}
+                                                <span>{city.isProtected ? 'Exclusive Access' : 'Try on Mobile'}</span>
                                                 <QrCode size={13} style={{ opacity: 0.8 }} />
                                             </button>
                                             <span style={{ 
@@ -290,7 +338,7 @@ const MarketplacePage = () => {
                                                 fontWeight: '600',
                                                 letterSpacing: '0.03em'
                                             }}>
-                                                Scan QR on desktop or tap to launch
+                                                {city.isProtected ? 'Password protected • Scan QR or tap to launch' : 'Scan QR on desktop or tap to launch'}
                                             </span>
                                         </>
                                     ) : (
@@ -497,6 +545,20 @@ const MarketplacePage = () => {
                         </div>
                     </div>
                 </div>
+            )}
+
+            {/* Password Gate Modal for Protected Experiences */}
+            {showGateForCity && (
+                <PasswordGate 
+                    onClose={() => setShowGateForCity(null)}
+                    onSuccess={() => {
+                        const targetCity = showGateForCity;
+                        setShowGateForCity(null);
+                        if (targetCity) {
+                            launchCityExperience(targetCity);
+                        }
+                    }}
+                />
             )}
 
             <Footer />

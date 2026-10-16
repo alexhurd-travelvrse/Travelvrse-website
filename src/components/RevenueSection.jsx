@@ -10,14 +10,17 @@ const RevenueSection = () => {
                     
                     {/* Visual Left - Compact Hero Video */}
                     <div className="animate-fade-up" style={{ containerType: 'inline-size' }}>
-                        <div style={{ 
+                        <div className="glass-card" style={{ 
                             position: 'relative', 
                             borderRadius: '24px', 
                             overflow: 'hidden', 
-                            boxShadow: '0 20px 60px rgba(0, 229, 255, 0.15)',
-                            border: '1px solid rgba(212, 175, 55, 0.3)',
+                            padding: 0,
+                            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.45)',
+                            border: '1px solid rgba(255, 255, 255, 0.12)',
                             aspectRatio: '16/9',
-                            background: 'linear-gradient(135deg, var(--color-navy-light) 0%, var(--color-navy-deep) 100%)',
+                            background: 'rgba(10, 18, 30, 0.72)',
+                            backdropFilter: 'blur(16px)',
+                            WebkitBackdropFilter: 'blur(16px)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center'

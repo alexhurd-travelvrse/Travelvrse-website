@@ -4,7 +4,7 @@ import './GoToMarketSection.css';
 
 const JourneyLifecycle = () => {
     return (
-        <div className="glass-card" style={{ padding: '2rem 1.5rem', marginTop: '30px', background: 'rgba(255,255,255,0.02)', borderRadius: '24px' }}>
+        <div className="glass-card" style={{ padding: '2rem 1.5rem', marginTop: '30px', background: 'rgba(10, 18, 30, 0.72)', border: '1px solid rgba(255, 255, 255, 0.12)', borderRadius: '24px', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.45)' }}>
             <div style={{ fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', color: 'rgba(226, 232, 240, 0.8)', marginBottom: '25px', textTransform: 'uppercase', textAlign: 'center' }}>
                 SUPPORTED GUEST JOURNEYS
             </div>

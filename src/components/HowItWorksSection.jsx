@@ -11,7 +11,7 @@ const HowItWorksSection = () => {
                     {/* Visual Left - Expanded Image Stack */}
                     <div className="animate-fade-up" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                         {/* Image 1: Creator */}
-                        <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                        <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255, 255, 255, 0.12)', background: 'rgba(10, 18, 30, 0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.45)' }}>
                             <img src="/assets/hola_grab.png" alt="Creator" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
                             <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                 <Smartphone size={14} className="text-gold" />
@@ -21,7 +21,7 @@ const HowItWorksSection = () => {
                         
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                             {/* Image 2: Sea Containers */}
-                            <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                            <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255, 255, 255, 0.12)', background: 'rgba(10, 18, 30, 0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.45)' }}>
                                 <img src="/models/seacontainers.png" alt="Sea Containers" style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
                                 <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-cyan-neon)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                     <Camera size={14} className="text-cyan" />
@@ -30,7 +30,7 @@ const HowItWorksSection = () => {
                             </div>
                             
                             {/* Image 3: Beach */}
-                            <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                            <div className="glass-card" style={{ position: 'relative', padding: '0', overflow: 'hidden', borderRadius: '24px', border: '1px solid rgba(255, 255, 255, 0.12)', background: 'rgba(10, 18, 30, 0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.45)' }}>
                                 <img src="/models/beach.png" alt="Beach" style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
                                 <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(5, 11, 20, 0.8)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-gold)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                     <Zap size={14} className="text-gold" />

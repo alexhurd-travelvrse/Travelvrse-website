@@ -87,8 +87,8 @@ const TeamSection = () => {
                         margin: '1.25rem auto 0 auto'
                     }}>
                         {[
-                            'Rewarded Engagement',
-                            'Next-Gen Discovery',
+                            'Gamification & Loyalty',
+                            'Mobile & Immersive Discovery',
                             'Travel Experiences',
                             'Hotel Operations'
                         ].map((domain, i) => (

@@ -120,7 +120,7 @@ const MarketplacePage = () => {
                 <div className="container">
                     <Helmet>
                         <title>Destination Challenges Marketplace | Hotels, Cruise &amp; Tour Experiences | Travelvrse</title>
-                        <meta name="description" content="Explore live Destination Challenges featuring Sea Containers London, Virgin Hotels Las Vegas, MSC Cruises, Ted Lasso Richmond, and ENA Suite Seoul. Mobile discovery paired with real-time local vibes." />
+                        <meta name="description" content="Explore live Destination Challenges across London, Las Vegas, Barcelona, Seoul, Copenhagen, and Dubai. Mobile discovery paired with real-time local vibes." />
                     </Helmet>
 
                     <div style={{ textAlign: 'center', marginBottom: '70px' }}>

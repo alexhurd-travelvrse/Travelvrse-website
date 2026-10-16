@@ -9,7 +9,7 @@ const Hero = () => {
         <section className="hero-section">
             <Helmet>
                 <title>Travelvrse | Destination Challenges for Hotels, Cruise and Tour Operators</title>
-                <meta name="description" content="Powering Destination Challenges for hotels, cruise lines, and tour operators. Disintermediate OTAs and drive direct revenue with interactive mobile discovery featuring Sea Containers London, Virgin Hotels, and MSC Cruises." />
+                <meta name="description" content="Powering Destination Challenges for hotels, cruise lines, and tour operators. Disintermediate OTAs and drive direct bookings with interactive mobile discovery across London, Las Vegas, Barcelona, Seoul, and global destinations." />
             </Helmet>
             <div className="hero-bg-container">
                 <video 

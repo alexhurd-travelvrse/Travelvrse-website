@@ -21,8 +21,7 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-# Disallow authenticated/internal app panels & private challenge pages
-Disallow: /creator-portal
+# Disallow private challenge pages
 Disallow: /barcelona
 
 # Sitemap location

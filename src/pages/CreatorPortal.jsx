@@ -8,8 +8,9 @@ const CreatorPortal = () => {
     return (
         <div className="creator-portal min-h-screen">
             <Helmet>
-                <title>Creator Portal | Travelvrse</title>
-                <meta name="robots" content="noindex, nofollow" />
+                <title>Creator Portal & Affiliate Network | Travelvrse</title>
+                <meta name="description" content="Join the Travelvrse Creator Network. Monetize your travel audience with gamified Destination Challenges, qualified lead tracking, and high-converting affiliate commissions." />
+                <link rel="canonical" href="https://www.travelvrse.com/creator-portal" />
             </Helmet>
 
             {/* Navbar Minimalist */}

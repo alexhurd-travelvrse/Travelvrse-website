@@ -1,11 +1,16 @@
 import React from 'react';
 import { Target, TrendingUp, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import './CreatorPortal.css';
 
 const CreatorPortal = () => {
     return (
         <div className="creator-portal min-h-screen">
+            <Helmet>
+                <title>Creator Portal | Travelvrse</title>
+                <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
 
             {/* Navbar Minimalist */}
             <nav className="portal-nav container">

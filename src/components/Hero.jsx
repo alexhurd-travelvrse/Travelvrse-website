@@ -36,7 +36,7 @@ const Hero = () => {
                     </h1>
 
                     <p className="hero-subheadline">
-                        Interactive Destination Challenges that turn local culture into high-intent direct bookings
+                        Interactive Destination Challenges that turn local culture into direct bookings
                     </p>
                 </div>
 

@@ -18,22 +18,22 @@ const BarcelonaPage = () => {
     };
 
     return (
-        <PasswordGate>
-            <Layout>
-                <div className="barcelona-page" style={{
-                    background: 'var(--color-navy-deep, #050B14)',
-                    minHeight: '100vh',
-                    paddingTop: '140px',
-                    paddingBottom: '100px',
-                    position: 'relative'
-                }}>
-                    <Helmet>
-                        <title>Barcelona Destination Challenge | Private Access | Travelvrse</title>
-                        <meta name="robots" content="noindex, nofollow" />
-                        <meta name="googlebot" content="noindex, nofollow" />
-                    </Helmet>
-
-                    <div className="container" style={{ maxWidth: '900px', margin: '0 auto', padding: '0 20px' }}>
+        <>
+            <Helmet>
+                <title>Barcelona Destination Challenge | Private Access | Travelvrse</title>
+                <meta name="robots" content="noindex, nofollow" />
+                <meta name="googlebot" content="noindex, nofollow" />
+            </Helmet>
+            <PasswordGate>
+                <Layout>
+                    <div className="barcelona-page" style={{
+                        background: 'var(--color-navy-deep, #050B14)',
+                        minHeight: '100vh',
+                        paddingTop: '140px',
+                        paddingBottom: '100px',
+                        position: 'relative'
+                    }}>
+                        <div className="container" style={{ maxWidth: '900px', margin: '0 auto', padding: '0 20px' }}>
                         {/* Navigation Back */}
                         <div style={{ marginBottom: '30px' }}>
                             <Link 
@@ -228,6 +228,7 @@ const BarcelonaPage = () => {
                 <Footer />
             </Layout>
         </PasswordGate>
+        </>
     );
 };
 

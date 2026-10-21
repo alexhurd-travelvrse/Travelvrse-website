@@ -84,7 +84,7 @@ const PartnerPage = () => {
                                     </div>
                                     <div>
                                         <h4 style={{ color: 'white', marginBottom: '4px', fontSize: '1.1rem', fontWeight: 700 }}>Increase Upsell</h4>
-                                        <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>Build rich guest profiles via photorealistic challenges</p>
+                                        <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>Target personalised, high-value upgrade offers based on trip-specific guest intent</p>
                                     </div>
                                 </div>
                             </div>

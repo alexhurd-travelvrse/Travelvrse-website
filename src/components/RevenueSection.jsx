@@ -136,7 +136,7 @@ const RevenueSection = () => {
                                 <div style={{ flex: 1 }}>
                                     <h4 style={{ color: 'white', marginBottom: '6px', fontSize: '1.15rem', fontWeight: '700' }}>Increase Upsell</h4>
                                     <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.98rem', lineHeight: '1.6', margin: 0 }}>
-                                        Target personalised, high-value upgrade offers based on traveller location specific preferences
+                                        Target personalised, high-value upgrade offers based on trip-specific guest intent
                                     </p>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@ const RevenueSection = () => {
                                 <div style={{ flex: 1 }}>
                                     <h4 style={{ color: 'white', marginBottom: '6px', fontSize: '1.15rem', fontWeight: '700' }}>Enhance Search Visibility</h4>
                                     <p style={{ color: 'rgba(226, 232, 240, 0.88)', fontSize: '0.98rem', lineHeight: '1.6', margin: 0 }}>
-                                        Rank higher versus OTAs. Unique content that matches vibe based AI search and links travel brands to their local area
+                                        Outrank OTAs in AI and social search with creator-verified proof linking your onsite experiences directly to trending local destinations
                                     </p>
                                 </div>
                             </div>

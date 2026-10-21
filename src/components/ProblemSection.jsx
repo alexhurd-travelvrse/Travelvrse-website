@@ -196,7 +196,7 @@ const ProblemSection = () => {
                                 }}>01</div>
                                 <div style={{ flex: 1 }}>
                                     <h4 style={{ fontSize: '1.15rem', marginBottom: '6px', color: 'white', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Engage</h4>
-                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>Travellers explore your rooms, dining, and neighborhood highlights through gamified mobile discovery</p>
+                                    <p style={{ fontSize: '0.98rem', lineHeight: '1.6', color: 'rgba(226, 232, 240, 0.88)', margin: 0 }}>Travellers explore your signature onsite experiences and trending local destinations through gamified mobile discovery</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '18px', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>

@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/play/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/play/:path*"
+    },
+    {
+      "source": "/v/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/v/:path*"
+    },
+    {
+      "source": "/vibe/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/vibe/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

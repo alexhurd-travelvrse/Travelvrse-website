@@ -11,35 +11,65 @@ const cities = [
     vibe: 'Indre By',
     img: '/assets/vinylroom.jpg',
     desc: 'Vibrant Scandinavian design and cozy vinyl vibes',
-    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/copenhagen/indre-by/25-hours-copenhagen'
+    shortUrl: 'https://www.travelvrse.com/play/25-hours',
+    canonicalUrl: 'https://www.travelvrse.com/vibe/copenhagen/indre-by/25-hours-copenhagen',
+    url: 'https://www.travelvrse.com/play/25-hours',
+    geoScore: 91.6,
+    atmosphereScore: 91.4,
+    gemProximityScore: 91.9,
+    topLocalGem: 'Rundetaarn (4.6★ • 1m walk) & TorvehallerneKBH (4.6★ • 6m walk)'
   },
   { 
     name: 'London',
     vibe: 'South Bank',
     img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800',
     desc: 'The historic capital of England',
-    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/london/south-bank/sea-containers'
+    shortUrl: 'https://www.travelvrse.com/play/sea-containers',
+    canonicalUrl: 'https://www.travelvrse.com/vibe/london/south-bank/sea-containers',
+    url: 'https://www.travelvrse.com/play/sea-containers',
+    geoScore: 91.3,
+    atmosphereScore: 91.4,
+    gemProximityScore: 90.8,
+    topLocalGem: 'Tate Modern (4.6★ • 4m walk) & BFI Southbank (4.7★ • 4m walk)'
   },
   { 
     name: 'London',
     vibe: 'Ted Lasso, Richmond',
     img: '/assets/richmond_ted_lasso.jpg',
     desc: 'Explore the charming neighborhood of Richmond',
-    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/london/richmond/ted-lasso'
+    shortUrl: 'https://www.travelvrse.com/play/ted-lasso',
+    canonicalUrl: 'https://www.travelvrse.com/vibe/london/richmond/ted-lasso',
+    url: 'https://www.travelvrse.com/play/ted-lasso',
+    geoScore: 93.8,
+    atmosphereScore: 94.3,
+    gemProximityScore: 93.1,
+    topLocalGem: "The Prince's Head (4.6★ • 1m walk) & Paved Court (4.8★ • 2m walk)"
   },
   { 
     name: 'Las Vegas',
     vibe: 'East of the Strip',
     img: 'https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?auto=format&fit=crop&q=80&w=800',
     desc: 'Iconic entertainment and luxury at the Virgin Hotel',
-    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/las-vegas/the-strip/virgin-hotel-las-vegas'
+    shortUrl: 'https://www.travelvrse.com/play/virgin-vegas',
+    canonicalUrl: 'https://www.travelvrse.com/vibe/las-vegas/the-strip/virgin-hotel-las-vegas',
+    url: 'https://www.travelvrse.com/play/virgin-vegas',
+    geoScore: 89.7,
+    atmosphereScore: 89.6,
+    gemProximityScore: 90.4,
+    topLocalGem: 'The Theater (4.6★ • 1m walk) & Kassi Beach House (4.5★ • 1m walk)'
   },
   { 
     name: 'Barcelona',
     vibe: 'Cruise',
     img: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800',
     desc: 'Setting sail from the heart of Catalonia',
-    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/mediterranean/cruise/msc-europa',
+    shortUrl: 'https://www.travelvrse.com/play/msc',
+    canonicalUrl: 'https://www.travelvrse.com/vibe/mediterranean/cruise/msc-europa',
+    url: 'https://www.travelvrse.com/play/msc',
+    geoScore: 89.8,
+    atmosphereScore: 90.1,
+    gemProximityScore: 89.4,
+    topLocalGem: "Chef's Garden Kitchen (4.7★) & La Barceloneta Tapas (4.6★)",
     isProtected: true
   },
   { 
@@ -47,7 +77,13 @@ const cities = [
     vibe: 'Namdaemun & ENA Suite',
     img: 'https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&q=80&w=800',
     desc: 'Modern luxury suites, 600-year market heritage, and mountain summit vistas',
-    url: 'https://ted-lasso-vibe-challenge.vercel.app/vibe/seoul/namdaemun/ena-suite-seoul'
+    shortUrl: 'https://www.travelvrse.com/play/seoul',
+    canonicalUrl: 'https://www.travelvrse.com/vibe/seoul/namdaemun/ena-suite-seoul',
+    url: 'https://www.travelvrse.com/play/seoul',
+    geoScore: 90.2,
+    atmosphereScore: 91.5,
+    gemProximityScore: 92.8,
+    topLocalGem: 'Deoksugung Stone Wall Rd (4.7★ • 2m walk) & SeMA (4.6★ • 3m walk)'
   },
   { 
     name: 'Manchester', 
@@ -214,6 +250,25 @@ const MarketplacePage = () => {
                                 }}
                             >
                                 <div style={{ height: '300px', position: 'relative', overflow: 'hidden' }}>
+                                    {city.geoScore && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '16px',
+                                            left: '16px',
+                                            background: 'rgba(5, 11, 20, 0.88)',
+                                            border: '1px solid rgba(0, 229, 255, 0.45)',
+                                            color: '#00e5ff',
+                                            fontSize: '0.72rem',
+                                            fontWeight: '800',
+                                            letterSpacing: '0.06em',
+                                            padding: '4px 11px',
+                                            borderRadius: '999px',
+                                            backdropFilter: 'blur(10px)',
+                                            zIndex: 2
+                                        }}>
+                                            GEO: {city.geoScore}/100
+                                        </div>
+                                    )}
                                     {city.isProtected && (
                                         <div style={{
                                             position: 'absolute',
@@ -304,6 +359,37 @@ const MarketplacePage = () => {
 
                                 {/* Compact 25% smaller Try on Mobile action container */}
                                 <div style={{ padding: '16px 24px', flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '6px' }}>
+                                    {city.topLocalGem && (
+                                        <div style={{
+                                            width: '100%',
+                                            background: 'rgba(255, 255, 255, 0.03)',
+                                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                                            borderRadius: '12px',
+                                            padding: '8px 11px',
+                                            marginBottom: '6px',
+                                            fontSize: '0.73rem',
+                                            color: 'rgba(230, 241, 255, 0.85)',
+                                            lineHeight: 1.35,
+                                            textAlign: 'left'
+                                        }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#00e5ff', fontWeight: 700, fontSize: '0.68rem', marginBottom: '3px' }}>
+                                                <span>Atmosphere: {city.atmosphereScore}</span>
+                                                <span>Gem Prox (&ge;4.4★): {city.gemProximityScore}</span>
+                                            </div>
+                                            <div style={{ marginBottom: '4px' }}><strong>Local Gems:</strong> {city.topLocalGem}</div>
+                                            <div style={{ textAlign: 'right' }}>
+                                                <a
+                                                    href="https://atmosvibe.io"
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    style={{ fontSize: '0.65rem', color: '#34d399', textDecoration: 'none', fontWeight: 700 }}
+                                                >
+                                                    ⚡ Powered by data from Atmosvibe.io
+                                                </a>
+                                            </div>
+                                        </div>
+                                    )}
                                     {city.url ? (
                                         <>
                                             <button 

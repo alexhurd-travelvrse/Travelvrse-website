@@ -59,8 +59,21 @@
           ],
           "sameAs": [
             "https://www.linkedin.com/company/travelvrse",
-            "https://travelvrse.substack.com"
+            "https://travelvrse.substack.com",
+            "https://atmosvibe.io"
           ]
+        },
+        {
+          "@type": "Dataset",
+          "@id": "https://atmosvibe.io/#dataset",
+          "name": "Atmosvibe.io Atmospheric DNA & Hyper-Local Gem Proximity Index",
+          "url": "https://atmosvibe.io",
+          "description": "Quantitative hospitality and cultural trail telemetry dataset measuring Acoustic DNA (dB & conversation clarity), Sleep Sanctuary, Local-to-Tourist Ratio, Diurnal Rhythm, and Exponential Distance-Decay Proximity (e^-0.35d) to verified >=4.4★ local gems.",
+          "creator": {
+            "@type": "Organization",
+            "name": "Atmosvibe.io",
+            "url": "https://atmosvibe.io"
+          }
         },
         {
           "@type": "SoftwareApplication",
@@ -69,7 +82,10 @@
           "operatingSystem": "All (Web, iOS, Android)",
           "applicationCategory": "TravelApplication",
           "url": "https://www.travelvrse.com/marketplace",
-          "description": "Interactive mobile-first destination challenge platform pairing real-world hotels, cruise voyages, and cultural destinations with 3D/audio spatial experiences to drive direct bookings.",
+          "isBasedOn": {
+            "@id": "https://atmosvibe.io/#dataset"
+          },
+          "description": "Interactive mobile-first destination challenge platform pairing real-world hotels, cruise voyages, and cultural destinations with 3D/audio spatial experiences and Atmosvibe.io mathematical GEO triangulation to drive direct bookings.",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -84,7 +100,15 @@
           "description": "Destination Challenges for Hotels, Cruise Lines, and Tour Operators",
           "publisher": {
             "@id": "https://www.travelvrse.com/#organization"
-          }
+          },
+          "hasPart": [
+            { "@type": "WebPage", "name": "Ted Lasso Richmond Challenge", "url": "https://www.travelvrse.com/vibe/london/richmond/ted-lasso", "sameAs": "https://www.travelvrse.com/play/ted-lasso" },
+            { "@type": "WebPage", "name": "25hours Copenhagen Challenge", "url": "https://www.travelvrse.com/vibe/copenhagen/indre-by/25-hours-copenhagen", "sameAs": "https://www.travelvrse.com/play/25-hours" },
+            { "@type": "WebPage", "name": "Sea Containers London Challenge", "url": "https://www.travelvrse.com/vibe/london/south-bank/sea-containers", "sameAs": "https://www.travelvrse.com/play/sea-containers" },
+            { "@type": "WebPage", "name": "Virgin Hotels Las Vegas Challenge", "url": "https://www.travelvrse.com/vibe/las-vegas/the-strip/virgin-hotel-las-vegas", "sameAs": "https://www.travelvrse.com/play/virgin-vegas" },
+            { "@type": "WebPage", "name": "MSC World Europa Barcelona Challenge", "url": "https://www.travelvrse.com/vibe/mediterranean/cruise/msc-europa", "sameAs": "https://www.travelvrse.com/play/msc" },
+            { "@type": "WebPage", "name": "ENA Suite Namdaemun Seoul Challenge", "url": "https://www.travelvrse.com/vibe/seoul/namdaemun/ena-suite-seoul", "sameAs": "https://www.travelvrse.com/play/seoul" }
+          ]
         }
       ]
     }
@@ -174,6 +198,15 @@
 
           window.__shouldBlockVercelAnalytics();
 
+          // Pre-register beforeSend in Vercel Analytics queue BEFORE any script loads
+          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+          window.va('beforeSend', function (event) {
+            if (window.__shouldBlockVercelAnalytics && window.__shouldBlockVercelAnalytics()) {
+              return null;
+            }
+            return event;
+          });
+
           if (typeof window.fetch === 'function') {
             var origFetch = window.fetch;
             window.fetch = function (input, init) {
@@ -200,7 +233,7 @@
         } catch (err) {}
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-CkBRw2T6.js"></script>
+    <script type="module" crossorigin src="/assets/index-D-0aJT3h.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CLXMFPtO.css">
   </head>
   <body>

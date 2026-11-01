@@ -1,28 +1,48 @@
-# Allow major web and AI search crawlers
+# Allow major web and AI search crawlers (Google, Bing, ChatGPT, Perplexity, Gemini, Claude)
 User-agent: *
 Allow: /
+Allow: /marketplace
+Allow: /vibe/
+Allow: /play/
+Disallow: /barcelona
+Disallow: /ignore-me
+Disallow: /notrack
+Disallow: /admin
 
-# Explicit AI Crawlers (Search & Model Retrieval)
+# Explicit AI & GEO Crawlers (Search & Model Retrieval)
 User-agent: GPTBot
 Allow: /
+Allow: /vibe/
+Allow: /play/
+Disallow: /barcelona
+Disallow: /ignore-me
+
+User-agent: OAI-SearchBot
+Allow: /
+Allow: /vibe/
+Allow: /play/
+Disallow: /barcelona
+Disallow: /ignore-me
 
 User-agent: ChatGPT-User
 Allow: /
+Allow: /vibe/
+Allow: /play/
 
 User-agent: Google-Extended
 Allow: /
+Allow: /vibe/
+Allow: /play/
 
 User-agent: PerplexityBot
 Allow: /
+Allow: /vibe/
+Allow: /play/
 
 User-agent: ClaudeBot
 Allow: /
-
-User-agent: CCBot
-Allow: /
-
-# Disallow private challenge pages
-Disallow: /barcelona
+Allow: /vibe/
+Allow: /play/
 
 # Sitemap location
 Sitemap: https://www.travelvrse.com/sitemap.xml

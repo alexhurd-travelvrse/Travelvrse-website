@@ -1,4 +1,22 @@
 {
+  "redirects": [
+    {
+      "source": "/creator-portal",
+      "destination": "https://www.travelvrse.com/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(creator-portal|barcelona|ignore-me|notrack)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/play/:path*",

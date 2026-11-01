@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Hero from './components/Hero';
 import ProblemSection from './components/ProblemSection';
@@ -11,7 +11,6 @@ import Footer from './components/Footer';
 import MarketplacePage from './pages/MarketplacePage';
 import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
-import CreatorPortal from './pages/CreatorPortal';
 import BarcelonaPage from './pages/BarcelonaPage';
 import RevenueSection from './components/RevenueSection';
 import { HelmetProvider } from 'react-helmet-async';
@@ -200,7 +199,7 @@ const App = () => {
           <Route path="/marketplace" element={<MarketplacePage />} />
           <Route path="/partner" element={<PartnerPage />} />
           <Route path="/creator" element={<CreatorPage />} />
-          <Route path="/creator-portal" element={<CreatorPortal />} />
+          <Route path="/creator-portal" element={<Navigate to="/" replace />} />
           <Route path="/barcelona" element={<BarcelonaPage />} />
         </Routes>
       </Router>

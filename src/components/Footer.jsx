@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
@@ -15,11 +14,6 @@ const Footer = () => {
                         <a href="https://usgrant.travelvrse.com/terms" target="_blank" rel="noopener noreferrer" className="footer-link">Terms &amp; Conditions</a>
                         <span className="footer-divider" aria-hidden="true">|</span>
                         <a href="https://atmosvibe.io" target="_blank" rel="noopener" className="footer-link" title="Verified Atmospheric DNA &amp; Local Gem Proximity Index">Atmospheric &amp; Local Gem Index</a>
-                        <span className="footer-divider" aria-hidden="true">|</span>
-                        {/* The Hidden Creator Link */}
-                        <Link to="/creator-portal" className="stealth-link" title="Creator Portal">
-                            Creators
-                        </Link>
                     </div>
                 </div>
             </div>

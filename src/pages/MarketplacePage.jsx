@@ -175,6 +175,33 @@ const MarketplacePage = () => {
                     <Helmet>
                         <title>Destination Challenges Marketplace | Hotels, Cruise &amp; Tour Experiences | Travelvrse</title>
                         <meta name="description" content="Explore live Destination Challenges across London, Las Vegas, Barcelona, Seoul, Copenhagen, and Dubai. Mobile discovery paired with real-time local vibes." />
+                        <link rel="canonical" href="https://www.travelvrse.com/marketplace" />
+                        <script type="application/ld+json">
+                            {JSON.stringify({
+                                '@context': 'https://schema.org',
+                                '@type': 'CollectionPage',
+                                '@id': 'https://www.travelvrse.com/marketplace#collection',
+                                'name': 'TravelVRSE Destination Challenges Marketplace',
+                                'url': 'https://www.travelvrse.com/marketplace',
+                                'isBasedOn': { '@id': 'https://atmosvibe.io/#dataset' },
+                                'mainEntity': {
+                                    '@type': 'ItemList',
+                                    'itemListElement': cities.filter(c => c.canonicalUrl).map((c, idx) => ({
+                                        '@type': 'ListItem',
+                                        'position': idx + 1,
+                                        'name': `${c.name} — ${c.vibe}`,
+                                        'url': c.canonicalUrl,
+                                        'item': {
+                                            '@type': 'TouristAttraction',
+                                            'name': `${c.name} — ${c.vibe}`,
+                                            'description': `${c.desc}. Verified Local Gems: ${c.topLocalGem}. Composite GEO Authority Score: ${c.geoScore}/100 (Atmosphere DNA: ${c.atmosphereScore}/100, Local Gem Proximity: ${c.gemProximityScore}/100).`,
+                                            'url': c.canonicalUrl,
+                                            'sameAs': c.shortUrl
+                                        }
+                                    }))
+                                }
+                            })}
+                        </script>
                     </Helmet>
 
                     <div style={{ textAlign: 'center', marginBottom: '70px' }}>
@@ -250,25 +277,6 @@ const MarketplacePage = () => {
                                 }}
                             >
                                 <div style={{ height: '300px', position: 'relative', overflow: 'hidden' }}>
-                                    {city.geoScore && (
-                                        <div style={{
-                                            position: 'absolute',
-                                            top: '16px',
-                                            left: '16px',
-                                            background: 'rgba(5, 11, 20, 0.88)',
-                                            border: '1px solid rgba(0, 229, 255, 0.45)',
-                                            color: '#00e5ff',
-                                            fontSize: '0.72rem',
-                                            fontWeight: '800',
-                                            letterSpacing: '0.06em',
-                                            padding: '4px 11px',
-                                            borderRadius: '999px',
-                                            backdropFilter: 'blur(10px)',
-                                            zIndex: 2
-                                        }}>
-                                            GEO: {city.geoScore}/100
-                                        </div>
-                                    )}
                                     {city.isProtected && (
                                         <div style={{
                                             position: 'absolute',
@@ -359,37 +367,6 @@ const MarketplacePage = () => {
 
                                 {/* Compact 25% smaller Try on Mobile action container */}
                                 <div style={{ padding: '16px 24px', flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '6px' }}>
-                                    {city.topLocalGem && (
-                                        <div style={{
-                                            width: '100%',
-                                            background: 'rgba(255, 255, 255, 0.03)',
-                                            border: '1px solid rgba(255, 255, 255, 0.08)',
-                                            borderRadius: '12px',
-                                            padding: '8px 11px',
-                                            marginBottom: '6px',
-                                            fontSize: '0.73rem',
-                                            color: 'rgba(230, 241, 255, 0.85)',
-                                            lineHeight: 1.35,
-                                            textAlign: 'left'
-                                        }}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#00e5ff', fontWeight: 700, fontSize: '0.68rem', marginBottom: '3px' }}>
-                                                <span>Atmosphere: {city.atmosphereScore}</span>
-                                                <span>Gem Prox (&ge;4.4★): {city.gemProximityScore}</span>
-                                            </div>
-                                            <div style={{ marginBottom: '4px' }}><strong>Local Gems:</strong> {city.topLocalGem}</div>
-                                            <div style={{ textAlign: 'right' }}>
-                                                <a
-                                                    href="https://atmosvibe.io"
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                    style={{ fontSize: '0.65rem', color: '#34d399', textDecoration: 'none', fontWeight: 700 }}
-                                                >
-                                                    ⚡ Powered by data from Atmosvibe.io
-                                                </a>
-                                            </div>
-                                        </div>
-                                    )}
                                     {city.url ? (
                                         <>
                                             <button 

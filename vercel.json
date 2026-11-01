@@ -13,6 +13,30 @@
       "destination": "https://ted-lasso-vibe-challenge.vercel.app/vibe/:path*"
     },
     {
+      "source": "/assets/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/assets/:path*"
+    },
+    {
+      "source": "/models/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/models/:path*"
+    },
+    {
+      "source": "/audio/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/audio/:path*"
+    },
+    {
+      "source": "/textures/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/textures/:path*"
+    },
+    {
+      "source": "/images/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/images/:path*"
+    },
+    {
+      "source": "/config/:path*",
+      "destination": "https://ted-lasso-vibe-challenge.vercel.app/config/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

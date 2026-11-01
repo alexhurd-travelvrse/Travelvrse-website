@@ -35,6 +35,8 @@ const OwnerModeBanner = () => {
     const params = new URLSearchParams(location.search);
     if (
       params.get('ignore_analytics') === 'true' ||
+      params.get('ignore') === 'me' ||
+      params.get('ignore') === 'true' ||
       params.get('me') === 'true' ||
       params.get('notrack') === 'true'
     ) {

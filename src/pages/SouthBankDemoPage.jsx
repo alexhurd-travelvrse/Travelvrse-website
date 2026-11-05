@@ -15,7 +15,6 @@ import {
     Camera,
     Building2,
     ExternalLink,
-    QrCode,
     Copy,
     Check,
     ChevronDown,
@@ -28,7 +27,10 @@ import {
     Clock,
     Users,
     Code2,
-    X
+    X,
+    Image as ImageIcon,
+    SlidersHorizontal,
+    EyeOff
 } from 'lucide-react';
 
 const INITIAL_SOUTHBANK_HOTELS = [
@@ -43,10 +45,44 @@ const INITIAL_SOUTHBANK_HOTELS = [
         canonicalUrl: 'https://www.travelvrse.com/vibe/london/south-bank/sea-containers',
         directBookingUrl: 'https://www.seacontainerslondon.com/rooms-suites/?promo=VIBE3D',
         image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=900',
+        nuiteeImages: {
+            totalRawCount: 48,
+            filteredClutterCount: 16,
+            filteredCategories: '9 Bathroom Sink Shots, 4 Conference Rooms, 3 Corridor Angles',
+            rawDefaultOta: {
+                url: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=900',
+                caption: 'Nuitée Raw #1 (order: 1): Standard Double Bed Close-Up',
+                tag: 'RAW OTA DEFAULT #1'
+            },
+            curatedSlots: [
+                {
+                    id: 'social',
+                    tabLabel: '1. Vibe Hero: Rooftop & River',
+                    caption: '12th Knot Rooftop Lounge & Panoramic Thames Dusk View (Promoted from Nuitée #14 → #1)',
+                    vibeMatch: '84 dB Evening Social Pulse • Lyaness & 12th Knot',
+                    url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=900'
+                },
+                {
+                    id: 'design',
+                    tabLabel: '2. Design & Mixology',
+                    caption: 'Tom Dixon Transatlantic Copper Hull Lobby & Lyaness Cocktail Bar (Promoted from Nuitée #9 → #2)',
+                    vibeMatch: '1920s Ocean Liner Architecture • World Top-50 Bar',
+                    url: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=900'
+                },
+                {
+                    id: 'sleep',
+                    tabLabel: '3. Sleep Sanctuary (36 dB)',
+                    caption: 'Triple-Glazed Riverfront Cabin Suite (Paired with 36 dB Acoustic Floor Telemetry)',
+                    vibeMatch: '36 dB Verified Nighttime Floor • Sleep Score 91/100',
+                    url: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=900'
+                }
+            ]
+        },
         nuiteeRetailRate: 265,
         nuiteeDiscountPct: 8,
         nuiteeChallengeRate: 244,
-        directPerk: '8% Direct Rate Match + 2 Complimentary Cocktails at 12th Knot Rooftop',
+        finisherCreditGbp: 21,
+        directPerk: '£21 Direct Finisher Credit + 2 Complimentary Cocktails at 12th Knot Rooftop',
         geoScore: 91.3,
         atmosphereScore: 91.4,
         gemProximityScore: 90.8,
@@ -94,9 +130,43 @@ const INITIAL_SOUTHBANK_HOTELS = [
         canonicalUrl: 'https://www.travelvrse.com/vibe/london/south-bank/bankside-hotel',
         directBookingUrl: 'https://www.banksidehotel.com/?promo=VIBE3D',
         image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=900',
+        nuiteeImages: {
+            totalRawCount: 41,
+            filteredClutterCount: 14,
+            filteredCategories: '7 Bathroom Shots, 5 Meeting Rooms, 2 Elevator Lobbies',
+            rawDefaultOta: {
+                url: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=900',
+                caption: 'Nuitée Raw #1 (order: 1): Standard King Pillow Close-Up',
+                tag: 'RAW OTA DEFAULT #1'
+            },
+            curatedSlots: [
+                {
+                    id: 'social',
+                    tabLabel: '1. Vibe Hero: Art Yard Terrace',
+                    caption: 'Art Yard Bar & Courtyard Wine Terrace (Promoted from Nuitée #11 → #1)',
+                    vibeMatch: '64 dB Relaxed Cultural Evening Pulse • Makers’ Courtyard',
+                    url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=900'
+                },
+                {
+                    id: 'design',
+                    tabLabel: '2. Makers’ Art Studio',
+                    caption: 'Curated Contemporary Art Wall & Mid-Century Collectors’ Lounge (Promoted from Nuitée #7 → #2)',
+                    vibeMatch: 'Resident Artist Studio & Hand-Picked Ceramics',
+                    url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=900'
+                },
+                {
+                    id: 'sleep',
+                    tabLabel: '3. Sleep Sanctuary (33 dB)',
+                    caption: 'Acoustic-Insulated Courtyard Suite (Paired with 33 dB Ultra-Quiet Sleep Score)',
+                    vibeMatch: '33 dB Quietest Luxury Floor on South Bank • Score 95/100',
+                    url: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=900'
+                }
+            ]
+        },
         nuiteeRetailRate: 285,
         nuiteeDiscountPct: 8,
         nuiteeChallengeRate: 262,
+        finisherCreditGbp: 23,
         directPerk: 'Direct Art Studio Suite Upgrade + Welcome Carafe at Art Yard',
         geoScore: 92.1,
         atmosphereScore: 92.6,
@@ -144,9 +214,43 @@ const INITIAL_SOUTHBANK_HOTELS = [
         canonicalUrl: 'https://www.travelvrse.com/vibe/london/south-bank/the-hoxton-southwark',
         directBookingUrl: 'https://thehoxton.com/london/southwark/?promo=VIBE3D',
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=900',
+        nuiteeImages: {
+            totalRawCount: 38,
+            filteredClutterCount: 12,
+            filteredCategories: '6 Bathroom Tile Shots, 4 Corridor Views, 2 Street Exterior Shots',
+            rawDefaultOta: {
+                url: 'https://images.unsplash.com/photo-1540518614846-7ede433c4573?auto=format&fit=crop&q=80&w=900',
+                caption: 'Nuitée Raw #1 (order: 1): Cosy Room Headboard Standard Shot',
+                tag: 'RAW OTA DEFAULT #1'
+            },
+            curatedSlots: [
+                {
+                    id: 'social',
+                    tabLabel: '1. Vibe Hero: Seabird Rooftop',
+                    caption: 'Seabird 14th-Floor Coastal Rooftop & Marble Raw Bar (Promoted from Nuitée #16 → #1)',
+                    vibeMatch: '78 dB Rooftop Social Buzz • Panoramic London Skyline',
+                    url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=900'
+                },
+                {
+                    id: 'design',
+                    tabLabel: '2. Crittall & Velvet Lobby',
+                    caption: 'Industrial Crittall Glass Co-Working & Espresso Lounge (Promoted from Nuitée #8 → #2)',
+                    vibeMatch: 'All-Day Southwark Creative Hub & Albie Dining',
+                    url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=900'
+                },
+                {
+                    id: 'sleep',
+                    tabLabel: '3. Sleep Sanctuary (38 dB)',
+                    caption: 'Upper-Floor Industrial Sash Bedroom (Paired with 38 dB Acoustic Floor Telemetry)',
+                    vibeMatch: '38 dB Acoustic Floor (Floors 6–12) • Sleep Score 88/100',
+                    url: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&q=80&w=900'
+                }
+            ]
+        },
         nuiteeRetailRate: 230,
         nuiteeDiscountPct: 8,
         nuiteeChallengeRate: 212,
+        finisherCreditGbp: 18,
         directPerk: 'Flexi-Check-In + Oyster & Champagne Pairing at Seabird Rooftop',
         geoScore: 90.7,
         atmosphereScore: 91.2,
@@ -194,9 +298,43 @@ const INITIAL_SOUTHBANK_HOTELS = [
         canonicalUrl: 'https://www.travelvrse.com/vibe/london/south-bank/citizenm-bankside',
         directBookingUrl: 'https://www.citizenm.com/hotels/europe/london/london-bankside-hotel?promo=VIBE3D',
         image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80&w=900',
+        nuiteeImages: {
+            totalRawCount: 35,
+            filteredClutterCount: 11,
+            filteredCategories: '5 Check-In Kiosk Shots, 4 Wet-Room Sink Shots, 2 Street Angles',
+            rawDefaultOta: {
+                url: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=900',
+                caption: 'Nuitée Raw #1 (order: 1): Standard White Duvet Bed View',
+                tag: 'RAW OTA DEFAULT #1'
+            },
+            curatedSlots: [
+                {
+                    id: 'social',
+                    tabLabel: '1. Vibe Hero: Bamboo Courtyard',
+                    caption: 'CanteenM 24/7 Barista Bar & Enclosed Bamboo Courtyard (Promoted from Nuitée #12 → #1)',
+                    vibeMatch: '66 dB Creative Living Room & Draft Cocktails',
+                    url: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80&w=900'
+                },
+                {
+                    id: 'design',
+                    tabLabel: '2. Vitra & Art Library',
+                    caption: 'Double-Height Vitra Furniture Lounge & Contemporary Art Bookcase (Promoted from Nuitée #6 → #2)',
+                    vibeMatch: 'Museum-Grade Pop Art & Designer Co-Working',
+                    url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=900'
+                },
+                {
+                    id: 'sleep',
+                    tabLabel: '3. Sleep Sanctuary (35 dB)',
+                    caption: 'iPad Mood-Lit Soundproof XL King Pod (Paired with 35 dB Acoustic Floor Telemetry)',
+                    vibeMatch: '35 dB Courtyard Acoustic Isolation • Sleep Score 92/100',
+                    url: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&q=80&w=900'
+                }
+            ]
+        },
         nuiteeRetailRate: 195,
         nuiteeDiscountPct: 8,
         nuiteeChallengeRate: 179,
+        finisherCreditGbp: 16,
         directPerk: 'Official Direct Rate + Free Late 2pm Checkout & CanteenM Cocktail',
         geoScore: 91.9,
         atmosphereScore: 90.8,
@@ -239,6 +377,17 @@ const SouthBankDemoPage = () => {
     const [hotels, setHotels] = useState(INITIAL_SOUTHBANK_HOTELS);
     const [activeFilter, setActiveFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Photo Curation Engine Mode ('curated' vs 'raw_ota')
+    const [photoEngineMode, setPhotoEngineMode] = useState('curated');
+    // Active photo slot per hotel ('social' | 'design' | 'sleep')
+    const [selectedPhotoSlotByHotel, setSelectedPhotoSlotByHotel] = useState({
+        'sea-containers': 'social',
+        'bankside-autograph': 'social',
+        'hoxton-southwark': 'social',
+        'citizenm-bankside': 'social'
+    });
+
     const [expandedVibeIds, setExpandedVibeIds] = useState({
         'sea-containers': true,
         'bankside-autograph': false,
@@ -264,8 +413,23 @@ const SouthBankDemoPage = () => {
         setExpandedVibeIds((prev) => ({ ...prev, [id]: !prev[id] }));
     };
 
+    const handleSelectPhotoSlot = (hotelId, slotId) => {
+        setPhotoEngineMode('curated');
+        setSelectedPhotoSlotByHotel((prev) => ({
+            ...prev,
+            [hotelId]: slotId
+        }));
+    };
+
     const handleResetDemo = () => {
         setHotels(INITIAL_SOUTHBANK_HOTELS);
+        setPhotoEngineMode('curated');
+        setSelectedPhotoSlotByHotel({
+            'sea-containers': 'social',
+            'bankside-autograph': 'social',
+            'hoxton-southwark': 'social',
+            'citizenm-bankside': 'social'
+        });
         setExpandedVibeIds({
             'sea-containers': true,
             'bankside-autograph': false,
@@ -372,7 +536,7 @@ const SouthBankDemoPage = () => {
             <PasswordGate
                 badgeText="PRIVATE V2 SANDBOX • NOINDEX"
                 title="South Bank & Sea Containers V2 Demo"
-                subtitle="Enter password (travelvrse) to preview the Nuitée OTA + Atmosvibe Overlay + Turnkey Working Scan Claim flow."
+                subtitle="Enter password (travelvrse) to preview the Nuitée OTA + Atmosvibe Photo Re-Ranker + Turnkey Working Scan Claim flow."
                 buttonText="Unlock South Bank V2 Demo"
             >
                 <Layout>
@@ -396,7 +560,7 @@ const SouthBankDemoPage = () => {
                                     justifyContent: 'space-between',
                                     gap: '12px',
                                     padding: '12px 18px',
-                                    marginBottom: '28px',
+                                    marginBottom: '24px',
                                     borderRadius: '14px',
                                     background: 'rgba(15, 23, 42, 0.85)',
                                     border: '1px solid rgba(255, 215, 0, 0.35)',
@@ -483,7 +647,7 @@ const SouthBankDemoPage = () => {
                                 style={{
                                     borderRadius: '24px',
                                     padding: '32px',
-                                    marginBottom: '28px',
+                                    marginBottom: '24px',
                                     background: 'linear-gradient(135deg, rgba(12, 22, 38, 0.95) 0%, rgba(15, 31, 54, 0.9) 100%)',
                                     border: '1px solid rgba(0, 229, 255, 0.28)',
                                     boxShadow: '0 24px 60px rgba(0, 0, 0, 0.5)',
@@ -685,70 +849,78 @@ const SouthBankDemoPage = () => {
                                 </div>
                             </div>
 
-                            {/* Commercial Lifecycle Legend Banner (Explains how the 3 tiers work) */}
+                            {/* NEW: Interactive Nuitée Photo Curation Engine Bar (Tests Rules 1 / 2 / 3 Live!) */}
                             <div
                                 style={{
-                                    display: 'grid',
-                                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                                    gap: '14px',
-                                    marginBottom: '28px'
+                                    borderRadius: '18px',
+                                    padding: '18px 22px',
+                                    marginBottom: '24px',
+                                    background: photoEngineMode === 'curated'
+                                        ? 'linear-gradient(90deg, rgba(0, 229, 255, 0.12) 0%, rgba(15, 23, 42, 0.92) 100%)'
+                                        : 'linear-gradient(90deg, rgba(239, 68, 68, 0.14) 0%, rgba(15, 23, 42, 0.92) 100%)',
+                                    border: photoEngineMode === 'curated'
+                                        ? '1px solid rgba(0, 229, 255, 0.4)'
+                                        : '1px solid rgba(239, 68, 68, 0.45)',
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    gap: '16px'
                                 }}
                             >
-                                <div
-                                    style={{
-                                        padding: '16px 18px',
-                                        borderRadius: '16px',
-                                        background: 'rgba(15, 23, 42, 0.75)',
-                                        border: '1px solid rgba(148, 163, 184, 0.25)'
-                                    }}
-                                >
-                                    <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#94a3b8', letterSpacing: '0.08em', marginBottom: '4px' }}>
-                                        STEP 1 • BASELINE NUITÉE + VIBE OVERLAY
+                                <div style={{ flex: '1 1 520px' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                        <SlidersHorizontal size={15} style={{ color: photoEngineMode === 'curated' ? '#00e5ff' : '#f87171' }} />
+                                        <span style={{ fontSize: '0.76rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: photoEngineMode === 'curated' ? '#00e5ff' : '#f87171' }}>
+                                            Nuitée hotelImages[] Curation Engine (Rules 1, 2 &amp; 3 Active)
+                                        </span>
                                     </div>
-                                    <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>
-                                        Unscanned Hotel (Open to Creators)
+                                    <div style={{ fontSize: '0.86rem', color: '#e2e8f0', lineHeight: 1.5 }}>
+                                        {photoEngineMode === 'curated' ? (
+                                            <>
+                                                <strong>1. Vibe Hero Promoted to Slot #1</strong> (Rooftops, Terraces &amp; Mixology first) •{' '}
+                                                <strong>2. Paired with Vibe Overlay Tabs</strong> (Social / Design / Sleep dB) •{' '}
+                                                <strong>3. OTA Clutter Stripped</strong> (53 bathroom sink, corridor &amp; meeting room shots hidden across these 4 hotels).
+                                            </>
+                                        ) : (
+                                            <>
+                                                <strong style={{ color: '#fca5a5' }}>Viewing Raw Unsorted Nuitée OTA Feed (order: 1):</strong> Notice how standard OTA feeds put generic white bedspreads and pillows in Slot #1 and mix in 53 sterile bathroom/conference room shots.
+                                            </>
+                                        )}
                                     </div>
-                                    <p style={{ fontSize: '0.8rem', color: '#94a3b8', margin: 0, lineHeight: 1.45 }}>
-                                        Every hotel gets a full Vibe Overlay &amp; GEO index + standard Nuitée rate. Creators apply to 3D scan the hotel to unlock the Nuitée-funded stay discount.
-                                    </p>
                                 </div>
 
-                                <div
-                                    style={{
-                                        padding: '16px 18px',
-                                        borderRadius: '16px',
-                                        background: 'rgba(16, 185, 129, 0.08)',
-                                        border: '1px solid rgba(16, 185, 129, 0.4)'
-                                    }}
-                                >
-                                    <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#34d399', letterSpacing: '0.08em', marginBottom: '4px' }}>
-                                        STEP 2 • WORKING 3D SCAN + NUITÉE DISCOUNT
-                                    </div>
-                                    <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>
-                                        Live Scan Converting Travelers Now
-                                    </div>
-                                    <p style={{ fontSize: '0.8rem', color: '#cbd5e1', margin: 0, lineHeight: 1.45 }}>
-                                        Once scanned, Nuitée’s wholesale margin funds an <strong>8% Stay Reward</strong>. The 3D challenge is live and generating bookings before the hotel pays a penny.
-                                    </p>
-                                </div>
-
-                                <div
-                                    style={{
-                                        padding: '16px 18px',
-                                        borderRadius: '16px',
-                                        background: 'rgba(255, 215, 0, 0.08)',
-                                        border: '1px solid rgba(255, 215, 0, 0.4)'
-                                    }}
-                                >
-                                    <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#ffd700', letterSpacing: '0.08em', marginBottom: '4px' }}>
-                                        STEP 3 • FRICTIONLESS HOTEL CLAIM
-                                    </div>
-                                    <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>
-                                        Hotel Takes Over Working Scan &amp; GEO Index
-                                    </div>
-                                    <p style={{ fontSize: '0.8rem', color: '#cbd5e1', margin: 0, lineHeight: 1.45 }}>
-                                        The hotel claims their <strong>already-working 3D scan</strong> (flipping checkout from Nuitée OTA to Direct Booking Engine) and embeds their Vibe Signature index.
-                                    </p>
+                                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                                    <button
+                                        onClick={() => setPhotoEngineMode('curated')}
+                                        style={{
+                                            padding: '9px 14px',
+                                            borderRadius: '10px',
+                                            fontSize: '0.78rem',
+                                            fontWeight: 800,
+                                            cursor: 'pointer',
+                                            background: photoEngineMode === 'curated' ? '#00e5ff' : 'rgba(255,255,255,0.06)',
+                                            color: photoEngineMode === 'curated' ? '#050b14' : '#cbd5e1',
+                                            border: photoEngineMode === 'curated' ? 'none' : '1px solid rgba(255,255,255,0.15)'
+                                        }}
+                                    >
+                                        ✨ Atmosvibe 1/2/3 Photo Curation (ON)
+                                    </button>
+                                    <button
+                                        onClick={() => setPhotoEngineMode('raw_ota')}
+                                        style={{
+                                            padding: '9px 14px',
+                                            borderRadius: '10px',
+                                            fontSize: '0.78rem',
+                                            fontWeight: 700,
+                                            cursor: 'pointer',
+                                            background: photoEngineMode === 'raw_ota' ? '#ef4444' : 'rgba(255,255,255,0.06)',
+                                            color: photoEngineMode === 'raw_ota' ? '#fff' : '#cbd5e1',
+                                            border: photoEngineMode === 'raw_ota' ? 'none' : '1px solid rgba(255,255,255,0.15)'
+                                        }}
+                                    >
+                                        Compare: Raw OTA Default (#1 Bed Shot)
+                                    </button>
                                 </div>
                             </div>
 
@@ -801,7 +973,7 @@ const SouthBankDemoPage = () => {
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                                     {[
                                         { id: 'all', label: `All South Bank Stays (${hotels.length})` },
-                                        { id: 'working_scan', label: '🟢 Working 3D Scan + 8% Discount Active' },
+                                        { id: 'working_scan', label: '🟢 Working 3D Scan + Finisher Credit Active' },
                                         { id: 'rooftop', label: '🍸 Rooftop & River Pulse' },
                                         { id: 'sleep', label: '🔇 Sleep Sanctuary (≤36 dB)' },
                                         { id: 'unscanned', label: '📸 Open for Creator Scan' }
@@ -835,12 +1007,27 @@ const SouthBankDemoPage = () => {
                             </div>
 
                             {/* PART C, D, E, F: South Bank Hotel Cards Grid */}
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '26px' }}>
                                 {filteredHotels.map((hotel) => {
                                     const isExpanded = !!expandedVibeIds[hotel.id];
                                     const isWorkingScan = hotel.tier === 'scanned_working';
                                     const isClaimed = hotel.tier === 'claimed_direct';
                                     const isUnscanned = hotel.tier === 'unscanned';
+
+                                    const activeSlotId = selectedPhotoSlotByHotel[hotel.id] || 'social';
+                                    const activeCuratedPhoto =
+                                        hotel.nuiteeImages.curatedSlots.find((s) => s.id === activeSlotId) ||
+                                        hotel.nuiteeImages.curatedSlots[0];
+
+                                    const displayedPhotoUrl =
+                                        photoEngineMode === 'raw_ota'
+                                            ? hotel.nuiteeImages.rawDefaultOta.url
+                                            : activeCuratedPhoto.url;
+
+                                    const displayedCaption =
+                                        photoEngineMode === 'raw_ota'
+                                            ? hotel.nuiteeImages.rawDefaultOta.caption
+                                            : activeCuratedPhoto.caption;
 
                                     return (
                                         <div
@@ -935,7 +1122,7 @@ const SouthBankDemoPage = () => {
                                                             ? `3D Scan by ${hotel.scanCreator} • ${hotel.telemetry.sessions30d.toLocaleString()} sessions (${hotel.telemetry.avgDwellTime} avg dwell) • ${hotel.telemetry.nuiteeBookings} Nuitée bookings generated`
                                                             : isClaimed
                                                             ? `Checkout linked directly to ${hotel.name} Booking Engine • White-label 3D Challenge & GEO Schema active`
-                                                            : 'Vibe Signature & GEO Index live • 8% Nuitée Stay Reward unlocks as soon as a Creator uploads a 3D Scan'}
+                                                            : 'Vibe Signature & Curated Nuitée Gallery live • £' + hotel.finisherCreditGbp + ' Finisher Credit unlocks once a Creator uploads a 3D Scan'}
                                                     </span>
                                                 </div>
 
@@ -961,81 +1148,142 @@ const SouthBankDemoPage = () => {
                                             <div
                                                 style={{
                                                     display: 'grid',
-                                                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                                                    gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
                                                     gap: '24px',
                                                     padding: '24px'
                                                 }}
                                             >
-                                                {/* Column 1: Visual + 3D Scan Action */}
-                                                <div style={{ position: 'relative' }}>
+                                                {/* Column 1: 1/2/3 Curated Nuitée Photo Switcher + Clutter Filter Badge + 3D Scan Action */}
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                                    {/* 1/2/3 Photo Slot Tabs (Paired with Vibe Overlay) */}
                                                     <div
                                                         style={{
-                                                            height: '235px',
+                                                            display: 'grid',
+                                                            gridTemplateColumns: 'repeat(3, 1fr)',
+                                                            gap: '6px'
+                                                        }}
+                                                    >
+                                                        {hotel.nuiteeImages.curatedSlots.map((slot) => {
+                                                            const isSlotActive = photoEngineMode === 'curated' && activeSlotId === slot.id;
+                                                            return (
+                                                                <button
+                                                                    key={slot.id}
+                                                                    onClick={() => handleSelectPhotoSlot(hotel.id, slot.id)}
+                                                                    style={{
+                                                                        padding: '7px 6px',
+                                                                        borderRadius: '8px',
+                                                                        fontSize: '0.69rem',
+                                                                        fontWeight: 800,
+                                                                        cursor: 'pointer',
+                                                                        textAlign: 'center',
+                                                                        background: isSlotActive
+                                                                            ? 'rgba(0, 229, 255, 0.18)'
+                                                                            : 'rgba(255,255,255,0.04)',
+                                                                        color: isSlotActive ? '#00e5ff' : '#94a3b8',
+                                                                        border: isSlotActive
+                                                                            ? '1px solid rgba(0, 229, 255, 0.5)'
+                                                                            : '1px solid rgba(255,255,255,0.08)',
+                                                                        transition: 'all 0.15s ease'
+                                                                    }}
+                                                                >
+                                                                    {slot.tabLabel}
+                                                                </button>
+                                                            );
+                                                        })}
+                                                    </div>
+
+                                                    {/* Main Curated Nuitée Photo Frame */}
+                                                    <div
+                                                        style={{
+                                                            height: '225px',
                                                             borderRadius: '16px',
                                                             overflow: 'hidden',
                                                             position: 'relative',
-                                                            border: '1px solid rgba(255,255,255,0.1)'
+                                                            border: photoEngineMode === 'raw_ota'
+                                                                ? '2px solid rgba(239, 68, 68, 0.6)'
+                                                                : '1px solid rgba(0, 229, 255, 0.3)'
                                                         }}
                                                     >
                                                         <img
-                                                            src={hotel.image}
-                                                            alt={hotel.name}
-                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                            src={displayedPhotoUrl}
+                                                            alt={`${hotel.name} - ${displayedCaption}`}
+                                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'all 0.3s ease' }}
                                                         />
                                                         <div
                                                             style={{
                                                                 position: 'absolute',
                                                                 inset: 0,
-                                                                background: 'linear-gradient(to top, rgba(5,11,20,0.9) 0%, transparent 60%)',
+                                                                background: 'linear-gradient(to top, rgba(5,11,20,0.95) 0%, rgba(5,11,20,0.2) 55%, rgba(5,11,20,0.6) 100%)',
                                                                 display: 'flex',
                                                                 flexDirection: 'column',
                                                                 justifyContent: 'space-between',
-                                                                padding: '14px'
+                                                                padding: '12px'
                                                             }}
                                                         >
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px' }}>
+                                                            {/* Top Badges inside Image */}
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '6px', flexWrap: 'wrap' }}>
                                                                 <span
                                                                     style={{
-                                                                        padding: '4px 10px',
+                                                                        padding: '4px 9px',
                                                                         borderRadius: '8px',
-                                                                        background: 'rgba(5, 11, 20, 0.8)',
-                                                                        backdropFilter: 'blur(8px)',
-                                                                        border: '1px solid rgba(255,255,255,0.15)',
-                                                                        color: '#f8fafc',
-                                                                        fontSize: '0.74rem',
-                                                                        fontWeight: 700
+                                                                        background: photoEngineMode === 'raw_ota'
+                                                                            ? 'rgba(239, 68, 68, 0.9)'
+                                                                            : 'rgba(5, 11, 20, 0.85)',
+                                                                        border: '1px solid rgba(255,255,255,0.2)',
+                                                                        color: '#fff',
+                                                                        fontSize: '0.7rem',
+                                                                        fontWeight: 800
                                                                     }}
                                                                 >
-                                                                    {hotel.distanceFromAnchor}
+                                                                    {photoEngineMode === 'raw_ota'
+                                                                        ? '❌ RAW NUITÉE DEFAULT #1 (BED SHOT)'
+                                                                        : `✓ ${activeCuratedPhoto.vibeMatch}`}
                                                                 </span>
+
                                                                 <span
                                                                     style={{
-                                                                        padding: '4px 10px',
+                                                                        padding: '4px 9px',
                                                                         borderRadius: '8px',
                                                                         background: 'rgba(5, 11, 20, 0.85)',
                                                                         border: '1px solid rgba(0, 229, 255, 0.35)',
                                                                         color: '#00e5ff',
-                                                                        fontSize: '0.74rem',
+                                                                        fontSize: '0.7rem',
                                                                         fontWeight: 800
                                                                     }}
                                                                 >
-                                                                    Sleep Floor: {hotel.verificationData.sleepAcousticDb}
+                                                                    {hotel.verificationData.sleepAcousticDb} Sleep Floor
                                                                 </span>
                                                             </div>
 
+                                                            {/* Bottom Caption + 3D Launch inside Image */}
                                                             <div>
+                                                                <div
+                                                                    style={{
+                                                                        fontSize: '0.73rem',
+                                                                        color: '#e2e8f0',
+                                                                        marginBottom: '8px',
+                                                                        fontWeight: 600,
+                                                                        display: 'flex',
+                                                                        alignItems: 'center',
+                                                                        gap: '6px'
+                                                                    }}
+                                                                >
+                                                                    <ImageIcon size={13} style={{ color: '#00e5ff', flexShrink: 0 }} />
+                                                                    <span>{displayedCaption}</span>
+                                                                </div>
+
                                                                 {(isWorkingScan || isClaimed) ? (
                                                                     <button
                                                                         onClick={() => setPlayModalHotel(hotel)}
                                                                         style={{
                                                                             width: '100%',
-                                                                            padding: '10px 14px',
+                                                                            padding: '9px 14px',
                                                                             borderRadius: '10px',
                                                                             background: 'linear-gradient(135deg, #00e5ff 0%, #3b82f6 100%)',
                                                                             color: '#050b14',
                                                                             border: 'none',
                                                                             fontWeight: 800,
-                                                                            fontSize: '0.84rem',
+                                                                            fontSize: '0.82rem',
                                                                             cursor: 'pointer',
                                                                             display: 'flex',
                                                                             alignItems: 'center',
@@ -1044,20 +1292,20 @@ const SouthBankDemoPage = () => {
                                                                             boxShadow: '0 8px 20px rgba(0, 229, 255, 0.3)'
                                                                         }}
                                                                     >
-                                                                        <Sparkles size={15} /> Launch Working 3D Vibe Challenge
+                                                                        <Sparkles size={14} /> Launch Working 3D Vibe Challenge
                                                                     </button>
                                                                 ) : (
                                                                     <button
                                                                         onClick={() => setCreatorModalHotel(hotel)}
                                                                         style={{
                                                                             width: '100%',
-                                                                            padding: '10px 14px',
+                                                                            padding: '9px 14px',
                                                                             borderRadius: '10px',
-                                                                            background: 'rgba(15, 23, 42, 0.9)',
+                                                                            background: 'rgba(15, 23, 42, 0.92)',
                                                                             color: '#38bdf8',
                                                                             border: '1px dashed rgba(56, 189, 248, 0.6)',
                                                                             fontWeight: 700,
-                                                                            fontSize: '0.82rem',
+                                                                            fontSize: '0.8rem',
                                                                             cursor: 'pointer',
                                                                             display: 'flex',
                                                                             alignItems: 'center',
@@ -1065,11 +1313,31 @@ const SouthBankDemoPage = () => {
                                                                             gap: '8px'
                                                                         }}
                                                                     >
-                                                                        <Camera size={15} /> Creators: Apply to 3D Scan (Unlock 8% Discount)
+                                                                        <Camera size={14} /> Creators: Apply to 3D Scan (Unlock £{hotel.finisherCreditGbp} Credit)
                                                                     </button>
                                                                 )}
                                                             </div>
                                                         </div>
+                                                    </div>
+
+                                                    {/* Rule 3 Indicator: OTA Clutter Filtered Out */}
+                                                    <div
+                                                        style={{
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'space-between',
+                                                            padding: '6px 10px',
+                                                            borderRadius: '8px',
+                                                            background: 'rgba(255,255,255,0.03)',
+                                                            border: '1px solid rgba(255,255,255,0.07)',
+                                                            fontSize: '0.71rem',
+                                                            color: '#94a3b8'
+                                                        }}
+                                                    >
+                                                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                                                            <EyeOff size={12} style={{ color: '#34d399' }} />
+                                                            <strong>{hotel.nuiteeImages.filteredClutterCount} of {hotel.nuiteeImages.totalRawCount} Nuitée photos hidden:</strong> {hotel.nuiteeImages.filteredCategories}
+                                                        </span>
                                                     </div>
                                                 </div>
 
@@ -1077,7 +1345,7 @@ const SouthBankDemoPage = () => {
                                                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                                                     <div>
                                                         <div style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                                            <MapPin size={13} style={{ color: '#00e5ff' }} /> {hotel.neighbourhood}
+                                                            <MapPin size={13} style={{ color: '#00e5ff' }} /> {hotel.neighbourhood} • <span style={{ color: '#cbd5e1' }}>{hotel.distanceFromAnchor}</span>
                                                         </div>
                                                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', margin: '0 0 6px 0' }}>
                                                             {hotel.name}
@@ -1128,7 +1396,7 @@ const SouthBankDemoPage = () => {
                                                             border: '1px solid rgba(0, 229, 255, 0.3)',
                                                             color: '#00e5ff',
                                                             fontWeight: 700,
-                                                            fontSize: '0.83rem',
+                                                            fontSize: '0.82rem',
                                                             cursor: 'pointer'
                                                         }}
                                                     >
@@ -1141,7 +1409,7 @@ const SouthBankDemoPage = () => {
                                                     </button>
                                                 </div>
 
-                                                {/* Column 3: Nuitée Pricing / Discount Mechanics + Turnkey Hotel Claim CTA */}
+                                                {/* Column 3: Rate-Parity Safe Pricing + CUG Finisher Credit + Turnkey Hotel Claim CTA */}
                                                 <div
                                                     style={{
                                                         background: 'rgba(5, 11, 20, 0.75)',
@@ -1155,24 +1423,18 @@ const SouthBankDemoPage = () => {
                                                     }}
                                                 >
                                                     <div>
-                                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
-                                                            <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase' }}>
-                                                                {isClaimed
-                                                                    ? 'Official Hotel Direct Rate'
-                                                                    : isWorkingScan
-                                                                    ? 'Nuitée-Funded 3D Challenge Rate'
-                                                                    : 'Standard Nuitée OTA Rate'}
+                                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                                                            <span style={{ fontSize: '0.73rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase' }}>
+                                                                {isClaimed ? 'Official Hotel Direct Rate (BAR)' : 'Standard Public Rate (Rate Parity Safe)'}
                                                             </span>
-                                                            {(isWorkingScan || isClaimed) && (
-                                                                <span style={{ fontSize: '0.8rem', color: '#64748b', textDecoration: 'line-through' }}>
-                                                                    £{hotel.nuiteeRetailRate}/nt
-                                                                </span>
-                                                            )}
+                                                            <span style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 700 }}>
+                                                                CUG Compliant
+                                                            </span>
                                                         </div>
 
                                                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '10px' }}>
                                                             <span style={{ fontSize: '1.85rem', fontWeight: 800, color: '#fff' }}>
-                                                                £{isWorkingScan || isClaimed ? hotel.nuiteeChallengeRate : hotel.nuiteeRetailRate}
+                                                                £{hotel.nuiteeRetailRate}
                                                             </span>
                                                             <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>/ night</span>
                                                             {(isWorkingScan || isClaimed) && (
@@ -1183,10 +1445,10 @@ const SouthBankDemoPage = () => {
                                                                         background: 'rgba(16, 185, 129, 0.18)',
                                                                         color: '#34d399',
                                                                         fontWeight: 800,
-                                                                        fontSize: '0.73rem'
+                                                                        fontSize: '0.72rem'
                                                                     }}
                                                                 >
-                                                                    SAVE {hotel.nuiteeDiscountPct}% (NUITÉE MARGIN)
+                                                                    🏆 -£{hotel.finisherCreditGbp} FINISHER CREDIT
                                                                 </span>
                                                             )}
                                                         </div>
@@ -1203,8 +1465,8 @@ const SouthBankDemoPage = () => {
                                                                     lineHeight: 1.45
                                                                 }}
                                                             >
-                                                                <strong style={{ color: '#34d399' }}>Working Scan Active:</strong> Travelers completing the 3D scan unlock an instant{' '}
-                                                                <strong>{hotel.nuiteeDiscountPct}% stay discount</strong> funded out of Nuitée’s wholesale margin.
+                                                                <strong style={{ color: '#34d399' }}>CUG Finisher Reward Active:</strong> Completing the 3D challenge unlocks a{' '}
+                                                                <strong>£{hotel.finisherCreditGbp}/nt TravelVRSE Finisher Stay Credit</strong> (£{hotel.nuiteeChallengeRate}/nt net at checkout, funded via Nuitée wholesale margin).
                                                             </div>
                                                         )}
 
@@ -1220,7 +1482,7 @@ const SouthBankDemoPage = () => {
                                                                     lineHeight: 1.45
                                                                 }}
                                                             >
-                                                                <strong>Direct Partner Perk:</strong> {hotel.directPerk}
+                                                                <strong>Official Direct Partner Perk:</strong> {hotel.directPerk}
                                                             </div>
                                                         )}
 
@@ -1236,7 +1498,7 @@ const SouthBankDemoPage = () => {
                                                                     lineHeight: 1.45
                                                                 }}
                                                             >
-                                                                <strong>8% Nuitée Discount Locked:</strong> Eligible for £{hotel.nuiteeChallengeRate}/nt reward rate as soon as a Creator completes the 3D scan.
+                                                                <strong>£{hotel.finisherCreditGbp} Finisher Credit Locked:</strong> Eligible for Nuitée-funded CUG finisher reward as soon as a Creator completes the 3D scan.
                                                             </div>
                                                         )}
                                                     </div>
@@ -1277,13 +1539,13 @@ const SouthBankDemoPage = () => {
                                                                     color: isWorkingScan ? '#052e16' : '#fff',
                                                                     border: 'none',
                                                                     fontWeight: 800,
-                                                                    fontSize: '0.84rem',
+                                                                    fontSize: '0.82rem',
                                                                     cursor: 'pointer'
                                                                 }}
                                                             >
                                                                 {isWorkingScan
-                                                                    ? `Play 3D Scan & Book (£${hotel.nuiteeChallengeRate} via Nuitée)`
-                                                                    : `Book Standard Rate (£${hotel.nuiteeRetailRate} via Nuitée)`}
+                                                                    ? `Play 3D Scan to Unlock -£${hotel.finisherCreditGbp} Finisher Credit`
+                                                                    : `Book Standard Rate (£${hotel.nuiteeRetailRate}/nt via Nuitée)`}
                                                             </button>
                                                         )}
 
@@ -1368,7 +1630,7 @@ const SouthBankDemoPage = () => {
                                                 </div>
                                             </div>
 
-                                            {/* Expandable PART C: Full Vibe Overlay Drawer */}
+                                            {/* Expandable PART C: Full Vibe Overlay Drawer (Clicking sections also syncs the Nuitée Photo!) */}
                                             {isExpanded && (
                                                 <div
                                                     style={{
@@ -1382,18 +1644,20 @@ const SouthBankDemoPage = () => {
                                                 >
                                                     {/* You'll Love This If */}
                                                     <div
+                                                        onClick={() => handleSelectPhotoSlot(hotel.id, 'social')}
                                                         style={{
                                                             padding: '16px',
                                                             borderRadius: '14px',
                                                             background: 'rgba(16, 185, 129, 0.06)',
-                                                            border: '1px solid rgba(16, 185, 129, 0.25)'
+                                                            border: '1px solid rgba(16, 185, 129, 0.25)',
+                                                            cursor: 'pointer'
                                                         }}
                                                     >
                                                         <div
                                                             style={{
                                                                 display: 'flex',
                                                                 alignItems: 'center',
-                                                                gap: '8px',
+                                                                justifyContent: 'space-between',
                                                                 color: '#34d399',
                                                                 fontWeight: 800,
                                                                 fontSize: '0.84rem',
@@ -1402,7 +1666,10 @@ const SouthBankDemoPage = () => {
                                                                 marginBottom: '12px'
                                                             }}
                                                         >
-                                                            <CheckCircle2 size={16} /> You’ll Love This Stay If...
+                                                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                                                                <CheckCircle2 size={16} /> You’ll Love This Stay If...
+                                                            </span>
+                                                            <span style={{ fontSize: '0.68rem', color: '#94a3b8' }}>Photo #1 ↗</span>
                                                         </div>
                                                         <ul style={{ margin: 0, paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '8px', color: '#e2e8f0', fontSize: '0.84rem', lineHeight: 1.5 }}>
                                                             {hotel.youWillLoveIf.map((item, i) => (
@@ -1413,18 +1680,20 @@ const SouthBankDemoPage = () => {
 
                                                     {/* Avoid If */}
                                                     <div
+                                                        onClick={() => handleSelectPhotoSlot(hotel.id, 'design')}
                                                         style={{
                                                             padding: '16px',
                                                             borderRadius: '14px',
                                                             background: 'rgba(245, 158, 11, 0.06)',
-                                                            border: '1px solid rgba(245, 158, 11, 0.25)'
+                                                            border: '1px solid rgba(245, 158, 11, 0.25)',
+                                                            cursor: 'pointer'
                                                         }}
                                                     >
                                                         <div
                                                             style={{
                                                                 display: 'flex',
                                                                 alignItems: 'center',
-                                                                gap: '8px',
+                                                                justifyContent: 'space-between',
                                                                 color: '#fbbf24',
                                                                 fontWeight: 800,
                                                                 fontSize: '0.84rem',
@@ -1433,7 +1702,10 @@ const SouthBankDemoPage = () => {
                                                                 marginBottom: '12px'
                                                             }}
                                                         >
-                                                            <AlertTriangle size={16} /> Avoid This Stay If...
+                                                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                                                                <AlertTriangle size={16} /> Avoid This Stay If...
+                                                            </span>
+                                                            <span style={{ fontSize: '0.68rem', color: '#94a3b8' }}>Photo #2 ↗</span>
                                                         </div>
                                                         <ul style={{ margin: 0, paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '8px', color: '#e2e8f0', fontSize: '0.84rem', lineHeight: 1.5 }}>
                                                             {hotel.avoidIf.map((item, i) => (
@@ -1442,20 +1714,22 @@ const SouthBankDemoPage = () => {
                                                         </ul>
                                                     </div>
 
-                                                    {/* Key Vibe Verification Telemetry */}
+                                                    {/* Key Vibe Verification Telemetry (Syncs with Sleep Sanctuary Photo #3) */}
                                                     <div
+                                                        onClick={() => handleSelectPhotoSlot(hotel.id, 'sleep')}
                                                         style={{
                                                             padding: '16px',
                                                             borderRadius: '14px',
                                                             background: 'rgba(0, 229, 255, 0.05)',
-                                                            border: '1px solid rgba(0, 229, 255, 0.25)'
+                                                            border: '1px solid rgba(0, 229, 255, 0.25)',
+                                                            cursor: 'pointer'
                                                         }}
                                                     >
                                                         <div
                                                             style={{
                                                                 display: 'flex',
                                                                 alignItems: 'center',
-                                                                gap: '8px',
+                                                                justifyContent: 'space-between',
                                                                 color: '#00e5ff',
                                                                 fontWeight: 800,
                                                                 fontSize: '0.84rem',
@@ -1464,7 +1738,10 @@ const SouthBankDemoPage = () => {
                                                                 marginBottom: '12px'
                                                             }}
                                                         >
-                                                            <ShieldCheck size={16} /> Key Vibe Verification Data
+                                                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                                                                <ShieldCheck size={16} /> Key Vibe Verification Data
+                                                            </span>
+                                                            <span style={{ fontSize: '0.68rem', color: '#94a3b8' }}>Sleep Photo #3 ↗</span>
                                                         </div>
 
                                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.82rem' }}>
@@ -1653,7 +1930,7 @@ const SouthBankDemoPage = () => {
 
                                     <div style={{ marginBottom: '18px' }}>
                                         <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#e2e8f0', marginBottom: '6px' }}>
-                                            2. Direct Challenge Completion Reward (Replaces Nuitée Wholesale Margin Discount):
+                                            2. Direct Challenge Completion Reward (Replaces Nuitée Wholesale Margin Credit):
                                         </label>
                                         <input
                                             type="text"
@@ -1759,7 +2036,7 @@ const SouthBankDemoPage = () => {
                         </div>
                     )}
 
-                    {/* MODAL 2: Creator "Apply to 3D Scan (Unlock Nuitée Discount)" Modal */}
+                    {/* MODAL 2: Creator "Apply to 3D Scan (Unlock Nuitée Finisher Credit)" Modal */}
                     {creatorModalHotel && (
                         <div
                             onClick={() => setCreatorModalHotel(null)}
@@ -1817,7 +2094,7 @@ const SouthBankDemoPage = () => {
                                     Scan {creatorModalHotel.name}
                                 </h2>
                                 <p style={{ fontSize: '0.88rem', color: '#cbd5e1', lineHeight: 1.55, marginBottom: '18px' }}>
-                                    Right now, <strong>{creatorModalHotel.name}</strong> is an unscanned Nuitée listing (£{creatorModalHotel.nuiteeRetailRate}/nt). When you capture and upload its 3D Gaussian Splat challenge:
+                                    Right now, <strong>{creatorModalHotel.name}</strong> is an unscanned Nuitée listing (£{creatorModalHotel.nuiteeRetailRate}/nt standard rate). When you capture and upload its 3D Gaussian Splat challenge:
                                 </p>
 
                                 <div
@@ -1834,7 +2111,7 @@ const SouthBankDemoPage = () => {
                                     }}
                                 >
                                     <div>
-                                        <strong style={{ color: '#34d399' }}>1. Unlocks 8% Traveler Stay Discount:</strong> Nuitée wholesale margin automatically funds an £{creatorModalHotel.nuiteeRetailRate - creatorModalHotel.nuiteeChallengeRate}/nt discount (£{creatorModalHotel.nuiteeChallengeRate}/nt reward rate).
+                                        <strong style={{ color: '#34d399' }}>1. Unlocks £{creatorModalHotel.finisherCreditGbp}/nt CUG Finisher Stay Credit:</strong> Nuitée wholesale margin automatically funds a £{creatorModalHotel.finisherCreditGbp}/nt reward (£{creatorModalHotel.nuiteeChallengeRate}/nt net at checkout) behind your 3D challenge gate.
                                     </div>
                                     <div>
                                         <strong style={{ color: '#38bdf8' }}>2. Creator Rev-Share Active:</strong> You earn commission on every Nuitée stay booked through your 3D scan—plus a residual bonus when the hotel claims your working scan!
@@ -1876,7 +2153,7 @@ const SouthBankDemoPage = () => {
                                             cursor: 'pointer'
                                         }}
                                     >
-                                        Simulate Creator Scan Upload → Unlock 8% Nuitée Discount Now
+                                        Simulate Creator Scan Upload → Unlock -£{creatorModalHotel.finisherCreditGbp} Finisher Credit Now
                                     </button>
                                 </form>
                             </div>
@@ -1932,11 +2209,11 @@ const SouthBankDemoPage = () => {
                                 </button>
 
                                 <div style={{ color: '#00e5ff', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '6px' }}>
-                                    WORKING 3D GAUSSIAN SPLAT CHALLENGE
+                                    CLOSED USER GROUP (CUG) • 3D VIBE CHALLENGE
                                 </div>
                                 <h3 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '0 0 8px 0' }}>{playModalHotel.name}</h3>
                                 <p style={{ fontSize: '0.84rem', color: '#cbd5e1', marginBottom: '18px' }}>
-                                    Explore the South Bank 3D space to unlock the <strong>£{playModalHotel.nuiteeChallengeRate}/nt ({playModalHotel.nuiteeDiscountPct}% Off)</strong> stay reward.
+                                    Complete the South Bank 3D space challenge to unlock your <strong>-£{playModalHotel.finisherCreditGbp}/nt Finisher Stay Credit</strong> (£{playModalHotel.nuiteeChallengeRate}/nt CUG Member Rate at checkout).
                                 </p>
 
                                 <div

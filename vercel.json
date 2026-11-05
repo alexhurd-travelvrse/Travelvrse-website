@@ -8,11 +8,11 @@
   ],
   "headers": [
     {
-      "source": "/(creator-portal|barcelona|ignore-me|notrack)",
+      "source": "/(creator-portal|barcelona|ignore-me|notrack|demo|demo/.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
-          "value": "noindex, nofollow"
+          "value": "noindex, nofollow, noarchive"
         }
       ]
     }

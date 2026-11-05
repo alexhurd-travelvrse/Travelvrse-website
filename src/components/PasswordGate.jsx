@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { X, Lock } from 'lucide-react';
 import './PasswordGate.css';
 
-const PasswordGate = ({ children, onClose, onSuccess }) => {
+const PasswordGate = ({
+    children,
+    onClose,
+    onSuccess,
+    badgeText = 'PASSWORD PROTECTED',
+    title = 'Exclusive Access',
+    subtitle = 'Please enter the password to view the Barcelona destination challenge.',
+    buttonText = 'Enter Experience'
+}) => {
     const [password, setPassword] = useState('');
     const [isAuthorized, setIsAuthorized] = useState(false);
     const [error, setError] = useState('');
@@ -17,8 +25,9 @@ const PasswordGate = ({ children, onClose, onSuccess }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Allow Travelvrse, travelvrse, TRAVELVRSE
-        if (password.trim().toLowerCase() === 'travelvrse') {
+        const cleaned = password.trim().toLowerCase();
+        // Allow Travelvrse, southbank, demo
+        if (cleaned === 'travelvrse' || cleaned === 'southbank' || cleaned === 'demo') {
             sessionStorage.setItem('travelvrse_authorized', 'true');
             setIsAuthorized(true);
             setError('');
@@ -50,10 +59,10 @@ const PasswordGate = ({ children, onClose, onSuccess }) => {
                 </div>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--color-gold, #ffd700)', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>
                     <Lock size={12} />
-                    <span>PASSWORD PROTECTED</span>
+                    <span>{badgeText}</span>
                 </div>
-                <h2>Exclusive Access</h2>
-                <p>Please enter the password to view the Barcelona destination challenge.</p>
+                <h2>{title}</h2>
+                <p>{subtitle}</p>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="password"
@@ -65,7 +74,7 @@ const PasswordGate = ({ children, onClose, onSuccess }) => {
                     />
                     {error && <p className="error-message">{error}</p>}
                     <button type="submit" className="submit-btn" style={{ background: 'linear-gradient(135deg, #ffd700 0%, #ffb300 100%)', color: '#050b14', fontWeight: '800' }}>
-                        Enter Experience
+                        {buttonText}
                     </button>
                 </form>
             </div>

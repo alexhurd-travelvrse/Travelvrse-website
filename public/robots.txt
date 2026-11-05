@@ -5,6 +5,8 @@ Allow: /marketplace
 Allow: /vibe/
 Allow: /play/
 Disallow: /barcelona
+Disallow: /demo
+Disallow: /demo/
 Disallow: /ignore-me
 Disallow: /notrack
 Disallow: /admin
@@ -15,6 +17,8 @@ Allow: /
 Allow: /vibe/
 Allow: /play/
 Disallow: /barcelona
+Disallow: /demo
+Disallow: /demo/
 Disallow: /ignore-me
 
 User-agent: OAI-SearchBot
@@ -22,6 +26,8 @@ Allow: /
 Allow: /vibe/
 Allow: /play/
 Disallow: /barcelona
+Disallow: /demo
+Disallow: /demo/
 Disallow: /ignore-me
 
 User-agent: ChatGPT-User

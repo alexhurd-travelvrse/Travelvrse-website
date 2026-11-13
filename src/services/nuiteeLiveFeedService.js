@@ -106,7 +106,7 @@ export function analyzeNuiteePhotoFeed(hotelId, hotelData, fallbackNuiteeImages)
  * Fetch live Nuitée hotel content (`/v3.0/data/hotel`), live rates (`/v3.0/hotels/rates`),
  * and live South Bank places (`/v3.0/data/places`) for all 4 South Bank demo properties.
  */
-export async function fetchLiveSouthBankNuiteeFeeds(customDates = null) {
+export async function fetchLiveSouthBankNuiteeFeeds(customDates = null, guestNationality = 'GB') {
     const apiKey = getLiteApiKey();
     const { checkin, checkout, nights } = customDates || getDefaultSouthBankDates(28, 2);
     const hotelIds = Object.values(SOUTHBANK_NUITEE_HOTEL_MAP);
@@ -118,7 +118,7 @@ export async function fetchLiveSouthBankNuiteeFeeds(customDates = null) {
     };
 
     try {
-        // 1. Fetch live /v3.0/hotels/rates for all 4 South Bank hotels in GBP
+        // 1. Fetch live /v3.0/hotels/rates for all 4 South Bank hotels with source-market guestNationality & margin: 0
         const ratesPromise = fetch(`${LITEAPI_BASE_URL}/hotels/rates`, {
             method: 'POST',
             headers,
@@ -127,9 +127,10 @@ export async function fetchLiveSouthBankNuiteeFeeds(customDates = null) {
                 checkin,
                 checkout,
                 currency: 'GBP',
-                guestNationality: 'GB',
+                guestNationality: guestNationality || 'GB',
+                margin: 0,
                 occupancies: [{ adults: 2 }],
-                maxRatesPerHotel: 10
+                maxRatesPerHotel: 15
             })
         }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
 
@@ -182,15 +183,48 @@ export async function fetchLiveSouthBankNuiteeFeeds(customDates = null) {
             const rateEntry = ratesByNuiteeId[nuiteeId];
             const roomTypes = Array.isArray(rateEntry?.roomTypes) ? rateEntry.roomTypes : [];
 
-            // Pick a clean representative room offer
+            // Pick a clean representative room offer + vibe-specific room options
             let chosenOffer = null;
+            let roomOptionsByPreference = {};
+
             if (roomTypes.length > 0) {
-                // Sort by retail total ascending and pick a standard double/queen/king room
                 const sorted = [...roomTypes].filter(
                     (rt) => rt?.offerRetailRate?.amount && rt?.rates?.[0]?.name
                 ).sort((a, b) => a.offerRetailRate.amount - b.offerRetailRate.amount);
 
                 chosenOffer = sorted[0] || roomTypes[0];
+
+                const formatOffer = (rt, matchReason) => {
+                    if (!rt) return null;
+                    const totRetail = Number(rt.offerRetailRate?.amount || 0);
+                    const totSsp = Number(rt.suggestedSellingPrice?.amount || totRetail * 1.12);
+                    const ntRetail = Math.max(120, Math.round(totRetail / Math.max(1, nights)));
+                    const ntSsp = Math.max(ntRetail + 12, Math.round(totSsp / Math.max(1, nights)));
+                    const finCredit = Math.max(15, Math.round(ntRetail * 0.08));
+                    return {
+                        roomName: rt.rates?.[0]?.name || 'Standard Double Room',
+                        boardName: rt.rates?.[0]?.boardName || 'Room Only',
+                        offerId: rt.offerId,
+                        nightlyRetailGbp: ntRetail,
+                        nightlySspGbp: ntSsp,
+                        finisherCreditGbp: finCredit,
+                        nuiteeChallengeRate: ntRetail - finCredit,
+                        cancellationTag: rt.rates?.[0]?.cancellationPolicies?.refundableTag || 'RFN',
+                        matchReason
+                    };
+                };
+
+                const viewOrRiver = sorted.find((rt) => /river|view|balcony|skyline|terrace|deluxe|executive/i.test(rt.rates?.[0]?.name || '')) || sorted[Math.min(1, sorted.length - 1)];
+                const studioOrDesign = sorted.find((rt) => /studio|superior|king|biggy|design|corner/i.test(rt.rates?.[0]?.name || '')) || sorted[Math.min(1, sorted.length - 1)];
+                const quietOrBreakfast = sorted.find((rt) => /courtyard|quiet|breakfast|queen|standard/i.test(`${rt.rates?.[0]?.name || ''} ${rt.rates?.[0]?.boardName || ''}`)) || sorted[0];
+
+                roomOptionsByPreference = {
+                    standard_entry: formatOffer(chosenOffer, 'Lowest Entry Rate'),
+                    quiet_sanctuary: formatOffer(quietOrBreakfast, 'Matched to Sleep ≤36dB / Morning Sanctuary Profile'),
+                    design_studio: formatOffer(studioOrDesign, 'Matched to Tate / Cultural Design Profile'),
+                    social_view: formatOffer(viewOrRiver, 'Matched to Rooftop / After-Dark Pulse Profile'),
+                    long_haul_comfort: formatOffer(studioOrDesign || viewOrRiver, 'Matched to Long-Haul King / Space Priority')
+                };
             }
 
             let nightlyRetailGbp = null;
@@ -233,6 +267,8 @@ export async function fetchLiveSouthBankNuiteeFeeds(customDates = null) {
                 liveBoardName,
                 liveOfferId,
                 cancellationTag,
+                roomOptionsByPreference,
+                guestNationality: guestNationality || 'GB',
                 checkin,
                 checkout,
                 nights

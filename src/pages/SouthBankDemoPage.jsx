@@ -51,6 +51,11 @@ import {
     executeSouthBankLivePrebook,
     getDefaultSouthBankDates
 } from '../services/nuiteeLiveFeedService';
+import {
+    detectUserPassiveContext,
+    resolveSouthBankPersonalisation,
+    DEMO_SOURCE_MARKET_PRESETS
+} from '../services/userContextAndVibeEngine';
 
 export const ATMOSPHERIC_DIALS = [
     {
@@ -241,11 +246,15 @@ const INITIAL_SOUTHBANK_HOTELS = [
             sleepSanctuaryNote: 'Triple-glazed river & courtyard rooms (Sleep Sanctuary Score: 91/100)',
             socialPeakWindow: '19:30 – 00:30 (84 dB at 12th Knot / 68 dB at Lyaness)',
             crowdRatio: '62% Design & Cultural Travelers • 38% Local Londoners',
+            onsiteSpaces: [
+                { name: '12th Knot Rooftop Lounge', tag: '12th Floor • 84 dB Skyline Bar' },
+                { name: 'Lyaness Cocktail Bar', tag: 'Ground Floor • World Top-50 Mixology' },
+                { name: 'agua London Spa & Sea Containers Restaurant', tag: 'Lower Ground & River Terrace' }
+            ],
             localGems: [
                 { name: 'Tate Modern', rating: '4.6★', walk: '4m walk' },
                 { name: 'BFI Southbank', rating: '4.7★', walk: '4m walk' },
-                { name: 'Lyaness Cocktail Bar', rating: '4.7★', walk: '0m (In-House)' },
-                { name: "Gabriel's Wharf", rating: '4.5★', walk: '2m walk' }
+                { name: "Gabriel's Wharf & Oxo Wharf", rating: '4.5★', walk: '2m walk' }
             ]
         },
         validator: {
@@ -347,6 +356,11 @@ const INITIAL_SOUTHBANK_HOTELS = [
             sleepSanctuaryNote: 'Set back on One Blackfriars courtyard (Sleep Sanctuary Score: 95/100)',
             socialPeakWindow: '17:30 – 21:30 (64 dB Gallery Lounge & Terrace)',
             crowdRatio: '70% Art Collectors & Couples • 30% Cultural Business Guests',
+            onsiteSpaces: [
+                { name: 'Art Yard Bar & Kitchen', tag: 'Ground Courtyard • Wood-Fired Dining' },
+                { name: 'Makers’ Artist-in-Residence Studio', tag: 'Gallery Level • Live Art & Ceramics' },
+                { name: 'Collector’s Library & Wine Vending Lounge', tag: 'Mezzanine • 54 dB Quiet Reading' }
+            ],
             localGems: [
                 { name: 'Tate Modern', rating: '4.6★', walk: '4m walk' },
                 { name: 'BFI Southbank', rating: '4.7★', walk: '5m walk' },
@@ -452,10 +466,15 @@ const INITIAL_SOUTHBANK_HOTELS = [
             sleepSanctuaryNote: 'Double-glazed industrial sash on floors 3–12 (Sleep Sanctuary Score: 88/100)',
             socialPeakWindow: '12:30 – 22:30 (78 dB at Seabird 14th-Floor Rooftop)',
             crowdRatio: '55% Local London Diners & Creatives • 45% International Guests',
+            onsiteSpaces: [
+                { name: 'Seabird 14th-Floor Rooftop', tag: '14th Floor • Marble Raw Bar & Skyline' },
+                { name: 'Albie All-Day Lobby Brasserie', tag: 'Ground Floor • 62 dB Crittall Café & Wine' },
+                { name: 'The Apartment Co-Working Pantry', tag: 'Mezzanine • Creative Hub' }
+            ],
             localGems: [
-                { name: 'Seabird Rooftop', rating: '4.5★', walk: '0m (14th Floor)' },
+                { name: 'Young Vic Theatre & Cut Bar', rating: '4.7★', walk: '4m walk' },
                 { name: 'Tate Modern', rating: '4.6★', walk: '6m walk' },
-                { name: 'Young Vic Theatre', rating: '4.7★', walk: '4m walk' }
+                { name: 'Borough Market', rating: '4.7★', walk: '11m walk' }
             ]
         },
         validator: {
@@ -557,6 +576,11 @@ const INITIAL_SOUTHBANK_HOTELS = [
             sleepSanctuaryNote: 'Enclosed courtyard orientation off Lavington St (Sleep Sanctuary Score: 92/100)',
             socialPeakWindow: '08:30 – 23:00 (66 dB CanteenM Living Room & Courtyard)',
             crowdRatio: '80% Design-Savvy Solo & Couple Explorers • 20% Tech & Media',
+            onsiteSpaces: [
+                { name: 'canteenM 24/7 Barista & Draft Bar', tag: 'Ground Floor • 24/7 Espresso & Cocktails' },
+                { name: 'Vitra Art Library & Bamboo Courtyard', tag: 'Ground Courtyard • 62 dB Design Lounge' },
+                { name: 'societyM Creative Meeting Studios', tag: 'Upper Ground • Vitra Co-Working' }
+            ],
             localGems: [
                 { name: 'Tate Modern', rating: '4.6★', walk: '4m walk' },
                 { name: 'Borough Market', rating: '4.7★', walk: '6m walk' },
@@ -632,6 +656,10 @@ const SouthBankDemoPage = () => {
     const [showTelemetryDrawer, setShowTelemetryDrawer] = useState(false);
     const [intelligenceTab, setIntelligenceTab] = useState('dmo'); // 'dmo' | 'atmosvibe'
 
+    // 2-Layer Personalisation Engine State (Layer 1: Country/Device/Model + Layer 2: Active Filters)
+    const [overrideCountryCode, setOverrideCountryCode] = useState(null);
+    const passiveContext = detectUserPassiveContext(overrideCountryCode);
+
     // Live Nuitée (LiteAPI v3.0) Content, Photo Re-Ranker & Rate Feed State
     const [nuiteeDates, setNuiteeDates] = useState(() => getDefaultSouthBankDates(28, 2));
     const [nuiteeFeedMeta, setNuiteeFeedMeta] = useState({
@@ -644,10 +672,11 @@ const SouthBankDemoPage = () => {
     });
     const [prebookStatusByHotel, setPrebookStatusByHotel] = useState({});
 
-    const syncLiveNuiteeFeed = async (customDates = null) => {
+    const syncLiveNuiteeFeed = async (customDates = null, nationalityOverride = null) => {
         const targetDates = customDates || nuiteeDates;
+        const targetNationality = nationalityOverride || passiveContext.countryCode || 'GB';
         setNuiteeFeedMeta((prev) => ({ ...prev, loading: true }));
-        const liveResult = await fetchLiveSouthBankNuiteeFeeds(targetDates);
+        const liveResult = await fetchLiveSouthBankNuiteeFeeds(targetDates, targetNationality);
 
         if (liveResult && liveResult.hotelUpdatesByDemoId) {
             let syncedCount = 0;
@@ -680,6 +709,7 @@ const SouthBankDemoPage = () => {
                         nuiteeSspRate: update.nightlySspGbp || hotel.nuiteeSspRate,
                         nuiteeChallengeRate: update.nuiteeChallengeRate || hotel.nuiteeChallengeRate,
                         finisherCreditGbp: update.finisherCreditGbp || hotel.finisherCreditGbp,
+                        roomOptionsByPreference: update.roomOptionsByPreference || hotel.roomOptionsByPreference || {},
                         nuiteeImages: analyzedImages
                     };
                 })
@@ -699,9 +729,9 @@ const SouthBankDemoPage = () => {
     };
 
     useEffect(() => {
-        syncLiveNuiteeFeed(nuiteeDates);
+        syncLiveNuiteeFeed(nuiteeDates, passiveContext.countryCode);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [overrideCountryCode]);
 
     const handleTestLivePrebook = async (hotel) => {
         setPrebookStatusByHotel((prev) => ({
@@ -772,6 +802,26 @@ const SouthBankDemoPage = () => {
     };
 
     const [activeDiurnalWindow, setActiveDiurnalWindow] = useState('after_dark');
+
+    const southBankPersonalisation = resolveSouthBankPersonalisation({
+        passiveContext,
+        activeDials,
+        activeDestVibe,
+        activeDestGem,
+        activeDiurnalWindow
+    });
+
+    // Automatically re-rank lead Hero Photo Slot across all cards when user's active filter or diurnal window changes
+    useEffect(() => {
+        const targetSlot = southBankPersonalisation.targetPhotoSlot || 'social';
+        setPhotoEngineMode('curated');
+        setSelectedPhotoSlotByHotel({
+            'sea-containers': targetSlot,
+            'bankside-autograph': targetSlot,
+            'hoxton-southwark': targetSlot,
+            'citizenm-bankside': targetSlot
+        });
+    }, [southBankPersonalisation.targetPhotoSlot]);
 
     const handleDiurnalSelect = (windowId) => {
         setActiveDiurnalWindow(windowId);
@@ -1649,6 +1699,60 @@ const SouthBankDemoPage = () => {
                                 );
                             })()}
 
+                            {/* 2-LAYER PERSONALISATION CONTEXT BAR (Layer 1: Country / Device / Model + Layer 2: Active Vibe / Filter) */}
+                            <div
+                                style={{
+                                    marginBottom: '12px',
+                                    padding: '9px 12px',
+                                    borderRadius: '12px',
+                                    background: 'rgba(14, 25, 45, 0.94)',
+                                    border: '1px solid rgba(56, 189, 248, 0.3)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    flexWrap: 'wrap',
+                                    gap: '8px'
+                                }}
+                            >
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                                    <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#e2e8f0', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                                        <span style={{ color: '#38bdf8' }}>🎯 Personalised for:</span>
+                                        <span>{southBankPersonalisation.contextSummaryPill}</span>
+                                    </div>
+                                    <div style={{ fontSize: '0.63rem', color: '#94a3b8' }}>
+                                        <strong style={{ color: '#34d399' }}>Active Rule:</strong> {southBankPersonalisation.whyPersonalisedText}
+                                    </div>
+                                </div>
+
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexWrap: 'wrap' }}>
+                                    <span style={{ fontSize: '0.6rem', color: '#94a3b8', fontWeight: 700, marginRight: '2px' }}>
+                                        Source Market:
+                                    </span>
+                                    {Object.values(DEMO_SOURCE_MARKET_PRESETS).map((preset) => {
+                                        const isCurrentCountry = passiveContext.countryCode === preset.code;
+                                        return (
+                                            <button
+                                                key={preset.code}
+                                                type="button"
+                                                onClick={() => setOverrideCountryCode(preset.code)}
+                                                style={{
+                                                    padding: '3px 7px',
+                                                    borderRadius: '6px',
+                                                    fontSize: '0.62rem',
+                                                    fontWeight: 800,
+                                                    cursor: 'pointer',
+                                                    background: isCurrentCountry ? 'rgba(56, 189, 248, 0.22)' : 'rgba(255,255,255,0.04)',
+                                                    color: isCurrentCountry ? '#38bdf8' : '#94a3b8',
+                                                    border: isCurrentCountry ? '1px solid rgba(56, 189, 248, 0.5)' : '1px solid rgba(255,255,255,0.08)'
+                                                }}
+                                            >
+                                                {preset.flag} {preset.code}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
                             {/* RESULTS: Mobile-First South Bank Hotel Cards (Extra Info Hidden inside Drawer) */}
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                                 {filteredHotels.map((hotel) => {
@@ -1671,6 +1775,18 @@ const SouthBankDemoPage = () => {
                                         photoEngineMode === 'raw_ota'
                                             ? hotel.nuiteeImages.rawDefaultOta.caption
                                             : activeCuratedPhoto.caption;
+
+                                    // Resolve personalised Room Offer based on active filter + source-market profile
+                                    const matchedRoomOption =
+                                        hotel.roomOptionsByPreference?.[southBankPersonalisation.roomPreferenceType] ||
+                                        hotel.roomOptionsByPreference?.standard_entry ||
+                                        null;
+
+                                    const activeRetailRate = matchedRoomOption?.nightlyRetailGbp || hotel.nuiteeRetailRate;
+                                    const activeChallengeRate = matchedRoomOption?.nuiteeChallengeRate || hotel.nuiteeChallengeRate;
+                                    const activeFinisherCredit = matchedRoomOption?.finisherCreditGbp || hotel.finisherCreditGbp;
+                                    const activeRoomName = matchedRoomOption?.roomName || hotel.liveRoomName;
+                                    const activeMatchReason = matchedRoomOption?.matchReason || southBankPersonalisation.whyPersonalisedText;
 
                                     return (
                                         <div
@@ -1903,23 +2019,45 @@ const SouthBankDemoPage = () => {
                                                         </div>
                                                     </div>
 
-                                                    {/* Walkable Gems Strip */}
-                                                    <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-                                                        {hotel.verificationData.localGems.map((g, i) => (
-                                                            <span
-                                                                key={i}
-                                                                style={{
-                                                                    padding: '2px 7px',
-                                                                    borderRadius: '6px',
-                                                                    background: 'rgba(255,255,255,0.05)',
-                                                                    color: '#cbd5e1',
-                                                                    fontSize: '0.66rem',
-                                                                    fontWeight: 600
-                                                                }}
-                                                            >
-                                                                📍 {g.name} ({g.walk})
-                                                            </span>
-                                                        ))}
+                                                    {/* On-Site Hotel Vibe Spaces + Walkable Off-Property Gems */}
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                        {Array.isArray(hotel.verificationData.onsiteSpaces) && (
+                                                            <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                                                                {hotel.verificationData.onsiteSpaces.slice(0, 2).map((sp, i) => (
+                                                                    <span
+                                                                        key={i}
+                                                                        style={{
+                                                                            padding: '2px 7px',
+                                                                            borderRadius: '6px',
+                                                                            background: 'rgba(168, 85, 247, 0.12)',
+                                                                            border: '1px solid rgba(168, 85, 247, 0.28)',
+                                                                            color: '#e9d5ff',
+                                                                            fontSize: '0.64rem',
+                                                                            fontWeight: 600
+                                                                        }}
+                                                                    >
+                                                                        🍸 {sp.name}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                                                            {hotel.verificationData.localGems.map((g, i) => (
+                                                                <span
+                                                                    key={i}
+                                                                    style={{
+                                                                        padding: '2px 7px',
+                                                                        borderRadius: '6px',
+                                                                        background: 'rgba(255,255,255,0.05)',
+                                                                        color: '#cbd5e1',
+                                                                        fontSize: '0.64rem',
+                                                                        fontWeight: 600
+                                                                    }}
+                                                                >
+                                                                    📍 {g.name} ({g.walk})
+                                                                </span>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -1937,14 +2075,14 @@ const SouthBankDemoPage = () => {
                                                     }}
                                                 >
                                                     <div>
-                                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', fontSize: '0.66rem', color: '#94a3b8' }}>
-                                                            <span>🟢 Nuitée {hotel.nuiteeHotelId}</span>
-                                                            <span style={{ color: '#34d399', fontWeight: 700 }}>{hotel.liveRoomTypesCount} Offers</span>
+                                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', fontSize: '0.64rem', color: '#94a3b8' }}>
+                                                            <span>{passiveContext.flag} {passiveContext.rateChannelLabel}</span>
+                                                            <span style={{ color: '#34d399', fontWeight: 700 }}>{hotel.liveRoomTypesCount} Room Offers</span>
                                                         </div>
 
                                                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap', marginBottom: '4px' }}>
                                                             <span style={{ fontSize: '1.55rem', fontWeight: 800, color: '#fff' }}>
-                                                                £{hotel.nuiteeRetailRate}
+                                                                £{activeRetailRate}
                                                             </span>
                                                             <span style={{ fontSize: '0.74rem', color: '#94a3b8' }}>/ night</span>
                                                             {(isWorkingScan || isClaimed) && (
@@ -1958,13 +2096,16 @@ const SouthBankDemoPage = () => {
                                                                         fontSize: '0.66rem'
                                                                     }}
                                                                 >
-                                                                    -£{hotel.finisherCreditGbp} Credit
+                                                                    -£{activeFinisherCredit} Credit
                                                                 </span>
                                                             )}
                                                         </div>
 
-                                                        <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>
-                                                            {hotel.liveRoomName} • Net <strong style={{ color: '#34d399' }}>£{hotel.nuiteeChallengeRate}/nt</strong> w/ Credit
+                                                        <div style={{ fontSize: '0.68rem', color: '#e2e8f0', fontWeight: 600 }}>
+                                                            {activeRoomName} • Net <strong style={{ color: '#34d399' }}>£{activeChallengeRate}/nt</strong>
+                                                        </div>
+                                                        <div style={{ fontSize: '0.6rem', color: '#38bdf8', marginTop: '3px' }}>
+                                                            🎯 {activeMatchReason}
                                                         </div>
                                                     </div>
 
@@ -2006,8 +2147,8 @@ const SouthBankDemoPage = () => {
                                                                 }}
                                                             >
                                                                 {isWorkingScan
-                                                                    ? `Unlock -£${hotel.finisherCreditGbp} Stay Credit`
-                                                                    : `Book £${hotel.nuiteeRetailRate}/nt`}
+                                                                    ? `Unlock -£${activeFinisherCredit} Stay Credit`
+                                                                    : `Book £${activeRetailRate}/nt`}
                                                             </button>
                                                         )}
 

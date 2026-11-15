@@ -13,6 +13,7 @@ import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
 import BarcelonaPage from './pages/BarcelonaPage';
 import SouthBankDemoPage from './pages/SouthBankDemoPage';
+import VibeDirectoryPage from './pages/VibeDirectoryPage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import RevenueSection from './components/RevenueSection';
@@ -203,6 +204,9 @@ const App = () => {
           <Route path="/notrack" element={<IgnoreAnalyticsPage />} />
           <Route path="/cookies" element={<CookiePolicyPage />} />
           <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+          <Route path="/vibe" element={<VibeDirectoryPage />} />
+          <Route path="/vibe-radar" element={<VibeDirectoryPage />} />
+          <Route path="/vibe/southbank" element={<VibeDirectoryPage />} />
           <Route path="/marketplace" element={<MarketplacePage />} />
           <Route path="/partner" element={<PartnerPage />} />
           <Route path="/creator" element={<CreatorPage />} />

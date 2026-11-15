@@ -30,6 +30,7 @@ const Layout = ({ children }) => {
                     </button>
 
                     <nav className={`header-nav ${isMenuOpen ? 'open' : ''}`}>
+                        <Link to="/vibe/southbank" className="nav-link" onClick={() => setIsMenuOpen(false)}>VIBE RADAR &amp; DIRECTORY</Link>
                         <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>CHALLENGE MARKETPLACE</a>
                         <Link to="/creator" className="nav-link" onClick={() => setIsMenuOpen(false)}>CREATOR LOGIN</Link>
                         <a href="#journal" className="nav-link" onClick={() => setIsMenuOpen(false)}>JOURNAL</a>

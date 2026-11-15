@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import VibeRadarChallenge from '../components/VibeRadarChallenge';
 import { SOUTH_BANK_VIBE_DATA } from '../data/southbankVibeData';
+import { getVibeIntentTelemetry, recordRadarChallengeCompletion } from '../services/vibeIntentTelemetry';
 import { Helmet } from 'react-helmet-async';
-import { Sparkles, MapPin, Volume2, ShieldCheck, ArrowRight, ExternalLink, Box, Tag, Award, Compass, Star } from 'lucide-react';
+import { Sparkles, MapPin, Volume2, ShieldCheck, ArrowRight, ExternalLink, Box, Tag, Award, Compass, Star, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const VibeDirectoryPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [matchedArchetype, setMatchedArchetype] = useState(null);
   const [hasCompletedRadar, setHasCompletedRadar] = useState(false);
+  const [telemetry, setTelemetry] = useState(() => getVibeIntentTelemetry());
 
-  const handleRadarComplete = (archetypeKey) => {
+  const handleRadarComplete = (archetypeKey, answers) => {
+    const updated = recordRadarChallengeCompletion(archetypeKey, answers, 'london-south-bank');
+    setTelemetry({ ...updated });
     setMatchedArchetype(SOUTH_BANK_VIBE_DATA.archetypes[archetypeKey]);
     setHasCompletedRadar(true);
   };
@@ -49,8 +53,18 @@ const VibeDirectoryPage = () => {
         '@type': 'LocationFeatureSpecification',
         name: 'Walkability Index',
         value: SOUTH_BANK_VIBE_DATA.atmosphericProfile.walkabilityScore
+      },
+      {
+        '@type': 'LocationFeatureSpecification',
+        name: 'Verified Radar Intent Telemetry',
+        value: `${telemetry.totalRadarCompletions} completed sessions`
       }
     ],
+    interactionStatistic: {
+      '@type': 'InteractionCounter',
+      interactionType: 'https://schema.org/CompleteAction',
+      userInteractionCount: telemetry.totalRadarCompletions
+    },
     hasPart: SOUTH_BANK_VIBE_DATA.nodes.map(n => ({
       '@type': n.type === 'hotel' ? 'Hotel' : 'TouristAttraction',
       name: n.name,
@@ -160,6 +174,13 @@ const VibeDirectoryPage = () => {
                 <span style={{ fontSize: '13px', color: '#94a3b8' }}>Local Independent Gem Ratio:</span>
                 <strong style={{ color: '#a78bfa', fontSize: '14px' }}>
                   {(SOUTH_BANK_VIBE_DATA.atmosphericProfile.independentGemRatio * 100).toFixed(0)}%
+                </strong>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Activity size={18} color="#f59e0b" />
+                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Live Radar Intent:</span>
+                <strong style={{ color: '#f59e0b', fontSize: '14px' }}>
+                  {telemetry.totalRadarCompletions} Completed
                 </strong>
               </div>
             </div>

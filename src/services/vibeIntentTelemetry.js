@@ -4,6 +4,13 @@ const STORAGE_KEY = 'travelvrse_vibe_intent_telemetry_v1';
 
 const DEFAULT_TELEMETRY_STATE = {
   totalIntentEvents: 1842,
+  totalRadarCompletions: 342,
+  archetypeDistribution: {
+    vinyl_flaneur: 141,
+    riverside_bohemian: 112,
+    sunset_mixologist: 89,
+    brutalist_purist: 54
+  },
   isDemoSimulation: true,
   filterClicks: {
     sleep: { label: '🔇 Verified Sleep Quality (≤36 dB)', count: 524 },
@@ -154,6 +161,31 @@ export function recordConversionIntentClick(hotelId, activeSlotId, actionType = 
   if (!isOwnerAnalyticsBlocked()) {
     try {
       track('vibe_conversion_action', { hotelId, activeSlotId: slotKey, actionType });
+    } catch {
+      // Ignore
+    }
+  }
+  return current;
+}
+
+export function recordRadarChallengeCompletion(archetypeKey, answers = {}, city = 'london-south-bank') {
+  const current = getVibeIntentTelemetry();
+  if (typeof current.totalRadarCompletions !== 'number') current.totalRadarCompletions = 342;
+  if (!current.archetypeDistribution) {
+    current.archetypeDistribution = { vinyl_flaneur: 141, riverside_bohemian: 112, sunset_mixologist: 89, brutalist_purist: 54 };
+  }
+  current.totalRadarCompletions += 1;
+  current.totalIntentEvents += 1;
+  current.archetypeDistribution[archetypeKey] = (current.archetypeDistribution[archetypeKey] || 0) + 1;
+  current.lastActionLog = [
+    { ts: new Date().toLocaleTimeString(), type: 'RADAR_COMPLETED', detail: `Radar: ${archetypeKey} (${city})` },
+    ...(current.lastActionLog || []).slice(0, 7)
+  ];
+  saveVibeIntentTelemetry(current);
+
+  if (!isOwnerAnalyticsBlocked()) {
+    try {
+      track('vibe_radar_completed', { archetype: archetypeKey, city });
     } catch {
       // Ignore
     }

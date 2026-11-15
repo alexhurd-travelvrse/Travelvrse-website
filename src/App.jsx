@@ -13,6 +13,8 @@ import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
 import BarcelonaPage from './pages/BarcelonaPage';
 import SouthBankDemoPage from './pages/SouthBankDemoPage';
+import CookiePolicyPage from './pages/CookiePolicyPage';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import RevenueSection from './components/RevenueSection';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
@@ -97,6 +99,7 @@ const shouldDropAnalyticsEvent = () => {
     localStorage.removeItem('ignore_analytics');
   }
   if (
+    localStorage.getItem('travelvrse_cookie_consent') === 'rejected' ||
     localStorage.getItem('ignore_analytics') === 'true' ||
     document.cookie.includes('ignore_analytics=true')
   ) {
@@ -193,10 +196,13 @@ const App = () => {
       <Router>
         <ScrollToTop />
         <OwnerModeBanner />
+        <CookieConsentBanner />
         <Routes>
           <Route path="/" element={<B2BHome />} />
           <Route path="/ignore-me" element={<IgnoreAnalyticsPage />} />
           <Route path="/notrack" element={<IgnoreAnalyticsPage />} />
+          <Route path="/cookies" element={<CookiePolicyPage />} />
+          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
           <Route path="/marketplace" element={<MarketplacePage />} />
           <Route path="/partner" element={<PartnerPage />} />
           <Route path="/creator" element={<CreatorPage />} />

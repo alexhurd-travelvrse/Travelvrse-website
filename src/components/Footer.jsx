@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
@@ -12,6 +13,8 @@ const Footer = () => {
                         <a href="https://usgrant.travelvrse.com/privacy" target="_blank" rel="noopener noreferrer" className="footer-link">Privacy Policy</a>
                         <span className="footer-divider" aria-hidden="true">|</span>
                         <a href="https://usgrant.travelvrse.com/terms" target="_blank" rel="noopener noreferrer" className="footer-link">Terms &amp; Conditions</a>
+                        <span className="footer-divider" aria-hidden="true">|</span>
+                        <Link to="/cookies" className="footer-link">Cookie Policy</Link>
                         <span className="footer-divider" aria-hidden="true">|</span>
                         <a href="https://atmosvibe.io" target="_blank" rel="noopener" className="footer-link" title="Verified Atmospheric DNA &amp; Local Gem Proximity Index">Atmospheric &amp; Local Gem Index</a>
                     </div>

@@ -19,6 +19,7 @@ import CookieConsentBanner from './components/CookieConsentBanner';
 import MobileSimulatorWrapper from './components/MobileSimulatorWrapper';
 import LightweightMobileChallengeDemo from './components/LightweightMobileChallengeDemo';
 import LiveMobileSimulatorPage from './pages/LiveMobileSimulatorPage';
+import PresenterPhoneHubPage from './pages/PresenterPhoneHubPage';
 import RevenueSection from './components/RevenueSection';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
@@ -214,6 +215,8 @@ const App = () => {
             <Route path="/mobile" element={<LiveMobileSimulatorPage />} />
             <Route path="/simulator" element={<LiveMobileSimulatorPage />} />
             <Route path="/live-mobile" element={<LiveMobileSimulatorPage />} />
+            <Route path="/presenter" element={<PresenterPhoneHubPage />} />
+            <Route path="/demo-hub" element={<PresenterPhoneHubPage />} />
             <Route path="/play/mobile-demo" element={<LightweightMobileChallengeDemo />} />
             <Route path="/challenge/mobile" element={<LightweightMobileChallengeDemo />} />
             <Route path="/demo/joystick" element={<LightweightMobileChallengeDemo />} />

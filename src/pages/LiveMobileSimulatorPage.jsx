@@ -1,36 +1,41 @@
 import React, { useState } from 'react';
-import { Smartphone, RotateCw, ExternalLink, QrCode, Monitor, Sparkles } from 'lucide-react';
+import { Smartphone, RotateCw, ExternalLink, QrCode, Monitor, Sparkles, Award, Play, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const LIVE_PRESETS = [
   {
     id: 'sea-containers',
-    name: 'Sea Containers London (Live 3D + Joystick)',
+    name: 'Sea Containers London',
     url: 'https://www.travelvrse.com/play/sea-containers',
+    completionUrl: 'https://www.travelvrse.com/play/sea-containers/completion',
     desc: 'Live 3D spatial room with mobile touch joystick, backpack inventory, and soundscape.'
   },
   {
     id: '25-hours',
-    name: '25hours Hotel Copenhagen (Live 3D + Joystick)',
+    name: '25hours Hotel Copenhagen',
     url: 'https://www.travelvrse.com/play/25-hours',
+    completionUrl: 'https://www.travelvrse.com/play/25-hours/completion',
     desc: 'Live Scandinavian design, vinyl room, and Indre By challenge with mobile joystick.'
   },
   {
     id: 'ted-lasso',
-    name: 'Ted Lasso Richmond (Live 3D + Joystick)',
+    name: 'Ted Lasso Richmond',
     url: 'https://www.travelvrse.com/play/ted-lasso',
+    completionUrl: 'https://www.travelvrse.com/play/ted-lasso/completion',
     desc: 'Live Richmond pub & green challenge with 3D navigation and local gem trail.'
   },
   {
     id: 'virgin-vegas',
-    name: 'Virgin Hotel Las Vegas (Live 3D + Joystick)',
+    name: 'Virgin Hotel Las Vegas',
     url: 'https://www.travelvrse.com/play/virgin-vegas',
+    completionUrl: 'https://www.travelvrse.com/play/virgin-vegas/completion',
     desc: 'Live Vegas suite and Ruby Lounge spatial challenge.'
   },
   {
     id: 'southbank-vibe-radar',
     name: 'South Bank Vibe Radar & Directory',
     url: '/vibe/southbank',
+    completionUrl: '/vibe/southbank',
     desc: 'Sensory radar challenge, audio voiceovers, and verified directory.'
   }
 ];
@@ -39,10 +44,11 @@ const LiveMobileSimulatorPage = () => {
   const [selectedPreset, setSelectedPreset] = useState(LIVE_PRESETS[0]);
   const [iframeKey, setIframeKey] = useState(0);
   const [scale, setScale] = useState(0.88);
+  const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
   const [customUrl, setCustomUrl] = useState('');
   const [showQrModal, setShowQrModal] = useState(false);
 
-  const activeUrl = customUrl || selectedPreset.url;
+  const activeUrl = customUrl || (isShowingConfirmation ? selectedPreset.completionUrl : selectedPreset.url);
 
   const reloadIframe = () => {
     setIframeKey(prev => prev + 1);
@@ -51,6 +57,12 @@ const LiveMobileSimulatorPage = () => {
   const handleSelectPreset = (preset) => {
     setSelectedPreset(preset);
     setCustomUrl('');
+    setIsShowingConfirmation(false);
+    setIframeKey(prev => prev + 1);
+  };
+
+  const toggleConfirmationMode = () => {
+    setIsShowingConfirmation(!isShowingConfirmation);
     setIframeKey(prev => prev + 1);
   };
 
@@ -77,28 +89,29 @@ const LiveMobileSimulatorPage = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '16px',
-          background: 'rgba(15, 23, 42, 0.88)',
+          gap: '12px',
+          background: 'rgba(15, 23, 42, 0.92)',
           backdropFilter: 'blur(16px)',
           border: '1px solid rgba(56, 189, 248, 0.3)',
           borderRadius: '16px',
-          padding: '8px 20px',
+          padding: '8px 18px',
           marginBottom: '16px',
           boxShadow: '0 10px 30px rgba(0, 0, 0, 0.6)',
           zIndex: 99999,
-          maxWidth: '920px',
-          width: '100%'
+          maxWidth: '960px',
+          width: '100%',
+          flexWrap: 'wrap'
         }}
       >
         {/* Title */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '20px' }}>📱</span>
           <div>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#38bdf8' }}>
-              Live Mobile Simulator (Native Touch &amp; Joystick)
+              Live Mobile Simulator
             </div>
             <div style={{ fontSize: '11px', color: '#94a3b8' }}>
-              Simulates exact live smartphone view &bull; iPhone 16 Pro (393 × 852)
+              {isShowingConfirmation ? '🏆 Live Confirmation Screen' : '🕹️ Live 3D + Virtual Joystick'}
             </div>
           </div>
         </div>
@@ -147,10 +160,45 @@ const LiveMobileSimulatorPage = () => {
           </button>
         </div>
 
+        {/* PRESENTER INSTANT SKIP BUTTON */}
+        <button
+          onClick={toggleConfirmationMode}
+          title="Instantly bypass challenges to show the confirmation/finisher reward screen to clients"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            background: isShowingConfirmation
+              ? 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)'
+              : 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+            color: isShowingConfirmation ? '#ffffff' : '#051b11',
+            border: 'none',
+            borderRadius: '8px',
+            padding: '7px 14px',
+            fontSize: '12px',
+            fontWeight: 800,
+            cursor: 'pointer',
+            boxShadow: isShowingConfirmation
+              ? '0 2px 10px rgba(2, 132, 199, 0.4)'
+              : '0 2px 12px rgba(245, 158, 11, 0.5)',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          {isShowingConfirmation ? (
+            <>
+              <Play size={14} /> 🎮 Back to 3D Challenge
+            </>
+          ) : (
+            <>
+              <Award size={14} /> ⚡️ Skip to Confirmation Page
+            </>
+          )}
+        </button>
+
         {/* Zoom Controls & QR */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(255,255,255,0.06)', borderRadius: '8px', padding: '2px 6px' }}>
-            <span style={{ fontSize: '11px', color: '#94a3b8' }}>Zoom:</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '3px', background: 'rgba(255,255,255,0.06)', borderRadius: '8px', padding: '2px 5px' }}>
+            <span style={{ fontSize: '11px', color: '#94a3b8', marginRight: '3px' }}>Zoom:</span>
             {[0.8, 0.88, 1.0].map(s => (
               <button
                 key={s}
@@ -160,7 +208,7 @@ const LiveMobileSimulatorPage = () => {
                   color: scale === s ? '#ffffff' : '#94a3b8',
                   border: 'none',
                   borderRadius: '6px',
-                  padding: '3px 7px',
+                  padding: '3px 6px',
                   fontSize: '11px',
                   fontWeight: 700,
                   cursor: 'pointer'
@@ -173,10 +221,11 @@ const LiveMobileSimulatorPage = () => {
 
           <button
             onClick={() => setShowQrModal(true)}
+            title="Scan QR to open this exact live screen on your phone"
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
+              gap: '5px',
               background: 'rgba(56, 189, 248, 0.12)',
               border: '1px solid rgba(56, 189, 248, 0.3)',
               color: '#38bdf8',
@@ -187,7 +236,7 @@ const LiveMobileSimulatorPage = () => {
               cursor: 'pointer'
             }}
           >
-            <QrCode size={14} /> Scan on Phone
+            <QrCode size={13} /> Phone
           </button>
 
           <Link
@@ -196,7 +245,7 @@ const LiveMobileSimulatorPage = () => {
               fontSize: '12px',
               color: '#94a3b8',
               textDecoration: 'none',
-              padding: '6px 8px'
+              padding: '6px 6px'
             }}
           >
             Exit &rarr;
@@ -311,14 +360,14 @@ const LiveMobileSimulatorPage = () => {
         </div>
       </div>
 
-      {/* QR Code Modal */}
+      {/* QR Code Modal for Real Phone Access */}
       {showQrModal && (
         <div
           onClick={() => setShowQrModal(false)}
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(0, 0, 0, 0.8)',
+            background: 'rgba(0, 0, 0, 0.82)',
             backdropFilter: 'blur(8px)',
             display: 'flex',
             alignItems: 'center',
@@ -333,22 +382,27 @@ const LiveMobileSimulatorPage = () => {
               background: '#0f172a',
               border: '1px solid rgba(56, 189, 248, 0.3)',
               borderRadius: '20px',
-              padding: '32px',
-              maxWidth: '360px',
+              padding: '28px',
+              maxWidth: '380px',
               textAlign: 'center',
               boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: 800, margin: '0 0 8px 0', color: '#f8fafc' }}>
-              Open on Your Smartphone
+            <h3 style={{ fontSize: '18px', fontWeight: 800, margin: '0 0 6px 0', color: '#f8fafc' }}>
+              Open Directly on Your Phone
             </h3>
-            <p style={{ fontSize: '13px', color: '#94a3b8', margin: '0 0 20px 0' }}>
-              Scan this QR code with your phone's camera to load <strong>{selectedPreset.name}</strong> directly.
+            <p style={{ fontSize: '13px', color: '#94a3b8', margin: '0 0 16px 0' }}>
+              Point your smartphone camera at this QR code. It will open this exact live screen on your phone:
+              <br />
+              <strong style={{ color: isShowingConfirmation ? '#34d399' : '#38bdf8' }}>
+                {selectedPreset.name} {isShowingConfirmation ? '(Confirmation Screen)' : '(3D Room)'}
+              </strong>
             </p>
+
             <div
               style={{
                 background: '#ffffff',
-                padding: '16px',
+                padding: '14px',
                 borderRadius: '12px',
                 display: 'inline-block',
                 marginBottom: '16px'
@@ -360,14 +414,15 @@ const LiveMobileSimulatorPage = () => {
                 style={{ width: '180px', height: '180px', display: 'block' }}
               />
             </div>
-            <div>
+
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
               <button
                 onClick={() => setShowQrModal(false)}
                 style={{
                   background: '#0284c7',
                   border: 'none',
                   color: '#ffffff',
-                  padding: '8px 24px',
+                  padding: '8px 20px',
                   borderRadius: '8px',
                   fontWeight: 700,
                   fontSize: '13px',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Smartphone, RotateCw, ExternalLink, QrCode, Monitor, Sparkles, Award, Play, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const LIVE_PRESETS = [
   {
@@ -83,6 +84,11 @@ const LiveMobileSimulatorPage = () => {
         overflow: 'hidden'
       }}
     >
+      <Helmet>
+        <title>TravelVRSE Presenter Simulator (Internal)</title>
+        <meta name="robots" content="noindex, nofollow, noarchive" />
+        <meta name="googlebot" content="noindex, nofollow, noarchive" />
+      </Helmet>
       {/* Top Floating Control Bar */}
       <div
         style={{

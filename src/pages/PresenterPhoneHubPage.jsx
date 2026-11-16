@@ -1,6 +1,7 @@
 import React from 'react';
 import { Smartphone, Award, Play, ExternalLink, ShieldCheck, Compass, ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const DESTINATIONS = [
   {
@@ -51,6 +52,11 @@ const PresenterPhoneHubPage = () => {
         fontFamily: 'Inter, system-ui, sans-serif'
       }}
     >
+      <Helmet>
+        <title>TravelVRSE Demo Hub (Internal)</title>
+        <meta name="robots" content="noindex, nofollow, noarchive" />
+        <meta name="googlebot" content="noindex, nofollow, noarchive" />
+      </Helmet>
       <div style={{ maxWidth: '440px', margin: '0 auto' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>

@@ -10,22 +10,28 @@ const LIVE_PRESETS = [
     desc: 'Live 3D spatial room with mobile touch joystick, backpack inventory, and soundscape.'
   },
   {
+    id: '25-hours',
+    name: '25hours Hotel Copenhagen (Live 3D + Joystick)',
+    url: 'https://www.travelvrse.com/play/25-hours',
+    desc: 'Live Scandinavian design, vinyl room, and Indre By challenge with mobile joystick.'
+  },
+  {
     id: 'ted-lasso',
     name: 'Ted Lasso Richmond (Live 3D + Joystick)',
     url: 'https://www.travelvrse.com/play/ted-lasso',
     desc: 'Live Richmond pub & green challenge with 3D navigation and local gem trail.'
   },
   {
-    id: 'southbank-vibe-radar',
-    name: 'South Bank Vibe Radar & Directory',
-    url: '/vibe/southbank',
-    desc: 'Sensory radar challenge, audio voiceovers, and verified directory.'
-  },
-  {
     id: 'virgin-vegas',
     name: 'Virgin Hotel Las Vegas (Live 3D + Joystick)',
     url: 'https://www.travelvrse.com/play/virgin-vegas',
     desc: 'Live Vegas suite and Ruby Lounge spatial challenge.'
+  },
+  {
+    id: 'southbank-vibe-radar',
+    name: 'South Bank Vibe Radar & Directory',
+    url: '/vibe/southbank',
+    desc: 'Sensory radar challenge, audio voiceovers, and verified directory.'
   }
 ];
 

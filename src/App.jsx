@@ -16,6 +16,7 @@ import SouthBankDemoPage from './pages/SouthBankDemoPage';
 import VibeDirectoryPage from './pages/VibeDirectoryPage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
 import CookieConsentBanner from './components/CookieConsentBanner';
+import MobileSimulatorWrapper from './components/MobileSimulatorWrapper';
 import RevenueSection from './components/RevenueSection';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
@@ -198,23 +199,25 @@ const App = () => {
         <ScrollToTop />
         <OwnerModeBanner />
         <CookieConsentBanner />
-        <Routes>
-          <Route path="/" element={<B2BHome />} />
-          <Route path="/ignore-me" element={<IgnoreAnalyticsPage />} />
-          <Route path="/notrack" element={<IgnoreAnalyticsPage />} />
-          <Route path="/cookies" element={<CookiePolicyPage />} />
-          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
-          <Route path="/vibe" element={<VibeDirectoryPage />} />
-          <Route path="/vibe-radar" element={<VibeDirectoryPage />} />
-          <Route path="/vibe/southbank" element={<VibeDirectoryPage />} />
-          <Route path="/marketplace" element={<MarketplacePage />} />
-          <Route path="/partner" element={<PartnerPage />} />
-          <Route path="/creator" element={<CreatorPage />} />
-          <Route path="/creator-portal" element={<Navigate to="/" replace />} />
-          <Route path="/barcelona" element={<BarcelonaPage />} />
-          <Route path="/demo" element={<SouthBankDemoPage />} />
-          <Route path="/demo/southbank" element={<SouthBankDemoPage />} />
-        </Routes>
+        <MobileSimulatorWrapper>
+          <Routes>
+            <Route path="/" element={<B2BHome />} />
+            <Route path="/ignore-me" element={<IgnoreAnalyticsPage />} />
+            <Route path="/notrack" element={<IgnoreAnalyticsPage />} />
+            <Route path="/cookies" element={<CookiePolicyPage />} />
+            <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+            <Route path="/vibe" element={<VibeDirectoryPage />} />
+            <Route path="/vibe-radar" element={<VibeDirectoryPage />} />
+            <Route path="/vibe/southbank" element={<VibeDirectoryPage />} />
+            <Route path="/marketplace" element={<MarketplacePage />} />
+            <Route path="/partner" element={<PartnerPage />} />
+            <Route path="/creator" element={<CreatorPage />} />
+            <Route path="/creator-portal" element={<Navigate to="/" replace />} />
+            <Route path="/barcelona" element={<BarcelonaPage />} />
+            <Route path="/demo" element={<SouthBankDemoPage />} />
+            <Route path="/demo/southbank" element={<SouthBankDemoPage />} />
+          </Routes>
+        </MobileSimulatorWrapper>
       </Router>
       <Analytics
         beforeSend={(event) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Smartphone, Monitor, QrCode, X, Maximize2, Minimize2, ExternalLink } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
+import { Smartphone, Monitor, QrCode, X, Maximize2, Minimize2, ExternalLink, Gamepad2 } from 'lucide-react';
+import { useLocation, Link } from 'react-router-dom';
 
 const MobileSimulatorWrapper = ({ children }) => {
   const location = useLocation();
@@ -148,6 +148,25 @@ const MobileSimulatorWrapper = ({ children }) => {
 
         {/* Action Buttons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Link
+            to="/play/mobile-demo"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)',
+              color: '#ffffff',
+              borderRadius: '8px',
+              padding: '6px 12px',
+              fontSize: '12px',
+              fontWeight: 700,
+              textDecoration: 'none',
+              boxShadow: '0 2px 8px rgba(2, 132, 199, 0.4)'
+            }}
+          >
+            <Gamepad2 size={14} /> 🕹️ Joystick 3D
+          </Link>
+
           <button
             onClick={() => setShowQrModal(true)}
             style={{

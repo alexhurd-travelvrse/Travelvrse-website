@@ -17,6 +17,7 @@ import VibeDirectoryPage from './pages/VibeDirectoryPage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import MobileSimulatorWrapper from './components/MobileSimulatorWrapper';
+import LightweightMobileChallengeDemo from './components/LightweightMobileChallengeDemo';
 import RevenueSection from './components/RevenueSection';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
@@ -209,6 +210,9 @@ const App = () => {
             <Route path="/vibe" element={<VibeDirectoryPage />} />
             <Route path="/vibe-radar" element={<VibeDirectoryPage />} />
             <Route path="/vibe/southbank" element={<VibeDirectoryPage />} />
+            <Route path="/play/mobile-demo" element={<LightweightMobileChallengeDemo />} />
+            <Route path="/challenge/mobile" element={<LightweightMobileChallengeDemo />} />
+            <Route path="/demo/joystick" element={<LightweightMobileChallengeDemo />} />
             <Route path="/marketplace" element={<MarketplacePage />} />
             <Route path="/partner" element={<PartnerPage />} />
             <Route path="/creator" element={<CreatorPage />} />

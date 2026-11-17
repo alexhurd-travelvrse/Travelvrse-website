@@ -238,6 +238,26 @@ const MarketplacePage = () => {
                     </div>
 
                     <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center', 
+                        padding: '0 12px 16px 12px',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                        marginBottom: '28px',
+                        flexWrap: 'wrap',
+                        gap: '12px'
+                    }}>
+                        <div>
+                            <h2 style={{ fontSize: '20px', fontWeight: 700, margin: '0 0 4px 0', color: '#ffffff' }}>
+                                All Global Destinations &amp; Verified Stays
+                            </h2>
+                            <p style={{ margin: 0, fontSize: '13px', color: '#94a3b8' }}>
+                                Launch mobile 3D spatial challenges to claim direct rate credits
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style={{ 
                         display: 'grid', 
                         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
                         gap: '35px',

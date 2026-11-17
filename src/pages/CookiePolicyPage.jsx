@@ -27,7 +27,9 @@ const CookiePolicyPage = () => {
       }
       setToastMessage('Non-essential analytics tracking disabled on this browser.');
     } else {
-      if (typeof window.__setVercelAnalyticsIgnore === 'function') {
+      // Only re-enable analytics if this device is NOT an owner/admin device
+      const isOwner = localStorage.getItem('ignore_analytics') === 'true' || localStorage.getItem('is_owner') === 'true' || document.cookie.includes('ignore_analytics=true');
+      if (!isOwner && typeof window.__setVercelAnalyticsIgnore === 'function') {
         window.__setVercelAnalyticsIgnore(false);
       }
       setToastMessage('Analytics cookies and performance telemetry enabled.');

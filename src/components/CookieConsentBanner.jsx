@@ -19,9 +19,7 @@ const CookieConsentBanner = () => {
 
   const handleAcceptAll = () => {
     localStorage.setItem('travelvrse_cookie_consent', 'accepted');
-    if (typeof window.__setVercelAnalyticsIgnore === 'function') {
-      window.__setVercelAnalyticsIgnore(false);
-    }
+    // Note: Do NOT touch ignore_analytics here so owner mode is never wiped by accepting cookies
     setIsVisible(false);
   };
 

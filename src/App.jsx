@@ -12,8 +12,7 @@ import MarketplacePage from './pages/MarketplacePage';
 import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
 import BarcelonaPage from './pages/BarcelonaPage';
-import SouthBankDemoPage from './pages/SouthBankDemoPage';
-import VibeDirectoryPage from './pages/VibeDirectoryPage';
+import PrivateDemoPage from './pages/PrivateDemoPage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import MobileSimulatorWrapper from './components/MobileSimulatorWrapper';
@@ -94,19 +93,50 @@ const OwnerModeBanner = () => {
 
 const shouldDropAnalyticsEvent = () => {
   if (typeof window === 'undefined') return false;
+  const hostname = (window.location.hostname || '').toLowerCase();
+  if (
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname === '0.0.0.0' ||
+    hostname.includes('trycloudflare.com') ||
+    hostname.includes('ngrok') ||
+    hostname.includes('loca.lt') ||
+    hostname.endsWith('.local')
+  ) {
+    return true;
+  }
   if (typeof window.__shouldBlockVercelAnalytics === 'function') {
     return window.__shouldBlockVercelAnalytics();
   }
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('ignore_analytics') === 'true' || urlParams.get('me') === 'true') {
+  const path = window.location.pathname || '';
+  if (
+    urlParams.get('ignore_analytics') === 'true' ||
+    urlParams.get('ignore') === 'me' ||
+    urlParams.get('ignore') === 'true' ||
+    urlParams.get('me') === 'true' ||
+    urlParams.get('admin') === 'true' ||
+    urlParams.get('presenter') === 'true' ||
+    path === '/ignore-me' ||
+    path === '/notrack' ||
+    path.startsWith('/presenter')
+  ) {
     localStorage.setItem('ignore_analytics', 'true');
+    localStorage.setItem('is_owner', 'true');
+    sessionStorage.setItem('ignore_analytics', 'true');
+    return true;
   } else if (urlParams.get('ignore_analytics') === 'false') {
     localStorage.removeItem('ignore_analytics');
+    localStorage.removeItem('is_owner');
+    sessionStorage.removeItem('ignore_analytics');
   }
   if (
     localStorage.getItem('travelvrse_cookie_consent') === 'rejected' ||
     localStorage.getItem('ignore_analytics') === 'true' ||
-    document.cookie.includes('ignore_analytics=true')
+    localStorage.getItem('is_owner') === 'true' ||
+    sessionStorage.getItem('ignore_analytics') === 'true' ||
+    document.cookie.includes('ignore_analytics=true') ||
+    document.cookie.includes('is_owner=true')
   ) {
     return true;
   }
@@ -209,9 +239,12 @@ const App = () => {
             <Route path="/notrack" element={<IgnoreAnalyticsPage />} />
             <Route path="/cookies" element={<CookiePolicyPage />} />
             <Route path="/cookie-policy" element={<CookiePolicyPage />} />
-            <Route path="/vibe" element={<VibeDirectoryPage />} />
-            <Route path="/vibe-radar" element={<VibeDirectoryPage />} />
-            <Route path="/vibe/southbank" element={<VibeDirectoryPage />} />
+            {/* Private Password-Gated Demo & Vibe Directory */}
+            <Route path="/demo" element={<PrivateDemoPage />} />
+            <Route path="/demo/southbank" element={<PrivateDemoPage />} />
+            <Route path="/vibe" element={<Navigate to="/demo" replace />} />
+            <Route path="/vibe-radar" element={<Navigate to="/demo" replace />} />
+            <Route path="/vibe/southbank" element={<Navigate to="/demo" replace />} />
             <Route path="/mobile" element={<LiveMobileSimulatorPage />} />
             <Route path="/simulator" element={<LiveMobileSimulatorPage />} />
             <Route path="/live-mobile" element={<LiveMobileSimulatorPage />} />
@@ -225,8 +258,6 @@ const App = () => {
             <Route path="/creator" element={<CreatorPage />} />
             <Route path="/creator-portal" element={<Navigate to="/" replace />} />
             <Route path="/barcelona" element={<BarcelonaPage />} />
-            <Route path="/demo" element={<SouthBankDemoPage />} />
-            <Route path="/demo/southbank" element={<SouthBankDemoPage />} />
           </Routes>
         </MobileSimulatorWrapper>
       </Router>

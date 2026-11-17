@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import VibeRadarChallenge from '../components/VibeRadarChallenge';
+import VibeSearchChallengeWidget from '../components/VibeSearchChallengeWidget';
 import { SOUTH_BANK_VIBE_DATA } from '../data/southbankVibeData';
 import { getVibeIntentTelemetry, recordRadarChallengeCompletion } from '../services/vibeIntentTelemetry';
 import { Helmet } from 'react-helmet-async';
 import { Sparkles, MapPin, Volume2, ShieldCheck, ArrowRight, ExternalLink, Box, Tag, Award, Compass, Star, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const VibeDirectoryPage = () => {
+const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [matchedArchetype, setMatchedArchetype] = useState(null);
   const [hasCompletedRadar, setHasCompletedRadar] = useState(false);
@@ -27,65 +28,12 @@ const VibeDirectoryPage = () => {
     return node.type === activeFilter;
   });
 
-  // Prepare JSON-LD for Search Engine & AI Crawler Generative Engine Optimization
-  const jsonLdData = {
-    '@context': 'https://schema.org',
-    '@type': 'TouristDestination',
-    name: SOUTH_BANK_VIBE_DATA.name,
-    description: 'Creator-verified atmospheric vibe directory and spatial discovery challenges for London South Bank.',
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: SOUTH_BANK_VIBE_DATA.geo.latitude,
-      longitude: SOUTH_BANK_VIBE_DATA.geo.longitude
-    },
-    amenityFeature: [
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'Composite Atmospheric Vibe Score',
-        value: SOUTH_BANK_VIBE_DATA.atmosphericProfile.compositeVibeScore
-      },
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'Acoustic Baseline Range',
-        value: `${SOUTH_BANK_VIBE_DATA.atmosphericProfile.acousticBaselineDb.lateNight} to ${SOUTH_BANK_VIBE_DATA.atmosphericProfile.acousticBaselineDb.afternoon} dB`
-      },
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'Walkability Index',
-        value: SOUTH_BANK_VIBE_DATA.atmosphericProfile.walkabilityScore
-      },
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'Verified Radar Intent Telemetry',
-        value: `${telemetry.totalRadarCompletions} completed sessions`
-      }
-    ],
-    interactionStatistic: {
-      '@type': 'InteractionCounter',
-      interactionType: 'https://schema.org/CompleteAction',
-      userInteractionCount: telemetry.totalRadarCompletions
-    },
-    hasPart: SOUTH_BANK_VIBE_DATA.nodes.map(n => ({
-      '@type': n.type === 'hotel' ? 'Hotel' : 'TouristAttraction',
-      name: n.name,
-      description: n.youWillLoveThisIf,
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: n.rating,
-        reviewCount: n.reviewsCount || 100
-      }
-    }))
-  };
-
-  return (
-    <Layout>
+  const content = (
+    <>
       <Helmet>
         <title>South Bank London Vibe Directory &amp; 3D Radar | TravelVRSE</title>
-        <meta
-          name="description"
-          content="Tune your sensory vibe radar for London South Bank. Explore creator-verified boutique hotels, independent craft gems, and unlock 5% to 10% rate-parity credits."
-        />
-        <script type="application/ld+json">{JSON.stringify(jsonLdData)}</script>
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
       </Helmet>
 
       <div
@@ -186,7 +134,12 @@ const VibeDirectoryPage = () => {
             </div>
           </div>
 
-          {/* VIBE RADAR CHALLENGE SECTION */}
+          {/* THE GAMIFIED VIBE SEARCH CHALLENGE (SENSORY DIALS & MICRO-GEMS) */}
+          <div style={{ marginBottom: '48px' }}>
+            <VibeSearchChallengeWidget initialLocation="london-southbank" />
+          </div>
+
+          {/* VIBE RADAR CHALLENGE SECTION (QUESTIONNAIRE MODE) */}
           <div style={{ marginBottom: '48px' }}>
             <VibeRadarChallenge onComplete={handleRadarComplete} />
           </div>
@@ -551,6 +504,16 @@ const VibeDirectoryPage = () => {
       </div>
 
       <Footer />
+    </>
+  );
+
+  if (isPrivateDemo) {
+    return content;
+  }
+
+  return (
+    <Layout>
+      {content}
     </Layout>
   );
 };

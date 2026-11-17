@@ -2,11 +2,15 @@
 User-agent: *
 Allow: /
 Allow: /marketplace
-Allow: /vibe/
 Allow: /play/
-Disallow: /barcelona
 Disallow: /demo
 Disallow: /demo/
+Disallow: /demo/*
+Disallow: /vibe
+Disallow: /vibe/
+Disallow: /vibe/*
+Disallow: /vibe-radar
+Disallow: /barcelona
 Disallow: /mobile
 Disallow: /simulator
 Disallow: /live-mobile
@@ -20,11 +24,16 @@ Disallow: /admin
 # Explicit AI & GEO Crawlers (Search & Model Retrieval)
 User-agent: GPTBot
 Allow: /
-Allow: /vibe/
+Allow: /marketplace
 Allow: /play/
-Disallow: /barcelona
 Disallow: /demo
 Disallow: /demo/
+Disallow: /demo/*
+Disallow: /vibe
+Disallow: /vibe/
+Disallow: /vibe/*
+Disallow: /vibe-radar
+Disallow: /barcelona
 Disallow: /mobile
 Disallow: /simulator
 Disallow: /presenter
@@ -32,11 +41,16 @@ Disallow: /ignore-me
 
 User-agent: OAI-SearchBot
 Allow: /
-Allow: /vibe/
+Allow: /marketplace
 Allow: /play/
-Disallow: /barcelona
 Disallow: /demo
 Disallow: /demo/
+Disallow: /demo/*
+Disallow: /vibe
+Disallow: /vibe/
+Disallow: /vibe/*
+Disallow: /vibe-radar
+Disallow: /barcelona
 Disallow: /mobile
 Disallow: /simulator
 Disallow: /presenter
@@ -44,23 +58,51 @@ Disallow: /ignore-me
 
 User-agent: ChatGPT-User
 Allow: /
-Allow: /vibe/
+Allow: /marketplace
 Allow: /play/
+Disallow: /demo
+Disallow: /demo/
+Disallow: /demo/*
+Disallow: /vibe
+Disallow: /vibe/
+Disallow: /vibe/*
+Disallow: /vibe-radar
 
 User-agent: Google-Extended
 Allow: /
-Allow: /vibe/
+Allow: /marketplace
 Allow: /play/
+Disallow: /demo
+Disallow: /demo/
+Disallow: /demo/*
+Disallow: /vibe
+Disallow: /vibe/
+Disallow: /vibe/*
+Disallow: /vibe-radar
 
 User-agent: PerplexityBot
 Allow: /
-Allow: /vibe/
+Allow: /marketplace
 Allow: /play/
+Disallow: /demo
+Disallow: /demo/
+Disallow: /demo/*
+Disallow: /vibe
+Disallow: /vibe/
+Disallow: /vibe/*
+Disallow: /vibe-radar
 
 User-agent: ClaudeBot
 Allow: /
-Allow: /vibe/
+Allow: /marketplace
 Allow: /play/
+Disallow: /demo
+Disallow: /demo/
+Disallow: /demo/*
+Disallow: /vibe
+Disallow: /vibe/
+Disallow: /vibe/*
+Disallow: /vibe-radar
 
 # Sitemap location
 Sitemap: https://www.travelvrse.com/sitemap.xml

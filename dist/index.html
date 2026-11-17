@@ -125,21 +125,43 @@
         try {
           var COOKIE_NAME = 'ignore_analytics';
           var MAX_AGE = 315360000; // 10 years
-          var rootDomain = window.location.hostname.replace(/^www\./, '');
+          var hostname = (window.location.hostname || '').toLowerCase();
+          var rootDomain = hostname.replace(/^www\./, '');
+
+          // Automatically block all tunnels, local environments, and dev previews
+          function isDevOrTunnelHost() {
+            return (
+              hostname === 'localhost' ||
+              hostname === '127.0.0.1' ||
+              hostname === '0.0.0.0' ||
+              hostname.indexOf('trycloudflare.com') !== -1 ||
+              hostname.indexOf('ngrok') !== -1 ||
+              hostname.indexOf('loca.lt') !== -1 ||
+              hostname.indexOf('.local') !== -1
+            );
+          }
 
           function setIgnoreFlag(enabled) {
             try {
               if (enabled) {
                 localStorage.setItem(COOKIE_NAME, 'true');
+                localStorage.setItem('is_owner', 'true');
+                sessionStorage.setItem(COOKIE_NAME, 'true');
                 document.cookie = COOKIE_NAME + '=true; path=/; max-age=' + MAX_AGE + '; SameSite=Lax';
+                document.cookie = 'is_owner=true; path=/; max-age=' + MAX_AGE + '; SameSite=Lax';
                 if (rootDomain.indexOf('.') !== -1) {
                   document.cookie = COOKIE_NAME + '=true; domain=.' + rootDomain + '; path=/; max-age=' + MAX_AGE + '; SameSite=Lax';
+                  document.cookie = 'is_owner=true; domain=.' + rootDomain + '; path=/; max-age=' + MAX_AGE + '; SameSite=Lax';
                 }
               } else {
                 localStorage.removeItem(COOKIE_NAME);
+                localStorage.removeItem('is_owner');
+                sessionStorage.removeItem(COOKIE_NAME);
                 document.cookie = COOKIE_NAME + '=; path=/; max-age=0; SameSite=Lax';
+                document.cookie = 'is_owner=; path=/; max-age=0; SameSite=Lax';
                 if (rootDomain.indexOf('.') !== -1) {
                   document.cookie = COOKIE_NAME + '=; domain=.' + rootDomain + '; path=/; max-age=0; SameSite=Lax';
+                  document.cookie = 'is_owner=; domain=.' + rootDomain + '; path=/; max-age=0; SameSite=Lax';
                 }
               }
             } catch (e) {}
@@ -148,15 +170,18 @@
           function isOwnerIgnored() {
             try {
               var params = new URLSearchParams(window.location.search);
-              var path = window.location.pathname;
+              var path = window.location.pathname || '';
               if (
                 params.get('ignore_analytics') === 'true' ||
                 params.get('ignore') === 'me' ||
                 params.get('ignore') === 'true' ||
                 params.get('me') === 'true' ||
-                params.get('notrack') === 'true' ||
+                params.get('admin') === 'true' ||
+                params.get('presenter') === 'true' ||
                 path === '/ignore-me' ||
-                path === '/notrack'
+                path === '/notrack' ||
+                path === '/presenter' ||
+                path.indexOf('/presenter') === 0
               ) {
                 setIgnoreFlag(true);
                 return true;
@@ -165,11 +190,13 @@
                 setIgnoreFlag(false);
                 return false;
               }
-              var hasLocal = localStorage.getItem(COOKIE_NAME) === 'true';
+              var hasLocal = localStorage.getItem(COOKIE_NAME) === 'true' || localStorage.getItem('is_owner') === 'true';
+              var hasSession = sessionStorage.getItem(COOKIE_NAME) === 'true';
               var hasCookie = document.cookie.split(';').some(function (c) {
-                return c.trim().indexOf(COOKIE_NAME + '=true') === 0;
+                var trimmed = c.trim();
+                return trimmed.indexOf(COOKIE_NAME + '=true') === 0 || trimmed.indexOf('is_owner=true') === 0;
               });
-              if (hasLocal || hasCookie) {
+              if (hasLocal || hasSession || hasCookie) {
                 setIgnoreFlag(true);
                 return true;
               }
@@ -194,7 +221,7 @@
           }
 
           window.__shouldBlockVercelAnalytics = function () {
-            return isOwnerIgnored() || isAutomatedBot();
+            return isDevOrTunnelHost() || isOwnerIgnored() || isAutomatedBot();
           };
           window.__setVercelAnalyticsIgnore = setIgnoreFlag;
 
@@ -235,8 +262,8 @@
         } catch (err) {}
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-CvMFp_9M.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BdoHyTO4.css">
+    <script type="module" crossorigin src="/assets/index-C71MZVLK.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C5fmZJyq.css">
   </head>
   <body>
     <div id="root"></div>

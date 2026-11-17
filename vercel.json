@@ -8,7 +8,7 @@
   ],
   "headers": [
     {
-      "source": "/(creator-portal|barcelona|ignore-me|notrack|demo|demo/.*|mobile|simulator|live-mobile|presenter|demo-hub|play/mobile-demo)",
+      "source": "/(creator-portal|barcelona|ignore-me|notrack|demo|demo/.*|vibe|vibe/.*|vibe-radar|mobile|simulator|live-mobile|presenter|demo-hub|play/mobile-demo)",
       "headers": [
         {
           "key": "X-Robots-Tag",

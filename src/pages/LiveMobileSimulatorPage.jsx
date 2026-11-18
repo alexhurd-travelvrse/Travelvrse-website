@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Smartphone, RotateCw, ExternalLink, QrCode, Monitor, Sparkles, Award, Play, CheckCircle2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 const LIVE_PRESETS = [
@@ -41,13 +41,42 @@ const LIVE_PRESETS = [
   }
 ];
 
+const findPreset = (query) => {
+  if (!query) return null;
+  const q = query.toLowerCase().trim();
+  return LIVE_PRESETS.find(p => 
+    p.id.toLowerCase() === q ||
+    p.id.replace(/-/g, '').toLowerCase() === q.replace(/-/g, '') ||
+    (q.includes('25') && p.id.includes('25')) ||
+    (q.includes('copenhagen') && p.id.includes('25')) ||
+    (q.includes('sea') && p.id.includes('sea')) ||
+    (q.includes('lasso') && p.id.includes('lasso')) ||
+    (q.includes('vegas') && p.id.includes('vegas')) ||
+    (q.includes('southbank') && p.id.includes('southbank'))
+  );
+};
+
 const LiveMobileSimulatorPage = () => {
-  const [selectedPreset, setSelectedPreset] = useState(LIVE_PRESETS[0]);
+  const [searchParams] = useSearchParams();
+  const initialPreset = findPreset(searchParams.get('preset') || searchParams.get('id') || searchParams.get('challenge') || searchParams.get('hotel')) || LIVE_PRESETS[0];
+  const [selectedPreset, setSelectedPreset] = useState(initialPreset);
   const [iframeKey, setIframeKey] = useState(0);
   const [scale, setScale] = useState(0.88);
   const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
   const [customUrl, setCustomUrl] = useState('');
   const [showQrModal, setShowQrModal] = useState(false);
+
+  useEffect(() => {
+    const presetParam = searchParams.get('preset') || searchParams.get('id') || searchParams.get('challenge') || searchParams.get('hotel');
+    if (presetParam) {
+      const match = findPreset(presetParam);
+      if (match && match.id !== selectedPreset.id) {
+        setSelectedPreset(match);
+        setCustomUrl('');
+        setIframeKey(k => k + 1);
+      }
+    }
+  }, [searchParams]);
 
   const activeUrl = customUrl || (isShowingConfirmation ? selectedPreset.completionUrl : selectedPreset.url);
 

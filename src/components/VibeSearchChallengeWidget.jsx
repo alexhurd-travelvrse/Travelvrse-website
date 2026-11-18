@@ -2462,62 +2462,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         {/* TAB 1: HOTELS (HORIZONTAL EDITORIAL-OTA CARDS + ATMOSVIBE & USER PHOTO FILTERS) */}
         {discoveryTab === 'hotels' && (
           <div>
-            {/* Global Photo Filter Bar */}
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '10px',
-              marginBottom: '18px',
-              background: 'rgba(255, 255, 255, 0.02)',
-              border: '1px solid rgba(255, 255, 255, 0.07)',
-              borderRadius: '14px',
-              padding: '10px 14px'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <span style={{ fontSize: '11.5px', fontWeight: '700', color: '#94a3b8', marginRight: '4px' }}>
-                  Filter Photos:
-                </span>
-                {[
-                  { id: 'for_your_vibe', label: '✨ For Your Vibe (Atmosvibe)' },
-                  { id: 'rooms', label: 'Rooms' },
-                  { id: 'views', label: 'Views & Terraces' },
-                  { id: 'dining', label: 'Dining & Bars' },
-                  { id: 'design', label: 'Design' }
-                ].map(f => {
-                  const isActive = globalPhotoFilter === f.id;
-                  return (
-                    <button
-                      key={f.id}
-                      type="button"
-                      onClick={() => {
-                        setGlobalPhotoFilter(f.id);
-                        setCardPhotoFilter({});
-                        setCardPhotoIndex({});
-                      }}
-                      style={{
-                        background: isActive ? '#0284c7' : 'rgba(255, 255, 255, 0.05)',
-                        color: isActive ? '#ffffff' : '#cbd5e1',
-                        border: isActive ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.08)',
-                        borderRadius: '999px',
-                        padding: '5px 12px',
-                        fontSize: '11.5px',
-                        fontWeight: '700',
-                        cursor: 'pointer',
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      {f.label}
-                    </button>
-                  );
-                })}
-              </div>
-              <span style={{ fontSize: '11px', color: '#64748b' }}>
-                Photos auto-ordered by your Duel answers
-              </span>
-            </div>
-
             {/* Horizontal Hotel Cards List */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {location.stayAnchors.map(stay => {

@@ -93,11 +93,11 @@ export default function PasswordGate({
           <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
         </Helmet>
         
-        {/* Floating lock/logout pill */}
+        {/* Floating lock/logout pill (Bottom Left so it never collides with simulator pill) */}
         <div style={{
           position: 'fixed',
           bottom: '16px',
-          right: '16px',
+          left: '16px',
           zIndex: 99999,
           pointerEvents: 'auto'
         }}>

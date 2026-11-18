@@ -5,7 +5,7 @@ import {
   Flame, Compass, Sun, Moon, Heart, Award, Share2, 
   Film, GlassWater, Clock, Coffee, Eye, Radio,
   Building, Palette, BookOpen, Layers, RefreshCw,
-  Zap, CreditCard, X, ChevronRight
+  Zap, CreditCard, X, ChevronRight, LayoutGrid
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { fetchLiveSouthBankNuiteeFeeds, executeSouthBankLivePrebook } from '../services/nuiteeLiveFeedService';
@@ -442,6 +442,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   // Photo Curation View Mode ('vibe' vs 'raw_ota')
   const [photoEngineMode, setPhotoEngineMode] = useState('vibe');
 
+  // Neighborhood Cultural Blueprint Streamlined Presentation ('tabs' vs 'grid')
+  const [blueprintActiveTab, setBlueprintActiveTab] = useState('youWillLove'); // 'youWillLove' | 'topVibes' | 'microGems'
+  const [blueprintViewMode, setBlueprintViewMode] = useState('tabs'); // 'tabs' (streamlined on load) | 'grid' (expand all)
+  const [blueprintRecentlyUpdated, setBlueprintRecentlyUpdated] = useState(false);
+
   // Live Nuitée Rates State
   const [nuiteeRates, setNuiteeRates] = useState({
     loading: true,
@@ -552,6 +557,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
       ...prev,
       [questionId]: optionId
     }));
+    setBlueprintRecentlyUpdated(true);
+    setTimeout(() => {
+      setBlueprintRecentlyUpdated(false);
+    }, 2200);
   };
 
   // Instant Live Nuitée Prebook Booking Flow
@@ -1003,180 +1012,587 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         </div>
       </div>
 
-      {/* 2. DYNAMIC "WHY SOUTH BANK IS GREAT" SECTION (DESTINATION INTELLIGENCE) */}
-      <div style={{ marginBottom: '40px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+      {/* 2. STREAMLINED "NEIGHBORHOOD CULTURAL BLUEPRINT" (DESTINATION INTELLIGENCE) */}
+      <div style={{ marginBottom: '36px' }}>
+        {/* Header with Mode Toggle & Live Indicator */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '14px' }}>
           <div>
             <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#a78bfa', fontWeight: '700' }}>
               Neighborhood Cultural Blueprint
             </div>
-            <h3 style={{ fontSize: '21px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
+            <h3 style={{ fontSize: '20px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
               Why {location.name.split('•')[1]?.trim() || location.name} Is Exceptional
             </h3>
           </div>
-          <div style={{
-            fontSize: '12px',
-            color: '#34d399',
-            background: 'rgba(52, 211, 153, 0.1)',
-            padding: '4px 10px',
-            borderRadius: '999px',
-            fontWeight: '600'
-          }}>
-            ⚡ Updates Live With Your Choices
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {/* View Mode Toggle: Streamlined (Tabs) vs All 3 Pillars (Grid) */}
+            <button
+              type="button"
+              onClick={() => setBlueprintViewMode(prev => prev === 'tabs' ? 'grid' : 'tabs')}
+              title={blueprintViewMode === 'tabs' ? 'Expand all 3 blueprint pillars side-by-side' : 'Streamline into clean interactive tabs'}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: blueprintViewMode === 'grid' ? 'rgba(56, 189, 248, 0.18)' : 'rgba(255, 255, 255, 0.05)',
+                border: `1px solid ${blueprintViewMode === 'grid' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(255, 255, 255, 0.1)'}`,
+                color: blueprintViewMode === 'grid' ? '#38bdf8' : '#94a3b8',
+                borderRadius: '8px',
+                padding: '6px 12px',
+                fontSize: '12px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <LayoutGrid size={13} />
+              <span>{blueprintViewMode === 'tabs' ? 'Expand All (3 Columns)' : 'Streamline (Tabs)'}</span>
+            </button>
+
+            {/* Dynamic Live Update Badge */}
+            <div style={{
+              fontSize: '11.5px',
+              color: '#34d399',
+              background: 'rgba(52, 211, 153, 0.1)',
+              border: '1px solid rgba(52, 211, 153, 0.25)',
+              padding: '5px 11px',
+              borderRadius: '999px',
+              fontWeight: '600',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              <span style={{
+                width: '7px',
+                height: '7px',
+                borderRadius: '50%',
+                background: '#34d399',
+                display: 'inline-block',
+                boxShadow: blueprintRecentlyUpdated ? '0 0 10px #34d399' : 'none'
+              }} />
+              <span>{blueprintRecentlyUpdated ? 'Blueprint Reshaped!' : 'Live With Your Choices'}</span>
+            </div>
           </div>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '20px'
-        }}>
-          {/* Card 1: Dynamic "You'll Love This" */}
+        {/* STREAMLINED TAB SELECTOR (Active when blueprintViewMode === 'tabs') */}
+        {blueprintViewMode === 'tabs' && (
           <div style={{
-            background: 'rgba(255, 255, 255, 0.025)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '8px',
+            background: 'rgba(15, 23, 42, 0.65)',
+            padding: '6px',
+            borderRadius: '14px',
             border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '16px',
-            padding: '20px',
-            display: 'flex',
-            flexDirection: 'column'
+            marginBottom: '16px'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-              <Heart size={18} color="#f43f5e" />
-              <h4 style={{ fontSize: '15px', fontWeight: '700', margin: 0, color: '#ffffff' }}>
-                You'll Love This
-              </h4>
-            </div>
-            <p style={{ fontSize: '12px', color: '#94a3b8', margin: '0 0 12px 0' }}>
-              Personalized based on how you experience the neighborhood:
-            </p>
-            <ul style={{ margin: 0, paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {dynamicYouWillLove.map((pt, idx) => (
-                <li key={idx} style={{ fontSize: '13px', lineHeight: '1.5', color: '#e2e8f0' }}>
-                  {pt}
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* Tab 1: You'll Love This */}
+            <button
+              type="button"
+              onClick={() => setBlueprintActiveTab('youWillLove')}
+              style={{
+                background: blueprintActiveTab === 'youWillLove'
+                  ? 'linear-gradient(135deg, rgba(244, 63, 94, 0.18) 0%, rgba(225, 29, 72, 0.08) 100%)'
+                  : 'transparent',
+                border: `1px solid ${blueprintActiveTab === 'youWillLove' ? 'rgba(244, 63, 94, 0.4)' : 'transparent'}`,
+                color: blueprintActiveTab === 'youWillLove' ? '#ffffff' : '#94a3b8',
+                borderRadius: '10px',
+                padding: '9px 12px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '8px',
+                transition: 'all 0.2s ease',
+                textAlign: 'left'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Heart size={16} color={blueprintActiveTab === 'youWillLove' ? '#f43f5e' : '#94a3b8'} />
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: '700' }}>You'll Love This</div>
+                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>Dynamic Personalization</div>
+                </div>
+              </div>
+              {blueprintRecentlyUpdated && (
+                <span style={{ fontSize: '10px', background: '#f43f5e', color: '#fff', padding: '1px 6px', borderRadius: '4px', fontWeight: '800' }}>
+                  UPDATED
+                </span>
+              )}
+            </button>
 
-          {/* Card 2: Top Destination Vibes */}
+            {/* Tab 2: Top Destination Vibes */}
+            <button
+              type="button"
+              onClick={() => setBlueprintActiveTab('topVibes')}
+              style={{
+                background: blueprintActiveTab === 'topVibes'
+                  ? 'linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(217, 119, 6, 0.08) 100%)'
+                  : 'transparent',
+                border: `1px solid ${blueprintActiveTab === 'topVibes' ? 'rgba(245, 158, 11, 0.4)' : 'transparent'}`,
+                color: blueprintActiveTab === 'topVibes' ? '#ffffff' : '#94a3b8',
+                borderRadius: '10px',
+                padding: '9px 12px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '8px',
+                transition: 'all 0.2s ease',
+                textAlign: 'left'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Flame size={16} color={blueprintActiveTab === 'topVibes' ? '#f59e0b' : '#94a3b8'} />
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: '700' }}>Destination Vibes</div>
+                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>3 Cultural Signatures</div>
+                </div>
+              </div>
+              <span style={{ fontSize: '10px', background: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', padding: '2px 6px', borderRadius: '4px', fontWeight: '700' }}>
+                ★ #1 Match
+              </span>
+            </button>
+
+            {/* Tab 3: Walkable Micro-Gems */}
+            <button
+              type="button"
+              onClick={() => setBlueprintActiveTab('microGems')}
+              style={{
+                background: blueprintActiveTab === 'microGems'
+                  ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(5, 150, 105, 0.08) 100%)'
+                  : 'transparent',
+                border: `1px solid ${blueprintActiveTab === 'microGems' ? 'rgba(16, 185, 129, 0.4)' : 'transparent'}`,
+                color: blueprintActiveTab === 'microGems' ? '#ffffff' : '#94a3b8',
+                borderRadius: '10px',
+                padding: '9px 12px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '8px',
+                transition: 'all 0.2s ease',
+                textAlign: 'left'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <ShieldCheck size={16} color={blueprintActiveTab === 'microGems' ? '#10b981' : '#94a3b8'} />
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: '700' }}>Walkable Gems</div>
+                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>4 Dispersal Micro-Gems</div>
+                </div>
+              </div>
+              <span style={{ fontSize: '10px', background: savedGemIds.length > 0 ? '#10b981' : 'rgba(255, 255, 255, 0.1)', color: '#ffffff', padding: '2px 6px', borderRadius: '4px', fontWeight: '700' }}>
+                {savedGemIds.length > 0 ? `${savedGemIds.length} Saved` : '4 Spots'}
+              </span>
+            </button>
+          </div>
+        )}
+
+        {/* BLUEPRINT CONTENT: STREAMLINED ACTIVE VIEW OR FULL 3-COLUMN GRID */}
+        {blueprintViewMode === 'tabs' ? (
+          /* Streamlined Active Tab Container (Compact on load) */
           <div style={{
             background: 'rgba(255, 255, 255, 0.025)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             borderRadius: '16px',
-            padding: '20px',
-            display: 'flex',
-            flexDirection: 'column'
+            padding: '22px 24px',
+            position: 'relative'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-              <Flame size={18} color="#f59e0b" />
-              <h4 style={{ fontSize: '15px', fontWeight: '700', margin: 0, color: '#ffffff' }}>
-                Top Destination Vibes
-              </h4>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {location.topVibes.map(vibe => {
-                const isHighlighted = vibe.id === highlightedTopVibeId;
-                return (
-                  <div 
-                    key={vibe.id}
-                    style={{
-                      background: isHighlighted ? 'rgba(56, 189, 248, 0.1)' : 'rgba(255, 255, 255, 0.02)',
-                      border: `1px solid ${isHighlighted ? 'rgba(56, 189, 248, 0.4)' : 'rgba(255, 255, 255, 0.05)'}`,
-                      borderRadius: '10px',
-                      padding: '10px 12px',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                      <span style={{ fontSize: '13px', fontWeight: '700', color: '#ffffff' }}>
-                        {vibe.title}
-                      </span>
-                      {isHighlighted && (
-                        <span style={{ fontSize: '10px', background: '#0284c7', color: '#ffffff', padding: '2px 6px', borderRadius: '4px', fontWeight: '800' }}>
-                          ★ YOUR #1 MATCH
-                        </span>
-                      )}
-                    </div>
-                    <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, lineHeight: '1.45' }}>
-                      {vibe.desc}
-                    </p>
+            {/* Panel 1: Dynamic "You'll Love This" */}
+            {blueprintActiveTab === 'youWillLove' && (
+              <div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '14px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Heart size={18} color="#f43f5e" />
+                    <h4 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
+                      Personalized Cultural Synthesis
+                    </h4>
                   </div>
-                );
-              })}
-            </div>
-          </div>
+                  <span style={{ fontSize: '12px', color: '#94a3b8' }}>
+                    Tapping the Duel cards below rewrites these points in real time ↓
+                  </span>
+                </div>
 
-          {/* Card 3: Top Walkable Micro-Gems (Dispersal Satellites) */}
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.025)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '16px',
-            padding: '20px',
-            display: 'flex',
-            flexDirection: 'column'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-              <ShieldCheck size={18} color="#10b981" />
-              <h4 style={{ fontSize: '15px', fontWeight: '700', margin: 0, color: '#ffffff' }}>
-                Top Local Gems (Within 5m Walk)
-              </h4>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {location.gems.map(gem => {
-                const isSaved = savedGemIds.includes(gem.id);
-                return (
-                  <div 
-                    key={gem.id}
-                    style={{
-                      background: isSaved ? 'rgba(16, 185, 129, 0.08)' : 'rgba(255, 255, 255, 0.02)',
-                      border: `1px solid ${isSaved ? 'rgba(16, 185, 129, 0.3)' : 'rgba(255, 255, 255, 0.05)'}`,
-                      borderRadius: '10px',
-                      padding: '10px 12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '8px'
-                    }}
-                  >
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ fontSize: '13px', fontWeight: '700', color: '#ffffff' }}>
-                          {gem.name}
-                        </span>
-                        <span style={{ fontSize: '11px', color: '#34d399' }}>({gem.walkTime.split(' ')[0]})</span>
-                      </div>
-                      <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: '2px 0 0 0' }}>
-                        {gem.badge} • {gem.impactTag}
-                      </p>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => toggleSaveGem(gem.id)}
-                      style={{
-                        background: isSaved ? '#10b981' : 'rgba(255, 255, 255, 0.08)',
-                        border: 'none',
-                        color: '#ffffff',
-                        padding: '6px 10px',
-                        borderRadius: '6px',
-                        fontSize: '11px',
-                        fontWeight: '700',
-                        cursor: 'pointer',
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '16px' }}>
+                  {dynamicYouWillLove.map((pt, idx) => (
+                    <div 
+                      key={idx} 
+                      style={{ 
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        border: '1px solid rgba(255, 255, 255, 0.06)',
+                        borderRadius: '12px',
+                        padding: '12px 14px',
                         display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        flexShrink: 0
+                        alignItems: 'flex-start',
+                        gap: '10px'
                       }}
                     >
-                      {isSaved ? <BookmarkCheck size={13} /> : <Bookmark size={13} />}
-                      {isSaved ? 'Saved' : 'Save'}
+                      <span style={{ color: '#f43f5e', fontSize: '14px', marginTop: '2px' }}>✦</span>
+                      <span style={{ fontSize: '13px', lineHeight: '1.5', color: '#e2e8f0' }}>{pt}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Quick Next Jumper */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
+                  <span style={{ fontSize: '12px', color: '#64748b' }}>
+                    Next Blueprint Pillar:
+                  </span>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setBlueprintActiveTab('topVibes')}
+                      style={{ background: 'transparent', border: 'none', color: '#f59e0b', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
+                    >
+                      View Top Destination Vibes ({location.topVibes.length}) →
+                    </button>
+                    <span style={{ color: '#334155' }}>•</span>
+                    <button
+                      type="button"
+                      onClick={() => setBlueprintActiveTab('microGems')}
+                      style={{ background: 'transparent', border: 'none', color: '#10b981', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
+                    >
+                      View Walkable Micro-Gems ({location.gems.length}) →
                     </button>
                   </div>
-                );
-              })}
+                </div>
+              </div>
+            )}
+
+            {/* Panel 2: Top Destination Vibes */}
+            {blueprintActiveTab === 'topVibes' && (
+              <div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '14px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Flame size={18} color="#f59e0b" />
+                    <h4 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
+                      South Bank's 3 Defining Destination Signatures
+                    </h4>
+                  </div>
+                  <span style={{ fontSize: '12px', color: '#38bdf8', fontWeight: '600' }}>
+                    ★ #1 Match is dynamically calculated from your duel choices
+                  </span>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '16px' }}>
+                  {location.topVibes.map(vibe => {
+                    const isHighlighted = vibe.id === highlightedTopVibeId;
+                    return (
+                      <div 
+                        key={vibe.id}
+                        style={{
+                          background: isHighlighted ? 'rgba(56, 189, 248, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                          border: `1px solid ${isHighlighted ? 'rgba(56, 189, 248, 0.35)' : 'rgba(255, 255, 255, 0.05)'}`,
+                          borderRadius: '12px',
+                          padding: '14px 16px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'space-between'
+                        }}
+                      >
+                        <div>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                            <span style={{ fontSize: '13.5px', fontWeight: '700', color: '#ffffff' }}>
+                              {vibe.title}
+                            </span>
+                            {isHighlighted && (
+                              <span style={{ fontSize: '10px', background: '#0284c7', color: '#ffffff', padding: '2px 6px', borderRadius: '4px', fontWeight: '800' }}>
+                                ★ YOUR #1 MATCH
+                              </span>
+                            )}
+                          </div>
+                          <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, lineHeight: '1.45' }}>
+                            {vibe.desc}
+                          </p>
+                        </div>
+                        <div style={{ marginTop: '10px', fontSize: '11px', color: isHighlighted ? '#38bdf8' : '#64748b', fontWeight: '600' }}>
+                          Tag: {vibe.vibeMatchTag}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Quick Next Jumper */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
+                  <span style={{ fontSize: '12px', color: '#64748b' }}>
+                    Next Blueprint Pillar:
+                  </span>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setBlueprintActiveTab('youWillLove')}
+                      style={{ background: 'transparent', border: 'none', color: '#f43f5e', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
+                    >
+                      ← Back to You'll Love This
+                    </button>
+                    <span style={{ color: '#334155' }}>•</span>
+                    <button
+                      type="button"
+                      onClick={() => setBlueprintActiveTab('microGems')}
+                      style={{ background: 'transparent', border: 'none', color: '#10b981', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
+                    >
+                      View Walkable Micro-Gems ({location.gems.length}) →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Panel 3: Walkable Micro-Gems */}
+            {blueprintActiveTab === 'microGems' && (
+              <div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '14px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <ShieldCheck size={18} color="#10b981" />
+                    <h4 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
+                      Top Walkable Micro-Gems (Zero Tourist Traps • Within 5m)
+                    </h4>
+                  </div>
+                  <span style={{ fontSize: '12px', color: '#34d399', fontWeight: '600' }}>
+                    {savedGemIds.length} of {location.gems.length} Saved to Your Vibe Pass
+                  </span>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '16px' }}>
+                  {location.gems.map(gem => {
+                    const isSaved = savedGemIds.includes(gem.id);
+                    return (
+                      <div 
+                        key={gem.id}
+                        style={{
+                          background: isSaved ? 'rgba(16, 185, 129, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                          border: `1px solid ${isSaved ? 'rgba(16, 185, 129, 0.35)' : 'rgba(255, 255, 255, 0.05)'}`,
+                          borderRadius: '12px',
+                          padding: '12px 14px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: '12px'
+                        }}
+                      >
+                        <div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: '#ffffff' }}>
+                              {gem.name}
+                            </span>
+                            <span style={{ fontSize: '11px', color: '#34d399', fontWeight: '600' }}>({gem.walkTime.split(' ')[0]})</span>
+                          </div>
+                          <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: '3px 0 0 0' }}>
+                            {gem.badge} • <span style={{ color: '#cbd5e1' }}>{gem.impactTag}</span>
+                          </p>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => toggleSaveGem(gem.id)}
+                          style={{
+                            background: isSaved ? '#10b981' : 'rgba(255, 255, 255, 0.08)',
+                            border: 'none',
+                            color: '#ffffff',
+                            padding: '6px 12px',
+                            borderRadius: '6px',
+                            fontSize: '11.5px',
+                            fontWeight: '700',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                            flexShrink: 0,
+                            transition: 'all 0.15s ease'
+                          }}
+                        >
+                          {isSaved ? <BookmarkCheck size={13} /> : <Bookmark size={13} />}
+                          {isSaved ? 'Saved' : 'Save'}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Quick Next Jumper */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
+                  <span style={{ fontSize: '12px', color: '#64748b' }}>
+                    Next Blueprint Pillar:
+                  </span>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setBlueprintActiveTab('youWillLove')}
+                      style={{ background: 'transparent', border: 'none', color: '#f43f5e', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
+                    >
+                      ← Back to You'll Love This
+                    </button>
+                    <span style={{ color: '#334155' }}>•</span>
+                    <button
+                      type="button"
+                      onClick={() => setBlueprintActiveTab('topVibes')}
+                      style={{ background: 'transparent', border: 'none', color: '#f59e0b', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
+                    >
+                      View Top Destination Vibes →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          /* Full 3-Column Grid View (when user clicks 'Expand All') */
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '20px'
+          }}>
+            {/* Card 1: Dynamic "You'll Love This" */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.025)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '16px',
+              padding: '20px',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                <Heart size={18} color="#f43f5e" />
+                <h4 style={{ fontSize: '15px', fontWeight: '700', margin: 0, color: '#ffffff' }}>
+                  You'll Love This
+                </h4>
+              </div>
+              <p style={{ fontSize: '12px', color: '#94a3b8', margin: '0 0 12px 0' }}>
+                Personalized based on how you experience the neighborhood:
+              </p>
+              <ul style={{ margin: 0, paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {dynamicYouWillLove.map((pt, idx) => (
+                  <li key={idx} style={{ fontSize: '13px', lineHeight: '1.5', color: '#e2e8f0' }}>
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Card 2: Top Destination Vibes */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.025)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '16px',
+              padding: '20px',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                <Flame size={18} color="#f59e0b" />
+                <h4 style={{ fontSize: '15px', fontWeight: '700', margin: 0, color: '#ffffff' }}>
+                  Top Destination Vibes
+                </h4>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {location.topVibes.map(vibe => {
+                  const isHighlighted = vibe.id === highlightedTopVibeId;
+                  return (
+                    <div 
+                      key={vibe.id}
+                      style={{
+                        background: isHighlighted ? 'rgba(56, 189, 248, 0.1)' : 'rgba(255, 255, 255, 0.02)',
+                        border: `1px solid ${isHighlighted ? 'rgba(56, 189, 248, 0.4)' : 'rgba(255, 255, 255, 0.05)'}`,
+                        borderRadius: '10px',
+                        padding: '10px 12px',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                        <span style={{ fontSize: '13px', fontWeight: '700', color: '#ffffff' }}>
+                          {vibe.title}
+                        </span>
+                        {isHighlighted && (
+                          <span style={{ fontSize: '10px', background: '#0284c7', color: '#ffffff', padding: '2px 6px', borderRadius: '4px', fontWeight: '800' }}>
+                            ★ YOUR #1 MATCH
+                          </span>
+                        )}
+                      </div>
+                      <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, lineHeight: '1.45' }}>
+                        {vibe.desc}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Card 3: Top Walkable Micro-Gems */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.025)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '16px',
+              padding: '20px',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                <ShieldCheck size={18} color="#10b981" />
+                <h4 style={{ fontSize: '15px', fontWeight: '700', margin: 0, color: '#ffffff' }}>
+                  Top Local Gems (Within 5m Walk)
+                </h4>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {location.gems.map(gem => {
+                  const isSaved = savedGemIds.includes(gem.id);
+                  return (
+                    <div 
+                      key={gem.id}
+                      style={{
+                        background: isSaved ? 'rgba(16, 185, 129, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                        border: `1px solid ${isSaved ? 'rgba(16, 185, 129, 0.3)' : 'rgba(255, 255, 255, 0.05)'}`,
+                        borderRadius: '10px',
+                        padding: '10px 12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '8px'
+                      }}
+                    >
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span style={{ fontSize: '13px', fontWeight: '700', color: '#ffffff' }}>
+                            {gem.name}
+                          </span>
+                          <span style={{ fontSize: '11px', color: '#34d399' }}>({gem.walkTime.split(' ')[0]})</span>
+                        </div>
+                        <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: '2px 0 0 0' }}>
+                          {gem.badge} • {gem.impactTag}
+                        </p>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => toggleSaveGem(gem.id)}
+                        style={{
+                          background: isSaved ? '#10b981' : 'rgba(255, 255, 255, 0.08)',
+                          border: 'none',
+                          color: '#ffffff',
+                          padding: '6px 10px',
+                          borderRadius: '6px',
+                          fontSize: '11px',
+                          fontWeight: '700',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          flexShrink: 0
+                        }}
+                      >
+                        {isSaved ? <BookmarkCheck size={13} /> : <Bookmark size={13} />}
+                        {isSaved ? 'Saved' : 'Save'}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* 3. THE TASTEMAKER DUEL: 4 DESTINATION-LEVEL CHOICE CARDS (NO DIALS / NO BUZZWORDS) */}

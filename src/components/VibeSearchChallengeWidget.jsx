@@ -5,7 +5,8 @@ import {
   Flame, Compass, Sun, Moon, Heart, Award, Share2, 
   Film, GlassWater, Clock, Coffee, Eye, Radio,
   Building, Palette, BookOpen, Layers, RefreshCw,
-  Zap, CreditCard, X, ChevronRight, ChevronLeft, LayoutGrid
+  Zap, CreditCard, X, ChevronRight, ChevronLeft, LayoutGrid,
+  BedDouble, Images, AlertTriangle, CheckCircle2, Box
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { fetchLiveSouthBankNuiteeFeeds, executeSouthBankLivePrebook } from '../services/nuiteeLiveFeedService';
@@ -100,29 +101,191 @@ const DESTINATION_DATABASE = {
         image: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&q=80&w=600"
       }
     ],
-    // Basecamp Hotel Anchors connected to Nuitée LiteAPI
+    // Curated Tours & Audio Trails
+    tours: [
+      {
+        id: 'southbank-cultural-trail',
+        name: 'Secret Arches & Brutalist Riverfront Walk',
+        category: 'Curator Audio Trail',
+        duration: '75 mins • Self-Guided',
+        price: 16,
+        discountPrice: 14,
+        badge: 'Most Popular',
+        loveThisIf: 'You want an unhurried audio stroll linking Tate Modern’s turbine views, Waterloo antique book stalls, and hidden maker courtyards.',
+        curatorNote: 'Created by @AlexCulture • Includes synced Spotify soundtrack',
+        image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 'leake-street-underground',
+        name: 'Leake Street Graffiti Vaults & Craft Cocktails',
+        category: 'Evening Culture Tour',
+        duration: '2 hrs • Small Group (Max 8)',
+        price: 42,
+        discountPrice: 38,
+        badge: 'After Dark',
+        loveThisIf: 'You love raw street art, local artist stories inside the 300m legal tunnel, and finishing at a hidden subterranean cocktail bar.',
+        curatorNote: 'Led by local muralist • Includes 1 welcome botanical cocktail',
+        image: 'https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 'gabriels-wharf-makers',
+        name: 'Gabriel’s Wharf & Lower Marsh Artisan Studio Pass',
+        category: 'Independent Makers',
+        duration: '90 mins • Morning Slot',
+        price: 28,
+        discountPrice: 25,
+        badge: 'Zero-Chain Charter',
+        loveThisIf: 'You want private studio access to independent printmakers, leatherworkers, and a single-origin espresso tasting before the crowds.',
+        curatorNote: '100% of pass fees go directly to participating makers',
+        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800'
+      }
+    ],
+    // Basecamp Hotel Anchors
     stayAnchors: [
       {
         id: 'sea-containers',
         nuiteeHotelId: 'lp73eb3',
         name: 'Sea Containers London',
+        walkability: '2 min walk to Gabriel’s Wharf • 4 min to Tate Modern',
         vibeAlignment: 'Design Luxury & Riverfront Sunset',
+        vibeMatchBase: 96,
         highlight: 'Tom Dixon nautical copper design, 12th Knot rooftop, and Curzon boutique cinema on-site.',
-        quietFeature: 'Upper-floor glazing dampens Thames boat engines to complete silence.',
+        loveThisIf: 'You want iconic Tom Dixon copper interiors, St Paul’s golden-hour rooftop cocktails at 12th Knot, and a private 56-seat Curzon cinema downstairs.',
+        avoidThisIf: 'You prefer a tiny, quiet residential guesthouse — the lobby and Lyaness cocktail bar have a lively evening buzz on weekends.',
+        quietFeature: 'Upper-floor acoustic glazing dampens Thames river hum to peaceful calm.',
         fallbackRetail: 449,
         fallbackCredit: 45,
-        url: '/demo/southbank'
+        hasSpatial3D: true,
+        spatialUrl: '/simulator?preset=sea-containers',
+        url: '/demo/southbank',
+        roomDetails: {
+          roomType: 'Superior River View Sanctuary Room',
+          size: '32 m² (345 sq ft)',
+          bed: 'Custom King Bed • Egyptian Cotton',
+          view: 'Panoramic Thames & St Paul’s Skyline',
+          checkIn: '15:00 Check-in • 12:00 Late Checkout',
+          cancellation: 'Free cancellation up to 48h prior',
+          highlights: [
+            'Floor-to-ceiling acoustically glazed river windows',
+            'Bespoke Tom Dixon marble vanity & rainfall shower',
+            'Priority booking for 12th Knot rooftop terrace',
+            'Complimentary Curzon cinema screening pass (subject to availability)'
+          ]
+        },
+        photos: [
+          {
+            id: 'sc-sunset',
+            category: 'views',
+            vibeTag: 'sunset_glow',
+            url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=900',
+            title: '12th Knot Rooftop Terrace at Golden Hour',
+            caption: 'Panoramic amber sunset views straight across the Thames to St Paul’s Cathedral.'
+          },
+          {
+            id: 'sc-room',
+            category: 'rooms',
+            vibeTag: 'courtyard_quiet',
+            url: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=900',
+            title: 'Superior River View Sanctuary Room',
+            caption: 'Restorative king suite with acoustic glazing and bespoke mid-century furnishings.'
+          },
+          {
+            id: 'sc-design',
+            category: 'design',
+            vibeTag: 'brutalist_film',
+            url: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=900',
+            title: 'Tom Dixon Copper Hull Lobby',
+            caption: 'Sculptural transatlantic copper reception inspired by 1920s ocean liners.'
+          },
+          {
+            id: 'sc-dining',
+            category: 'dining',
+            vibeTag: 'social_terrace',
+            url: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=900',
+            title: 'Lyaness Botanical Cocktail Lounge',
+            caption: 'World-acclaimed ingredient-led mixology right on the river’s edge.'
+          },
+          {
+            id: 'sc-cinema',
+            category: 'design',
+            vibeTag: 'brutalist_film',
+            url: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=900',
+            title: 'Curzon Boutique Screening Room',
+            caption: '56-seat subterranean cinema screening curated indie & arthouse film.'
+          },
+          {
+            id: 'sc-morning',
+            category: 'views',
+            vibeTag: 'morning_mist',
+            url: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=900',
+            title: 'Early Morning Thames Walk',
+            caption: 'Step straight out onto peaceful morning river paths before the city wakes.'
+          }
+        ]
       },
       {
         id: 'bankside-hotel',
         nuiteeHotelId: 'lpfc870',
         name: 'Bankside Hotel, Autograph Collection',
+        walkability: '3 min walk to Tate Modern • 2 min to Blackfriars',
         vibeAlignment: 'Artisan Makers & Contemporary Art',
+        vibeMatchBase: 92,
         highlight: 'Live artist-in-residence studio on the ground floor with peaceful interior dining courtyard.',
+        loveThisIf: 'You appreciate a creative, art-filled boutique stay with a live Makers Studio on the ground floor and a serene, unhurried courtyard.',
+        avoidThisIf: 'You are specifically looking for direct, unobstructed Thames river views from your bedroom window.',
         quietFeature: 'Tucked away from main thoroughfares in a quiet cultural mews.',
         fallbackRetail: 385,
         fallbackCredit: 39,
-        url: '/demo/southbank'
+        hasSpatial3D: false,
+        url: '/demo/southbank',
+        roomDetails: {
+          roomType: 'Boutique King Art Studio',
+          size: '29 m² (312 sq ft)',
+          bed: 'Plush King Bed • Locally Woven Throws',
+          view: 'Peaceful Cultural Courtyard & Tree-Lined Mews',
+          checkIn: '15:00 Check-in • 12:00 Checkout',
+          cancellation: 'Free cancellation up to 24h prior',
+          highlights: [
+            'Original commissioned artwork by local South Bank artists',
+            'Vending machine stocked with curated local prints & design objects',
+            'Direct access to the Makers Studio & Art Yard Bar',
+            'Complimentary Pashley bicycles for morning river rides'
+          ]
+        },
+        photos: [
+          {
+            id: 'bh-room',
+            category: 'rooms',
+            vibeTag: 'courtyard_quiet',
+            url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=900',
+            title: 'Boutique King Art Studio',
+            caption: 'Sunlit, quiet bedroom curated with mid-century oak and local ceramics.'
+          },
+          {
+            id: 'bh-design',
+            category: 'design',
+            vibeTag: 'indie_makers',
+            url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=900',
+            title: 'Makers Studio & Live Art Gallery',
+            caption: 'Watch resident artists paint, sculpt, and print right off the lobby.'
+          },
+          {
+            id: 'bh-dining',
+            category: 'dining',
+            vibeTag: 'sunset_glow',
+            url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=900',
+            title: 'Art Yard Bar & Kitchen',
+            caption: 'Seasonal wood-fired plates and natural wines in a bright glass atrium.'
+          },
+          {
+            id: 'bh-views',
+            category: 'views',
+            vibeTag: 'morning_mist',
+            url: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=900',
+            title: 'Sheltered Courtyard Terrace',
+            caption: 'Peaceful outdoor seating tucked away from riverfront foot traffic.'
+          }
+        ]
       }
     ],
     curators: [
@@ -305,17 +468,97 @@ const DESTINATION_DATABASE = {
         image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=600"
       }
     ],
+    tours: [
+      {
+        id: 'cph-latin-quarter-walk',
+        name: 'Latin Quarter Courtyard & Bakery Trail',
+        category: 'Curator Audio Trail',
+        duration: '65 mins • Self-Guided',
+        price: 15,
+        discountPrice: 13,
+        badge: 'Morning Ritual',
+        loveThisIf: 'You want to uncover 18th-century cobblestone courtyards, warm cardamom buns, and ceramic studios before midday crowds.',
+        curatorNote: 'Curated by @FrejaCph • Includes bakery tasting map',
+        image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 'cph-canal-wine-stroll',
+        name: 'Indre By Natural Wine & Canal Architecture Walk',
+        category: 'Evening Discovery',
+        duration: '2 hrs • Small Group',
+        price: 45,
+        discountPrice: 40,
+        badge: 'Golden Hour',
+        loveThisIf: 'You enjoy Nordic architectural storytelling paired with two pours at independent canal-side natural wine cellars.',
+        curatorNote: 'Hosted by local architect • Max 8 guests',
+        image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80&w=800'
+      }
+    ],
     stayAnchors: [
       {
         id: '25hours-copenhagen',
         nuiteeHotelId: 'lp73eb3_cph',
         name: '25hours Hotel Indre By',
+        walkability: '1 min walk to Rundetaarn • 6 min to TorvehallerneKBH',
         vibeAlignment: 'Nordic Creative & Courtyard Hygge',
-        highlight: 'Historic university building with vinyl listening nooks, Boilerman Bar, and quiet interior garden rooms.',
+        vibeMatchBase: 97,
+        highlight: '19th-century porcelain factory with vinyl listening room, NENI glasshouse dining, and outdoor Nordic sauna.',
+        loveThisIf: 'You love playful design storytelling, spinning analog vinyl records in a cozy lounge, and relaxing in a secret outdoor courtyard sauna.',
+        avoidThisIf: 'You want ultra-minimalist white-box luxury — this hotel celebrates eclectic, colourful Danish maximalism.',
         quietFeature: 'Protected interior courtyards shielded from bicycle streets.',
         fallbackRetail: 285,
         fallbackCredit: 29,
-        url: '/play/25hours-copenhagen'
+        hasSpatial3D: true,
+        spatialUrl: '/simulator?preset=25-hours',
+        url: '/play/25-hours',
+        roomDetails: {
+          roomType: 'Medium Passion / Knowledge Room',
+          size: '27 m² (290 sq ft)',
+          bed: 'King Bed • Schindelhauer Bike Loan Included',
+          view: 'Quiet Porcelain Courtyard or Cobblestone Lane',
+          checkIn: '15:00 Check-in • 12:00 Checkout',
+          cancellation: 'Free cancellation up to 48h prior',
+          highlights: [
+            'Access to the Vinyl Listening Room & Love Library',
+            'Outdoor Nordic courtyard sauna & terrace',
+            'Complimentary Schindelhauer city bike rental',
+            'NENI glasshouse Mediterranean dining & Assembly Bar'
+          ]
+        },
+        photos: [
+          {
+            id: 'cph-design',
+            category: 'design',
+            vibeTag: 'brutalist_film',
+            url: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=900',
+            title: '19th-Century Porcelain Factory & Vinyl Lounge',
+            caption: 'Warm analog turntables, curated bookshelves, and eclectic Danish craft.'
+          },
+          {
+            id: 'cph-room',
+            category: 'rooms',
+            vibeTag: 'courtyard_quiet',
+            url: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=900',
+            title: 'Courtyard Sanctuary Room',
+            caption: 'Calm, richly textured bedroom overlooking the sheltered interior garden.'
+          },
+          {
+            id: 'cph-dining',
+            category: 'dining',
+            vibeTag: 'sunset_glow',
+            url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=900',
+            title: 'NENI Glasshouse & Assembly Bar',
+            caption: 'Lush botanical dining space and late-night aperitivo bar.'
+          },
+          {
+            id: 'cph-views',
+            category: 'views',
+            vibeTag: 'morning_mist',
+            url: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=900',
+            title: 'Secret Courtyard & Outdoor Sauna',
+            caption: 'Peaceful Nordic outdoor lounge steps from historic Pilestræde.'
+          }
+        ]
       }
     ],
     curators: [
@@ -450,6 +693,41 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   // Interactive Destination Duel & Harmony Wizard State
   const [duelStep, setDuelStep] = useState(0); // 0..3
   const [duelViewMode, setDuelViewMode] = useState('wizard'); // 'wizard' (1-at-a-time, ~1/3 space) | 'all' (all 4 cards expanded)
+
+  // Unified Bottom Discovery Tabs ('hotels' | 'tours' | 'gems') & Photo Filter / Modal State
+  const [discoveryTab, setDiscoveryTab] = useState('hotels');
+  const [globalPhotoFilter, setGlobalPhotoFilter] = useState('for_your_vibe'); // 'for_your_vibe' | 'rooms' | 'views' | 'dining' | 'design'
+  const [cardPhotoFilter, setCardPhotoFilter] = useState({});
+  const [cardPhotoIndex, setCardPhotoIndex] = useState({});
+  const [galleryModalHotel, setGalleryModalHotel] = useState(null);
+  const [galleryModalFilter, setGalleryModalFilter] = useState('for_your_vibe');
+  const [roomModalHotel, setRoomModalHotel] = useState(null);
+
+  // Atmosvibe + User Filter Photo Ranking Engine
+  const getFilteredHotelPhotos = (stay, filterOverride = null) => {
+    const rawPhotos = stay.photos || [];
+    const activeFilter = filterOverride || cardPhotoFilter[stay.id] || globalPhotoFilter;
+
+    // 1. Score every photo with Atmosvibe based on live Duel answers
+    const scored = rawPhotos.map((photo, originalIdx) => {
+      let score = 0;
+      if (photo.vibeTag === userAnswers.diurnalRhythm) score += 30;
+      if (photo.vibeTag === userAnswers.sanctuary) score += 28;
+      if (photo.vibeTag === userAnswers.culturePace) score += 22;
+      if (photo.vibeTag === userAnswers.dispersion) score += 18;
+      return { ...photo, atmosScore: score, originalIdx };
+    });
+
+    // Sort descending by Atmosvibe score (preserve curated order on ties)
+    const atmosOrdered = [...scored].sort((a, b) => b.atmosScore - a.atmosScore || a.originalIdx - b.originalIdx);
+
+    // 2. Apply user category filter while keeping Atmosvibe ordering within the category
+    if (activeFilter === 'for_your_vibe') {
+      return atmosOrdered;
+    }
+    const categoryMatches = atmosOrdered.filter(p => p.category === activeFilter);
+    return categoryMatches.length > 0 ? categoryMatches : atmosOrdered;
+  };
 
   // Live Nuitée Rates State
   const [nuiteeRates, setNuiteeRates] = useState({
@@ -2113,306 +2391,1074 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         </div>
       </div>
 
-      {/* 5. LIVE NUITÉE FEED: VIBE-REORDERED PHOTO GALLERY & LIVE COMMERCIAL RATES */}
-      <div style={{
-        background: 'rgba(255, 255, 255, 0.02)',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
-        borderRadius: '20px',
-        padding: '24px',
-        marginBottom: '32px'
-      }}>
-        {/* Section Header with Live Sync Indicator */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '20px' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
-                Live Nuitée LiteAPI v3.0 Feed & Photo Re-Ranker
-              </span>
-              <span style={{
-                fontSize: '10.5px',
-                background: nuiteeRates.isLive ? 'rgba(52, 211, 153, 0.2)' : 'rgba(56, 189, 248, 0.2)',
-                color: nuiteeRates.isLive ? '#34d399' : '#38bdf8',
-                padding: '2px 8px',
-                borderRadius: '999px',
-                fontWeight: '700',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: nuiteeRates.isLive ? '#34d399' : '#38bdf8' }}></span>
-                {nuiteeRates.isLive ? 'Live API Connected' : 'Nuitée Sandbox Live Sync'}
-              </span>
-            </div>
-            <h4 style={{ fontSize: '19px', fontWeight: '800', margin: '4px 0 0 0', color: '#ffffff' }}>
-              Visual Proof: Photos Dynamically Re-Ordered by Your Vibe
-            </h4>
-          </div>
-
-          {/* Toggle between Vibe-Reordered & Raw OTA Clutter */}
-          <div style={{ display: 'flex', background: 'rgba(0, 0, 0, 0.3)', padding: '3px', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-            <button
-              type="button"
-              onClick={() => setPhotoEngineMode('vibe')}
-              style={{
-                background: photoEngineMode === 'vibe' ? 'linear-gradient(135deg, #0ea5e9, #6366f1)' : 'transparent',
-                color: photoEngineMode === 'vibe' ? '#ffffff' : '#94a3b8',
-                border: 'none',
-                borderRadius: '8px',
-                padding: '6px 12px',
-                fontSize: '11.5px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-            >
-              ★ Vibe Re-Ordered
-            </button>
-            <button
-              type="button"
-              onClick={() => setPhotoEngineMode('raw_ota')}
-              style={{
-                background: photoEngineMode === 'raw_ota' ? 'rgba(239, 68, 68, 0.3)' : 'transparent',
-                color: photoEngineMode === 'raw_ota' ? '#fca5a5' : '#94a3b8',
-                border: 'none',
-                borderRadius: '8px',
-                padding: '6px 12px',
-                fontSize: '11.5px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-            >
-              Raw OTA Clutter Feed
-            </button>
-          </div>
-        </div>
-
-        {/* Notice on Filtered Clutter */}
+      {/* 5. UNIFIED DISCOVERY TABS: HOTELS (HORIZONTAL EDITORIAL-OTA) | TOURS | LOCAL GEMS */}
+      <div id="curated-discovery" style={{ marginBottom: '24px' }}>
+        {/* Clean 3-Tab Switcher Header */}
         <div style={{
-          background: photoEngineMode === 'vibe' ? 'rgba(56, 189, 248, 0.06)' : 'rgba(239, 68, 68, 0.08)',
-          border: `1px solid ${photoEngineMode === 'vibe' ? 'rgba(56, 189, 248, 0.2)' : 'rgba(239, 68, 68, 0.3)'}`,
-          borderRadius: '10px',
-          padding: '10px 14px',
-          fontSize: '12px',
-          color: photoEngineMode === 'vibe' ? '#cbd5e1' : '#fca5a5',
-          marginBottom: '20px',
           display: 'flex',
+          flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '8px'
-        }}>
-          <span>
-            {photoEngineMode === 'vibe' ? (
-              <>🛡️ <strong>OTA Clutter Filter Active:</strong> 53 uncurated photos filtered out (sterile bathroom sinks, empty boardrooms, elevator hallways). <strong>Slot #1 promoted based on your challenge choices.</strong></>
-            ) : (
-              <>⚠️ <strong>Raw OTA Clutter View:</strong> Showing uncurated images in arbitrary order as dumped on Booking.com / Expedia.</>
-            )}
-          </span>
-          <span style={{ fontSize: '11px', color: '#94a3b8' }}>
-            Nuitée Hotel: Sea Containers London (lp73eb3 • 88 Raw Photos)
-          </span>
-        </div>
-
-        {/* The 4 Reordered Photo Slots */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
           gap: '14px',
-          marginBottom: '28px'
+          marginBottom: '20px',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          paddingBottom: '16px'
         }}>
-          {reorderedPhotos.map((photo, idx) => (
-            <div
-              key={idx}
-              style={{
-                background: 'rgba(0, 0, 0, 0.4)',
-                borderRadius: '14px',
-                overflow: 'hidden',
-                border: idx === 0 && photoEngineMode === 'vibe' ? '2px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.08)',
-                boxShadow: idx === 0 && photoEngineMode === 'vibe' ? '0 0 20px rgba(56, 189, 248, 0.2)' : 'none',
-                position: 'relative'
-              }}
-            >
-              <div style={{ height: '140px', position: 'relative', overflow: 'hidden' }}>
-                <img 
-                  src={photo.url} 
-                  alt={photo.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-                <div style={{
-                  position: 'absolute',
-                  top: '8px',
-                  left: '8px',
-                  background: idx === 0 && photoEngineMode === 'vibe' ? '#0284c7' : 'rgba(0, 0, 0, 0.75)',
-                  color: '#ffffff',
-                  fontSize: '9.5px',
-                  fontWeight: '800',
-                  padding: '3px 8px',
-                  borderRadius: '6px',
-                  letterSpacing: '0.5px'
-                }}>
-                  {photo.tag}
-                </div>
-              </div>
-              <div style={{ padding: '12px' }}>
-                <h5 style={{ fontSize: '13.5px', fontWeight: '800', color: '#ffffff', margin: '0 0 4px 0' }}>
-                  {photo.title}
-                </h5>
-                <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: 0, lineHeight: '1.4' }}>
-                  {photo.caption}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Commercial Monetization & Live Booking Engine */}
-        <div style={{
-          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-          paddingTop: '20px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-            <div>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#34d399', fontWeight: '800' }}>
-                Live Commercial Monetization (Synched to Nuitée Rates)
-              </div>
-              <h5 style={{ fontSize: '17px', fontWeight: '800', margin: '2px 0 0 0', color: '#ffffff' }}>
-                Live Room Rates & 10% Finisher Stay Credits
-              </h5>
-            </div>
-            <div style={{ fontSize: '11.5px', color: '#94a3b8' }}>
-              Guaranteed Rate Parity with Booking.com • Direct API Settlement
-            </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            {[
+              { id: 'hotels', label: `Hotels (${location.stayAnchors.length})`, icon: '🏨' },
+              { id: 'tours', label: `Tours (${(location.tours || []).length})`, icon: '🧭' },
+              { id: 'gems', label: `Local Gems (${location.gems.length})`, icon: '💎' }
+            ].map(tab => {
+              const isActive = discoveryTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setDiscoveryTab(tab.id)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '7px',
+                    padding: '10px 18px',
+                    borderRadius: '12px',
+                    background: isActive
+                      ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(99, 102, 241, 0.25))'
+                      : 'rgba(255, 255, 255, 0.03)',
+                    border: isActive
+                      ? '1px solid rgba(56, 189, 248, 0.55)'
+                      : '1px solid rgba(255, 255, 255, 0.08)',
+                    color: isActive ? '#ffffff' : '#94a3b8',
+                    fontSize: '13.5px',
+                    fontWeight: '800',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <span>{tab.icon}</span>
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
           </div>
 
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '16px'
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            background: 'rgba(16, 185, 129, 0.12)',
+            border: '1px solid rgba(52, 211, 153, 0.35)',
+            color: '#34d399',
+            padding: '6px 12px',
+            borderRadius: '999px',
+            fontSize: '12px',
+            fontWeight: '700'
           }}>
-            {location.stayAnchors.map(stay => {
-              const rateData = nuiteeRates.hotels[stay.id] || {
-                retailRate: stay.fallbackRetail,
-                challengeRate: Math.round(stay.fallbackRetail * 0.9),
-                finisherCreditGbp: stay.fallbackCredit,
-                roomName: 'Curated South Bank Sanctuary Room'
-              };
+            <Sparkles size={13} />
+            <span>10% Finisher Credit Active</span>
+          </div>
+        </div>
 
+        {/* TAB 1: HOTELS (HORIZONTAL EDITORIAL-OTA CARDS + ATMOSVIBE & USER PHOTO FILTERS) */}
+        {discoveryTab === 'hotels' && (
+          <div>
+            {/* Global Photo Filter Bar */}
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '10px',
+              marginBottom: '18px',
+              background: 'rgba(255, 255, 255, 0.02)',
+              border: '1px solid rgba(255, 255, 255, 0.07)',
+              borderRadius: '14px',
+              padding: '10px 14px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '11.5px', fontWeight: '700', color: '#94a3b8', marginRight: '4px' }}>
+                  Filter Photos:
+                </span>
+                {[
+                  { id: 'for_your_vibe', label: '✨ For Your Vibe (Atmosvibe)' },
+                  { id: 'rooms', label: 'Rooms' },
+                  { id: 'views', label: 'Views & Terraces' },
+                  { id: 'dining', label: 'Dining & Bars' },
+                  { id: 'design', label: 'Design' }
+                ].map(f => {
+                  const isActive = globalPhotoFilter === f.id;
+                  return (
+                    <button
+                      key={f.id}
+                      type="button"
+                      onClick={() => {
+                        setGlobalPhotoFilter(f.id);
+                        setCardPhotoFilter({});
+                        setCardPhotoIndex({});
+                      }}
+                      style={{
+                        background: isActive ? '#0284c7' : 'rgba(255, 255, 255, 0.05)',
+                        color: isActive ? '#ffffff' : '#cbd5e1',
+                        border: isActive ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.08)',
+                        borderRadius: '999px',
+                        padding: '5px 12px',
+                        fontSize: '11.5px',
+                        fontWeight: '700',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      {f.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <span style={{ fontSize: '11px', color: '#64748b' }}>
+                Photos auto-ordered by your Duel answers
+              </span>
+            </div>
+
+            {/* Horizontal Hotel Cards List */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {location.stayAnchors.map(stay => {
+                const rateData = nuiteeRates.hotels[stay.id] || {
+                  retailRate: stay.fallbackRetail,
+                  challengeRate: Math.round(stay.fallbackRetail * 0.9),
+                  finisherCreditGbp: stay.fallbackCredit,
+                  roomName: stay.roomDetails?.roomType || 'Curated Sanctuary Room'
+                };
+                const activeFilter = cardPhotoFilter[stay.id] || globalPhotoFilter;
+                const photos = getFilteredHotelPhotos(stay, activeFilter);
+                const rawIndex = cardPhotoIndex[stay.id] || 0;
+                const safeIndex = photos.length > 0 ? rawIndex % photos.length : 0;
+                const activePhoto = photos[safeIndex] || photos[0];
+                const vibeMatchPct = Math.min(99, (stay.vibeMatchBase || 94) + (matchCalculation.matchCount >= 3 ? 2 : 0));
+
+                return (
+                  <div
+                    key={stay.id}
+                    style={{
+                      background: 'rgba(15, 23, 42, 0.72)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '18px',
+                      overflow: 'hidden',
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                      boxShadow: '0 12px 30px rgba(0, 0, 0, 0.35)'
+                    }}
+                  >
+                    {/* ZONE A (LEFT): SMART PHOTO GALLERY */}
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      background: 'rgba(0, 0, 0, 0.35)',
+                      borderRight: '1px solid rgba(255, 255, 255, 0.06)'
+                    }}>
+                      {/* Hero Photo Viewport */}
+                      <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+                        {activePhoto && (
+                          <img
+                            src={activePhoto.url}
+                            alt={activePhoto.title}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                          />
+                        )}
+                        <div style={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: 'linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%)',
+                          pointerEvents: 'none'
+                        }} />
+
+                        {/* Top-Left Atmosvibe Badge */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '10px',
+                          left: '10px',
+                          background: activeFilter === 'for_your_vibe' && safeIndex === 0
+                            ? 'rgba(2, 132, 199, 0.92)'
+                            : 'rgba(15, 23, 42, 0.82)',
+                          color: '#ffffff',
+                          fontSize: '10.5px',
+                          fontWeight: '800',
+                          padding: '4px 9px',
+                          borderRadius: '999px',
+                          backdropFilter: 'blur(6px)'
+                        }}>
+                          {activeFilter === 'for_your_vibe' && safeIndex === 0
+                            ? '✨ #1 for Your Vibe'
+                            : activePhoto?.title}
+                        </div>
+
+                        {/* Top-Right Photo Counter */}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setGalleryModalHotel(stay);
+                            setGalleryModalFilter(activeFilter);
+                          }}
+                          style={{
+                            position: 'absolute',
+                            top: '10px',
+                            right: '10px',
+                            background: 'rgba(15, 23, 42, 0.85)',
+                            border: '1px solid rgba(255, 255, 255, 0.2)',
+                            color: '#ffffff',
+                            fontSize: '11px',
+                            fontWeight: '700',
+                            padding: '4px 10px',
+                            borderRadius: '999px',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                            backdropFilter: 'blur(6px)'
+                          }}
+                        >
+                          <Images size={12} />
+                          <span>All Photos ({(stay.photos || []).length})</span>
+                        </button>
+
+                        {/* Left / Right Flip Arrows */}
+                        {photos.length > 1 && (
+                          <>
+                            <button
+                              type="button"
+                              aria-label="Previous photo"
+                              onClick={() => setCardPhotoIndex(prev => ({
+                                ...prev,
+                                [stay.id]: (safeIndex - 1 + photos.length) % photos.length
+                              }))}
+                              style={{
+                                position: 'absolute',
+                                left: '8px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                width: '30px',
+                                height: '30px',
+                                borderRadius: '50%',
+                                background: 'rgba(0, 0, 0, 0.6)',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                color: '#ffffff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              <ChevronLeft size={16} />
+                            </button>
+                            <button
+                              type="button"
+                              aria-label="Next photo"
+                              onClick={() => setCardPhotoIndex(prev => ({
+                                ...prev,
+                                [stay.id]: (safeIndex + 1) % photos.length
+                              }))}
+                              style={{
+                                position: 'absolute',
+                                right: '8px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                width: '30px',
+                                height: '30px',
+                                borderRadius: '50%',
+                                background: 'rgba(0, 0, 0, 0.6)',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                color: '#ffffff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              <ChevronRight size={16} />
+                            </button>
+                          </>
+                        )}
+
+                        {/* Bottom Caption */}
+                        {activePhoto && (
+                          <div style={{
+                            position: 'absolute',
+                            bottom: '8px',
+                            left: '12px',
+                            right: '12px',
+                            fontSize: '11.5px',
+                            color: '#f1f5f9',
+                            fontWeight: '600',
+                            textShadow: '0 1px 4px rgba(0,0,0,0.9)'
+                          }}>
+                            {activePhoto.title}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Per-Card Quick Photo Filter Pills */}
+                      <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: '5px',
+                        padding: '10px 12px',
+                        alignItems: 'center'
+                      }}>
+                        {[
+                          { id: 'for_your_vibe', label: '✨ Vibe' },
+                          { id: 'rooms', label: 'Rooms' },
+                          { id: 'views', label: 'Views' },
+                          { id: 'dining', label: 'Dining' },
+                          { id: 'design', label: 'Design' }
+                        ].map(pill => {
+                          const isPillActive = activeFilter === pill.id;
+                          return (
+                            <button
+                              key={pill.id}
+                              type="button"
+                              onClick={() => {
+                                setCardPhotoFilter(prev => ({ ...prev, [stay.id]: pill.id }));
+                                setCardPhotoIndex(prev => ({ ...prev, [stay.id]: 0 }));
+                              }}
+                              style={{
+                                background: isPillActive ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                                border: isPillActive ? '1px solid rgba(56, 189, 248, 0.5)' : '1px solid rgba(255, 255, 255, 0.08)',
+                                color: isPillActive ? '#7dd3fc' : '#94a3b8',
+                                borderRadius: '6px',
+                                padding: '3px 8px',
+                                fontSize: '10.5px',
+                                fontWeight: '700',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              {pill.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* ZONE B (MIDDLE): HONEST FIT (LOVE THIS / AVOID THIS) & ROOM DETAILS */}
+                    <div style={{
+                      padding: '18px 20px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      gap: '12px'
+                    }}>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '4px' }}>
+                          <h4 style={{ fontSize: '17px', fontWeight: '800', color: '#ffffff', margin: 0 }}>
+                            {stay.name}
+                          </h4>
+                          <span style={{
+                            fontSize: '11px',
+                            background: 'rgba(52, 211, 153, 0.15)',
+                            color: '#34d399',
+                            border: '1px solid rgba(52, 211, 153, 0.35)',
+                            padding: '2px 8px',
+                            borderRadius: '999px',
+                            fontWeight: '800',
+                            whiteSpace: 'nowrap'
+                          }}>
+                            {vibeMatchPct}% Vibe Match
+                          </span>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12px', color: '#94a3b8', marginBottom: '12px' }}>
+                          <MapPin size={12} color="#38bdf8" />
+                          <span>{stay.walkability || stay.vibeAlignment}</span>
+                        </div>
+
+                        {/* Love This If */}
+                        <div style={{
+                          background: 'rgba(16, 185, 129, 0.07)',
+                          borderLeft: '3px solid #10b981',
+                          borderRadius: '0 8px 8px 0',
+                          padding: '8px 10px',
+                          marginBottom: '8px',
+                          fontSize: '12px',
+                          lineHeight: '1.45',
+                          color: '#e2e8f0'
+                        }}>
+                          <strong style={{ color: '#34d399' }}>Love this if: </strong>
+                          {stay.loveThisIf || stay.highlight}
+                        </div>
+
+                        {/* Avoid This If */}
+                        <div style={{
+                          background: 'rgba(245, 158, 11, 0.07)',
+                          borderLeft: '3px solid #f59e0b',
+                          borderRadius: '0 8px 8px 0',
+                          padding: '8px 10px',
+                          fontSize: '12px',
+                          lineHeight: '1.45',
+                          color: '#cbd5e1'
+                        }}>
+                          <strong style={{ color: '#fbbf24' }}>Avoid this if: </strong>
+                          {stay.avoidThisIf || 'You want a remote suburban resort far from central cultural walks.'}
+                        </div>
+                      </div>
+
+                      {/* Matched Room & Quick Links */}
+                      <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '8px',
+                        paddingTop: '10px',
+                        borderTop: '1px solid rgba(255, 255, 255, 0.07)'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#7dd3fc', fontWeight: '600' }}>
+                          <BedDouble size={14} />
+                          <span>{rateData.roomName}</span>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                          <button
+                            type="button"
+                            onClick={() => setRoomModalHotel(stay)}
+                            style={{
+                              background: 'transparent',
+                              border: 'none',
+                              color: '#38bdf8',
+                              fontSize: '12px',
+                              fontWeight: '700',
+                              cursor: 'pointer',
+                              padding: 0,
+                              textDecoration: 'underline',
+                              textUnderlineOffset: '3px'
+                            }}
+                          >
+                            Room Details →
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setGalleryModalHotel(stay);
+                              setGalleryModalFilter(activeFilter);
+                            }}
+                            style={{
+                              background: 'transparent',
+                              border: 'none',
+                              color: '#94a3b8',
+                              fontSize: '12px',
+                              fontWeight: '600',
+                              cursor: 'pointer',
+                              padding: 0
+                            }}
+                          >
+                            More Photos ({(stay.photos || []).length})
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ZONE C (RIGHT): CLEAN PRICING & BOOKING ACTION */}
+                    <div style={{
+                      padding: '18px 20px',
+                      background: 'rgba(0, 0, 0, 0.25)',
+                      borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      gap: '14px'
+                    }}>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                          <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>Standard Rate</span>
+                          <span style={{ fontSize: '13px', color: '#94a3b8', textDecoration: 'line-through' }}>
+                            £{rateData.retailRate}
+                          </span>
+                        </div>
+
+                        <div style={{
+                          display: 'inline-block',
+                          fontSize: '10.5px',
+                          fontWeight: '800',
+                          color: '#34d399',
+                          background: 'rgba(16, 185, 129, 0.15)',
+                          border: '1px solid rgba(52, 211, 153, 0.35)',
+                          padding: '3px 8px',
+                          borderRadius: '6px',
+                          marginBottom: '10px'
+                        }}>
+                          10% Stay Credit Applied (-£{rateData.finisherCreditGbp})
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                          <span style={{ fontSize: '30px', fontWeight: '900', color: '#ffffff', lineHeight: 1 }}>
+                            £{rateData.challengeRate}
+                          </span>
+                          <span style={{ fontSize: '12px', color: '#94a3b8' }}>/ night</span>
+                        </div>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>
+                          {stay.roomDetails?.cancellation || 'Free cancellation available'}
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <button
+                          type="button"
+                          disabled={isPrebooking}
+                          onClick={() => handleInitiateBooking(stay)}
+                          style={{
+                            width: '100%',
+                            background: 'linear-gradient(135deg, #10b981, #059669)',
+                            color: '#ffffff',
+                            border: 'none',
+                            padding: '11px 14px',
+                            borderRadius: '10px',
+                            fontSize: '13px',
+                            fontWeight: '800',
+                            cursor: isPrebooking ? 'wait' : 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '6px',
+                            boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)'
+                          }}
+                        >
+                          <CreditCard size={14} />
+                          <span>{isPrebooking ? 'Securing Rate...' : 'Reserve Stay'}</span>
+                        </button>
+
+                        {stay.hasSpatial3D && (
+                          <Link
+                            to={stay.spatialUrl || '/simulator'}
+                            style={{
+                              width: '100%',
+                              background: 'rgba(56, 189, 248, 0.1)',
+                              border: '1px solid rgba(56, 189, 248, 0.3)',
+                              color: '#7dd3fc',
+                              textDecoration: 'none',
+                              padding: '8px 12px',
+                              borderRadius: '10px',
+                              fontSize: '12px',
+                              fontWeight: '700',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: '6px',
+                              boxSizing: 'border-box'
+                            }}
+                          >
+                            <Box size={13} />
+                            <span>Explore in 3D</span>
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 2: TOURS & CURATOR TRAILS (CLEAN VERTICAL GRID) */}
+        {discoveryTab === 'tours' && (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '20px'
+          }}>
+            {(location.tours || []).map(tour => (
+              <div
+                key={tour.id}
+                style={{
+                  background: 'rgba(15, 23, 42, 0.72)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderRadius: '18px',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <div>
+                  <div style={{ position: 'relative', height: '165px', overflow: 'hidden' }}>
+                    <img
+                      src={tour.image}
+                      alt={tour.name}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                    <span style={{
+                      position: 'absolute',
+                      top: '10px',
+                      left: '10px',
+                      background: 'rgba(15, 23, 42, 0.85)',
+                      color: '#38bdf8',
+                      fontSize: '10.5px',
+                      fontWeight: '800',
+                      padding: '4px 9px',
+                      borderRadius: '999px'
+                    }}>
+                      {tour.badge}
+                    </span>
+                  </div>
+
+                  <div style={{ padding: '16px 18px' }}>
+                    <div style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>
+                      {tour.category} • {tour.duration}
+                    </div>
+                    <h4 style={{ fontSize: '15.5px', fontWeight: '800', color: '#ffffff', margin: '0 0 10px 0' }}>
+                      {tour.name}
+                    </h4>
+                    <p style={{ fontSize: '12px', color: '#cbd5e1', lineHeight: '1.5', margin: '0 0 10px 0' }}>
+                      <strong style={{ color: '#34d399' }}>Love this if: </strong>
+                      {tour.loveThisIf}
+                    </p>
+                    <div style={{ fontSize: '11.5px', color: '#94a3b8', fontStyle: 'italic' }}>
+                      {tour.curatorNote}
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{
+                  padding: '14px 18px',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.07)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '10px'
+                }}>
+                  <div>
+                    <span style={{ fontSize: '11.5px', color: '#64748b', textDecoration: 'line-through', marginRight: '6px' }}>
+                      £{tour.price}
+                    </span>
+                    <span style={{ fontSize: '18px', fontWeight: '900', color: '#34d399' }}>
+                      £{tour.discountPrice}
+                    </span>
+                    <span style={{ fontSize: '11px', color: '#94a3b8' }}> / pass</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => alert(`10% Finisher Credit applied to "${tour.name}" (£${tour.discountPrice}). Ready for checkout.`)}
+                    style={{
+                      background: 'rgba(56, 189, 248, 0.15)',
+                      border: '1px solid rgba(56, 189, 248, 0.4)',
+                      color: '#ffffff',
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      fontSize: '12px',
+                      fontWeight: '700',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Reserve Pass
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* TAB 3: LOCAL GEMS (CLEAN VERTICAL GRID) */}
+        {discoveryTab === 'gems' && (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '18px'
+          }}>
+            {location.gems.map(gem => {
+              const isSaved = savedGemIds.includes(gem.id);
               return (
                 <div
-                  key={stay.id}
+                  key={gem.id}
                   style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '14px',
-                    padding: '16px 18px',
+                    background: 'rgba(15, 23, 42, 0.72)',
+                    border: isSaved ? '1px solid rgba(52, 211, 153, 0.45)' : '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '18px',
+                    overflow: 'hidden',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between'
                   }}
                 >
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                      <h6 style={{ fontSize: '15px', fontWeight: '800', color: '#ffffff', margin: 0 }}>
-                        {stay.name}
-                      </h6>
-                      <span style={{ fontSize: '10px', background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', padding: '2px 6px', borderRadius: '4px', fontWeight: '700' }}>
-                        Nuitée: {stay.nuiteeHotelId}
+                    <div style={{ position: 'relative', height: '150px', overflow: 'hidden' }}>
+                      <img
+                        src={gem.image}
+                        alt={gem.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                      />
+                      <span style={{
+                        position: 'absolute',
+                        top: '10px',
+                        left: '10px',
+                        background: 'rgba(15, 23, 42, 0.85)',
+                        color: '#34d399',
+                        fontSize: '10.5px',
+                        fontWeight: '800',
+                        padding: '4px 9px',
+                        borderRadius: '999px'
+                      }}>
+                        {gem.walkTime}
                       </span>
                     </div>
 
-                    <div style={{ fontSize: '12px', color: '#38bdf8', fontWeight: '600', marginBottom: '8px' }}>
-                      {rateData.roomName}
-                    </div>
-
-                    <p style={{ fontSize: '12px', color: '#cbd5e1', margin: '0 0 12px 0', lineHeight: '1.4' }}>
-                      {stay.highlight}
-                    </p>
-
-                    {/* Price Breakdown */}
-                    <div style={{
-                      background: 'rgba(0, 0, 0, 0.3)',
-                      borderRadius: '8px',
-                      padding: '10px 12px',
-                      marginBottom: '14px'
-                    }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#94a3b8', marginBottom: '4px' }}>
-                        <span>Public OTA Retail Rate:</span>
-                        <span style={{ textDecoration: 'line-through' }}>£{rateData.retailRate}/nt</span>
+                    <div style={{ padding: '15px 16px' }}>
+                      <div style={{ fontSize: '11px', color: '#38bdf8', fontWeight: '700', marginBottom: '4px' }}>
+                        {gem.badge} • {gem.category}
                       </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#34d399', fontWeight: '700', marginBottom: '4px' }}>
-                        <span>10% Vibe Finisher Credit:</span>
-                        <span>-£{rateData.finisherCreditGbp}/nt</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', color: '#ffffff', fontWeight: '800', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '4px' }}>
-                        <span>TravelVRSE Challenge Rate:</span>
-                        <span style={{ color: '#34d399' }}>£{rateData.challengeRate}/nt</span>
+                      <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#ffffff', margin: '0 0 8px 0' }}>
+                        {gem.name}
+                      </h4>
+                      <p style={{ fontSize: '12px', color: '#cbd5e1', lineHeight: '1.5', margin: '0 0 8px 0' }}>
+                        {gem.desc}
+                      </p>
+                      <div style={{ fontSize: '11px', color: '#34d399', fontWeight: '600' }}>
+                        ✓ {gem.impactTag}
                       </div>
                     </div>
                   </div>
 
-                  {/* Booking CTA Button */}
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                    <div style={{ fontSize: '10.5px', color: '#94a3b8' }}>
-                      Commercial margin settled via Nuitée
-                    </div>
-
+                  <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(255, 255, 255, 0.07)' }}>
                     <button
                       type="button"
-                      disabled={isPrebooking}
-                      onClick={() => handleInitiateBooking(stay)}
+                      onClick={() => toggleSaveGem(gem.id)}
                       style={{
-                        background: 'linear-gradient(135deg, #10b981, #059669)',
-                        color: '#ffffff',
+                        width: '100%',
+                        background: isSaved ? '#10b981' : 'rgba(255, 255, 255, 0.07)',
                         border: 'none',
-                        padding: '8px 16px',
+                        color: '#ffffff',
+                        padding: '9px 12px',
                         borderRadius: '8px',
                         fontSize: '12px',
-                        fontWeight: '800',
-                        cursor: isPrebooking ? 'wait' : 'pointer',
+                        fontWeight: '700',
+                        cursor: 'pointer',
                         display: 'inline-flex',
                         alignItems: 'center',
-                        gap: '6px',
-                        boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+                        justifyContent: 'center',
+                        gap: '6px'
                       }}
                     >
-                      <CreditCard size={13} />
-                      {isPrebooking ? 'Connecting Nuitée...' : 'Book with 10% Credit'}
+                      {isSaved ? <BookmarkCheck size={14} /> : <Bookmark size={14} />}
+                      <span>{isSaved ? 'Saved to Vibe Pass' : 'Save to Vibe Pass'}</span>
                     </button>
                   </div>
                 </div>
               );
             })}
           </div>
-        </div>
+        )}
       </div>
 
-      {/* 6. PREBOOK CONFIRMATION MODAL (INTERACTIVE BOOKING SIMULATOR) */}
+      {/* MODAL 1: IN-PAGE PHOTO GALLERY MODAL (MORE PHOTOS + ATMOSVIBE & USER FILTERS) */}
+      {galleryModalHotel && (
+        <div
+          onClick={() => setGalleryModalHotel(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.86)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            padding: '20px'
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: '#0f172a',
+              border: '1px solid rgba(56, 189, 248, 0.35)',
+              borderRadius: '20px',
+              maxWidth: '860px',
+              width: '100%',
+              maxHeight: '88vh',
+              overflowY: 'auto',
+              padding: '24px',
+              position: 'relative',
+              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.8)'
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setGalleryModalHotel(null)}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '34px',
+                height: '34px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#ffffff',
+                cursor: 'pointer'
+              }}
+            >
+              <X size={16} />
+            </button>
+
+            <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800', marginBottom: '4px' }}>
+              Curated Visual Gallery
+            </div>
+            <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#ffffff', margin: '0 0 14px 0' }}>
+              {galleryModalHotel.name}
+            </h3>
+
+            {/* Modal Filter Pills */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '18px' }}>
+              {[
+                { id: 'for_your_vibe', label: '✨ For Your Vibe (Atmosvibe Order)' },
+                { id: 'rooms', label: 'Rooms' },
+                { id: 'views', label: 'Views & Terraces' },
+                { id: 'dining', label: 'Dining & Bars' },
+                { id: 'design', label: 'Design' }
+              ].map(f => (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => setGalleryModalFilter(f.id)}
+                  style={{
+                    background: galleryModalFilter === f.id ? '#0284c7' : 'rgba(255, 255, 255, 0.06)',
+                    border: galleryModalFilter === f.id ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.1)',
+                    color: '#ffffff',
+                    borderRadius: '999px',
+                    padding: '6px 12px',
+                    fontSize: '12px',
+                    fontWeight: '700',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
+              {getFilteredHotelPhotos(galleryModalHotel, galleryModalFilter).map((photo, idx) => (
+                <div
+                  key={photo.id}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: idx === 0 && galleryModalFilter === 'for_your_vibe'
+                      ? '2px solid #38bdf8'
+                      : '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '14px',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <div style={{ position: 'relative', height: '165px' }}>
+                    <img
+                      src={photo.url}
+                      alt={photo.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                    {idx === 0 && galleryModalFilter === 'for_your_vibe' && (
+                      <span style={{
+                        position: 'absolute',
+                        top: '8px',
+                        left: '8px',
+                        background: '#0284c7',
+                        color: '#ffffff',
+                        fontSize: '10px',
+                        fontWeight: '800',
+                        padding: '3px 8px',
+                        borderRadius: '999px'
+                      }}>
+                        ✨ #1 Match for Your Vibe
+                      </span>
+                    )}
+                  </div>
+                  <div style={{ padding: '12px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: '800', color: '#ffffff', marginBottom: '4px' }}>
+                      {photo.title}
+                    </div>
+                    <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: 0, lineHeight: '1.4' }}>
+                      {photo.caption}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL 2: IN-PAGE ROOM DETAILS & AMENITIES MODAL */}
+      {roomModalHotel && (
+        <div
+          onClick={() => setRoomModalHotel(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.86)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            padding: '20px'
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
+              border: '1px solid rgba(56, 189, 248, 0.35)',
+              borderRadius: '20px',
+              maxWidth: '560px',
+              width: '100%',
+              padding: '26px',
+              position: 'relative',
+              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.8)'
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setRoomModalHotel(null)}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '32px',
+                height: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#ffffff',
+                cursor: 'pointer'
+              }}
+            >
+              <X size={16} />
+            </button>
+
+            <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800', marginBottom: '4px' }}>
+              Room Details & Sanctuary Specs
+            </div>
+            <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#ffffff', margin: '0 0 4px 0' }}>
+              {roomModalHotel.roomDetails?.roomType || 'Curated Room'}
+            </h3>
+            <div style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '16px' }}>
+              {roomModalHotel.name} • {roomModalHotel.walkability}
+            </div>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '10px',
+              background: 'rgba(0, 0, 0, 0.25)',
+              borderRadius: '12px',
+              padding: '14px',
+              marginBottom: '16px',
+              fontSize: '12px'
+            }}>
+              <div>
+                <div style={{ color: '#64748b', fontSize: '11px' }}>Room Size</div>
+                <div style={{ color: '#ffffff', fontWeight: '700' }}>{roomModalHotel.roomDetails?.size}</div>
+              </div>
+              <div>
+                <div style={{ color: '#64748b', fontSize: '11px' }}>Bedding</div>
+                <div style={{ color: '#ffffff', fontWeight: '700' }}>{roomModalHotel.roomDetails?.bed}</div>
+              </div>
+              <div>
+                <div style={{ color: '#64748b', fontSize: '11px' }}>Outlook</div>
+                <div style={{ color: '#ffffff', fontWeight: '700' }}>{roomModalHotel.roomDetails?.view}</div>
+              </div>
+              <div>
+                <div style={{ color: '#64748b', fontSize: '11px' }}>Check-in / Out</div>
+                <div style={{ color: '#ffffff', fontWeight: '700' }}>{roomModalHotel.roomDetails?.checkIn}</div>
+              </div>
+            </div>
+
+            <div style={{ marginBottom: '18px' }}>
+              <div style={{ fontSize: '12px', fontWeight: '800', color: '#ffffff', marginBottom: '8px' }}>
+                Included Highlights
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
+                {(roomModalHotel.roomDetails?.highlights || []).map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: '#e2e8f0' }}>
+                    <CheckCircle2 size={14} color="#34d399" style={{ flexShrink: 0 }} />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  const hotelToBook = roomModalHotel;
+                  setRoomModalHotel(null);
+                  handleInitiateBooking(hotelToBook);
+                }}
+                style={{
+                  flex: 1,
+                  background: 'linear-gradient(135deg, #10b981, #059669)',
+                  color: '#ffffff',
+                  border: 'none',
+                  padding: '12px',
+                  borderRadius: '10px',
+                  fontSize: '13px',
+                  fontWeight: '800',
+                  cursor: 'pointer'
+                }}
+              >
+                Reserve with 10% Credit
+              </button>
+              <button
+                type="button"
+                onClick={() => setRoomModalHotel(null)}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  color: '#cbd5e1',
+                  border: 'none',
+                  padding: '12px 18px',
+                  borderRadius: '10px',
+                  fontSize: '13px',
+                  fontWeight: '700',
+                  cursor: 'pointer'
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL 3: RESERVATION CONFIRMATION MODAL */}
       {prebookSession && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(0, 0, 0, 0.85)',
-          backdropFilter: 'blur(8px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 9999,
-          padding: '20px'
-        }}>
-          <div style={{
-            background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
-            border: '1px solid rgba(56, 189, 248, 0.4)',
-            borderRadius: '20px',
-            maxWidth: '480px',
-            width: '100%',
-            padding: '28px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
-            position: 'relative'
-          }}>
+        <div
+          onClick={() => setPrebookSession(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.85)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            padding: '20px'
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
+              borderRadius: '20px',
+              maxWidth: '460px',
+              width: '100%',
+              padding: '28px',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
+              position: 'relative'
+            }}
+          >
             <button
               type="button"
               onClick={() => setPrebookSession(null)}
@@ -2436,10 +3482,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             </button>
 
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(52, 211, 153, 0.15)', color: '#34d399', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '800', marginBottom: '12px' }}>
-              <Check size={13} /> NUITÉE LIVE PREBOOK SESSION CONFIRMED
+              <Check size={13} /> 10% STAY CREDIT LOCKED IN
             </div>
 
-            <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#ffffff', margin: '0 0 6px 0' }}>
+            <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#ffffff', margin: '0 0 4px 0' }}>
               {prebookSession.hotelName}
             </h3>
             <p style={{ fontSize: '13px', color: '#38bdf8', fontWeight: '600', margin: '0 0 16px 0' }}>
@@ -2458,11 +3504,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               border: '1px solid rgba(255, 255, 255, 0.08)'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
-                <span>Nuitée Prebook ID:</span>
-                <span style={{ fontFamily: 'monospace', color: '#ffffff', fontSize: '11px' }}>{prebookSession.prebookId.substring(0, 18)}...</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
-                <span>Standard Public Rate:</span>
+                <span>Standard Rate:</span>
                 <span style={{ textDecoration: 'line-through' }}>£{prebookSession.retailRate}/night</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: '#34d399', fontWeight: '700' }}>
@@ -2470,13 +3512,9 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 <span>-£{prebookSession.finisherCreditGbp}/night</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: '#ffffff', fontWeight: '800', fontSize: '15px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '6px' }}>
-                <span>Your Challenge Rate:</span>
+                <span>Your Rate:</span>
                 <span style={{ color: '#34d399' }}>£{prebookSession.challengeRate}/night</span>
               </div>
-            </div>
-
-            <div style={{ fontSize: '11.5px', color: '#cbd5e1', lineHeight: '1.45', marginBottom: '20px', background: 'rgba(56, 189, 248, 0.08)', padding: '10px 12px', borderRadius: '8px' }}>
-              💡 <strong>Monetization Active:</strong> This booking uses Nuitée’s closed-user-group (CUG) wholesale inventory. Rate parity with Booking.com is maintained while TravelVRSE earns the affiliate margin.
             </div>
 
             <button
@@ -2494,7 +3532,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 cursor: 'pointer'
               }}
             >
-              Continue Exploring Vibe Map
+              Continue Exploring
             </button>
           </div>
         </div>

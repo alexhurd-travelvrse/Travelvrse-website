@@ -174,52 +174,52 @@ const DESTINATION_DATABASE = {
         },
         photos: [
           {
-            id: 'sc-sunset',
+            id: 'sc-roof',
             category: 'views',
             vibeTag: 'sunset_glow',
-            url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=900',
-            title: '12th Knot Rooftop Terrace at Golden Hour',
-            caption: 'Panoramic amber sunset views straight across the Thames to St Paul’s Cathedral.'
+            url: 'https://static.cupid.travel/hotels/570881905.jpg',
+            title: '12th Knot Rooftop Terrace',
+            caption: 'Panoramic Thames views overlooking St Paul’s Cathedral at golden hour.'
           },
           {
             id: 'sc-room',
             category: 'rooms',
             vibeTag: 'courtyard_quiet',
-            url: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=900',
-            title: 'Superior River View Sanctuary Room',
-            caption: 'Restorative king suite with acoustic glazing and bespoke mid-century furnishings.'
+            url: 'https://static.cupid.travel/hotels/209880755.jpg',
+            title: 'River View Sanctuary Room',
+            caption: 'Restorative suite with acoustic glazing and bespoke mid-century furnishings.'
           },
           {
             id: 'sc-design',
             category: 'design',
             vibeTag: 'brutalist_film',
-            url: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=900',
+            url: 'https://static.cupid.travel/hotels/37483771.jpg',
             title: 'Tom Dixon Copper Hull Lobby',
             caption: 'Sculptural transatlantic copper reception inspired by 1920s ocean liners.'
           },
           {
-            id: 'sc-dining',
+            id: 'sc-bar',
             category: 'dining',
             vibeTag: 'social_terrace',
-            url: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=900',
-            title: 'Lyaness Botanical Cocktail Lounge',
-            caption: 'World-acclaimed ingredient-led mixology right on the river’s edge.'
+            url: 'https://static.cupid.travel/hotels/37483636.jpg',
+            title: 'Lyaness Cocktail Bar',
+            caption: 'World-acclaimed botanical mixology right on the river’s edge.'
           },
           {
-            id: 'sc-cinema',
-            category: 'design',
-            vibeTag: 'brutalist_film',
-            url: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=900',
-            title: 'Curzon Boutique Screening Room',
-            caption: '56-seat subterranean cinema screening curated indie & arthouse film.'
+            id: 'sc-restaurant',
+            category: 'dining',
+            vibeTag: 'sunset_glow',
+            url: 'https://static.cupid.travel/hotels/578376385.jpg',
+            title: 'Sea Containers Riverfront Restaurant',
+            caption: 'Ingredient-led dining with sweeping Thames water views.'
           },
           {
-            id: 'sc-morning',
+            id: 'sc-balcony',
             category: 'views',
             vibeTag: 'morning_mist',
-            url: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=900',
-            title: 'Early Morning Thames Walk',
-            caption: 'Step straight out onto peaceful morning river paths before the city wakes.'
+            url: 'https://static.cupid.travel/hotels/209881271.jpg',
+            title: 'Private Riverfront Balcony',
+            caption: 'Step out to peaceful morning light along the Thames.'
           }
         ]
       },
@@ -257,33 +257,41 @@ const DESTINATION_DATABASE = {
             id: 'bh-room',
             category: 'rooms',
             vibeTag: 'courtyard_quiet',
-            url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=900',
+            url: 'https://static.cupid.travel/hotels/466062553.jpg',
             title: 'Boutique King Art Studio',
-            caption: 'Sunlit, quiet bedroom curated with mid-century oak and local ceramics.'
+            caption: 'Sunlit, quiet bedroom curated with mid-century oak and local artwork.'
           },
           {
             id: 'bh-design',
             category: 'design',
             vibeTag: 'indie_makers',
-            url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=900',
-            title: 'Makers Studio & Live Art Gallery',
-            caption: 'Watch resident artists paint, sculpt, and print right off the lobby.'
+            url: 'https://static.cupid.travel/hotels/463631777.jpg',
+            title: 'Art-Filled Lobby & Makers Space',
+            caption: 'Original commissioned works and design objects in a calm creative hub.'
+          },
+          {
+            id: 'bh-lounge',
+            category: 'design',
+            vibeTag: 'brutalist_film',
+            url: 'https://static.cupid.travel/hotels/614264955.jpg',
+            title: 'Living Space & Library Lounge',
+            caption: 'Relaxed mezzanine seating ideal for unhurried reading or coffee.'
           },
           {
             id: 'bh-dining',
             category: 'dining',
             vibeTag: 'sunset_glow',
-            url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=900',
+            url: 'https://static.cupid.travel/hotels/466063738.jpg',
             title: 'Art Yard Bar & Kitchen',
-            caption: 'Seasonal wood-fired plates and natural wines in a bright glass atrium.'
+            caption: 'Seasonal plates and natural wines in a bright ground-floor atrium.'
           },
           {
             id: 'bh-views',
             category: 'views',
             vibeTag: 'morning_mist',
-            url: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=900',
-            title: 'Sheltered Courtyard Terrace',
-            caption: 'Peaceful outdoor seating tucked away from riverfront foot traffic.'
+            url: 'https://static.cupid.travel/hotels/560813397.jpg',
+            title: 'Bankside Cultural Mews Exterior',
+            caption: 'Tucked away on a peaceful tree-lined street steps from Tate Modern.'
           }
         ]
       }
@@ -703,9 +711,61 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   const [galleryModalFilter, setGalleryModalFilter] = useState('for_your_vibe');
   const [roomModalHotel, setRoomModalHotel] = useState(null);
 
-  // Atmosvibe + User Filter Photo Ranking Engine
+  // Curate & filter real live Nuitée hotelImages (removing pools, bathrooms, meeting rooms, gyms)
+  const curateLiveNuiteePhotos = (rawHotelDetail, fallbackPhotos = []) => {
+    const imgs = rawHotelDetail?.hotelImages;
+    if (!Array.isArray(imgs) || imgs.length === 0) return fallbackPhotos;
+
+    const clutterRe = /(pool|bath|toilet|sink|shower|meeting|conference|boardroom|banquet|ballroom|fitness|gym|corridor|hallway|parking|elevator)/i;
+    const picked = { views: [], rooms: [], dining: [], design: [] };
+    const seenUrls = new Set();
+
+    imgs.forEach((img, idx) => {
+      const url = img.urlHd || img.url;
+      if (!url || seenUrls.has(url)) return;
+      const cap = (img.caption || '').trim();
+      const capLower = cap.toLowerCase();
+      if (clutterRe.test(capLower)) return;
+
+      let category = null;
+      let vibeTag = 'brutalist_film';
+      let title = cap ? cap.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'Hotel Space';
+
+      if (/(roof|balcony|terrace|view|exterior|building)/i.test(capLower)) {
+        category = 'views';
+        vibeTag = /(roof|terrace|balcony)/i.test(capLower) ? 'sunset_glow' : 'morning_mist';
+      } else if (/(hotel room|bedroom|suite|bed)/i.test(capLower)) {
+        category = 'rooms';
+        vibeTag = 'courtyard_quiet';
+      } else if (/(restaurant|bar|lounge|breakfast|dining|cafe|bbq)/i.test(capLower)) {
+        category = 'dining';
+        vibeTag = /(bar|lounge|restaurant)/i.test(capLower) ? 'social_terrace' : 'sunset_glow';
+      } else if (/(reception|lobby|living|mezzanine|art|library|cinema)/i.test(capLower)) {
+        category = 'design';
+        vibeTag = 'indie_makers';
+      }
+
+      if (category && picked[category].length < 3) {
+        seenUrls.add(url);
+        picked[category].push({
+          id: `live-${category}-${idx}`,
+          category,
+          vibeTag,
+          url,
+          title,
+          caption: `Verified property photo (${title})`
+        });
+      }
+    });
+
+    const merged = [...picked.views, ...picked.rooms, ...picked.dining, ...picked.design];
+    return merged.length >= 4 ? merged : fallbackPhotos;
+  };
+
+  // Atmosvibe + User Filter Photo Ranking Engine (prefers live Nuitée feed photos)
   const getFilteredHotelPhotos = (stay, filterOverride = null) => {
-    const rawPhotos = stay.photos || [];
+    const liveFeedPhotos = nuiteeRates.hotels[stay.id]?.livePhotos;
+    const rawPhotos = (Array.isArray(liveFeedPhotos) && liveFeedPhotos.length > 0) ? liveFeedPhotos : (stay.photos || []);
     const activeFilter = filterOverride || cardPhotoFilter[stay.id] || globalPhotoFilter;
 
     // 1. Score every photo with Atmosvibe based on live Duel answers
@@ -794,7 +854,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               finisherCreditGbp: sea?.finisherCreditGbp || Math.round((sea?.nightlyRetailGbp || 449) * 0.1),
               roomName: sea?.liveRoomName || 'Superior River View Sanctuary Room',
               boardName: sea?.liveBoardName || 'Room Only',
-              liveOfferId: sea?.liveOfferId || null
+              liveOfferId: sea?.liveOfferId || null,
+              livePhotos: curateLiveNuiteePhotos(sea?.rawHotelDetail, DESTINATION_DATABASE['london-southbank'].stayAnchors[0].photos)
             },
             'bankside-hotel': {
               retailRate: bankside?.nightlyRetailGbp || 385,
@@ -802,7 +863,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               finisherCreditGbp: bankside?.finisherCreditGbp || Math.round((bankside?.nightlyRetailGbp || 385) * 0.1),
               roomName: bankside?.liveRoomName || 'Boutique King Art Studio',
               boardName: bankside?.liveBoardName || 'Room Only',
-              liveOfferId: bankside?.liveOfferId || null
+              liveOfferId: bankside?.liveOfferId || null,
+              livePhotos: curateLiveNuiteePhotos(bankside?.rawHotelDetail, DESTINATION_DATABASE['london-southbank'].stayAnchors[1].photos)
             }
           }
         });

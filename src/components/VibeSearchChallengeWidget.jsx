@@ -2044,10 +2044,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <span style={{ fontSize: '11px', color: '#e2e8f0', fontWeight: '600' }}>
-                      {d.title.split('&')[0].trim()}
+                    <span style={{ fontSize: '11px', color: '#e2e8f0', fontWeight: '600', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {d.id === 'culturePace' ? '1. Art & Film' : d.id === 'diurnalRhythm' ? '2. River Rhythm' : d.id === 'dispersion' ? '3. Maker Spend' : '4. Stay Style'}
                     </span>
-                    <span style={{ fontSize: '10.5px', color: d.isMatch ? '#34d399' : '#94a3b8', fontWeight: '700' }}>
+                    <span style={{ fontSize: '10.5px', color: d.isMatch ? '#34d399' : '#94a3b8', fontWeight: '700', whiteSpace: 'nowrap', flexShrink: 0 }}>
                       {d.isMatch ? '✓ Sync' : 'Alt'}
                     </span>
                   </button>

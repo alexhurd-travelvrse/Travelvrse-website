@@ -5,18 +5,18 @@ import { Helmet } from 'react-helmet-async';
 
 const LIVE_PRESETS = [
   {
-    id: 'sea-containers',
-    name: 'Sea Containers London',
-    url: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers',
-    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers/completion',
-    desc: 'Live 3D spatial room with mobile touch joystick, backpack inventory, and soundscape.'
-  },
-  {
     id: '25-hours',
     name: '25hours Hotel Copenhagen',
     url: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours',
     completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours/completion',
     desc: 'Live Scandinavian design, vinyl room, and Indre By challenge with mobile joystick.'
+  },
+  {
+    id: 'sea-containers',
+    name: 'Sea Containers London',
+    url: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers/completion',
+    desc: 'Live 3D spatial room with mobile touch joystick, backpack inventory, and soundscape.'
   },
   {
     id: 'ted-lasso',

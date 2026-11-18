@@ -5,7 +5,7 @@ import {
   Flame, Compass, Sun, Moon, Heart, Award, Share2, 
   Film, GlassWater, Clock, Coffee, Eye, Radio,
   Building, Palette, BookOpen, Layers, RefreshCw,
-  Zap, CreditCard, X, ChevronRight, LayoutGrid
+  Zap, CreditCard, X, ChevronRight, ChevronLeft, LayoutGrid
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { fetchLiveSouthBankNuiteeFeeds, executeSouthBankLivePrebook } from '../services/nuiteeLiveFeedService';
@@ -447,6 +447,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   const [blueprintViewMode, setBlueprintViewMode] = useState('tabs'); // 'tabs' (streamlined on load) | 'grid' (expand all)
   const [blueprintRecentlyUpdated, setBlueprintRecentlyUpdated] = useState(false);
 
+  // Interactive Destination Duel & Harmony Wizard State
+  const [duelStep, setDuelStep] = useState(0); // 0..3
+  const [duelViewMode, setDuelViewMode] = useState('wizard'); // 'wizard' (1-at-a-time, ~1/3 space) | 'all' (all 4 cards expanded)
+
   // Live Nuitée Rates State
   const [nuiteeRates, setNuiteeRates] = useState({
     loading: true,
@@ -552,7 +556,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     });
   };
 
-  const handleSelectOption = (questionId, optionId) => {
+  const handleSelectOption = (questionId, optionId, shouldAutoAdvance = true) => {
     setUserAnswers(prev => ({
       ...prev,
       [questionId]: optionId
@@ -561,6 +565,13 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     setTimeout(() => {
       setBlueprintRecentlyUpdated(false);
     }, 2200);
+
+    // Auto-advance to next question in wizard mode
+    if (shouldAutoAdvance && duelViewMode === 'wizard' && duelStep < location.duelQuestions.length - 1) {
+      setTimeout(() => {
+        setDuelStep(prev => Math.min(prev + 1, location.duelQuestions.length - 1));
+      }, 340);
+    }
   };
 
   // Instant Live Nuitée Prebook Booking Flow
@@ -1595,275 +1606,509 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         )}
       </div>
 
-      {/* 3. THE TASTEMAKER DUEL: 4 DESTINATION-LEVEL CHOICE CARDS (NO DIALS / NO BUZZWORDS) */}
+      {/* 3. INTERACTIVE DESTINATION DUEL & TASTEMAKER HARMONY WIZARD (COMPACT ~1/3 FOOTPRINT) */}
       <div style={{
-        background: 'rgba(15, 23, 42, 0.6)',
-        border: '1px solid rgba(56, 189, 248, 0.2)',
-        borderRadius: '20px',
-        padding: '28px 24px',
-        marginBottom: '36px'
+        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(10, 16, 30, 0.95) 100%)',
+        border: '1px solid rgba(56, 189, 248, 0.25)',
+        borderRadius: '22px',
+        padding: '24px 26px',
+        marginBottom: '36px',
+        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)'
       }}>
-        <div style={{ marginBottom: '24px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(56, 189, 248, 0.12)', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '800', color: '#38bdf8', marginBottom: '8px' }}>
-            <Award size={13} /> THE DESTINATION DUEL
+        {/* Wizard Header Bar */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '20px' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+              <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
+                Interactive Destination Duel & Harmony
+              </span>
+              <span style={{ fontSize: '11px', background: 'rgba(56, 189, 248, 0.15)', color: '#7dd3fc', padding: '2px 8px', borderRadius: '999px', fontWeight: '700' }}>
+                {duelViewMode === 'wizard' ? `Card ${duelStep + 1} of ${location.duelQuestions.length}` : 'All 4 Cards'}
+              </span>
+            </div>
+            <h3 style={{ fontSize: '20px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
+              How Do You Experience {location.name.split('•')[1]?.trim() || location.name}?
+            </h3>
           </div>
-          <h3 style={{ fontSize: '22px', fontWeight: '800', margin: '0 0 6px 0', color: '#ffffff' }}>
-            How Do You Experience {location.name.split('•')[1]?.trim() || location.name}?
-          </h3>
-          <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0 }}>
-            Tap the cards that match your personal travel frequency. Compare your choices against our local scout ({activeCurator.name.split(' ')[0]}).
-          </p>
+
+          {/* Step Selector Dots & Expand Toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {duelViewMode === 'wizard' && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                {location.duelQuestions.map((q, idx) => {
+                  const isAnswered = !!userAnswers[q.id];
+                  const isActive = duelStep === idx;
+                  return (
+                    <button
+                      key={q.id}
+                      type="button"
+                      onClick={() => setDuelStep(idx)}
+                      title={`Go to Question ${idx + 1}: ${q.title}`}
+                      style={{
+                        width: isActive ? '26px' : '9px',
+                        height: '9px',
+                        borderRadius: '5px',
+                        background: isActive ? '#38bdf8' : isAnswered ? '#10b981' : 'rgba(255, 255, 255, 0.2)',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: 0,
+                        transition: 'all 0.2s ease'
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={() => setDuelViewMode(prev => prev === 'wizard' ? 'all' : 'wizard')}
+              title={duelViewMode === 'wizard' ? 'Show all 4 duel cards simultaneously' : 'Switch back to compact 1-question wizard'}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: duelViewMode === 'all' ? 'rgba(56, 189, 248, 0.18)' : 'rgba(255, 255, 255, 0.05)',
+                border: `1px solid ${duelViewMode === 'all' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(255, 255, 255, 0.1)'}`,
+                color: duelViewMode === 'all' ? '#38bdf8' : '#94a3b8',
+                borderRadius: '8px',
+                padding: '6px 12px',
+                fontSize: '12px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <LayoutGrid size={13} />
+              <span>{duelViewMode === 'wizard' ? 'Expand All (4 Cards)' : 'Compact Wizard'}</span>
+            </button>
+          </div>
         </div>
 
-        {/* 4 Interactive Duel Cards */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {location.duelQuestions.map((q) => {
-            const currentChoice = userAnswers[q.id];
-            const isMatchWithCreator = currentChoice === q.creatorPick;
+        {/* 2-COLUMN UNIFIED SPLIT: WIZARD QUESTION (LEFT) + HARMONY SCORECARD (RIGHT) */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: duelViewMode === 'wizard' ? 'minmax(0, 1.4fr) minmax(0, 1fr)' : '1fr',
+          gap: '24px',
+          alignItems: 'stretch'
+        }}>
+          {/* LEFT COLUMN: ACTIVE WIZARD QUESTION (OR ALL 4 IF EXPANDED) */}
+          {duelViewMode === 'wizard' ? (
+            /* WIZARD CARD: SINGLE ACTIVE QUESTION (~1/3 space) */
+            (() => {
+              const q = location.duelQuestions[duelStep];
+              const currentChoice = userAnswers[q.id];
+              const isMatchWithCreator = currentChoice === q.creatorPick;
 
-            return (
-              <div 
-                key={q.id}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.02)',
-                  border: '1px solid rgba(255, 255, 255, 0.06)',
+              return (
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.025)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
                   borderRadius: '16px',
-                  padding: '18px 20px'
-                }}
-              >
-                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '12px' }}>
+                  padding: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
+                }}>
                   <div>
-                    <h4 style={{ fontSize: '15.5px', fontWeight: '800', color: '#ffffff', margin: 0 }}>
-                      {q.title}
-                    </h4>
-                    <span style={{ fontSize: '12.5px', color: '#94a3b8' }}>{q.subtitle}</span>
+                    {/* Question Header & Match Badge */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '8px' }}>
+                      <div>
+                        <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#94a3b8', fontWeight: '700' }}>
+                          Question {duelStep + 1} of {location.duelQuestions.length}
+                        </div>
+                        <h4 style={{ fontSize: '16px', fontWeight: '800', color: '#ffffff', margin: '2px 0 0 0' }}>
+                          {q.title}
+                        </h4>
+                      </div>
+
+                      <div style={{
+                        fontSize: '11px',
+                        padding: '3px 9px',
+                        borderRadius: '999px',
+                        fontWeight: '700',
+                        background: isMatchWithCreator ? 'rgba(52, 211, 153, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+                        color: isMatchWithCreator ? '#34d399' : '#fbbf24',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                      }}>
+                        {isMatchWithCreator ? <Check size={11} /> : null}
+                        {isMatchWithCreator ? `Matches ${activeCurator.name.split(' ')[0]}` : `Alternative Frequency`}
+                      </div>
+                    </div>
+
+                    <p style={{ fontSize: '12.5px', color: '#94a3b8', margin: '0 0 16px 0' }}>
+                      {q.subtitle}
+                    </p>
+
+                    {/* Option A vs Option B Buttons */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '14px' }}>
+                      {/* Option A */}
+                      <button
+                        type="button"
+                        onClick={() => handleSelectOption(q.id, q.optionA.id, true)}
+                        style={{
+                          textAlign: 'left',
+                          background: currentChoice === q.optionA.id 
+                            ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.22), rgba(99, 102, 241, 0.22))' 
+                            : 'rgba(255, 255, 255, 0.02)',
+                          border: currentChoice === q.optionA.id 
+                            ? '2px solid #38bdf8' 
+                            : '1px solid rgba(255, 255, 255, 0.08)',
+                          borderRadius: '12px',
+                          padding: '12px 14px',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                          <span style={{ fontSize: '13.5px', fontWeight: '800', color: currentChoice === q.optionA.id ? '#ffffff' : '#e2e8f0' }}>
+                            {q.optionA.label}
+                          </span>
+                          <span style={{
+                            fontSize: '10px',
+                            background: 'rgba(255, 255, 255, 0.08)',
+                            color: '#38bdf8',
+                            padding: '1px 5px',
+                            borderRadius: '4px',
+                            fontWeight: '700'
+                          }}>
+                            {q.optionA.tag}
+                          </span>
+                        </div>
+                        <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: 0, lineHeight: '1.4' }}>
+                          {q.optionA.desc}
+                        </p>
+                      </button>
+
+                      {/* Option B */}
+                      <button
+                        type="button"
+                        onClick={() => handleSelectOption(q.id, q.optionB.id, true)}
+                        style={{
+                          textAlign: 'left',
+                          background: currentChoice === q.optionB.id 
+                            ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.22), rgba(99, 102, 241, 0.22))' 
+                            : 'rgba(255, 255, 255, 0.02)',
+                          border: currentChoice === q.optionB.id 
+                            ? '2px solid #38bdf8' 
+                            : '1px solid rgba(255, 255, 255, 0.08)',
+                          borderRadius: '12px',
+                          padding: '12px 14px',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                          <span style={{ fontSize: '13.5px', fontWeight: '800', color: currentChoice === q.optionB.id ? '#ffffff' : '#e2e8f0' }}>
+                            {q.optionB.label}
+                          </span>
+                          <span style={{
+                            fontSize: '10px',
+                            background: 'rgba(255, 255, 255, 0.08)',
+                            color: '#a78bfa',
+                            padding: '1px 5px',
+                            borderRadius: '4px',
+                            fontWeight: '700'
+                          }}>
+                            {q.optionB.tag}
+                          </span>
+                        </div>
+                        <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: 0, lineHeight: '1.4' }}>
+                          {q.optionB.desc}
+                        </p>
+                      </button>
+                    </div>
+
+                    {/* Alex's Insider Note */}
+                    <div style={{
+                      fontSize: '11px',
+                      color: '#94a3b8',
+                      background: 'rgba(0, 0, 0, 0.25)',
+                      padding: '7px 11px',
+                      borderRadius: '8px',
+                      borderLeft: '3px solid #38bdf8',
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      gap: '5px',
+                      marginBottom: '14px'
+                    }}>
+                      <strong style={{ color: '#38bdf8', flexShrink: 0 }}>{activeCurator.name.split(' ')[0]}'s Take:</strong>
+                      <span style={{ fontStyle: 'italic' }}>{q.creatorReason}</span>
+                    </div>
                   </div>
 
+                  {/* Wizard Footer Controls */}
                   <div style={{
-                    fontSize: '11.5px',
-                    padding: '3px 10px',
-                    borderRadius: '999px',
-                    fontWeight: '700',
-                    background: isMatchWithCreator ? 'rgba(52, 211, 153, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                    color: isMatchWithCreator ? '#34d399' : '#fbbf24',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px'
+                    justifyContent: 'space-between',
+                    paddingTop: '12px',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.06)'
                   }}>
-                    {isMatchWithCreator ? <Check size={12} /> : null}
-                    {isMatchWithCreator ? `Matches ${activeCurator.name.split(' ')[0]}` : `Alternative Frequency`}
+                    <button
+                      type="button"
+                      disabled={duelStep === 0}
+                      onClick={() => setDuelStep(prev => Math.max(0, prev - 1))}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: duelStep === 0 ? '#475569' : '#94a3b8',
+                        fontSize: '12px',
+                        fontWeight: '700',
+                        cursor: duelStep === 0 ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        padding: '4px 8px'
+                      }}
+                    >
+                      <ChevronLeft size={14} /> Back
+                    </button>
+
+                    <div style={{ fontSize: '11.5px', color: '#64748b', fontWeight: '600' }}>
+                      Auto-advances on tap
+                    </div>
+
+                    {duelStep < location.duelQuestions.length - 1 ? (
+                      <button
+                        type="button"
+                        onClick={() => setDuelStep(prev => Math.min(location.duelQuestions.length - 1, prev + 1))}
+                        style={{
+                          background: 'rgba(56, 189, 248, 0.1)',
+                          border: '1px solid rgba(56, 189, 248, 0.3)',
+                          color: '#38bdf8',
+                          fontSize: '12px',
+                          fontWeight: '700',
+                          borderRadius: '6px',
+                          padding: '5px 12px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px'
+                        }}
+                      >
+                        Next <ChevronRight size={14} />
+                      </button>
+                    ) : (
+                      <span style={{
+                        fontSize: '11.5px',
+                        color: '#10b981',
+                        fontWeight: '700',
+                        background: 'rgba(16, 185, 129, 0.15)',
+                        padding: '4px 10px',
+                        borderRadius: '6px'
+                      }}>
+                        ✓ Duel Complete
+                      </span>
+                    )}
                   </div>
                 </div>
+              );
+            })()
+          ) : (
+            /* EXPANDED VIEW: ALL 4 QUESTIONS IN A RESPONSIVE GRID */
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+              {location.duelQuestions.map((q, idx) => {
+                const currentChoice = userAnswers[q.id];
+                const isMatchWithCreator = currentChoice === q.creatorPick;
 
-                {/* Option A vs Option B Buttons */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px', marginBottom: '12px' }}>
-                  {/* Option A */}
-                  <button
-                    type="button"
-                    onClick={() => handleSelectOption(q.id, q.optionA.id)}
+                return (
+                  <div 
+                    key={q.id}
                     style={{
-                      textAlign: 'left',
-                      background: currentChoice === q.optionA.id 
-                        ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(99, 102, 241, 0.2))' 
-                        : 'rgba(255, 255, 255, 0.02)',
-                      border: currentChoice === q.optionA.id 
-                        ? '2px solid #38bdf8' 
-                        : '1px solid rgba(255, 255, 255, 0.08)',
-                      borderRadius: '12px',
-                      padding: '14px',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                      position: 'relative'
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                      borderRadius: '14px',
+                      padding: '16px'
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                      <span style={{ fontSize: '14px', fontWeight: '800', color: currentChoice === q.optionA.id ? '#ffffff' : '#e2e8f0' }}>
-                        {q.optionA.label}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '13.5px', fontWeight: '800', color: '#ffffff' }}>
+                        {idx + 1}. {q.title}
                       </span>
                       <span style={{
-                        fontSize: '10.5px',
-                        background: 'rgba(255, 255, 255, 0.08)',
-                        color: '#38bdf8',
-                        padding: '2px 6px',
-                        borderRadius: '4px',
+                        fontSize: '10px',
+                        padding: '2px 7px',
+                        borderRadius: '999px',
+                        background: isMatchWithCreator ? 'rgba(52, 211, 153, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+                        color: isMatchWithCreator ? '#34d399' : '#fbbf24',
                         fontWeight: '700'
                       }}>
-                        {q.optionA.tag}
+                        {isMatchWithCreator ? `Matches Alex` : `Alternative`}
                       </span>
                     </div>
-                    <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, lineHeight: '1.45' }}>
-                      {q.optionA.desc}
-                    </p>
-                  </button>
 
-                  {/* Option B */}
-                  <button
-                    type="button"
-                    onClick={() => handleSelectOption(q.id, q.optionB.id)}
-                    style={{
-                      textAlign: 'left',
-                      background: currentChoice === q.optionB.id 
-                        ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(99, 102, 241, 0.2))' 
-                        : 'rgba(255, 255, 255, 0.02)',
-                      border: currentChoice === q.optionB.id 
-                        ? '2px solid #38bdf8' 
-                        : '1px solid rgba(255, 255, 255, 0.08)',
-                      borderRadius: '12px',
-                      padding: '14px',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                      position: 'relative'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                      <span style={{ fontSize: '14px', fontWeight: '800', color: currentChoice === q.optionB.id ? '#ffffff' : '#e2e8f0' }}>
-                        {q.optionB.label}
-                      </span>
-                      <span style={{
-                        fontSize: '10.5px',
-                        background: 'rgba(255, 255, 255, 0.08)',
-                        color: '#a78bfa',
-                        padding: '2px 6px',
-                        borderRadius: '4px',
-                        fontWeight: '700'
-                      }}>
-                        {q.optionB.tag}
-                      </span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
+                      <button
+                        type="button"
+                        onClick={() => handleSelectOption(q.id, q.optionA.id, false)}
+                        style={{
+                          textAlign: 'left',
+                          background: currentChoice === q.optionA.id ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255, 255, 255, 0.02)',
+                          border: currentChoice === q.optionA.id ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.06)',
+                          borderRadius: '8px',
+                          padding: '8px 10px',
+                          color: '#ffffff',
+                          cursor: 'pointer',
+                          fontSize: '12px'
+                        }}
+                      >
+                        <strong>{q.optionA.label}</strong>: {q.optionA.desc}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleSelectOption(q.id, q.optionB.id, false)}
+                        style={{
+                          textAlign: 'left',
+                          background: currentChoice === q.optionB.id ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255, 255, 255, 0.02)',
+                          border: currentChoice === q.optionB.id ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.06)',
+                          borderRadius: '8px',
+                          padding: '8px 10px',
+                          color: '#ffffff',
+                          cursor: 'pointer',
+                          fontSize: '12px'
+                        }}
+                      >
+                        <strong>{q.optionB.label}</strong>: {q.optionB.desc}
+                      </button>
                     </div>
-                    <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, lineHeight: '1.45' }}>
-                      {q.optionB.desc}
-                    </p>
-                  </button>
-                </div>
 
-                {/* Creator's Insider Commentary */}
-                <div style={{
-                  fontSize: '11.5px',
-                  color: '#94a3b8',
-                  background: 'rgba(0, 0, 0, 0.25)',
-                  padding: '8px 12px',
-                  borderRadius: '8px',
-                  borderLeft: '3px solid #38bdf8',
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  gap: '6px'
-                }}>
-                  <strong style={{ color: '#38bdf8', flexShrink: 0 }}>{activeCurator.name.split(' ')[0]}'s Insider Note:</strong>
-                  <span style={{ fontStyle: 'italic' }}>{q.creatorReason}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+                    <div style={{ fontSize: '11px', color: '#94a3b8', fontStyle: 'italic', borderLeft: '2px solid #38bdf8', paddingLeft: '8px' }}>
+                      Alex: {q.creatorReason}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
-      {/* 4. THE PAYOFF: MATCH SCORECARD & CROWD BENCHMARK */}
-      <div style={{
-        background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95))',
-        border: '1px solid rgba(56, 189, 248, 0.3)',
-        borderRadius: '20px',
-        padding: '28px 24px',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '24px',
-        alignItems: 'center',
-        marginBottom: '40px'
-      }}>
-        {/* Left: Creator Match Dial */}
-        <div>
-          <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800', marginBottom: '4px' }}>
-            Tastemaker Harmony Score
-          </div>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-            <span style={{ fontSize: '48px', fontWeight: '900', color: '#ffffff', lineHeight: 1 }}>
-              {matchCalculation.percentage}%
-            </span>
-            <span style={{ fontSize: '15px', color: '#38bdf8', fontWeight: '700' }}>
-              Match with {activeCurator.name}
-            </span>
-          </div>
-          <p style={{ fontSize: '13.5px', lineHeight: '1.5', color: '#e2e8f0', margin: '0 0 16px 0' }}>
-            {matchCalculation.alignmentSummary}
-          </p>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-            {matchCalculation.details.map(d => (
-              <span 
-                key={d.id}
-                style={{
-                  fontSize: '11.5px',
-                  padding: '4px 10px',
-                  borderRadius: '999px',
-                  background: d.isMatch ? 'rgba(52, 211, 153, 0.15)' : 'rgba(255, 255, 255, 0.05)',
-                  border: `1px solid ${d.isMatch ? 'rgba(52, 211, 153, 0.4)' : 'rgba(255, 255, 255, 0.1)'}`,
-                  color: d.isMatch ? '#34d399' : '#94a3b8',
-                  fontWeight: '600'
-                }}
-              >
-                {d.isMatch ? '✓' : '•'} {d.title}: {d.isMatch ? 'In Sync' : 'Alternative'}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Right: Crowd Dispersion Rank & Voucher */}
-        <div style={{
-          background: 'rgba(0, 0, 0, 0.3)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '16px',
-          padding: '20px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-            <Sparkles size={18} color="#a78bfa" />
-            <span style={{ fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '1px', color: '#a78bfa', fontWeight: '800' }}>
-              Crowd Dispersion Benchmark
-            </span>
-          </div>
-
-          <h4 style={{ fontSize: '17px', fontWeight: '800', color: '#ffffff', margin: '0 0 6px 0' }}>
-            {crowdBenchmark.archetype}
-          </h4>
-          <p style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: '1.45', margin: '0 0 14px 0' }}>
-            {crowdBenchmark.desc}. ({crowdBenchmark.dmoImpact})
-          </p>
-
+          {/* RIGHT COLUMN: LIVE TASTEMAKER HARMONY & CROWD BENCHMARK SCORECARD */}
           <div style={{
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 95, 70, 0.15))',
-            border: '1px solid rgba(52, 211, 153, 0.4)',
-            borderRadius: '10px',
-            padding: '12px 14px',
+            background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95))',
+            border: '1px solid rgba(56, 189, 248, 0.3)',
+            borderRadius: '16px',
+            padding: '20px',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '12px'
+            flexDirection: 'column',
+            justifyContent: 'space-between'
           }}>
             <div>
-              <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#34d399', fontWeight: '800' }}>
-                Finisher Reward Unlocked
+              {/* Header */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
+                  Live Tastemaker Harmony
+                </span>
+                <span style={{ fontSize: '11px', color: '#34d399', fontWeight: '700' }}>
+                  {matchCalculation.matchCount} of 4 in Sync
+                </span>
               </div>
-              <div style={{ fontSize: '13px', fontWeight: '800', color: '#ffffff' }}>
-                10% Stay Credit • Code: VIBE-SOUTHBANK-10
+
+              {/* Big Percent Indicator */}
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '6px' }}>
+                <span style={{ fontSize: '42px', fontWeight: '900', color: '#ffffff', lineHeight: 1 }}>
+                  {matchCalculation.percentage}%
+                </span>
+                <span style={{ fontSize: '13.5px', color: '#38bdf8', fontWeight: '700' }}>
+                  Match with {activeCurator.name}
+                </span>
+              </div>
+
+              <p style={{ fontSize: '12px', lineHeight: '1.45', color: '#cbd5e1', margin: '0 0 14px 0' }}>
+                {matchCalculation.alignmentSummary}
+              </p>
+
+              {/* 4 Clickable Dimension Pills (Sync Jumpers) */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px', marginBottom: '16px' }}>
+                {matchCalculation.details.map((d, idx) => (
+                  <button
+                    key={d.id}
+                    type="button"
+                    onClick={() => {
+                      setDuelViewMode('wizard');
+                      setDuelStep(idx);
+                    }}
+                    title={`Click to jump to question ${idx + 1}`}
+                    style={{
+                      background: d.isMatch ? 'rgba(52, 211, 153, 0.12)' : 'rgba(255, 255, 255, 0.04)',
+                      border: `1px solid ${d.isMatch ? 'rgba(52, 211, 153, 0.35)' : 'rgba(255, 255, 255, 0.08)'}`,
+                      borderRadius: '8px',
+                      padding: '6px 8px',
+                      textAlign: 'left',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      transition: 'all 0.15s ease'
+                    }}
+                  >
+                    <span style={{ fontSize: '11px', color: '#e2e8f0', fontWeight: '600' }}>
+                      {d.title.split('&')[0].trim()}
+                    </span>
+                    <span style={{ fontSize: '10.5px', color: d.isMatch ? '#34d399' : '#94a3b8', fontWeight: '700' }}>
+                      {d.isMatch ? '✓ Sync' : 'Alt'}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
 
-            <Link
-              to="/demo/southbank"
-              style={{
-                background: '#10b981',
-                color: '#ffffff',
-                textDecoration: 'none',
-                padding: '8px 14px',
+            {/* Dispersion Benchmark & Finisher Reward */}
+            <div style={{
+              background: 'rgba(0, 0, 0, 0.3)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '12px',
+              padding: '12px 14px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#a78bfa', fontWeight: '800' }}>
+                  Dispersion Benchmark
+                </span>
+                <span style={{ fontSize: '11px', color: '#a78bfa', fontWeight: '800' }}>
+                  Top {crowdBenchmark.pct}%
+                </span>
+              </div>
+
+              <div style={{ fontSize: '13px', fontWeight: '800', color: '#ffffff', marginBottom: '2px' }}>
+                {crowdBenchmark.archetype}
+              </div>
+              <p style={{ fontSize: '11px', color: '#94a3b8', margin: '0 0 10px 0', lineHeight: '1.4' }}>
+                {crowdBenchmark.dmoImpact}
+              </p>
+
+              {/* 10% Stay Credit Voucher Pill */}
+              <div style={{
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(6, 95, 70, 0.18))',
+                border: '1px solid rgba(52, 211, 153, 0.4)',
                 borderRadius: '8px',
-                fontSize: '12px',
-                fontWeight: '800',
-                display: 'inline-flex',
+                padding: '8px 10px',
+                display: 'flex',
                 alignItems: 'center',
-                gap: '4px',
-                flexShrink: 0
-              }}
-            >
-              Explore 3D <ArrowRight size={13} />
-            </Link>
+                justifyContent: 'space-between',
+                gap: '8px'
+              }}>
+                <div>
+                  <div style={{ fontSize: '9.5px', textTransform: 'uppercase', letterSpacing: '0.6px', color: '#34d399', fontWeight: '800' }}>
+                    Finisher Reward
+                  </div>
+                  <div style={{ fontSize: '12px', fontWeight: '800', color: '#ffffff' }}>
+                    10% Credit: VIBE-SOUTHBANK-10
+                  </div>
+                </div>
+                <span style={{
+                  fontSize: '11px',
+                  background: '#10b981',
+                  color: '#ffffff',
+                  padding: '3px 8px',
+                  borderRadius: '6px',
+                  fontWeight: '800'
+                }}>
+                  Unlocked
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

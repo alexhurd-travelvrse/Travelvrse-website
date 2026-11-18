@@ -22,7 +22,7 @@ export const SOUTH_BANK_VIBE_DATA = {
       afternoon: 66,
       lateNight: 41
     },
-    dominantAesthetics: ['Mid-Century Craft', 'Brutalist Riverfront', 'Independent Vinyl & Cinema'],
+    dominantAesthetics: ['Mid-Century Craft', 'Brutalist Riverfront', 'Boutique Cinema & Botanical Mixology'],
     walkabilityScore: 97.2,
     independentGemRatio: 0.76,
     activeCuratorsCount: 2
@@ -41,7 +41,7 @@ export const SOUTH_BANK_VIBE_DATA = {
       verifiedGemsCount: 8,
       voiceoverTitle: 'Tuning Your South Bank Frequency (45s)',
       audioSampleUrl: 'https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg',
-      quote: "South Bank isn't just concrete and tourists—it has some of the quietest vinyl rooms and independent craft courtyards in Europe."
+      quote: "South Bank isn't just concrete and tourists—it has subterranean boutique cinema rooms, award-winning botanical mixology, and independent craft courtyards."
     },
     {
       id: 'sarah-lin',
@@ -66,12 +66,12 @@ export const SOUTH_BANK_VIBE_DATA = {
       subtitle: 'What sonic environment recharges you after exploring?',
       options: [
         {
-          id: 'vinyl_calm',
-          label: 'Low-Decibel Vinyl Lounge',
+          id: 'cinema_sanctuary',
+          label: 'Subterranean Curzon Cinema Sanctuary',
           badge: '34–38 dB • Courtyard Quiet',
           description: 'Warm analog sound, velvet seating, and sheltered courtyard calm.',
-          archetypeAffinity: 'vinyl_flaneur',
-          sampleSound: 'Vinyl needle crackle & jazz chords'
+          archetypeAffinity: 'cultural_connoisseur',
+          sampleSound: 'Subterranean velvet quiet & acoustic film score'
         },
         {
           id: 'river_breeze',
@@ -115,7 +115,7 @@ export const SOUTH_BANK_VIBE_DATA = {
           label: 'Late-Night Culture & Speakeasy',
           badge: '21:00–00:30 • Low Mood Light',
           description: 'Subterranean cinema bars, late gallery openings, and candlelight craft drinks.',
-          archetypeAffinity: 'vinyl_flaneur'
+          archetypeAffinity: 'cultural_connoisseur'
         }
       ]
     },
@@ -143,7 +143,7 @@ export const SOUTH_BANK_VIBE_DATA = {
           label: 'Mid-Century Design & Riverfront Suites',
           badge: '1m Walk • Sea Containers & Oxo',
           description: 'Tom Dixon copper interiors, panoramic river views, and signature suites.',
-          archetypeAffinity: 'vinyl_flaneur'
+          archetypeAffinity: 'cultural_connoisseur'
         }
       ]
     }
@@ -151,12 +151,12 @@ export const SOUTH_BANK_VIBE_DATA = {
 
   // ARCHETYPES
   archetypes: {
-    vinyl_flaneur: {
-      name: 'The Vinyl Flâneur',
+    cultural_connoisseur: {
+      name: 'The Cultural Connoisseur',
       matchPct: 94,
       tagline: 'Analog Soul, Architectural Quiet & Subdued Elegance',
-      summary: 'You avoid generic luxury. You thrive in spaces with rich tactile materials, low ambient decibels, and proximity to rare record collections and world cinema.',
-      recommendedStay: 'Sea Containers London (River View Suite & Vinyl Lounge)'
+      summary: 'You avoid generic luxury. You thrive in spaces with rich tactile materials, low ambient decibels, and proximity to boutique cinema screenings, botanical cocktail labs, and world-class river views.',
+      recommendedStay: 'Sea Containers London (River View Suite & Curzon Cinema Access)'
     },
     riverside_bohemian: {
       name: 'The Riverside Bohemian',
@@ -199,10 +199,10 @@ export const SOUTH_BANK_VIBE_DATA = {
       discountSpatial: '10% Off with 3D Challenge',
       quietDecibels: 34,
       acousticLabel: '34 dB (Courtyard & River Suite Quiet)',
-      youWillLoveThisIf: 'You appreciate iconic mid-century copper design, low-decibel bedroom tranquility, and an on-site vinyl listening lounge 4 minutes from Tate Modern.',
+      youWillLoveThisIf: 'You appreciate iconic mid-century copper design, low-decibel bedroom tranquility, and a 56-seat boutique Curzon cinema on-site 4 minutes from Tate Modern.',
       curatorNote: 'Verified by @AlexCulture: Ask for upper-floor river view for panoramic skyline acoustics.',
       priceStarting: '£265/night',
-      features: ['3D Spatial Challenge Ready', 'Lyaness Cocktail Bar', 'Curated Vinyl Listening Room', 'Curator Verified']
+      features: ['3D Spatial Challenge Ready', 'Lyaness Cocktail Bar', 'Curzon Boutique Screening Room', 'Curator Verified']
     },
     {
       id: 'bankside-hotel',
@@ -245,7 +245,7 @@ export const SOUTH_BANK_VIBE_DATA = {
       type: 'hidden_gem',
       name: 'BFI Southbank Riverfront & Archive',
       vibeScore: 94.6,
-      category: 'Cinema & Vinyl Cafe',
+      category: 'Cinema & Archival Mediatheque',
       rating: 4.7,
       image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=900',
       heroTag: 'Film Lover\'s Riverside Coffee Sanctuary',
@@ -257,9 +257,9 @@ export const SOUTH_BANK_VIBE_DATA = {
       features: ['Free Film Mediatheque', 'Vintage Bookshop', 'Riverside Terrace', 'Curator Verified']
     },
     {
-      id: 'southbank-vinyl-acoustic-walk',
+      id: 'southbank-cultural-acoustic-walk',
       type: 'tour',
-      name: 'The South Bank Acoustic & Vinyl Trail',
+      name: 'The South Bank Riverfront Cultural & Secret Arch Trail',
       vibeScore: 94.1,
       category: 'Curator Walking Trail',
       rating: 4.9,
@@ -268,7 +268,7 @@ export const SOUTH_BANK_VIBE_DATA = {
       hasSpatial3D: false,
       discountBasic: '5% Off Trail Audio Pass',
       acousticLabel: 'Dynamic 42–65 dB Journey',
-      youWillLoveThisIf: 'You want an audio-guided walk connecting secret acoustic echoes under Waterloo Bridge to hidden vinyl listening rooms.',
+      youWillLoveThisIf: 'You want an audio-guided walk connecting secret acoustic echoes under Waterloo Bridge to hidden courtyard maker studios and subterranean cinema nooks.',
       curatorNote: 'Created by @AlexCulture: Includes secret downloadable Spotify playlist synced to trail landmarks.',
       priceStarting: '£12 / pass',
       features: ['GPS-Synced Audio Guide', 'Exclusive Spotify Playlist', 'Independent Drink Stops', 'Curator Verified']

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
-import VibeRadarChallenge from '../components/VibeRadarChallenge';
 import VibeSearchChallengeWidget from '../components/VibeSearchChallengeWidget';
 import { SOUTH_BANK_VIBE_DATA } from '../data/southbankVibeData';
 import { getVibeIntentTelemetry, recordRadarChallengeCompletion } from '../services/vibeIntentTelemetry';
@@ -134,14 +133,9 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
             </div>
           </div>
 
-          {/* THE GAMIFIED VIBE SEARCH CHALLENGE (SENSORY DIALS & MICRO-GEMS) */}
+          {/* THE GAMIFIED DESTINATION VIBE CHALLENGE */}
           <div style={{ marginBottom: '48px' }}>
             <VibeSearchChallengeWidget initialLocation="london-southbank" />
-          </div>
-
-          {/* VIBE RADAR CHALLENGE SECTION (QUESTIONNAIRE MODE) */}
-          <div style={{ marginBottom: '48px' }}>
-            <VibeRadarChallenge onComplete={handleRadarComplete} />
           </div>
 
           {/* RESULTS DIRECTORY SECTION */}

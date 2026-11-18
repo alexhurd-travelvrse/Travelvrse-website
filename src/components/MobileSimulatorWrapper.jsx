@@ -36,6 +36,18 @@ const MobileSimulatorWrapper = ({ children }) => {
     localStorage.setItem('travelvrse_simulator_mode', enabled ? 'true' : 'false');
   };
 
+  const isSimulatorRoute = 
+    location.pathname.startsWith('/simulator') || 
+    location.pathname.startsWith('/mobile') || 
+    location.pathname.startsWith('/live-mobile') || 
+    location.pathname.startsWith('/presenter') || 
+    location.pathname.startsWith('/demo-hub') ||
+    location.pathname.startsWith('/play');
+
+  if (isSimulatorRoute) {
+    return <>{children}</>;
+  }
+
   // If on actual mobile device or simulator turned off, render normally
   if (!isDesktopScreen || !isSimulatorActive) {
     return (

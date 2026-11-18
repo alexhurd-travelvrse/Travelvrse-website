@@ -7,29 +7,29 @@ const LIVE_PRESETS = [
   {
     id: 'sea-containers',
     name: 'Sea Containers London',
-    url: 'https://www.travelvrse.com/play/sea-containers',
-    completionUrl: 'https://www.travelvrse.com/play/sea-containers/completion',
+    url: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers/completion',
     desc: 'Live 3D spatial room with mobile touch joystick, backpack inventory, and soundscape.'
   },
   {
     id: '25-hours',
     name: '25hours Hotel Copenhagen',
-    url: 'https://www.travelvrse.com/play/25-hours',
-    completionUrl: 'https://www.travelvrse.com/play/25-hours/completion',
+    url: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours/completion',
     desc: 'Live Scandinavian design, vinyl room, and Indre By challenge with mobile joystick.'
   },
   {
     id: 'ted-lasso',
     name: 'Ted Lasso Richmond',
-    url: 'https://www.travelvrse.com/play/ted-lasso',
-    completionUrl: 'https://www.travelvrse.com/play/ted-lasso/completion',
+    url: 'https://ted-lasso-vibe-challenge.vercel.app/play/ted-lasso',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/ted-lasso/completion',
     desc: 'Live Richmond pub & green challenge with 3D navigation and local gem trail.'
   },
   {
     id: 'virgin-vegas',
     name: 'Virgin Hotel Las Vegas',
-    url: 'https://www.travelvrse.com/play/virgin-vegas',
-    completionUrl: 'https://www.travelvrse.com/play/virgin-vegas/completion',
+    url: 'https://ted-lasso-vibe-challenge.vercel.app/play/virgin-vegas',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/virgin-vegas/completion',
     desc: 'Live Vegas suite and Ruby Lounge spatial challenge.'
   },
   {
@@ -58,13 +58,14 @@ const findPreset = (query) => {
 
 const LiveMobileSimulatorPage = () => {
   const [searchParams] = useSearchParams();
-  const initialPreset = findPreset(searchParams.get('preset') || searchParams.get('id') || searchParams.get('challenge') || searchParams.get('hotel')) || LIVE_PRESETS[0];
+  const initialPreset = findPreset(searchParams.get('preset') || searchParams.get('id') || searchParams.get('challenge') || searchParams.get('hotel')) || LIVE_PRESETS[1];
   const [selectedPreset, setSelectedPreset] = useState(initialPreset);
   const [iframeKey, setIframeKey] = useState(0);
   const [scale, setScale] = useState(0.88);
   const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
   const [customUrl, setCustomUrl] = useState('');
   const [showQrModal, setShowQrModal] = useState(false);
+  const [isIframeLoading, setIsIframeLoading] = useState(true);
 
   useEffect(() => {
     const presetParam = searchParams.get('preset') || searchParams.get('id') || searchParams.get('challenge') || searchParams.get('hotel');
@@ -73,6 +74,7 @@ const LiveMobileSimulatorPage = () => {
       if (match && match.id !== selectedPreset.id) {
         setSelectedPreset(match);
         setCustomUrl('');
+        setIsIframeLoading(true);
         setIframeKey(k => k + 1);
       }
     }
@@ -81,6 +83,7 @@ const LiveMobileSimulatorPage = () => {
   const activeUrl = customUrl || (isShowingConfirmation ? selectedPreset.completionUrl : selectedPreset.url);
 
   const reloadIframe = () => {
+    setIsIframeLoading(true);
     setIframeKey(prev => prev + 1);
   };
 
@@ -88,11 +91,13 @@ const LiveMobileSimulatorPage = () => {
     setSelectedPreset(preset);
     setCustomUrl('');
     setIsShowingConfirmation(false);
+    setIsIframeLoading(true);
     setIframeKey(prev => prev + 1);
   };
 
   const toggleConfirmationMode = () => {
     setIsShowingConfirmation(!isShowingConfirmation);
+    setIsIframeLoading(true);
     setIframeKey(prev => prev + 1);
   };
 
@@ -274,6 +279,29 @@ const LiveMobileSimulatorPage = () => {
             <QrCode size={13} /> Phone
           </button>
 
+          <a
+            href={activeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open raw mobile app in new tab / fullscreen"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+              background: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              color: '#f8fafc',
+              borderRadius: '8px',
+              padding: '6px 10px',
+              fontSize: '12px',
+              fontWeight: 600,
+              textDecoration: 'none',
+              cursor: 'pointer'
+            }}
+          >
+            <ExternalLink size={13} /> Fullscreen
+          </a>
+
           <Link
             to="/vibe/southbank"
             style={{
@@ -361,10 +389,50 @@ const LiveMobileSimulatorPage = () => {
             </div>
           </div>
 
+          {/* Loading Indicator Inside Phone */}
+          {isIframeLoading && (
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'radial-gradient(circle at 50% 35%, #0d192e 0%, #030712 100%)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 99995,
+                padding: '30px',
+                textAlign: 'center',
+                pointerEvents: 'none',
+                borderRadius: '50px'
+              }}
+            >
+              <div
+                style={{
+                  width: '42px',
+                  height: '42px',
+                  border: '3px solid rgba(56, 189, 248, 0.15)',
+                  borderTop: '3px solid #38bdf8',
+                  borderRadius: '50%',
+                  animation: 'simSpin 0.9s linear infinite',
+                  marginBottom: '16px'
+                }}
+              />
+              <style dangerouslySetInnerHTML={{ __html: '@keyframes simSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }' }} />
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#f8fafc', marginBottom: '6px' }}>
+                Connecting to {selectedPreset.name}
+              </div>
+              <div style={{ fontSize: '12px', color: '#94a3b8', lineHeight: 1.5, maxWidth: '240px' }}>
+                Streaming live atmospheric audio, 3D assets & mobile touch engine...
+              </div>
+            </div>
+          )}
+
           {/* Real Live Mobile App Inside Viewport */}
           <iframe
             key={iframeKey}
             src={activeUrl}
+            onLoad={() => setIsIframeLoading(false)}
             title="Live Mobile TravelVRSE Simulation"
             style={{
               width: '100%',

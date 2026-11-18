@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Cookie, X, Check, Shield } from 'lucide-react';
 
 const CookieConsentBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     // Check if user has already made a consent choice
@@ -17,9 +18,16 @@ const CookieConsentBanner = () => {
     }
   }, []);
 
+  const isSimulatorRoute = 
+    location.pathname.startsWith('/simulator') || 
+    location.pathname.startsWith('/mobile') || 
+    location.pathname.startsWith('/live-mobile') || 
+    location.pathname.startsWith('/presenter') || 
+    location.pathname.startsWith('/demo-hub') ||
+    location.pathname.startsWith('/play');
+
   const handleAcceptAll = () => {
     localStorage.setItem('travelvrse_cookie_consent', 'accepted');
-    // Note: Do NOT touch ignore_analytics here so owner mode is never wiped by accepting cookies
     setIsVisible(false);
   };
 
@@ -31,7 +39,7 @@ const CookieConsentBanner = () => {
     setIsVisible(false);
   };
 
-  if (!isVisible) return null;
+  if (isSimulatorRoute || !isVisible) return null;
 
   return (
     <div

@@ -42,7 +42,8 @@ const MobileSimulatorWrapper = ({ children }) => {
     location.pathname.startsWith('/live-mobile') || 
     location.pathname.startsWith('/presenter') || 
     location.pathname.startsWith('/demo-hub') ||
-    location.pathname.startsWith('/play');
+    location.pathname.startsWith('/play') ||
+    location.pathname.startsWith('/pull');
 
   if (isSimulatorRoute) {
     return <>{children}</>;

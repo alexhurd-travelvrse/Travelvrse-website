@@ -24,7 +24,8 @@ const CookieConsentBanner = () => {
     location.pathname.startsWith('/live-mobile') || 
     location.pathname.startsWith('/presenter') || 
     location.pathname.startsWith('/demo-hub') ||
-    location.pathname.startsWith('/play');
+    location.pathname.startsWith('/play') ||
+    location.pathname.startsWith('/pull');
 
   const handleAcceptAll = () => {
     localStorage.setItem('travelvrse_cookie_consent', 'accepted');

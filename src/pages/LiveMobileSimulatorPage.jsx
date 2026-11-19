@@ -5,8 +5,22 @@ import { Helmet } from 'react-helmet-async';
 
 const LIVE_PRESETS = [
   {
+    id: 'southbank-pull',
+    name: '✨ South Bank — "The Pull" Mobile Vibe Challenge',
+    url: '/pull/southbank',
+    completionUrl: '/pull/southbank',
+    desc: 'New mobile-first crossfade drag duel, Scrub the Sun, sound crossfade & Spotify Wrapped reveal.'
+  },
+  {
+    id: 'copenhagen-pull',
+    name: '✨ Copenhagen — "The Pull" Mobile Vibe Challenge',
+    url: '/pull/copenhagen',
+    completionUrl: '/pull/copenhagen',
+    desc: 'Copenhagen Indre By re-skin proving one gesture, four skins.'
+  },
+  {
     id: '25-hours',
-    name: '25hours Hotel Copenhagen',
+    name: '25hours Hotel Copenhagen (3D)',
     url: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours',
     completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours/completion',
     desc: 'Live Scandinavian design, vinyl room, and Indre By challenge with mobile joystick.'
@@ -47,6 +61,8 @@ const findPreset = (query) => {
   return LIVE_PRESETS.find(p => 
     p.id.toLowerCase() === q ||
     p.id.replace(/-/g, '').toLowerCase() === q.replace(/-/g, '') ||
+    (q === 'pull' && p.id === 'southbank-pull') ||
+    (q.includes('copenhagen-pull') && p.id === 'copenhagen-pull') ||
     (q.includes('25') && p.id.includes('25')) ||
     (q.includes('copenhagen') && p.id.includes('25')) ||
     (q.includes('sea') && p.id.includes('sea')) ||
@@ -58,7 +74,7 @@ const findPreset = (query) => {
 
 const LiveMobileSimulatorPage = () => {
   const [searchParams] = useSearchParams();
-  const initialPreset = findPreset(searchParams.get('preset') || searchParams.get('id') || searchParams.get('challenge') || searchParams.get('hotel')) || LIVE_PRESETS[1];
+  const initialPreset = findPreset(searchParams.get('preset') || searchParams.get('id') || searchParams.get('challenge') || searchParams.get('hotel')) || LIVE_PRESETS[0];
   const [selectedPreset, setSelectedPreset] = useState(initialPreset);
   const [iframeKey, setIframeKey] = useState(0);
   const [scale, setScale] = useState(0.88);

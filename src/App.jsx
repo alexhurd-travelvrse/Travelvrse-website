@@ -17,6 +17,7 @@ import CookiePolicyPage from './pages/CookiePolicyPage';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import MobileSimulatorWrapper from './components/MobileSimulatorWrapper';
 import LightweightMobileChallengeDemo from './components/LightweightMobileChallengeDemo';
+import MobileVibePullChallenge from './components/MobileVibePullChallenge';
 import LiveMobileSimulatorPage from './pages/LiveMobileSimulatorPage';
 import PresenterPhoneHubPage from './pages/PresenterPhoneHubPage';
 import RevenueSection from './components/RevenueSection';
@@ -248,6 +249,9 @@ const App = () => {
             <Route path="/mobile" element={<LiveMobileSimulatorPage />} />
             <Route path="/simulator" element={<LiveMobileSimulatorPage />} />
             <Route path="/live-mobile" element={<LiveMobileSimulatorPage />} />
+            <Route path="/pull" element={<MobileVibePullChallenge initialCity="southbank" />} />
+            <Route path="/pull/southbank" element={<MobileVibePullChallenge initialCity="southbank" />} />
+            <Route path="/pull/copenhagen" element={<MobileVibePullChallenge initialCity="copenhagen" />} />
             <Route path="/presenter" element={<PresenterPhoneHubPage />} />
             <Route path="/demo-hub" element={<PresenterPhoneHubPage />} />
             <Route path="/play/mobile-demo" element={<LightweightMobileChallengeDemo />} />

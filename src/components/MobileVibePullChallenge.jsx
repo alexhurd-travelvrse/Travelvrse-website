@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Volume2, VolumeX, Share2, Copy, Check, Sparkles, ShieldCheck, RotateCcw, Sun, ChevronRight } from 'lucide-react';
 import { fetchLiveSouthBankNuiteeFeeds } from '../services/nuiteeLiveFeedService';
+import { savePortableVibeProfile, trackPullFunnelEvent } from '../services/vibeProfileStore';
 
 /**
  * TravelVRSE Mobile-First Vibe Challenge: "The Pull"
@@ -439,13 +440,14 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
     audioRef.current = new PullAudioEngine();
   }
 
-  // Preload all 8 step photos behind Screen 0 so zero pop-in occurs
+  // Preload all 8 step photos behind Screen 0 so zero pop-in occurs + log hook view
   useEffect(() => {
+    trackPullFunnelEvent('hook_viewed', { city: activeCityKey });
     config.steps.forEach(s => {
       const imgL = new Image(); imgL.src = s.left.photo;
       const imgR = new Image(); imgR.src = s.right.photo;
     });
-  }, [config]);
+  }, [config, activeCityKey]);
 
   // Fetch live Nuitée rates in background for Screen 9
   useEffect(() => {
@@ -534,6 +536,7 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
 
   const handleStart = () => {
     audioRef.current.unlock();
+    trackPullFunnelEvent('pull_started', { city: activeCityKey });
     setPicks([]);
     setStepIdx(0);
     setSplitPct(50);
@@ -595,6 +598,13 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
       audioRef.current.playTick(matchedCreator ? 780 : 420, 0.07);
     }, 320);
 
+    trackPullFunnelEvent(`pull_step_${stepIdx + 1}`, {
+      city: activeCityKey,
+      stepId: step.id,
+      choice: chosen.id,
+      intensity: Number(newPick.intensity.toFixed(2))
+    });
+
     // Auto-advance after 820ms micro-reveal
     setTimeout(() => {
       setMicroReveal(null);
@@ -602,6 +612,21 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
         setStepIdx(prev => prev + 1);
         setSplitPct(50);
       } else {
+        const finalPct = computeMatchPct(nextPicks);
+        const finalArch = getArchetype(nextPicks);
+        const strongest = [...nextPicks].sort((a, b) => b.intensity - a.intensity)[0];
+        savePortableVibeProfile({
+          city: activeCityKey,
+          picks: nextPicks,
+          alignmentPct: finalPct,
+          archetype: finalArch,
+          strongestPick: strongest
+        });
+        trackPullFunnelEvent('pull_completed', {
+          city: activeCityKey,
+          alignmentPct: finalPct,
+          archetype: finalArch.name
+        });
         setScreen('blend');
       }
     }, 880);
@@ -689,13 +714,16 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
   const archetype = getArchetype(picks);
   const agreedPicks = picks.filter(p => p.matchedCreator);
   const splitPicks = picks.filter(p => !p.matchedCreator);
+  const strongestPick = picks.length > 0 ? [...picks].sort((a, b) => b.intensity - a.intensity)[0] : null;
+  const primaryHotel = config.hotels[0];
 
   const handleCopyWordleGrid = () => {
     const glyphs = picks.map(p => (p.matchedCreator ? '●' : '◐')).join('');
-    const shareText = `${glyphs} ${finalMatchPct}% ${config.creator.handle} · ${archetype.name}\nBeat my ${config.cityName} vibe → ${config.shareUrl}`;
+    const shareText = `${glyphs} ${finalMatchPct}% aligned with ${config.creator.handle} · ${archetype.name}\nBeat my ${config.cityName} vibe → ${config.shareUrl}`;
     if (navigator.clipboard?.writeText) {
       navigator.clipboard.writeText(shareText).catch(() => {});
     }
+    trackPullFunnelEvent('share_copied', { city: activeCityKey, archetype: archetype.name });
     setCopiedGrid(true);
     setTimeout(() => setCopiedGrid(false), 2200);
   };
@@ -785,8 +813,11 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
               {refParam ? config.creatorHeadline : config.hookHeadline}
             </h1>
 
-            <div style={{ fontSize: '14px', color: '#cbd5e1', fontWeight: 600, marginBottom: '28px' }}>
+            <div style={{ fontSize: '14px', color: '#cbd5e1', fontWeight: 600, marginBottom: '6px' }}>
               4 swipes · 20 sec
+            </div>
+            <div style={{ fontSize: '12.5px', color: '#34d399', fontWeight: 700, marginBottom: '24px' }}>
+              Unlock your {config.cityName} Vibe Passport + 10% Stay Credit
             </div>
 
             <button
@@ -1159,16 +1190,20 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
           SCREEN 5: THE BLEND (1.2s unskippable slot-reel beat)
          ============================================================ */}
       {screen === 'blend' && (
-        <div style={{
-          height: '100dvh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '24px',
-          textAlign: 'center',
-          background: 'radial-gradient(circle at 50% 35%, #111c38 0%, #050811 100%)'
-        }}>
+        <div
+          onClick={() => setScreen('story1')}
+          style={{
+            height: '100dvh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '24px',
+            textAlign: 'center',
+            background: 'radial-gradient(circle at 50% 35%, #111c38 0%, #050811 100%)',
+            cursor: 'pointer'
+          }}
+        >
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '26px' }}>
             {picks.map((p, i) => (
               <img
@@ -1201,8 +1236,11 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
               marginBottom: '18px'
             }}
           />
-          <div style={{ fontSize: '19px', fontWeight: 800, color: '#f8fafc' }}>
+          <div style={{ fontSize: '19px', fontWeight: 800, color: '#f8fafc', marginBottom: '12px' }}>
             Finding your {config.cityName} twin…
+          </div>
+          <div style={{ fontSize: '11.5px', color: '#64748b', fontWeight: 600 }}>
+            Tap anywhere to skip
           </div>
         </div>
       )}
@@ -1252,9 +1290,24 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
             <div style={{ fontSize: '74px', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.03em' }}>
               {animatedPct}%
             </div>
-            <div style={{ fontSize: '16px', fontWeight: 700, color: '#94a3b8', marginBottom: '26px' }}>
-              vibe match
+            <div style={{ fontSize: '15px', fontWeight: 700, color: '#94a3b8', marginBottom: '14px' }}>
+              alignment with {config.creator.firstName}’s selections
             </div>
+            {strongestPick && (
+              <div style={{
+                display: 'inline-block',
+                fontSize: '11.5px',
+                fontWeight: 800,
+                color: '#34d399',
+                background: 'rgba(16, 185, 129, 0.14)',
+                border: '1px solid rgba(52, 211, 153, 0.35)',
+                padding: '4px 12px',
+                borderRadius: '999px',
+                marginBottom: '20px'
+              }}>
+                Strongest pull: {strongestPick.label}
+              </div>
+            )}
 
             <div style={{
               background: 'rgba(255,255,255,0.04)',
@@ -1464,7 +1517,8 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
               type="button"
               onClick={() => {
                 audioRef.current.playThunk();
-                setScreen('credit');
+                trackPullFunnelEvent('bridge_viewed', { city: activeCityKey, archetype: archetype.name });
+                setScreen('bridge');
               }}
               style={{
                 width: '100%',
@@ -1483,8 +1537,111 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
                 boxShadow: '0 10px 25px rgba(16, 185, 129, 0.35)'
               }}
             >
-              <span>Get my 10% credit</span>
+              <span>Unlock my Vibe Passport</span>
               <ChevronRight size={17} />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================
+          SCREEN 8.5: EDITORIAL BRIDGE SCREEN (The Pull -> Vibe Passport)
+         ============================================================ */}
+      {screen === 'bridge' && primaryHotel && (
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '100dvh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            padding: '28px 22px 40px 22px',
+            boxSizing: 'border-box',
+            backgroundImage: `url(${wantsRooftop ? primaryHotel.rooftopPhoto : primaryHotel.quietPhoto})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(5,8,17,0.3) 0%, rgba(5,8,17,0.65) 45%, rgba(5,8,17,0.97) 100%)'
+          }} />
+
+          <div style={{ position: 'relative', zIndex: 2 }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'rgba(16, 185, 129, 0.18)',
+              border: '1px solid rgba(52, 211, 153, 0.45)',
+              color: '#34d399',
+              padding: '5px 12px',
+              borderRadius: '999px',
+              fontSize: '11px',
+              fontWeight: 800,
+              letterSpacing: '0.8px',
+              marginBottom: '12px'
+            }}>
+              <Sparkles size={12} /> VIBE PASSPORT UNLOCKED
+            </div>
+
+            <h2 style={{ fontSize: '28px', fontWeight: 900, lineHeight: 1.12, margin: '0 0 10px 0', letterSpacing: '-0.02em' }}>
+              Your {config.cityName} stay is matched.
+            </h2>
+
+            <p style={{ fontSize: '14px', color: '#e2e8f0', lineHeight: 1.5, margin: '0 0 18px 0' }}>
+              You chose <strong>{picks[3]?.label || 'DEEP QUIET'}</strong> &amp; <strong>{picks[1]?.label || 'GOLDEN 6PM'}</strong>.{' '}
+              Here’s why <strong>{primaryHotel.name}</strong> suits your exact rhythm.
+            </p>
+
+            {/* Reward & Match Summary Box */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.85)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid rgba(56, 189, 248, 0.3)',
+              borderRadius: '16px',
+              padding: '16px',
+              marginBottom: '18px'
+            }}>
+              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#7dd3fc', fontWeight: 800, marginBottom: '4px' }}>
+                Your First Reward
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: 900, color: '#ffffff', marginBottom: '4px' }}>
+                10% Stay Credit on eligible {config.shortCode} stays
+              </div>
+              <div style={{ fontSize: '12px', color: '#94a3b8' }}>
+                Includes curated room matches, local gems &amp; your {config.cityName} soundtrack.
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                audioRef.current.playThunk();
+                trackPullFunnelEvent('passport_revealed', { city: activeCityKey, archetype: archetype.name });
+                setScreen('credit');
+              }}
+              style={{
+                width: '100%',
+                height: '58px',
+                borderRadius: '16px',
+                border: 'none',
+                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                color: '#ffffff',
+                fontSize: '16px',
+                fontWeight: 900,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                boxShadow: '0 12px 30px rgba(16, 185, 129, 0.45)'
+              }}
+            >
+              <span>Reveal my Vibe Passport</span>
+              <ChevronRight size={18} />
             </button>
           </div>
         </div>

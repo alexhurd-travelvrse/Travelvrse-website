@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { fetchLiveSouthBankNuiteeFeeds, executeSouthBankLivePrebook } from '../services/nuiteeLiveFeedService';
+import { loadPortableVibeProfile } from '../services/vibeProfileStore';
 
 // Comprehensive DESTINATION-LEVEL Database (Focusing on the neighborhood, not a single hotel)
 const DESTINATION_DATABASE = {
@@ -682,12 +683,21 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   // The Creator Lead
   const activeCurator = location.curators[0];
 
-  // User Duel Answers
-  const [userAnswers, setUserAnswers] = useState({
-    culturePace: activeCurator.duelChoices.culturePace,
-    diurnalRhythm: activeCurator.duelChoices.diurnalRhythm,
-    dispersion: activeCurator.duelChoices.dispersion,
-    sanctuary: activeCurator.duelChoices.sanctuary
+  // Portable Vibe Profile hydration from Mobile "The Pull"
+  const [hydratedFromMobilePull] = useState(() => Boolean(loadPortableVibeProfile()?.desktopAnswers));
+
+  // User Duel Answers (auto-hydrated from Mobile "The Pull" if present)
+  const [userAnswers, setUserAnswers] = useState(() => {
+    const saved = loadPortableVibeProfile();
+    if (saved?.desktopAnswers) {
+      return saved.desktopAnswers;
+    }
+    return {
+      culturePace: activeCurator.duelChoices.culturePace,
+      diurnalRhythm: activeCurator.duelChoices.diurnalRhythm,
+      dispersion: activeCurator.duelChoices.dispersion,
+      sanctuary: activeCurator.duelChoices.sanctuary
+    };
   });
 
   // Photo Curation View Mode ('vibe' vs 'raw_ota')
@@ -1965,6 +1975,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               <span style={{ fontSize: '11px', background: 'rgba(56, 189, 248, 0.15)', color: '#7dd3fc', padding: '2px 8px', borderRadius: '999px', fontWeight: '700' }}>
                 {duelViewMode === 'wizard' ? `Card ${duelStep + 1} of ${location.duelQuestions.length}` : 'All 4 Cards'}
               </span>
+              {hydratedFromMobilePull && (
+                <span style={{ fontSize: '11px', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(52, 211, 153, 0.35)', padding: '2px 8px', borderRadius: '999px', fontWeight: '700' }}>
+                  ✨ Synced from your Mobile Pull
+                </span>
+              )}
             </div>
             <h3 style={{ fontSize: '20px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
               How Do You Experience {location.name.split('•')[1]?.trim() || location.name}?

@@ -14,6 +14,7 @@ const CHALLENGE_DESTINATIONS = {
     cityName: 'South Bank',
     shortCode: 'SE1',
     shareUrl: 'travelvrse.com/sb',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers/completion',
     hookBg: 'https://static.cupid.travel/hotels/570881905.jpg',
     hookHeadline: 'Are you a South Bank local at heart?',
     creatorHeadline: 'Do you vibe like Alex?',
@@ -142,6 +143,7 @@ const CHALLENGE_DESTINATIONS = {
     cityName: 'Indre By',
     shortCode: 'CPH',
     shareUrl: 'travelvrse.com/cph',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours/completion',
     hookBg: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=900',
     hookHeadline: 'Are you a Copenhagen local at heart?',
     creatorHeadline: 'Do you vibe like Freja?',
@@ -1489,158 +1491,47 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
       )}
 
       {/* ============================================================
-          SCREEN 9: 10% CREDIT TICKET + PERSONALISED HOTELS (Scroll allowed)
+          SCREEN 9: EXACT NORMAL DESTINATION CHALLENGE CONFIRMATION PAGE (VibePassportModal)
          ============================================================ */}
       {screen === 'credit' && (
-        <div style={{ padding: '54px 18px 40px 18px', boxSizing: 'border-box' }}>
-          {/* Ticket Card */}
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.22), rgba(2, 132, 199, 0.22))',
-            border: '1.5px dashed rgba(52, 211, 153, 0.65)',
-            borderRadius: '18px',
-            padding: '18px',
-            textAlign: 'center',
-            marginBottom: '16px'
-          }}>
-            <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '1px', color: '#34d399', marginBottom: '4px' }}>
-              10% STAY CREDIT UNLOCKED
-            </div>
-            <div style={{ fontSize: '20px', fontWeight: 900, marginBottom: '12px' }}>
-              {archetype.name} · {finalMatchPct}% Match
-            </div>
-
-            {!claimedCredit ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    audioRef.current.playTick(820, 0.08);
-                    setClaimedCredit(true);
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '44px',
-                    borderRadius: '10px',
-                    border: 'none',
-                    background: '#ffffff',
-                    color: '#050811',
-                    fontSize: '13.5px',
-                    fontWeight: 800,
-                    cursor: 'pointer'
-                  }}
-                >
-                  Continue with Apple / Google to claim
-                </button>
-              </div>
-            ) : (
-              <div style={{
-                background: 'rgba(16, 185, 129, 0.2)',
-                borderRadius: '10px',
-                padding: '9px',
-                fontSize: '12.5px',
-                fontWeight: 800,
-                color: '#6ee7b7'
-              }}>
-                ✓ Member Rates Unlocked Below
-              </div>
-            )}
-          </div>
-
-          {/* Reordered Real Hotels */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-            <div style={{ fontSize: '15px', fontWeight: 800 }}>
-              Your {config.shortCode} stays
-            </div>
-            <button
-              type="button"
-              onClick={handleStart}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#7dd3fc',
-                fontSize: '12px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
-            >
-              <RotateCcw size={12} /> Replay
-            </button>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {config.hotels.map(hotel => {
-              const live = liveHotelRates[hotel.id];
-              const retail = live?.retail || hotel.retail;
-              const member = live?.member || hotel.member;
-              const heroPhoto = wantsRooftop ? hotel.rooftopPhoto : hotel.quietPhoto;
-              const whyChip = wantsRooftop ? hotel.rooftopChip : hotel.quietChip;
-
-              return (
-                <div
-                  key={hotel.id}
-                  style={{
-                    background: 'rgba(15, 23, 42, 0.85)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: '18px',
-                    overflow: 'hidden'
-                  }}
-                >
-                  <div style={{ position: 'relative', height: '180px' }}>
-                    <img src={heroPhoto} alt={hotel.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                    <span style={{
-                      position: 'absolute',
-                      top: '10px',
-                      left: '10px',
-                      background: 'rgba(2, 132, 199, 0.9)',
-                      fontSize: '10.5px',
-                      fontWeight: 800,
-                      padding: '4px 9px',
-                      borderRadius: '999px'
-                    }}>
-                      ✨ {wantsRooftop ? 'Rooftop Buzz' : 'Deep Quiet'} shown first
-                    </span>
-                  </div>
-
-                  <div style={{ padding: '14px 16px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                      <div style={{ fontSize: '15.5px', fontWeight: 800 }}>{hotel.name}</div>
-                      <span style={{ fontSize: '12px', color: '#fbbf24', fontWeight: 800 }}>★ {hotel.rating}</span>
-                    </div>
-
-                    <div style={{ fontSize: '12px', color: '#cbd5e1', marginBottom: '12px' }}>
-                      {whyChip}
-                    </div>
-
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <div>
-                        <span style={{ fontSize: '12px', color: '#64748b', textDecoration: 'line-through', marginRight: '6px' }}>
-                          £{retail}
-                        </span>
-                        <span style={{ fontSize: '19px', fontWeight: 900, color: '#34d399' }}>
-                          {claimedCredit ? `£${member}` : `£${member}`}
-                        </span>
-                        <span style={{ fontSize: '11px', color: '#94a3b8' }}> member</span>
-                      </div>
-
-                      <div style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        fontSize: '10.5px',
-                        color: '#7dd3fc',
-                        fontWeight: 700
-                      }}>
-                        <ShieldCheck size={12} /> Atmosvibe Verified
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        <div style={{ position: 'relative', width: '100%', height: '100dvh', background: '#050B14', overflow: 'hidden' }}>
+          <iframe
+            src={config.completionUrl}
+            title={`${config.cityName} Vibe Passport Confirmation`}
+            style={{
+              width: '100%',
+              height: '100%',
+              border: 'none',
+              display: 'block',
+              background: '#050B14'
+            }}
+            allow="fullscreen; autoplay"
+          />
+          <button
+            type="button"
+            onClick={handleStart}
+            style={{
+              position: 'fixed',
+              bottom: '14px',
+              left: '14px',
+              zIndex: 9999,
+              background: 'rgba(15, 23, 42, 0.88)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
+              color: '#7dd3fc',
+              padding: '7px 12px',
+              borderRadius: '999px',
+              fontSize: '11.5px',
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.6)'
+            }}
+          >
+            <RotateCcw size={12} /> Replay Pull
+          </button>
         </div>
       )}
     </div>

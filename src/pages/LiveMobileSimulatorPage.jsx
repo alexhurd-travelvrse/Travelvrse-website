@@ -8,14 +8,14 @@ const LIVE_PRESETS = [
     id: 'southbank-pull',
     name: '✨ South Bank — "The Pull" Mobile Vibe Challenge',
     url: '/pull/southbank',
-    completionUrl: '/pull/southbank',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers/completion',
     desc: 'New mobile-first crossfade drag duel, Scrub the Sun, sound crossfade & Spotify Wrapped reveal.'
   },
   {
     id: 'copenhagen-pull',
     name: '✨ Copenhagen — "The Pull" Mobile Vibe Challenge',
     url: '/pull/copenhagen',
-    completionUrl: '/pull/copenhagen',
+    completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours/completion',
     desc: 'Copenhagen Indre By re-skin proving one gesture, four skins.'
   },
   {

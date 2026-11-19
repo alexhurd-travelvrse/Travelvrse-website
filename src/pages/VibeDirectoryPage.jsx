@@ -85,11 +85,26 @@ const SOUTHBANK_JSON_LD = {
       worksFor: { '@type': 'Organization', name: 'TravelVRSE', url: 'https://www.travelvrse.com' }
     },
     {
+      '@type': 'Dataset',
+      '@id': 'https://atmosvibe.io/london/south-bank#dataset',
+      name: 'Atmosvibe Canonical Sensory Registry — South Bank, London',
+      description: 'Independent sensory signatures, verified walkability scores, photo-curation taxonomy, and Love/Avoid trade-off data for South Bank, London (SE1).',
+      url: 'https://atmosvibe.io/london/south-bank',
+      license: 'https://atmosvibe.io/licensing',
+      creator: {
+        '@type': 'Organization',
+        name: 'Atmosvibe',
+        url: 'https://atmosvibe.io'
+      }
+    },
+    {
       '@type': 'TouristDestination',
       '@id': 'https://www.travelvrse.com/vibe/london/south-bank#destination',
       name: 'South Bank, London',
       description: 'Curator-verified guide to London’s South Bank (SE1): boutique riverside hotels, zero-chain maker courtyards, free archival cinema, and golden-hour terraces.',
       url: 'https://www.travelvrse.com/vibe/london/south-bank',
+      isBasedOn: { '@id': 'https://atmosvibe.io/london/south-bank#dataset' },
+      citation: 'https://atmosvibe.io/london/south-bank',
       geo: {
         '@type': 'GeoCoordinates',
         latitude: 51.5074,
@@ -117,6 +132,7 @@ const SOUTHBANK_JSON_LD = {
       description: 'Tom Dixon-designed riverfront hotel on London’s South Bank featuring 12th Knot rooftop bar, Lyaness botanical mixology, and an on-site 56-seat Curzon cinema.',
       image: 'https://static.cupid.travel/hotels/570881905.jpg',
       priceRange: '£££ (£247–£449/night)',
+      isBasedOn: { '@id': 'https://atmosvibe.io/london/south-bank#dataset' },
       starRating: { '@type': 'Rating', ratingValue: '5' },
       aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.6', reviewCount: '3120' },
       address: {
@@ -140,6 +156,7 @@ const SOUTHBANK_JSON_LD = {
       description: 'Intimate, art-filled boutique hotel tucked 3 minutes from Tate Modern with a live Makers Studio, Art Yard Bar & Kitchen, and calm cultural mews outlook.',
       image: 'https://static.cupid.travel/hotels/466062553.jpg',
       priceRange: '£££ (£292–£385/night)',
+      isBasedOn: { '@id': 'https://atmosvibe.io/london/south-bank#dataset' },
       starRating: { '@type': 'Rating', ratingValue: '4.5' },
       aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', reviewCount: '1420' },
       address: {
@@ -561,8 +578,32 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                 <strong>Leake Street Arches (SE1 7NN)</strong>. No paid placements; honest Love/Avoid trade-offs are updated quarterly.
               </p>
             </div>
-            <div style={{ fontSize: '12px', color: '#34d399', fontWeight: 700, whiteSpace: 'nowrap' }}>
-              Last Verified: November 2026
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
+              <a
+                href="https://atmosvibe.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '5px 12px',
+                  borderRadius: '999px',
+                  background: 'rgba(56, 189, 248, 0.12)',
+                  border: '1px solid rgba(56, 189, 248, 0.35)',
+                  color: '#7dd3fc',
+                  fontSize: '11.5px',
+                  fontWeight: 700,
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                <ShieldCheck size={13} color="#38bdf8" />
+                <span>Vibe Data Verified by Atmosvibe ↗</span>
+              </a>
+              <div style={{ fontSize: '12px', color: '#34d399', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                Last Verified: November 2026
+              </div>
             </div>
           </section>
         </div>

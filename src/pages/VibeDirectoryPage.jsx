@@ -1,38 +1,244 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import VibeSearchChallengeWidget from '../components/VibeSearchChallengeWidget';
 import { SOUTH_BANK_VIBE_DATA } from '../data/southbankVibeData';
-import { getVibeIntentTelemetry, recordRadarChallengeCompletion } from '../services/vibeIntentTelemetry';
+import { getVibeIntentTelemetry } from '../services/vibeIntentTelemetry';
 import { Helmet } from 'react-helmet-async';
-import { Sparkles, MapPin, Volume2, ShieldCheck, ArrowRight, ExternalLink, Box, Tag, Award, Compass, Star, Activity } from 'lucide-react';
+import {
+  Sparkles,
+  MapPin,
+  ShieldCheck,
+  Compass,
+  Activity,
+  ChevronDown,
+  ChevronRight,
+  CalendarCheck,
+  CheckCircle2,
+  HelpCircle
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const SOUTHBANK_INSIDER_FAQS = [
+  {
+    q: "What is the best boutique hotel on London's South Bank for sunset views vs. quiet sleep?",
+    a: "Choose Sea Containers London (20 Upper Ground, SE1 9PD) for panoramic St Paul’s sunset views from the 12th Knot rooftop, Tom Dixon copper design, and an on-site 56-seat Curzon cinema. Choose Bankside Hotel, Autograph Collection (2–8 Great Suffolk St, SE1 0UG) if you prefer a quieter, tree-lined cultural mews tucked 3 minutes from Tate Modern with a live Makers Studio."
+  },
+  {
+    q: "How do I avoid tourist crowds on South Bank?",
+    a: "Walk just two minutes inland from the busy Queen’s Walk promenade. Head to Gabriel’s Wharf (56 Upper Ground, SE1 9PP) for zero-chain independent craft studios, explore the Lower Marsh market corridor behind Waterloo, or visit the Thames footpaths before 10:00 AM when rowers and local commuters have the riverfront to themselves."
+  },
+  {
+    q: "Where can I find independent, chain-free food and makers near Tate Modern?",
+    a: "Gabriel’s Wharf (2-minute walk from Sea Containers, 4 minutes from Tate Modern) operates under a strict zero-chain charter featuring independent leatherworkers, printmakers, and wood-fired courtyard cafes. For lunch and artisan coffee, walk 5 minutes inland to Lower Marsh or Borough’s side-street bakeries."
+  },
+  {
+    q: "What is the best time of day to visit South Bank?",
+    a: "South Bank has two standout windows: 08:30–10:30 AM for peaceful riverside walks, uncrowded Tate Modern turbine views, and single-origin flat whites; and 17:00–19:30 for golden hour amber reflections over St Paul’s Cathedral, riverside aperitivo terraces, and evening BFI film screenings."
+  },
+  {
+    q: "Are there free cultural hidden gems on South Bank besides Tate Modern?",
+    a: "Yes. Inside BFI Southbank (Belvedere Rd, SE1 8XT), the BFI Mediatheque offers free private viewing booths with 10,000+ archived British films. Under Waterloo Bridge, the daily outdoor Waterloo Book Market sells antique prints and rare paperbacks, and 6 minutes inland, the 300-meter Leake Street Graffiti Tunnel (SE1 7NN) showcases constantly evolving street art."
+  }
+];
+
+const SOUTHBANK_COMPARISON_ROWS = [
+  {
+    name: 'Sea Containers London',
+    address: '20 Upper Ground, SE1 9PD',
+    bestFor: 'St Paul’s sunset rooftop, Tom Dixon design & on-site Curzon cinema',
+    walkToTate: '4 min walk (320m)',
+    loveAvoid: 'Love: Panoramic Thames views & Lyaness bar. Avoid: If you want a tiny residential guesthouse.',
+    startingRate: 'From £247 / nt',
+    creditNote: '10% Credit Applied'
+  },
+  {
+    name: 'Bankside Hotel, Autograph Collection',
+    address: '2–8 Great Suffolk St, SE1 0UG',
+    bestFor: 'Art-filled quiet sanctuary, live Makers Studio & sheltered courtyard',
+    walkToTate: '3 min walk (240m)',
+    loveAvoid: 'Love: Calm creative mews & local art. Avoid: If you specifically need direct river views from bed.',
+    startingRate: 'From £292 / nt',
+    creditNote: '10% Credit Applied'
+  }
+];
+
+const SOUTHBANK_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://www.travelvrse.com/vibe/london/south-bank#breadcrumb',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.travelvrse.com/' },
+        { '@type': 'ListItem', position: 2, name: 'London', item: 'https://www.travelvrse.com/vibe/london' },
+        { '@type': 'ListItem', position: 3, name: 'South Bank', item: 'https://www.travelvrse.com/vibe/london/south-bank' }
+      ]
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.travelvrse.com/curators/alex-hurd#person',
+      name: 'Alex Hurd',
+      alternateName: '@AlexCulture',
+      jobTitle: 'South Bank Design & Cultural Scout',
+      description: 'London design and cultural scout verifying South Bank hotels, riverside sanctuaries, and independent maker corridors on-site.',
+      worksFor: { '@type': 'Organization', name: 'TravelVRSE', url: 'https://www.travelvrse.com' }
+    },
+    {
+      '@type': 'TouristDestination',
+      '@id': 'https://www.travelvrse.com/vibe/london/south-bank#destination',
+      name: 'South Bank, London',
+      description: 'Curator-verified guide to London’s South Bank (SE1): boutique riverside hotels, zero-chain maker courtyards, free archival cinema, and golden-hour terraces.',
+      url: 'https://www.travelvrse.com/vibe/london/south-bank',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 51.5074,
+        longitude: -0.1065
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'South Bank, London',
+        addressRegion: 'Greater London',
+        postalCode: 'SE1',
+        addressCountry: 'GB'
+      },
+      containsPlace: [
+        { '@id': 'https://www.travelvrse.com/vibe/london/south-bank#sea-containers' },
+        { '@id': 'https://www.travelvrse.com/vibe/london/south-bank#bankside-hotel' },
+        { '@id': 'https://www.travelvrse.com/vibe/london/south-bank#gabriels-wharf' },
+        { '@id': 'https://www.travelvrse.com/vibe/london/south-bank#bfi-mediatheque' },
+        { '@id': 'https://www.travelvrse.com/vibe/london/south-bank#leake-street' }
+      ]
+    },
+    {
+      '@type': 'Hotel',
+      '@id': 'https://www.travelvrse.com/vibe/london/south-bank#sea-containers',
+      name: 'Sea Containers London',
+      description: 'Tom Dixon-designed riverfront hotel on London’s South Bank featuring 12th Knot rooftop bar, Lyaness botanical mixology, and an on-site 56-seat Curzon cinema.',
+      image: 'https://static.cupid.travel/hotels/570881905.jpg',
+      priceRange: '£££ (£247–£449/night)',
+      starRating: { '@type': 'Rating', ratingValue: '5' },
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.6', reviewCount: '3120' },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '20 Upper Ground, South Bank',
+        addressLocality: 'London',
+        postalCode: 'SE1 9PD',
+        addressCountry: 'GB'
+      },
+      geo: { '@type': 'GeoCoordinates', latitude: 51.5081, longitude: -0.1068 },
+      amenityFeature: [
+        { '@type': 'LocationFeatureSpecification', name: '12th Knot Rooftop Terrace', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Curzon Boutique Cinema', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Lyaness Cocktail Bar', value: true }
+      ]
+    },
+    {
+      '@type': 'Hotel',
+      '@id': 'https://www.travelvrse.com/vibe/london/south-bank#bankside-hotel',
+      name: 'Bankside Hotel, Autograph Collection',
+      description: 'Intimate, art-filled boutique hotel tucked 3 minutes from Tate Modern with a live Makers Studio, Art Yard Bar & Kitchen, and calm cultural mews outlook.',
+      image: 'https://static.cupid.travel/hotels/466062553.jpg',
+      priceRange: '£££ (£292–£385/night)',
+      starRating: { '@type': 'Rating', ratingValue: '4.5' },
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', reviewCount: '1420' },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '2-8 Great Suffolk Street',
+        addressLocality: 'London',
+        postalCode: 'SE1 0UG',
+        addressCountry: 'GB'
+      },
+      geo: { '@type': 'GeoCoordinates', latitude: 51.5063, longitude: -0.1027 },
+      amenityFeature: [
+        { '@type': 'LocationFeatureSpecification', name: 'Live Artist-in-Residence Makers Studio', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Art Yard Bar & Kitchen', value: true }
+      ]
+    },
+    {
+      '@type': 'TouristAttraction',
+      '@id': 'https://www.travelvrse.com/vibe/london/south-bank#gabriels-wharf',
+      name: "Gabriel's Wharf Artisan Courtyard",
+      description: 'Zero-chain riverside courtyard of independent craft workshops, leatherworkers, printmakers, and local cafes.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '56 Upper Ground',
+        addressLocality: 'London',
+        postalCode: 'SE1 9PP',
+        addressCountry: 'GB'
+      }
+    },
+    {
+      '@type': 'TouristAttraction',
+      '@id': 'https://www.travelvrse.com/vibe/london/south-bank#bfi-mediatheque',
+      name: 'BFI Southbank & Mediatheque',
+      description: 'Independent film hub with free private archival viewing booths featuring 10,000+ British films.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Belvedere Road',
+        addressLocality: 'London',
+        postalCode: 'SE1 8XT',
+        addressCountry: 'GB'
+      }
+    },
+    {
+      '@type': 'TouristAttraction',
+      '@id': 'https://www.travelvrse.com/vibe/london/south-bank#leake-street',
+      name: 'Leake Street Arches & Graffiti Tunnel',
+      description: '300-meter legal street art tunnel beneath Waterloo lined with independent subterranean lounges.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Leake Street',
+        addressLocality: 'London',
+        postalCode: 'SE1 7NN',
+        addressCountry: 'GB'
+      }
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://www.travelvrse.com/vibe/london/south-bank#faq',
+      mainEntity: SOUTHBANK_INSIDER_FAQS.map(item => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a
+        }
+      }))
+    }
+  ]
+};
+
 const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [matchedArchetype, setMatchedArchetype] = useState(null);
-  const [hasCompletedRadar, setHasCompletedRadar] = useState(false);
-  const [telemetry, setTelemetry] = useState(() => getVibeIntentTelemetry());
+  const [telemetry] = useState(() => getVibeIntentTelemetry());
+  const [openFaqIdx, setOpenFaqIdx] = useState(0);
 
-  const handleRadarComplete = (archetypeKey, answers) => {
-    const updated = recordRadarChallengeCompletion(archetypeKey, answers, 'london-south-bank');
-    setTelemetry({ ...updated });
-    setMatchedArchetype(SOUTH_BANK_VIBE_DATA.archetypes[archetypeKey]);
-    setHasCompletedRadar(true);
-  };
-
-  const filteredNodes = SOUTH_BANK_VIBE_DATA.nodes.filter(node => {
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'spatial') return node.hasSpatial3D;
-    return node.type === activeFilter;
-  });
+  const pageTitle = 'South Bank, London: Curated Hotels, Hidden Gems & Insider Guide (2026) | TravelVRSE';
+  const pageDesc =
+    'On-site verified guide to London’s South Bank (SE1). Compare Sea Containers London and Bankside Hotel, discover zero-chain local gems like Gabriel’s Wharf, and unlock 10% stay credits.';
 
   const content = (
     <>
       <Helmet>
-        <title>South Bank London Vibe Directory &amp; 3D Radar | TravelVRSE</title>
-        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
-        <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDesc} />
+        <link rel="canonical" href="https://www.travelvrse.com/vibe/london/south-bank" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDesc} />
+        <meta property="og:image" content="https://static.cupid.travel/hotels/570881905.jpg" />
+        <meta property="og:url" content="https://www.travelvrse.com/vibe/london/south-bank" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDesc} />
+        <meta name="twitter:image" content="https://static.cupid.travel/hotels/570881905.jpg" />
+        {isPrivateDemo && (
+          <>
+            <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+            <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+          </>
+        )}
+        <script type="application/ld+json">{JSON.stringify(SOUTHBANK_JSON_LD)}</script>
       </Helmet>
 
       <div
@@ -40,14 +246,33 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
           background: 'linear-gradient(180deg, #050b14 0%, #070e1c 40%, #050b14 100%)',
           color: '#f8fafc',
           minHeight: '100vh',
-          padding: '40px 20px 80px 20px',
+          padding: '32px 20px 80px 20px',
           fontFamily: 'Inter, system-ui, sans-serif'
         }}
       >
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          {/* Breadcrumb Navigation */}
+          <nav
+            aria-label="Breadcrumb"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '12.5px',
+              color: '#94a3b8',
+              marginBottom: '18px'
+            }}
+          >
+            <Link to="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>Home</Link>
+            <ChevronRight size={13} color="#475569" />
+            <span style={{ color: '#94a3b8' }}>London</span>
+            <ChevronRight size={13} color="#475569" />
+            <span style={{ color: '#38bdf8', fontWeight: 700 }}>South Bank (SE1)</span>
+          </nav>
+
           {/* Top Destination Header */}
           <div style={{ marginBottom: '32px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '12px' }}>
               <span
                 style={{
                   display: 'inline-flex',
@@ -66,28 +291,45 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
               >
                 <Compass size={14} /> Creator-Verified Neighborhood Hub
               </span>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  padding: '4px 10px',
+                  borderRadius: '999px',
+                  background: 'rgba(16, 185, 129, 0.12)',
+                  border: '1px solid rgba(52, 211, 153, 0.3)',
+                  color: '#34d399',
+                  fontSize: '11.5px',
+                  fontWeight: 700
+                }}
+              >
+                <CalendarCheck size={13} /> Last Verified On-Site: Nov 2026
+              </span>
               <span style={{ fontSize: '13px', color: '#94a3b8' }}>
-                Borough of {SOUTH_BANK_VIBE_DATA.geo.borough}
+                Borough of {SOUTH_BANK_VIBE_DATA.geo.borough} • SE1
               </span>
             </div>
 
             <h1
               style={{
-                fontSize: '40px',
+                fontSize: 'clamp(28px, 4vw, 40px)',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
+                lineHeight: 1.15,
                 margin: '0 0 12px 0',
                 background: 'linear-gradient(135deg, #ffffff 40%, #93c5fd 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent'
               }}
             >
-              South Bank Vibe Directory &amp; Radar
+              South Bank, London: Curated Hotels, Hidden Gems &amp; Insider Guide
             </h1>
 
-            <p style={{ fontSize: '16px', color: '#94a3b8', maxWidth: '780px', lineHeight: 1.6, margin: '0 0 20px 0' }}>
-              Curated on-site by London culture scouts. Discover low-decibel bedroom sanctuaries, independent riverfront craft studios,
-              and unlock verified rate credits before you pack.
+            <p style={{ fontSize: '16px', color: '#94a3b8', maxWidth: '800px', lineHeight: 1.6, margin: '0 0 20px 0' }}>
+              Curated on-site by London culture scouts. Discover quiet riverside sanctuaries, independent riverfront craft studios,
+              and unlock verified 10% stay credits before you pack.
             </p>
 
             {/* Macro Stats Strip */}
@@ -110,10 +352,10 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                 </strong>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Volume2 size={18} color="#34d399" />
-                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Late-Night Quiet Baseline:</span>
+                <MapPin size={18} color="#34d399" />
+                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Walkability Score:</span>
                 <strong style={{ color: '#34d399', fontSize: '14px' }}>
-                  {SOUTH_BANK_VIBE_DATA.atmosphericProfile.acousticBaselineDb.lateNight} dB
+                  {SOUTH_BANK_VIBE_DATA.atmosphericProfile.walkabilityScore} / 100
                 </strong>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -125,7 +367,7 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Activity size={18} color="#f59e0b" />
-                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Live Radar Intent:</span>
+                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Live Challenge Completions:</span>
                 <strong style={{ color: '#f59e0b', fontSize: '14px' }}>
                   {telemetry.totalRadarCompletions} Completed
                 </strong>
@@ -133,11 +375,196 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
             </div>
           </div>
 
-          {/* THE GAMIFIED DESTINATION VIBE CHALLENGE */}
-          <div style={{ marginBottom: '48px' }}>
+          {/* THE GAMIFIED DESTINATION VIBE CHALLENGE & UNIFIED DISCOVERY TABS */}
+          <div style={{ marginBottom: '40px' }}>
             <VibeSearchChallengeWidget initialLocation="london-southbank" />
           </div>
 
+          {/* GEO SECTION 1: STRUCTURED HOTEL COMPARISON TABLE (HTML <table>) */}
+          <section
+            aria-labelledby="southbank-comparison-heading"
+            style={{
+              background: 'rgba(15, 23, 42, 0.65)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '20px',
+              padding: '24px',
+              marginBottom: '28px'
+            }}
+          >
+            <div style={{ marginBottom: '16px' }}>
+              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: 800, marginBottom: '4px' }}>
+                Quick Comparison
+              </div>
+              <h2 id="southbank-comparison-heading" style={{ fontSize: '20px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                South Bank Boutique Hotels at a Glance
+              </h2>
+            </div>
+
+            <div style={{ overflowX: 'auto' }}>
+              <table
+                style={{
+                  width: '100%',
+                  borderCollapse: 'collapse',
+                  fontSize: '13px',
+                  textAlign: 'left',
+                  minWidth: '680px'
+                }}
+              >
+                <thead>
+                  <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.12)', color: '#94a3b8', fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    <th style={{ padding: '10px 12px' }}>Hotel &amp; Address</th>
+                    <th style={{ padding: '10px 12px' }}>Best For</th>
+                    <th style={{ padding: '10px 12px' }}>Walk to Tate Modern</th>
+                    <th style={{ padding: '10px 12px' }}>Honest Fit (Love / Avoid)</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'right' }}>Starting Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {SOUTHBANK_COMPARISON_ROWS.map((row, idx) => (
+                    <tr
+                      key={row.name}
+                      style={{
+                        borderBottom: idx < SOUTHBANK_COMPARISON_ROWS.length - 1 ? '1px solid rgba(255, 255, 255, 0.06)' : 'none'
+                      }}
+                    >
+                      <td style={{ padding: '14px 12px', verticalAlign: 'top' }}>
+                        <div style={{ fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>{row.name}</div>
+                        <div style={{ fontSize: '11.5px', color: '#94a3b8' }}>{row.address}</div>
+                      </td>
+                      <td style={{ padding: '14px 12px', color: '#e2e8f0', verticalAlign: 'top', lineHeight: 1.45 }}>
+                        {row.bestFor}
+                      </td>
+                      <td style={{ padding: '14px 12px', color: '#7dd3fc', fontWeight: 700, verticalAlign: 'top', whiteSpace: 'nowrap' }}>
+                        {row.walkToTate}
+                      </td>
+                      <td style={{ padding: '14px 12px', color: '#cbd5e1', verticalAlign: 'top', lineHeight: 1.45 }}>
+                        {row.loveAvoid}
+                      </td>
+                      <td style={{ padding: '14px 12px', textAlign: 'right', verticalAlign: 'top', whiteSpace: 'nowrap' }}>
+                        <div style={{ fontWeight: 800, color: '#34d399', fontSize: '14px' }}>{row.startingRate}</div>
+                        <div style={{ fontSize: '11px', color: '#94a3b8' }}>{row.creditNote}</div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* GEO SECTION 2: DIRECT-ANSWER INSIDER FAQ (COLLAPSIBLE ACCORDION) */}
+          <section
+            aria-labelledby="southbank-faq-heading"
+            style={{
+              background: 'rgba(15, 23, 42, 0.65)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '20px',
+              padding: '24px',
+              marginBottom: '28px'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginBottom: '16px' }}>
+              <div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#a78bfa', fontWeight: 800, marginBottom: '4px' }}>
+                  <HelpCircle size={13} /> South Bank Insider FAQ
+                </div>
+                <h2 id="southbank-faq-heading" style={{ fontSize: '20px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                  Frequently Asked Questions About Staying on South Bank
+                </h2>
+              </div>
+              <span style={{ fontSize: '12px', color: '#94a3b8' }}>
+                Direct answers verified on-site in SE1
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {SOUTHBANK_INSIDER_FAQS.map((item, idx) => {
+                const isOpen = openFaqIdx === idx;
+                return (
+                  <div
+                    key={idx}
+                    style={{
+                      background: isOpen ? 'rgba(56, 189, 248, 0.06)' : 'rgba(255, 255, 255, 0.02)',
+                      border: isOpen ? '1px solid rgba(56, 189, 248, 0.35)' : '1px solid rgba(255, 255, 255, 0.07)',
+                      borderRadius: '12px',
+                      overflow: 'hidden',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenFaqIdx(isOpen ? -1 : idx)}
+                      style={{
+                        width: '100%',
+                        background: 'transparent',
+                        border: 'none',
+                        padding: '14px 16px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '12px',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        color: '#ffffff',
+                        fontSize: '14px',
+                        fontWeight: 700
+                      }}
+                    >
+                      <span>{item.q}</span>
+                      <ChevronDown
+                        size={17}
+                        color="#94a3b8"
+                        style={{
+                          flexShrink: 0,
+                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.2s ease'
+                        }}
+                      />
+                    </button>
+                    {isOpen && (
+                      <div style={{ padding: '0 16px 15px 16px', fontSize: '13.5px', lineHeight: 1.6, color: '#cbd5e1' }}>
+                        {item.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* GEO SECTION 3: E-E-A-T VERIFICATION & HYPER-LOCAL POSTCODE ANCHORS */}
+          <section
+            aria-label="How We Verify South Bank"
+            style={{
+              background: 'rgba(16, 185, 129, 0.05)',
+              border: '1px solid rgba(52, 211, 153, 0.2)',
+              borderRadius: '16px',
+              padding: '18px 22px',
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '16px'
+            }}
+          >
+            <div style={{ maxWidth: '720px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                <CheckCircle2 size={16} color="#34d399" />
+                <strong style={{ fontSize: '13.5px', color: '#ffffff' }}>
+                  How We Verify • On-Site Curation by Alex Hurd (@AlexCulture)
+                </strong>
+              </div>
+              <p style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.55, margin: 0 }}>
+                Every hotel, maker courtyard, and walking time on this page was walked and verified in person across South Bank SE1
+                — covering <strong>20 Upper Ground (SE1 9PD)</strong>, <strong>2–8 Great Suffolk St (SE1 0UG)</strong>,{' '}
+                <strong>Gabriel’s Wharf (SE1 9PP)</strong>, <strong>BFI Southbank (SE1 8XT)</strong>, and{' '}
+                <strong>Leake Street Arches (SE1 7NN)</strong>. No paid placements; honest Love/Avoid trade-offs are updated quarterly.
+              </p>
+            </div>
+            <div style={{ fontSize: '12px', color: '#34d399', fontWeight: 700, whiteSpace: 'nowrap' }}>
+              Last Verified: November 2026
+            </div>
+          </section>
         </div>
       </div>
 

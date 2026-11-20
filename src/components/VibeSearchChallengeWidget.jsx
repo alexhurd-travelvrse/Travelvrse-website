@@ -1395,11 +1395,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         {/* Header with Mode Toggle & Live Indicator */}
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '14px' }}>
           <div>
-            <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#a78bfa', fontWeight: '700' }}>
-              Neighborhood Cultural Blueprint
+            <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#a78bfa', fontWeight: '800' }}>
+              02 · The Neighbourhood
             </div>
             <h3 style={{ fontSize: '20px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
-              Why {location.name.split('•')[1]?.trim() || location.name} Is Exceptional
+              The {location.name.split('•')[1]?.trim() || location.name} Blueprint
             </h3>
           </div>
 
@@ -1987,11 +1987,23 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
               <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
-                Interactive Destination Duel & Harmony
+                01 · Discover Your Vibe
               </span>
-              <span style={{ fontSize: '11px', background: 'rgba(56, 189, 248, 0.15)', color: '#7dd3fc', padding: '2px 8px', borderRadius: '999px', fontWeight: '700' }}>
-                {duelViewMode === 'wizard' ? `Card ${duelStep + 1} of ${location.duelQuestions.length}` : 'All 4 Cards'}
-              </span>
+              <Link
+                to={selectedLocKey === 'copenhagen-indre-by' ? '/pull/copenhagen' : '/pull/southbank'}
+                style={{
+                  fontSize: '11px',
+                  background: 'rgba(56, 189, 248, 0.14)',
+                  border: '1px solid rgba(56, 189, 248, 0.35)',
+                  color: '#7dd3fc',
+                  padding: '2px 9px',
+                  borderRadius: '999px',
+                  fontWeight: '700',
+                  textDecoration: 'none'
+                }}
+              >
+                Try 20-sec Mobile Pull →
+              </Link>
               {hydratedFromMobilePull && (
                 <span style={{ fontSize: '11px', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(52, 211, 153, 0.35)', padding: '2px 8px', borderRadius: '999px', fontWeight: '700' }}>
                   ✨ Synced from your Mobile Pull
@@ -1999,7 +2011,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               )}
             </div>
             <h3 style={{ fontSize: '20px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
-              How Do You Experience {location.name.split('•')[1]?.trim() || location.name}?
+              Find your {location.name.split('•')[1]?.trim() || location.name}.
             </h3>
           </div>
 
@@ -2450,10 +2462,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 {crowdBenchmark.dmoImpact}
               </p>
 
-              {/* 10% Stay Credit Voucher Pill */}
+              {/* Portable Vibe Identity Pill (Zero Coupon Framing) */}
               <div style={{
-                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(6, 95, 70, 0.18))',
-                border: '1px solid rgba(52, 211, 153, 0.4)',
+                background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.14), rgba(99, 102, 241, 0.14))',
+                border: '1px solid rgba(56, 189, 248, 0.35)',
                 borderRadius: '8px',
                 padding: '8px 10px',
                 display: 'flex',
@@ -2462,22 +2474,22 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 gap: '8px'
               }}>
                 <div>
-                  <div style={{ fontSize: '9.5px', textTransform: 'uppercase', letterSpacing: '0.6px', color: '#34d399', fontWeight: '800' }}>
-                    Finisher Reward
+                  <div style={{ fontSize: '9.5px', textTransform: 'uppercase', letterSpacing: '0.6px', color: '#7dd3fc', fontWeight: '800' }}>
+                    Personalised Discovery Active
                   </div>
                   <div style={{ fontSize: '12px', fontWeight: '800', color: '#ffffff' }}>
-                    10% Credit: VIBE-SOUTHBANK-10
+                    Rooms, photos &amp; gems tailored below
                   </div>
                 </div>
                 <span style={{
-                  fontSize: '11px',
-                  background: '#10b981',
+                  fontSize: '10.5px',
+                  background: 'rgba(56, 189, 248, 0.25)',
                   color: '#ffffff',
                   padding: '3px 8px',
                   borderRadius: '6px',
                   fontWeight: '800'
                 }}>
-                  Unlocked
+                  Live
                 </span>
               </div>
             </div>
@@ -2485,7 +2497,105 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         </div>
       </div>
 
-      {/* 5. UNIFIED DISCOVERY TABS: HOTELS (HORIZONTAL EDITORIAL-OTA) | TOURS | LOCAL GEMS */}
+      {/* STAGE 03 · EXPERIENCE: DEDICATED 3D SPATIAL WALK FEATURE CARD (ON-SITE & NEIGHBOURHOOD ATMOSPHERE) */}
+      <div style={{
+        position: 'relative',
+        borderRadius: '22px',
+        overflow: 'hidden',
+        border: '1px solid rgba(56, 189, 248, 0.3)',
+        marginBottom: '36px',
+        backgroundImage: `url(${selectedLocKey === 'copenhagen-indre-by'
+          ? 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=1200'
+          : 'https://static.cupid.travel/hotels/37483771.jpg'})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.45)'
+      }}>
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(95deg, rgba(5, 11, 20, 0.94) 0%, rgba(5, 11, 20, 0.82) 55%, rgba(5, 11, 20, 0.38) 100%)'
+        }} />
+        <div style={{
+          position: 'relative',
+          zIndex: 2,
+          padding: '28px 28px',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '20px'
+        }}>
+          <div style={{ maxWidth: '580px' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '11px',
+              textTransform: 'uppercase',
+              letterSpacing: '1.1px',
+              color: '#38bdf8',
+              fontWeight: '800',
+              marginBottom: '8px'
+            }}>
+              <Box size={13} /> 03 · Step Inside · 60–90 Sec Spatial Walk
+            </div>
+            <h3 style={{ fontSize: '24px', fontWeight: '900', margin: '0 0 8px 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
+              Feel the place before you arrive.
+            </h3>
+            <p style={{ fontSize: '14px', color: '#cbd5e1', lineHeight: '1.55', margin: '0 0 14px 0' }}>
+              {selectedLocKey === 'copenhagen-indre-by'
+                ? 'Step inside the Vinyl Lounge, NENI glasshouse, and surrounding Indre By lanes of 25hours Hotel Copenhagen — then explore actual rooms below.'
+                : 'Step inside the social spaces, sounds, and hidden local discoveries around Sea Containers London & South Bank — then explore actual rooms below.'}
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {['On-Site Social Spaces', 'Spatial Soundscape', 'Collectible Pocket Map'].map(tag => (
+                <span
+                  key={tag}
+                  style={{
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    color: '#e2e8f0',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(255, 255, 255, 0.14)',
+                    padding: '4px 10px',
+                    borderRadius: '999px'
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
+            <Link
+              to={selectedLocKey === 'copenhagen-indre-by' ? '/simulator?preset=25-hours' : '/simulator?preset=sea-containers'}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)',
+                color: '#ffffff',
+                textDecoration: 'none',
+                padding: '13px 22px',
+                borderRadius: '12px',
+                fontSize: '14px',
+                fontWeight: '800',
+                boxShadow: '0 10px 28px rgba(14, 165, 233, 0.4)'
+              }}
+            >
+              <Box size={16} />
+              <span>Step inside in 3D →</span>
+            </Link>
+            <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>
+              Open immediately · No sign-up required
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* STAGE 04 · CHOOSE: UNIFIED DISCOVERY TABS (HOTELS | TOURS | LOCAL GEMS) */}
       <div id="curated-discovery" style={{ marginBottom: '24px' }}>
         {/* Clean 3-Tab Switcher Header */}
         <div style={{
@@ -2549,7 +2659,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             fontWeight: '700'
           }}>
             <Sparkles size={13} />
-            <span>10% Finisher Credit Active</span>
+            <span>04 · Find Your Stay · Member Rates Active</span>
           </div>
         </div>
 
@@ -3011,7 +3121,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                           borderRadius: '6px',
                           marginBottom: '10px'
                         }}>
-                          10% Stay Credit Applied (-£{rateData.finisherCreditGbp})
+                          Member Rate · Save £{rateData.finisherCreditGbp}/nt
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
@@ -3536,7 +3646,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                   cursor: 'pointer'
                 }}
               >
-                Reserve with 10% Credit
+                Reserve stay
               </button>
               <button
                 type="button"
@@ -3611,7 +3721,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             </button>
 
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(52, 211, 153, 0.15)', color: '#34d399', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '800', marginBottom: '12px' }}>
-              <Check size={13} /> 10% STAY CREDIT LOCKED IN
+              <Check size={13} /> MEMBER RATE RESERVED
             </div>
 
             <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#ffffff', margin: '0 0 4px 0' }}>
@@ -3637,7 +3747,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 <span style={{ textDecoration: 'line-through' }}>£{prebookSession.retailRate}/night</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: '#34d399', fontWeight: '700' }}>
-                <span>10% Finisher Stay Credit:</span>
+                <span>Member Rate Savings:</span>
                 <span>-£{prebookSession.finisherCreditGbp}/night</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: '#ffffff', fontWeight: '800', fontSize: '15px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '6px' }}>

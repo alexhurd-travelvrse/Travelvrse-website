@@ -50,7 +50,7 @@ const SOUTHBANK_COMPARISON_ROWS = [
     walkToTate: '4 min walk (320m)',
     loveAvoid: 'Love: Panoramic Thames views & Lyaness bar. Avoid: If you want a tiny residential guesthouse.',
     startingRate: 'From £247 / nt',
-    creditNote: '10% Credit Applied'
+    creditNote: 'Member Rate'
   },
   {
     name: 'Bankside Hotel, Autograph Collection',
@@ -59,7 +59,7 @@ const SOUTHBANK_COMPARISON_ROWS = [
     walkToTate: '3 min walk (240m)',
     loveAvoid: 'Love: Calm creative mews & local art. Avoid: If you specifically need direct river views from bed.',
     startingRate: 'From £292 / nt',
-    creditNote: '10% Credit Applied'
+    creditNote: 'Member Rate'
   }
 ];
 
@@ -345,8 +345,7 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
             </h1>
 
             <p style={{ fontSize: '16px', color: '#94a3b8', maxWidth: '800px', lineHeight: 1.6, margin: '0 0 20px 0' }}>
-              Curated on-site by London culture scouts. Discover quiet riverside sanctuaries, independent riverfront craft studios,
-              and unlock verified 10% stay credits before you pack.
+              Discover your vibe. Feel the place. Find your stay — curated on-site by London culture scouts across quiet riverside sanctuaries and independent craft studios.
             </p>
 
             {/* Macro Stats Strip */}
@@ -384,9 +383,9 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Activity size={18} color="#f59e0b" />
-                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Live Challenge Completions:</span>
+                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Verified Local Explorers:</span>
                 <strong style={{ color: '#f59e0b', fontSize: '14px' }}>
-                  {telemetry.totalRadarCompletions} Completed
+                  {telemetry.totalRadarCompletions} Profiles
                 </strong>
               </div>
             </div>

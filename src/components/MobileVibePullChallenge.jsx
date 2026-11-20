@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Volume2, VolumeX, Share2, Copy, Check, Sparkles, ShieldCheck, RotateCcw, Sun, ChevronRight } from 'lucide-react';
 import { fetchLiveSouthBankNuiteeFeeds } from '../services/nuiteeLiveFeedService';
-import { savePortableVibeProfile, trackPullFunnelEvent } from '../services/vibeProfileStore';
+import { savePortableVibeProfile, savePortableTripContext, computeTripDates, getDefaultTripContext, trackPullFunnelEvent } from '../services/vibeProfileStore';
 
 /**
  * TravelVRSE Mobile-First Vibe Challenge: "The Pull"
@@ -430,6 +430,35 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
   const [copiedGrid, setCopiedGrid] = useState(false);
   const [claimedCredit, setClaimedCredit] = useState(false);
   const [liveHotelRates, setLiveHotelRates] = useState({});
+  const [tripContext, setTripContext] = useState(() => getDefaultTripContext());
+
+  const handleSelectWindow = (winKey) => {
+    const { checkin, checkout, nights } = computeTripDates(winKey, tripContext.nights, tripContext.checkin);
+    const updated = { ...tripContext, travelWindow: winKey, checkin, checkout, nights };
+    setTripContext(updated);
+    savePortableTripContext(updated);
+  };
+
+  const handleSelectCustomDate = (dateStr) => {
+    if (!dateStr) return;
+    const { checkin, checkout, nights } = computeTripDates('custom', tripContext.nights, dateStr);
+    const updated = { ...tripContext, travelWindow: 'custom', checkin, checkout, nights };
+    setTripContext(updated);
+    savePortableTripContext(updated);
+  };
+
+  const handleSelectNights = (n) => {
+    const { checkin, checkout, nights } = computeTripDates(tripContext.travelWindow, n, tripContext.checkin);
+    const updated = { ...tripContext, checkin, checkout, nights };
+    setTripContext(updated);
+    savePortableTripContext(updated);
+  };
+
+  const handleSelectParty = (partyType, guests) => {
+    const updated = { ...tripContext, partyType, guests };
+    setTripContext(updated);
+    savePortableTripContext(updated);
+  };
 
   const surfaceRef = useRef(null);
   const dragStartRef = useRef(null);
@@ -1596,23 +1625,130 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
               Here’s why <strong>{primaryHotel.name}</strong> suits your exact rhythm.
             </p>
 
-            {/* Reward & Match Summary Box */}
+            {/* 2-Tap Trip Context Chips (Zero typing, powers live rates & B2B intent) */}
             <div style={{
-              background: 'rgba(15, 23, 42, 0.85)',
+              background: 'rgba(15, 23, 42, 0.88)',
               backdropFilter: 'blur(12px)',
               border: '1px solid rgba(56, 189, 248, 0.3)',
               borderRadius: '16px',
-              padding: '16px',
-              marginBottom: '18px'
+              padding: '14px',
+              marginBottom: '14px'
             }}>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#7dd3fc', fontWeight: 800, marginBottom: '4px' }}>
-                Your First Reward
+              {/* Row 1: When? */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '7px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 800, color: '#7dd3fc', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+                  When are you thinking?
+                </span>
+                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>
+                  {tripContext.checkin}
+                </span>
               </div>
-              <div style={{ fontSize: '16px', fontWeight: 900, color: '#ffffff', marginBottom: '4px' }}>
-                10% Stay Credit on eligible {config.shortCode} stays
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
+                {[
+                  { id: 'this_weekend', label: 'This Weekend' },
+                  { id: 'next_month', label: 'Next Month' },
+                  { id: 'in_2_months', label: '2–3 Months' },
+                  { id: 'custom', label: 'Pick Date 📅' }
+                ].map(w => {
+                  const active = tripContext.travelWindow === w.id;
+                  return (
+                    <button
+                      key={w.id}
+                      type="button"
+                      onClick={() => handleSelectWindow(w.id)}
+                      style={{
+                        background: active ? '#0284c7' : 'rgba(255,255,255,0.07)',
+                        border: active ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.12)',
+                        color: '#ffffff',
+                        borderRadius: '999px',
+                        padding: '5px 10px',
+                        fontSize: '11.5px',
+                        fontWeight: 700,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {w.label}
+                    </button>
+                  );
+                })}
               </div>
-              <div style={{ fontSize: '12px', color: '#94a3b8' }}>
-                Includes curated room matches, local gems &amp; your {config.cityName} soundtrack.
+
+              {tripContext.travelWindow === 'custom' && (
+                <div style={{ marginBottom: '10px' }}>
+                  <input
+                    type="date"
+                    value={tripContext.checkin}
+                    onChange={e => handleSelectCustomDate(e.target.value)}
+                    style={{
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      background: 'rgba(0,0,0,0.45)',
+                      border: '1px solid rgba(56, 189, 248, 0.45)',
+                      borderRadius: '8px',
+                      padding: '7px 10px',
+                      color: '#ffffff',
+                      fontSize: '12.5px',
+                      fontWeight: 600
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Row 2: Who + Nights */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '7px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 800, color: '#7dd3fc', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+                  Who’s going?
+                </span>
+                <div style={{ display: 'flex', gap: '4px' }}>
+                  {[1, 2, 3].map(n => (
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => handleSelectNights(n)}
+                      style={{
+                        background: tripContext.nights === n ? 'rgba(16, 185, 129, 0.25)' : 'rgba(255,255,255,0.06)',
+                        border: tripContext.nights === n ? '1px solid #34d399' : '1px solid rgba(255,255,255,0.1)',
+                        color: tripContext.nights === n ? '#6ee7b7' : '#94a3b8',
+                        borderRadius: '6px',
+                        padding: '2px 7px',
+                        fontSize: '10.5px',
+                        fontWeight: 800,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {n === 3 ? '3+ nts' : `${n} nt${n > 1 ? 's' : ''}`}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
+                {[
+                  { id: 'solo', label: 'Solo', guests: 1 },
+                  { id: 'couple', label: 'Couple', guests: 2 },
+                  { id: 'friends', label: 'Friends', guests: 3 },
+                  { id: 'family', label: 'Family', guests: 4 }
+                ].map(pt => {
+                  const active = tripContext.partyType === pt.id;
+                  return (
+                    <button
+                      key={pt.id}
+                      type="button"
+                      onClick={() => handleSelectParty(pt.id, pt.guests)}
+                      style={{
+                        background: active ? '#0284c7' : 'rgba(255,255,255,0.07)',
+                        border: active ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.12)',
+                        color: '#ffffff',
+                        borderRadius: '8px',
+                        padding: '6px 4px',
+                        fontSize: '11.5px',
+                        fontWeight: 700,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {pt.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -1620,6 +1756,15 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
               type="button"
               onClick={() => {
                 audioRef.current.playThunk();
+                savePortableTripContext(tripContext);
+                trackPullFunnelEvent('trip_context_captured', {
+                  city: activeCityKey,
+                  travelWindow: tripContext.travelWindow,
+                  checkin: tripContext.checkin,
+                  nights: tripContext.nights,
+                  partyType: tripContext.partyType,
+                  guests: tripContext.guests
+                });
                 trackPullFunnelEvent('passport_revealed', { city: activeCityKey, archetype: archetype.name });
                 setScreen('credit');
               }}
@@ -1653,7 +1798,7 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
       {screen === 'credit' && (
         <div style={{ position: 'relative', width: '100%', height: '100dvh', background: '#050B14', overflow: 'hidden' }}>
           <iframe
-            src={config.completionUrl}
+            src={`${config.completionUrl}?checkin=${encodeURIComponent(tripContext.checkin)}&checkout=${encodeURIComponent(tripContext.checkout)}&nights=${tripContext.nights}&guests=${tripContext.guests}&party=${encodeURIComponent(tripContext.partyType)}`}
             title={`${config.cityName} Vibe Passport Confirmation`}
             style={{
               width: '100%',

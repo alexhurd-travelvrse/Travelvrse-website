@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { fetchLiveSouthBankNuiteeFeeds, executeSouthBankLivePrebook } from '../services/nuiteeLiveFeedService';
-import { loadPortableVibeProfile } from '../services/vibeProfileStore';
+import { loadPortableVibeProfile, savePortableTripContext, computeTripDates, getDefaultTripContext } from '../services/vibeProfileStore';
 
 // Comprehensive DESTINATION-LEVEL Database (Focusing on the neighborhood, not a single hotel)
 const DESTINATION_DATABASE = {
@@ -686,6 +686,19 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   // Portable Vibe Profile hydration from Mobile "The Pull"
   const [hydratedFromMobilePull] = useState(() => Boolean(loadPortableVibeProfile()?.desktopAnswers));
 
+  // Shared Trip Context (Date, Nights, Party Size) — auto-hydrated from Mobile Pull
+  const [tripContext, setTripContext] = useState(() => loadPortableVibeProfile()?.tripContext || getDefaultTripContext());
+
+  const updateDesktopTrip = (patch) => {
+    setTripContext(prev => {
+      const next = { ...prev, ...patch };
+      const { checkin, checkout, nights } = computeTripDates('custom', next.nights, next.checkin);
+      const finalCtx = { ...next, travelWindow: 'custom', checkin, checkout, nights };
+      savePortableTripContext(finalCtx);
+      return finalCtx;
+    });
+  };
+
   // User Duel Answers (auto-hydrated from Mobile "The Pull" if present)
   const [userAnswers, setUserAnswers] = useState(() => {
     const saved = loadPortableVibeProfile();
@@ -843,7 +856,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     let isMounted = true;
     setNuiteeRates(prev => ({ ...prev, loading: true }));
 
-    fetchLiveSouthBankNuiteeFeeds()
+    fetchLiveSouthBankNuiteeFeeds({
+      checkin: tripContext.checkin,
+      checkout: tripContext.checkout,
+      nights: tripContext.nights
+    })
       .then(res => {
         if (!isMounted || !res || !res.hotelUpdatesByDemoId) {
           if (isMounted) setNuiteeRates(prev => ({ ...prev, loading: false }));
@@ -884,7 +901,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
       });
 
     return () => { isMounted = false; };
-  }, [selectedLocKey]);
+  }, [selectedLocKey, tripContext.checkin, tripContext.checkout, tripContext.nights]);
 
   // Reset user answers when location switches
   useEffect(() => {
@@ -2539,6 +2556,97 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         {/* TAB 1: HOTELS (HORIZONTAL EDITORIAL-OTA CARDS + ATMOSVIBE & USER PHOTO FILTERS) */}
         {discoveryTab === 'hotels' && (
           <div>
+            {/* Compact 1-Line Live Trip Bar (Dates · Nights · Group Size -> Live Rates) */}
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '12px',
+              background: 'rgba(15, 23, 42, 0.72)',
+              border: '1px solid rgba(255, 255, 255, 0.09)',
+              borderRadius: '14px',
+              padding: '10px 16px',
+              marginBottom: '18px'
+            }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '14px' }}>
+                <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>
+                  <span>Check-in</span>
+                  <input
+                    type="date"
+                    value={tripContext.checkin}
+                    onChange={e => e.target.value && updateDesktopTrip({ checkin: e.target.value })}
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.4)',
+                      border: '1px solid rgba(56, 189, 248, 0.35)',
+                      borderRadius: '8px',
+                      padding: '4px 8px',
+                      color: '#ffffff',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      cursor: 'pointer'
+                    }}
+                  />
+                </label>
+
+                <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>
+                  <span>Nights</span>
+                  <select
+                    value={tripContext.nights}
+                    onChange={e => updateDesktopTrip({ nights: Number(e.target.value) })}
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.45)',
+                      border: '1px solid rgba(255, 255, 255, 0.14)',
+                      borderRadius: '8px',
+                      padding: '5px 8px',
+                      color: '#ffffff',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {[1, 2, 3, 4, 5].map(n => (
+                      <option key={n} value={n} style={{ background: '#0f172a' }}>
+                        {n} {n === 1 ? 'night' : 'nights'}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>
+                  <span>Party</span>
+                  <select
+                    value={tripContext.partyType}
+                    onChange={e => {
+                      const map = { solo: 1, couple: 2, friends: 3, family: 4 };
+                      updateDesktopTrip({ partyType: e.target.value, guests: map[e.target.value] || 2 });
+                    }}
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.45)',
+                      border: '1px solid rgba(255, 255, 255, 0.14)',
+                      borderRadius: '8px',
+                      padding: '5px 8px',
+                      color: '#ffffff',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <option value="solo" style={{ background: '#0f172a' }}>Solo (1)</option>
+                    <option value="couple" style={{ background: '#0f172a' }}>Couple (2)</option>
+                    <option value="friends" style={{ background: '#0f172a' }}>Friends (3–4)</option>
+                    <option value="family" style={{ background: '#0f172a' }}>Family</option>
+                  </select>
+                </label>
+              </div>
+
+              <div style={{ fontSize: '11.5px', color: nuiteeRates.loading ? '#fbbf24' : '#34d399', fontWeight: 700 }}>
+                {nuiteeRates.loading
+                  ? '● Refreshing live rates…'
+                  : `● Live rates for ${tripContext.nights} nt${tripContext.nights > 1 ? 's' : ''} · ${tripContext.guests} guest${tripContext.guests > 1 ? 's' : ''}`}
+              </div>
+            </div>
+
             {/* Horizontal Hotel Cards List */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {location.stayAnchors.map(stay => {

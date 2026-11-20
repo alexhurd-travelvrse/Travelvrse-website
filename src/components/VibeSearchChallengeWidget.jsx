@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   Sparkles, Users, Volume2, ShieldCheck, MapPin, 
   ArrowRight, Bookmark, BookmarkCheck, Check, 
@@ -723,7 +723,132 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
 
   // Interactive Destination Duel & Harmony Wizard State
   const [duelStep, setDuelStep] = useState(0); // 0..3
-  const [duelViewMode, setDuelViewMode] = useState('wizard'); // 'wizard' (1-at-a-time, ~1/3 space) | 'all' (all 4 cards expanded)
+  const [duelViewMode, setDuelViewMode] = useState('wizard');
+  const [pullSplitPct, setPullSplitPct] = useState(50);
+  const [isPullDragging, setIsPullDragging] = useState(false);
+  const [pullRevealMsg, setPullRevealMsg] = useState(null);
+  const pullSurfaceRef = useRef(null);
+  const pullStartRef = useRef(null);
+
+  const PULL_VISUALS = selectedLocKey === 'copenhagen-indre-by'
+    ? [
+        {
+          id: 'culturePace',
+          type: 'pull',
+          left: { id: 'brutalist_film', label: 'ROYAL HALLS', photo: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=900', crowdPct: 58 },
+          right: { id: 'street_arches', label: 'BACK COURTYARDS', photo: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=900', crowdPct: 42 }
+        },
+        {
+          id: 'diurnalRhythm',
+          type: 'sun',
+          left: { id: 'morning_mist', label: 'HARBOUR DAWN', photo: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=900', crowdPct: 45 },
+          right: { id: 'sunset_glow', label: 'GOLDEN BRIDGES', photo: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80&w=900', crowdPct: 55 }
+        },
+        {
+          id: 'dispersion',
+          type: 'pull',
+          left: { id: 'indie_makers', label: 'QUIET LANES', photo: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=900', crowdPct: 44 },
+          right: { id: 'river_promenade', label: 'HARBOUR BUZZ', photo: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=900', crowdPct: 56 }
+        },
+        {
+          id: 'sanctuary',
+          type: 'pull',
+          left: { id: 'courtyard_quiet', label: 'HYGGE ROOM', photo: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=900', crowdPct: 61 },
+          right: { id: 'social_terrace', label: 'ROOFTOP BAR', photo: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=900', crowdPct: 39 }
+        }
+      ]
+    : [
+        {
+          id: 'culturePace',
+          type: 'pull',
+          left: { id: 'brutalist_film', label: 'BIG ART', photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=900', crowdPct: 62 },
+          right: { id: 'street_arches', label: 'HIDDEN WALLS', photo: 'https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&q=80&w=900', crowdPct: 38 }
+        },
+        {
+          id: 'diurnalRhythm',
+          type: 'sun',
+          left: { id: 'morning_mist', label: 'MISTY 8:30', photo: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=900', crowdPct: 34 },
+          right: { id: 'sunset_glow', label: 'GOLDEN 6PM', photo: 'https://static.cupid.travel/hotels/570881905.jpg', crowdPct: 66 }
+        },
+        {
+          id: 'dispersion',
+          type: 'pull',
+          left: { id: 'indie_makers', label: 'HIDDEN LANES', photo: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=900', crowdPct: 41 },
+          right: { id: 'river_promenade', label: 'RIVER BUZZ', photo: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&q=80&w=900', crowdPct: 59 }
+        },
+        {
+          id: 'sanctuary',
+          type: 'pull',
+          left: { id: 'courtyard_quiet', label: 'DEEP QUIET', photo: 'https://static.cupid.travel/hotels/209880755.jpg', crowdPct: 54 },
+          right: { id: 'social_terrace', label: 'ROOFTOP BUZZ', photo: 'https://static.cupid.travel/hotels/37483636.jpg', crowdPct: 46 }
+        }
+      ];
+
+  const commitEmbeddedPull = (stepObj, side) => {
+    const chosen = side === 'left' ? stepObj.left : stepObj.right;
+    const matchedCreator = activeCurator.duelChoices[stepObj.id] === chosen.id;
+    setPullSplitPct(side === 'left' ? 100 : 0);
+    setPullRevealMsg({
+      label: chosen.label,
+      matchedCreator,
+      leftPct: stepObj.left.crowdPct,
+      rightPct: stepObj.right.crowdPct,
+      leftLabel: stepObj.left.label,
+      rightLabel: stepObj.right.label,
+      side
+    });
+    handleSelectOption(stepObj.id, chosen.id, false);
+    setTimeout(() => {
+      setPullRevealMsg(null);
+      setPullSplitPct(50);
+      if (duelStep < PULL_VISUALS.length - 1) {
+        setDuelStep(prev => prev + 1);
+      }
+    }, 780);
+  };
+
+  const onEmbeddedPullDown = (e) => {
+    if (pullRevealMsg || !pullSurfaceRef.current) return;
+    const rect = pullSurfaceRef.current.getBoundingClientRect();
+    pullStartRef.current = { x: e.clientX, time: Date.now(), moved: false, relX: (e.clientX - rect.left) / rect.width };
+    setIsPullDragging(true);
+  };
+
+  const onEmbeddedPullMove = (e) => {
+    if (!isPullDragging || pullRevealMsg || !pullSurfaceRef.current || !pullStartRef.current) return;
+    if (Math.abs(e.clientX - pullStartRef.current.x) > 6) pullStartRef.current.moved = true;
+    const rect = pullSurfaceRef.current.getBoundingClientRect();
+    const pct = Math.max(6, Math.min(94, ((e.clientX - rect.left) / rect.width) * 100));
+    setPullSplitPct(pct);
+  };
+
+  const onEmbeddedPullUp = (e) => {
+    if (!isPullDragging || pullRevealMsg || !pullSurfaceRef.current || !pullStartRef.current) {
+      setIsPullDragging(false);
+      return;
+    }
+    const rect = pullSurfaceRef.current.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width;
+    const wasTap = !pullStartRef.current.moved && (Date.now() - pullStartRef.current.time < 320);
+    setIsPullDragging(false);
+    const stepObj = PULL_VISUALS[duelStep];
+
+    if (wasTap) {
+      commitEmbeddedPull(stepObj, relX < 0.5 ? 'left' : 'right');
+      return;
+    }
+    if (stepObj.type === 'sun' && Math.abs(pullSplitPct - 50) >= 8) {
+      commitEmbeddedPull(stepObj, pullSplitPct > 50 ? 'left' : 'right');
+      return;
+    }
+    if (pullSplitPct >= 65) {
+      commitEmbeddedPull(stepObj, 'left');
+    } else if (pullSplitPct <= 35) {
+      commitEmbeddedPull(stepObj, 'right');
+    } else {
+      setPullSplitPct(50);
+    }
+  };
 
   // Unified Bottom Discovery Tabs ('hotels' | 'tours' | 'gems') & Photo Filter / Modal State
   const [discoveryTab, setDiscoveryTab] = useState('hotels');
@@ -1390,6 +1515,351 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         </div>
       </div>
 
+      {/* STAGE 01 · DISCOVER YOUR VIBE: INTERACTIVE VISUAL "THE PULL" + LIVE HARMONY */}
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(10, 16, 30, 0.96) 100%)',
+        border: '1px solid rgba(56, 189, 248, 0.25)',
+        borderRadius: '22px',
+        padding: '22px 24px',
+        marginBottom: '36px',
+        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.45)'
+      }}>
+        {/* Header Bar */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '16px' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '4px' }}>
+              <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
+                01 · Discover Your Vibe
+              </span>
+              <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '600' }}>
+                Drag the seam or tap a photo · {duelStep + 1} of 4
+              </span>
+              {hydratedFromMobilePull && (
+                <span style={{ fontSize: '11px', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(52, 211, 153, 0.35)', padding: '2px 8px', borderRadius: '999px', fontWeight: '700' }}>
+                  ✨ Synced from Mobile Pull
+                </span>
+              )}
+            </div>
+            <h3 style={{ fontSize: '21px', fontWeight: '900', margin: 0, color: '#ffffff' }}>
+              Find your {location.name.split('•')[1]?.trim() || location.name}.
+            </h3>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {/* 4 Step Pills */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              {PULL_VISUALS.map((pv, idx) => (
+                <button
+                  key={pv.id}
+                  type="button"
+                  onClick={() => {
+                    setPullRevealMsg(null);
+                    setPullSplitPct(50);
+                    setDuelStep(idx);
+                  }}
+                  title={`Step ${idx + 1}: ${pv.left.label} vs ${pv.right.label}`}
+                  style={{
+                    width: duelStep === idx ? '26px' : '10px',
+                    height: '8px',
+                    borderRadius: '999px',
+                    background: duelStep === idx ? '#38bdf8' : 'rgba(255,255,255,0.25)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: 0,
+                    transition: 'all 0.2s ease'
+                  }}
+                />
+              ))}
+            </div>
+
+            <Link
+              to={selectedLocKey === 'copenhagen-indre-by' ? '/pull/copenhagen' : '/pull/southbank'}
+              style={{
+                fontSize: '11.5px',
+                background: 'rgba(56, 189, 248, 0.14)',
+                border: '1px solid rgba(56, 189, 248, 0.35)',
+                color: '#7dd3fc',
+                padding: '6px 12px',
+                borderRadius: '8px',
+                fontWeight: '700',
+                textDecoration: 'none'
+              }}
+            >
+              Fullscreen Mobile Pull →
+            </Link>
+          </div>
+        </div>
+
+        {/* 2-Column Split: Visual Pull Canvas (Left) + Live Alignment Scorecard (Right) */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '20px',
+          alignItems: 'stretch'
+        }}>
+          {/* LEFT: LIVE INTERACTIVE "THE PULL" PHOTO CANVAS */}
+          {(() => {
+            const pv = PULL_VISUALS[duelStep];
+            return (
+              <div
+                ref={pullSurfaceRef}
+                onPointerDown={onEmbeddedPullDown}
+                onPointerMove={onEmbeddedPullMove}
+                onPointerUp={onEmbeddedPullUp}
+                onPointerCancel={onEmbeddedPullUp}
+                style={{
+                  position: 'relative',
+                  height: '360px',
+                  borderRadius: '18px',
+                  overflow: 'hidden',
+                  touchAction: 'none',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
+                  cursor: isPullDragging ? 'grabbing' : 'grab',
+                  border: '1px solid rgba(255, 255, 255, 0.14)'
+                }}
+              >
+                {/* Right Photo */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundImage: `url(${pv.right.photo})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }} />
+
+                {/* Left Photo (Clipped or Crossfade on Scrub the Sun) */}
+                {pv.type === 'sun' ? (
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: `url(${pv.left.photo})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    opacity: pullSplitPct / 100,
+                    transition: isPullDragging ? 'none' : 'opacity 0.25s ease'
+                  }} />
+                ) : (
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: `url(${pv.left.photo})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    clipPath: `inset(0 ${100 - pullSplitPct}% 0 0)`,
+                    transition: isPullDragging ? 'none' : 'clip-path 0.25s cubic-bezier(0.22, 1, 0.36, 1)'
+                  }} />
+                )}
+
+                {/* Contrast Scrim */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(180deg, rgba(5,8,17,0.25) 0%, rgba(5,8,17,0) 40%, rgba(5,8,17,0.88) 100%)',
+                  pointerEvents: 'none'
+                }} />
+
+                {/* Vertical Glowing Seam */}
+                {pv.type !== 'sun' && !pullRevealMsg && (
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: `${pullSplitPct}%`,
+                    width: '2px',
+                    background: 'rgba(255,255,255,0.88)',
+                    boxShadow: '0 0 16px rgba(56, 189, 248, 0.9)',
+                    pointerEvents: 'none',
+                    transition: isPullDragging ? 'none' : 'left 0.25s cubic-bezier(0.22, 1, 0.36, 1)'
+                  }} />
+                )}
+
+                {/* Bold 2-Word Labels */}
+                {!pullRevealMsg && (
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '92px',
+                    left: '16px',
+                    right: '16px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    pointerEvents: 'none'
+                  }}>
+                    <span style={{ fontSize: '21px', fontWeight: 900, color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.9)' }}>
+                      {pv.left.label}
+                    </span>
+                    <span style={{ fontSize: '21px', fontWeight: 900, color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.9)' }}>
+                      {pv.right.label}
+                    </span>
+                  </div>
+                )}
+
+                {/* Drag Handle (or Sun Handle on Step 2) */}
+                {!pullRevealMsg && (
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '44px',
+                    left: `${Math.max(12, Math.min(88, pullSplitPct))}%`,
+                    transform: 'translate(-50%, 50%)',
+                    pointerEvents: 'none',
+                    transition: isPullDragging ? 'none' : 'left 0.25s cubic-bezier(0.22, 1, 0.36, 1)'
+                  }}>
+                    {pv.type === 'sun' ? (
+                      <div style={{
+                        width: '48px',
+                        height: '48px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #fde047, #f97316)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 0 26px rgba(251, 146, 60, 0.9), 0 0 0 3px rgba(255,255,255,0.45)'
+                      }}>
+                        <Sun size={22} color="#ffffff" />
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.8)' }}>◀</span>
+                        <div style={{
+                          width: '44px',
+                          height: '44px',
+                          borderRadius: '50%',
+                          background: 'rgba(15, 23, 42, 0.88)',
+                          border: '2px solid #ffffff',
+                          boxShadow: '0 0 20px rgba(56, 189, 248, 0.8)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}>
+                          <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#38bdf8' }} />
+                        </div>
+                        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.8)' }}>▶</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* 700ms Micro-Reveal Overlay */}
+                {pullRevealMsg && (
+                  <div style={{
+                    position: 'absolute',
+                    left: '16px',
+                    right: '16px',
+                    bottom: '22px',
+                    background: 'rgba(5, 8, 17, 0.88)',
+                    backdropFilter: 'blur(12px)',
+                    border: '1px solid rgba(56, 189, 248, 0.35)',
+                    borderRadius: '14px',
+                    padding: '12px 14px'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '14px', fontWeight: 900, color: '#ffffff' }}>
+                        {pullRevealMsg.matchedCreator ? `Same as ${activeCurator.name.split(' ')[0]}.` : `${activeCurator.name.split(' ')[0]} went the other way.`}
+                      </span>
+                      <img
+                        src={activeCurator.avatar}
+                        alt={activeCurator.name}
+                        style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', border: `2px solid ${pullRevealMsg.matchedCreator ? '#34d399' : '#fbbf24'}` }}
+                      />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 800, color: '#cbd5e1', marginBottom: '5px' }}>
+                      <span>{pullRevealMsg.leftPct}% {pullRevealMsg.leftLabel}</span>
+                      <span>{pullRevealMsg.rightPct}% {pullRevealMsg.rightLabel}</span>
+                    </div>
+                    <div style={{ height: '7px', borderRadius: '999px', background: 'rgba(255,255,255,0.12)', overflow: 'hidden' }}>
+                      <div style={{ width: `${pullRevealMsg.leftPct}%`, height: '100%', background: '#38bdf8' }} />
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
+
+          {/* RIGHT: LIVE ALIGNMENT & PORTABLE VIBE IDENTITY SCORECARD */}
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.82), rgba(15, 23, 42, 0.94))',
+            border: '1px solid rgba(56, 189, 248, 0.28)',
+            borderRadius: '18px',
+            padding: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
+          }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                <span style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
+                  Live Creator Alignment
+                </span>
+                <span style={{ fontSize: '11px', color: '#34d399', fontWeight: '700' }}>
+                  {matchCalculation.matchCount} of 4 in sync
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '6px' }}>
+                <span style={{ fontSize: '42px', fontWeight: '900', color: '#ffffff', lineHeight: 1 }}>
+                  {matchCalculation.percentage}%
+                </span>
+                <span style={{ fontSize: '13.5px', color: '#7dd3fc', fontWeight: '700' }}>
+                  aligned with {activeCurator.handle}
+                </span>
+              </div>
+
+              <div style={{ fontSize: '14px', fontWeight: '800', color: '#c084fc', marginBottom: '6px' }}>
+                {crowdBenchmark.archetype}
+              </div>
+              <p style={{ fontSize: '12px', lineHeight: '1.45', color: '#cbd5e1', margin: '0 0 14px 0' }}>
+                {crowdBenchmark.desc}.
+              </p>
+
+              {/* 4 Clickable Visual Step Pills */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '7px', marginBottom: '14px' }}>
+                {PULL_VISUALS.map((pv, idx) => {
+                  const chosenId = userAnswers[pv.id];
+                  const chosenLabel = chosenId === pv.left.id ? pv.left.label : pv.right.label;
+                  const isActive = duelStep === idx;
+                  return (
+                    <button
+                      key={pv.id}
+                      type="button"
+                      onClick={() => {
+                        setPullRevealMsg(null);
+                        setPullSplitPct(50);
+                        setDuelStep(idx);
+                      }}
+                      style={{
+                        background: isActive ? 'rgba(56, 189, 248, 0.16)' : 'rgba(255, 255, 255, 0.04)',
+                        border: isActive ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.08)',
+                        borderRadius: '8px',
+                        padding: '7px 9px',
+                        textAlign: 'left',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 700 }}>Pull {idx + 1}</div>
+                      <div style={{ fontSize: '11.5px', color: '#ffffff', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {chosenLabel}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div style={{
+              background: 'rgba(56, 189, 248, 0.1)',
+              border: '1px solid rgba(56, 189, 248, 0.3)',
+              borderRadius: '10px',
+              padding: '10px 12px',
+              fontSize: '11.5px',
+              color: '#e2e8f0',
+              lineHeight: 1.4
+            }}>
+              <strong style={{ color: '#7dd3fc' }}>Personalised Discovery Active:</strong> Every pull reshapes the Blueprint, 3D walk &amp; real hotel photos below in real time.
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* 2. STREAMLINED "NEIGHBORHOOD CULTURAL BLUEPRINT" (DESTINATION INTELLIGENCE) */}
       <div style={{ marginBottom: '36px' }}>
         {/* Header with Mode Toggle & Live Indicator */}
@@ -1971,530 +2441,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             </div>
           </div>
         )}
-      </div>
-
-      {/* 3. INTERACTIVE DESTINATION DUEL & TASTEMAKER HARMONY WIZARD (COMPACT ~1/3 FOOTPRINT) */}
-      <div style={{
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(10, 16, 30, 0.95) 100%)',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
-        borderRadius: '22px',
-        padding: '24px 26px',
-        marginBottom: '36px',
-        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)'
-      }}>
-        {/* Wizard Header Bar */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '20px' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
-                01 · Discover Your Vibe
-              </span>
-              <Link
-                to={selectedLocKey === 'copenhagen-indre-by' ? '/pull/copenhagen' : '/pull/southbank'}
-                style={{
-                  fontSize: '11px',
-                  background: 'rgba(56, 189, 248, 0.14)',
-                  border: '1px solid rgba(56, 189, 248, 0.35)',
-                  color: '#7dd3fc',
-                  padding: '2px 9px',
-                  borderRadius: '999px',
-                  fontWeight: '700',
-                  textDecoration: 'none'
-                }}
-              >
-                Try 20-sec Mobile Pull →
-              </Link>
-              {hydratedFromMobilePull && (
-                <span style={{ fontSize: '11px', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(52, 211, 153, 0.35)', padding: '2px 8px', borderRadius: '999px', fontWeight: '700' }}>
-                  ✨ Synced from your Mobile Pull
-                </span>
-              )}
-            </div>
-            <h3 style={{ fontSize: '20px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
-              Find your {location.name.split('•')[1]?.trim() || location.name}.
-            </h3>
-          </div>
-
-          {/* Step Selector Dots & Expand Toggle */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            {duelViewMode === 'wizard' && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                {location.duelQuestions.map((q, idx) => {
-                  const isAnswered = !!userAnswers[q.id];
-                  const isActive = duelStep === idx;
-                  return (
-                    <button
-                      key={q.id}
-                      type="button"
-                      onClick={() => setDuelStep(idx)}
-                      title={`Go to Question ${idx + 1}: ${q.title}`}
-                      style={{
-                        width: isActive ? '26px' : '9px',
-                        height: '9px',
-                        borderRadius: '5px',
-                        background: isActive ? '#38bdf8' : isAnswered ? '#10b981' : 'rgba(255, 255, 255, 0.2)',
-                        border: 'none',
-                        cursor: 'pointer',
-                        padding: 0,
-                        transition: 'all 0.2s ease'
-                      }}
-                    />
-                  );
-                })}
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setDuelViewMode(prev => prev === 'wizard' ? 'all' : 'wizard')}
-              title={duelViewMode === 'wizard' ? 'Show all 4 duel cards simultaneously' : 'Switch back to compact 1-question wizard'}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                background: duelViewMode === 'all' ? 'rgba(56, 189, 248, 0.18)' : 'rgba(255, 255, 255, 0.05)',
-                border: `1px solid ${duelViewMode === 'all' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(255, 255, 255, 0.1)'}`,
-                color: duelViewMode === 'all' ? '#38bdf8' : '#94a3b8',
-                borderRadius: '8px',
-                padding: '6px 12px',
-                fontSize: '12px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <LayoutGrid size={13} />
-              <span>{duelViewMode === 'wizard' ? 'Expand All (4 Cards)' : 'Compact Wizard'}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* 2-COLUMN UNIFIED SPLIT: WIZARD QUESTION (LEFT) + HARMONY SCORECARD (RIGHT) */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: duelViewMode === 'wizard' ? 'minmax(0, 1.4fr) minmax(0, 1fr)' : '1fr',
-          gap: '24px',
-          alignItems: 'stretch'
-        }}>
-          {/* LEFT COLUMN: ACTIVE WIZARD QUESTION (OR ALL 4 IF EXPANDED) */}
-          {duelViewMode === 'wizard' ? (
-            /* WIZARD CARD: SINGLE ACTIVE QUESTION (~1/3 space) */
-            (() => {
-              const q = location.duelQuestions[duelStep];
-              const currentChoice = userAnswers[q.id];
-              const isMatchWithCreator = currentChoice === q.creatorPick;
-
-              return (
-                <div style={{
-                  background: 'rgba(255, 255, 255, 0.025)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  borderRadius: '16px',
-                  padding: '20px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}>
-                  <div>
-                    {/* Question Header & Match Badge */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '8px' }}>
-                      <div>
-                        <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#94a3b8', fontWeight: '700' }}>
-                          Question {duelStep + 1} of {location.duelQuestions.length}
-                        </div>
-                        <h4 style={{ fontSize: '16px', fontWeight: '800', color: '#ffffff', margin: '2px 0 0 0' }}>
-                          {q.title}
-                        </h4>
-                      </div>
-
-                      <div style={{
-                        fontSize: '11px',
-                        padding: '3px 9px',
-                        borderRadius: '999px',
-                        fontWeight: '700',
-                        background: isMatchWithCreator ? 'rgba(52, 211, 153, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                        color: isMatchWithCreator ? '#34d399' : '#fbbf24',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px'
-                      }}>
-                        {isMatchWithCreator ? <Check size={11} /> : null}
-                        {isMatchWithCreator ? `Matches ${activeCurator.name.split(' ')[0]}` : `Alternative Frequency`}
-                      </div>
-                    </div>
-
-                    <p style={{ fontSize: '12.5px', color: '#94a3b8', margin: '0 0 16px 0' }}>
-                      {q.subtitle}
-                    </p>
-
-                    {/* Option A vs Option B Buttons */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '14px' }}>
-                      {/* Option A */}
-                      <button
-                        type="button"
-                        onClick={() => handleSelectOption(q.id, q.optionA.id, true)}
-                        style={{
-                          textAlign: 'left',
-                          background: currentChoice === q.optionA.id 
-                            ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.22), rgba(99, 102, 241, 0.22))' 
-                            : 'rgba(255, 255, 255, 0.02)',
-                          border: currentChoice === q.optionA.id 
-                            ? '2px solid #38bdf8' 
-                            : '1px solid rgba(255, 255, 255, 0.08)',
-                          borderRadius: '12px',
-                          padding: '12px 14px',
-                          cursor: 'pointer',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                          <span style={{ fontSize: '13.5px', fontWeight: '800', color: currentChoice === q.optionA.id ? '#ffffff' : '#e2e8f0' }}>
-                            {q.optionA.label}
-                          </span>
-                          <span style={{
-                            fontSize: '10px',
-                            background: 'rgba(255, 255, 255, 0.08)',
-                            color: '#38bdf8',
-                            padding: '1px 5px',
-                            borderRadius: '4px',
-                            fontWeight: '700'
-                          }}>
-                            {q.optionA.tag}
-                          </span>
-                        </div>
-                        <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: 0, lineHeight: '1.4' }}>
-                          {q.optionA.desc}
-                        </p>
-                      </button>
-
-                      {/* Option B */}
-                      <button
-                        type="button"
-                        onClick={() => handleSelectOption(q.id, q.optionB.id, true)}
-                        style={{
-                          textAlign: 'left',
-                          background: currentChoice === q.optionB.id 
-                            ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.22), rgba(99, 102, 241, 0.22))' 
-                            : 'rgba(255, 255, 255, 0.02)',
-                          border: currentChoice === q.optionB.id 
-                            ? '2px solid #38bdf8' 
-                            : '1px solid rgba(255, 255, 255, 0.08)',
-                          borderRadius: '12px',
-                          padding: '12px 14px',
-                          cursor: 'pointer',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                          <span style={{ fontSize: '13.5px', fontWeight: '800', color: currentChoice === q.optionB.id ? '#ffffff' : '#e2e8f0' }}>
-                            {q.optionB.label}
-                          </span>
-                          <span style={{
-                            fontSize: '10px',
-                            background: 'rgba(255, 255, 255, 0.08)',
-                            color: '#a78bfa',
-                            padding: '1px 5px',
-                            borderRadius: '4px',
-                            fontWeight: '700'
-                          }}>
-                            {q.optionB.tag}
-                          </span>
-                        </div>
-                        <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: 0, lineHeight: '1.4' }}>
-                          {q.optionB.desc}
-                        </p>
-                      </button>
-                    </div>
-
-                    {/* Alex's Insider Note */}
-                    <div style={{
-                      fontSize: '11px',
-                      color: '#94a3b8',
-                      background: 'rgba(0, 0, 0, 0.25)',
-                      padding: '7px 11px',
-                      borderRadius: '8px',
-                      borderLeft: '3px solid #38bdf8',
-                      display: 'flex',
-                      alignItems: 'baseline',
-                      gap: '5px',
-                      marginBottom: '14px'
-                    }}>
-                      <strong style={{ color: '#38bdf8', flexShrink: 0 }}>{activeCurator.name.split(' ')[0]}'s Take:</strong>
-                      <span style={{ fontStyle: 'italic' }}>{q.creatorReason}</span>
-                    </div>
-                  </div>
-
-                  {/* Wizard Footer Controls */}
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingTop: '12px',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.06)'
-                  }}>
-                    <button
-                      type="button"
-                      disabled={duelStep === 0}
-                      onClick={() => setDuelStep(prev => Math.max(0, prev - 1))}
-                      style={{
-                        background: 'transparent',
-                        border: 'none',
-                        color: duelStep === 0 ? '#475569' : '#94a3b8',
-                        fontSize: '12px',
-                        fontWeight: '700',
-                        cursor: duelStep === 0 ? 'not-allowed' : 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        padding: '4px 8px'
-                      }}
-                    >
-                      <ChevronLeft size={14} /> Back
-                    </button>
-
-                    <div style={{ fontSize: '11.5px', color: '#64748b', fontWeight: '600' }}>
-                      Auto-advances on tap
-                    </div>
-
-                    {duelStep < location.duelQuestions.length - 1 ? (
-                      <button
-                        type="button"
-                        onClick={() => setDuelStep(prev => Math.min(location.duelQuestions.length - 1, prev + 1))}
-                        style={{
-                          background: 'rgba(56, 189, 248, 0.1)',
-                          border: '1px solid rgba(56, 189, 248, 0.3)',
-                          color: '#38bdf8',
-                          fontSize: '12px',
-                          fontWeight: '700',
-                          borderRadius: '6px',
-                          padding: '5px 12px',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '4px'
-                        }}
-                      >
-                        Next <ChevronRight size={14} />
-                      </button>
-                    ) : (
-                      <span style={{
-                        fontSize: '11.5px',
-                        color: '#10b981',
-                        fontWeight: '700',
-                        background: 'rgba(16, 185, 129, 0.15)',
-                        padding: '4px 10px',
-                        borderRadius: '6px'
-                      }}>
-                        ✓ Duel Complete
-                      </span>
-                    )}
-                  </div>
-                </div>
-              );
-            })()
-          ) : (
-            /* EXPANDED VIEW: ALL 4 QUESTIONS IN A RESPONSIVE GRID */
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
-              {location.duelQuestions.map((q, idx) => {
-                const currentChoice = userAnswers[q.id];
-                const isMatchWithCreator = currentChoice === q.creatorPick;
-
-                return (
-                  <div 
-                    key={q.id}
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.06)',
-                      borderRadius: '14px',
-                      padding: '16px'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '13.5px', fontWeight: '800', color: '#ffffff' }}>
-                        {idx + 1}. {q.title}
-                      </span>
-                      <span style={{
-                        fontSize: '10px',
-                        padding: '2px 7px',
-                        borderRadius: '999px',
-                        background: isMatchWithCreator ? 'rgba(52, 211, 153, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                        color: isMatchWithCreator ? '#34d399' : '#fbbf24',
-                        fontWeight: '700'
-                      }}>
-                        {isMatchWithCreator ? `Matches Alex` : `Alternative`}
-                      </span>
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
-                      <button
-                        type="button"
-                        onClick={() => handleSelectOption(q.id, q.optionA.id, false)}
-                        style={{
-                          textAlign: 'left',
-                          background: currentChoice === q.optionA.id ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255, 255, 255, 0.02)',
-                          border: currentChoice === q.optionA.id ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.06)',
-                          borderRadius: '8px',
-                          padding: '8px 10px',
-                          color: '#ffffff',
-                          cursor: 'pointer',
-                          fontSize: '12px'
-                        }}
-                      >
-                        <strong>{q.optionA.label}</strong>: {q.optionA.desc}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => handleSelectOption(q.id, q.optionB.id, false)}
-                        style={{
-                          textAlign: 'left',
-                          background: currentChoice === q.optionB.id ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255, 255, 255, 0.02)',
-                          border: currentChoice === q.optionB.id ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.06)',
-                          borderRadius: '8px',
-                          padding: '8px 10px',
-                          color: '#ffffff',
-                          cursor: 'pointer',
-                          fontSize: '12px'
-                        }}
-                      >
-                        <strong>{q.optionB.label}</strong>: {q.optionB.desc}
-                      </button>
-                    </div>
-
-                    <div style={{ fontSize: '11px', color: '#94a3b8', fontStyle: 'italic', borderLeft: '2px solid #38bdf8', paddingLeft: '8px' }}>
-                      Alex: {q.creatorReason}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          {/* RIGHT COLUMN: LIVE TASTEMAKER HARMONY & CROWD BENCHMARK SCORECARD */}
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95))',
-            border: '1px solid rgba(56, 189, 248, 0.3)',
-            borderRadius: '16px',
-            padding: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
-          }}>
-            <div>
-              {/* Header */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
-                  Live Tastemaker Harmony
-                </span>
-                <span style={{ fontSize: '11px', color: '#34d399', fontWeight: '700' }}>
-                  {matchCalculation.matchCount} of 4 in Sync
-                </span>
-              </div>
-
-              {/* Big Percent Indicator */}
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '6px' }}>
-                <span style={{ fontSize: '42px', fontWeight: '900', color: '#ffffff', lineHeight: 1 }}>
-                  {matchCalculation.percentage}%
-                </span>
-                <span style={{ fontSize: '13.5px', color: '#38bdf8', fontWeight: '700' }}>
-                  Match with {activeCurator.name}
-                </span>
-              </div>
-
-              <p style={{ fontSize: '12px', lineHeight: '1.45', color: '#cbd5e1', margin: '0 0 14px 0' }}>
-                {matchCalculation.alignmentSummary}
-              </p>
-
-              {/* 4 Clickable Dimension Pills (Sync Jumpers) */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px', marginBottom: '16px' }}>
-                {matchCalculation.details.map((d, idx) => (
-                  <button
-                    key={d.id}
-                    type="button"
-                    onClick={() => {
-                      setDuelViewMode('wizard');
-                      setDuelStep(idx);
-                    }}
-                    title={`Click to jump to question ${idx + 1}`}
-                    style={{
-                      background: d.isMatch ? 'rgba(52, 211, 153, 0.12)' : 'rgba(255, 255, 255, 0.04)',
-                      border: `1px solid ${d.isMatch ? 'rgba(52, 211, 153, 0.35)' : 'rgba(255, 255, 255, 0.08)'}`,
-                      borderRadius: '8px',
-                      padding: '6px 8px',
-                      textAlign: 'left',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.15s ease'
-                    }}
-                  >
-                    <span style={{ fontSize: '11px', color: '#e2e8f0', fontWeight: '600', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {d.id === 'culturePace' ? '1. Art & Film' : d.id === 'diurnalRhythm' ? '2. River Rhythm' : d.id === 'dispersion' ? '3. Maker Spend' : '4. Stay Style'}
-                    </span>
-                    <span style={{ fontSize: '10.5px', color: d.isMatch ? '#34d399' : '#94a3b8', fontWeight: '700', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                      {d.isMatch ? '✓ Sync' : 'Alt'}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Dispersion Benchmark & Finisher Reward */}
-            <div style={{
-              background: 'rgba(0, 0, 0, 0.3)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderRadius: '12px',
-              padding: '12px 14px'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                <span style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#a78bfa', fontWeight: '800' }}>
-                  Dispersion Benchmark
-                </span>
-                <span style={{ fontSize: '11px', color: '#a78bfa', fontWeight: '800' }}>
-                  Top {crowdBenchmark.pct}%
-                </span>
-              </div>
-
-              <div style={{ fontSize: '13px', fontWeight: '800', color: '#ffffff', marginBottom: '2px' }}>
-                {crowdBenchmark.archetype}
-              </div>
-              <p style={{ fontSize: '11px', color: '#94a3b8', margin: '0 0 10px 0', lineHeight: '1.4' }}>
-                {crowdBenchmark.dmoImpact}
-              </p>
-
-              {/* Portable Vibe Identity Pill (Zero Coupon Framing) */}
-              <div style={{
-                background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.14), rgba(99, 102, 241, 0.14))',
-                border: '1px solid rgba(56, 189, 248, 0.35)',
-                borderRadius: '8px',
-                padding: '8px 10px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '8px'
-              }}>
-                <div>
-                  <div style={{ fontSize: '9.5px', textTransform: 'uppercase', letterSpacing: '0.6px', color: '#7dd3fc', fontWeight: '800' }}>
-                    Personalised Discovery Active
-                  </div>
-                  <div style={{ fontSize: '12px', fontWeight: '800', color: '#ffffff' }}>
-                    Rooms, photos &amp; gems tailored below
-                  </div>
-                </div>
-                <span style={{
-                  fontSize: '10.5px',
-                  background: 'rgba(56, 189, 248, 0.25)',
-                  color: '#ffffff',
-                  padding: '3px 8px',
-                  borderRadius: '6px',
-                  fontWeight: '800'
-                }}>
-                  Live
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* STAGE 03 · EXPERIENCE: DEDICATED 3D SPATIAL WALK FEATURE CARD (ON-SITE & NEIGHBOURHOOD ATMOSPHERE) */}

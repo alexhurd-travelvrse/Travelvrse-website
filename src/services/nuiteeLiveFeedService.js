@@ -23,6 +23,50 @@ export function getLiteApiKey() {
     return DEFAULT_SANDBOX_KEY;
 }
 
+function shouldUseServerProxy() {
+    if (typeof window === 'undefined') return false;
+    const host = window.location.hostname;
+    return host !== 'localhost' && host !== '127.0.0.1';
+}
+
+async function callNuiteeApi(endpoint, { method = 'GET', query = {}, body = null } = {}) {
+    // 1. Production: call our server-side Vercel proxy (/api/nuitee) so NUITEE_API_KEY stays secret
+    if (shouldUseServerProxy()) {
+        try {
+            const params = new URLSearchParams({ endpoint, ...query });
+            const res = await fetch(`/api/nuitee?${params.toString()}`, {
+                method,
+                headers: {
+                    accept: 'application/json',
+                    ...(method === 'POST' ? { 'content-type': 'application/json' } : {})
+                },
+                ...(method === 'POST' && body ? { body: JSON.stringify(body) } : {})
+            });
+            if (res.ok) {
+                return { ok: true, json: await res.json(), mode: 'live-proxy' };
+            }
+        } catch (_) {
+            // Fall back to sandbox below if proxy unavailable
+        }
+    }
+
+    // 2. Local dev / fallback: call LiteAPI directly using sandbox key
+    const apiKey = getLiteApiKey();
+    const qs = new URLSearchParams(query).toString();
+    const url = `${LITEAPI_BASE_URL}/${endpoint}${qs ? `?${qs}` : ''}`;
+    const res = await fetch(url, {
+        method,
+        headers: {
+            'X-API-Key': apiKey,
+            accept: 'application/json',
+            ...(method === 'POST' ? { 'content-type': 'application/json' } : {})
+        },
+        ...(method === 'POST' && body ? { body: JSON.stringify(body) } : {})
+    });
+    if (!res.ok) return { ok: false, json: null, mode: 'sandbox' };
+    return { ok: true, json: await res.json(), mode: 'sandbox' };
+}
+
 /**
  * Canonical mapping between TravelVRSE South Bank Demo Hotel IDs and real Nuitée LiteAPI v3.0 hotelIds
  */
@@ -107,22 +151,14 @@ export function analyzeNuiteePhotoFeed(hotelId, hotelData, fallbackNuiteeImages)
  * and live South Bank places (`/v3.0/data/places`) for all 4 South Bank demo properties.
  */
 export async function fetchLiveSouthBankNuiteeFeeds(customDates = null, guestNationality = 'GB') {
-    const apiKey = getLiteApiKey();
     const { checkin, checkout, nights } = customDates || getDefaultSouthBankDates(28, 2);
     const hotelIds = Object.values(SOUTHBANK_NUITEE_HOTEL_MAP);
 
-    const headers = {
-        'X-API-Key': apiKey,
-        accept: 'application/json',
-        'content-type': 'application/json'
-    };
-
     try {
-        // 1. Fetch live /v3.0/hotels/rates for all 4 South Bank hotels with source-market guestNationality & margin: 0
-        const ratesPromise = fetch(`${LITEAPI_BASE_URL}/hotels/rates`, {
+        // 1. Fetch live /v3.0/hotels/rates for all 4 South Bank hotels (via /api/nuitee in prod)
+        const ratesPromise = callNuiteeApi('hotels/rates', {
             method: 'POST',
-            headers,
-            body: JSON.stringify({
+            body: {
                 hotelIds,
                 checkin,
                 checkout,
@@ -131,33 +167,30 @@ export async function fetchLiveSouthBankNuiteeFeeds(customDates = null, guestNat
                 margin: 0,
                 occupancies: [{ adults: 2 }],
                 maxRatesPerHotel: 15
-            })
-        }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+            }
+        }).catch(() => ({ ok: false, json: null, mode: 'sandbox' }));
 
         // 2. Fetch live /v3.0/data/hotel content & photo galleries in parallel
         const hotelDetailsPromises = hotelIds.map((hId) =>
-            fetch(`${LITEAPI_BASE_URL}/data/hotel?hotelId=${encodeURIComponent(hId)}`, {
+            callNuiteeApi('data/hotel', {
                 method: 'GET',
-                headers: { 'X-API-Key': apiKey, accept: 'application/json' }
-            })
-                .then((r) => (r.ok ? r.json() : null))
-                .catch(() => null)
+                query: { hotelId: hId }
+            }).then((r) => (r.ok ? r.json : null)).catch(() => null)
         );
 
         // 3. Fetch live /v3.0/data/places for South Bank London SE1
-        const placesPromise = fetch(
-            `${LITEAPI_BASE_URL}/data/places?textQuery=${encodeURIComponent('South Bank London')}`,
-            {
-                method: 'GET',
-                headers: { 'X-API-Key': apiKey, accept: 'application/json' }
-            }
-        ).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+        const placesPromise = callNuiteeApi('data/places', {
+            method: 'GET',
+            query: { textQuery: 'South Bank London' }
+        }).then((r) => (r.ok ? r.json : null)).catch(() => null);
 
-        const [ratesRes, placesRes, ...detailsList] = await Promise.all([
+        const [ratesCall, placesRes, ...detailsList] = await Promise.all([
             ratesPromise,
             placesPromise,
             ...hotelDetailsPromises
         ]);
+        const ratesRes = ratesCall?.ok ? ratesCall.json : null;
+        const apiMode = ratesCall?.mode || 'sandbox';
 
         const detailsByNuiteeId = {};
         detailsList.forEach((item, idx) => {
@@ -277,7 +310,7 @@ export async function fetchLiveSouthBankNuiteeFeeds(customDates = null, guestNat
 
         return {
             isLive: Object.values(hotelUpdatesByDemoId).some((u) => u.hasLiveNuiteeDetail || u.hasLiveNuiteeRate),
-            apiKeyMasked: `${apiKey.slice(0, 9)}...${apiKey.slice(-4)}`,
+            apiMode,
             checkin,
             checkout,
             nights,
@@ -302,27 +335,19 @@ export async function fetchLiveSouthBankNuiteeFeeds(customDates = null, guestNat
  * Execute a live `POST /v3.0/rates/prebook` call for any South Bank hotel offer
  */
 export async function executeSouthBankLivePrebook({ nuiteeHotelId, offerId, hotelName, roomName, retailRate, challengeRate, finisherCreditGbp }) {
-    const apiKey = getLiteApiKey();
-
     if (offerId && !String(offerId).startsWith('static_')) {
         try {
-            const response = await fetch(`${LITEAPI_BASE_URL}/rates/prebook`, {
+            const { ok, json } = await callNuiteeApi('rates/prebook', {
                 method: 'POST',
-                headers: {
-                    'X-API-Key': apiKey,
-                    accept: 'application/json',
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
+                body: {
                     offerId,
                     usePaymentSdk: false
-                })
+                }
             });
 
-            const json = await response.json();
             const prebookData = json?.data;
 
-            if (response.ok && prebookData?.prebookId) {
+            if (ok && prebookData?.prebookId) {
                 return {
                     status: 'CONFIRMED_LIVE_PREBOOK',
                     isLiveApi: true,

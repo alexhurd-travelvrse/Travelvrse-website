@@ -220,6 +220,8 @@ export function buildSouthBankHubJsonLd() {
         name: 'Atmosvibe Canonical Sensory Registry — South Bank, London',
         description: 'Independently verified neighbourhood sensory signatures, timed walking corridors, acoustic character, and honest hotel-fit data for London South Bank (SE1).',
         url: CANONICAL_URLS.atmosvibeRegistrySouthBank,
+        license: 'https://creativecommons.org/licenses/by/4.0/',
+        isAccessibleForFree: true,
         creator: { '@type': 'Organization', name: 'Atmosvibe', url: ATMOSVIBE_ORIGIN },
         dateModified: '2026-11-18'
       },

@@ -1,4 +1,5 @@
 {
+  "cleanUrls": true,
   "redirects": [
     {
       "source": "/creator-portal",
@@ -53,6 +54,18 @@
     {
       "source": "/config/:path*",
       "destination": "https://ted-lasso-vibe-challenge.vercel.app/config/:path*"
+    },
+    {
+      "source": "/destinations/london/south-bank",
+      "destination": "/destinations/london/south-bank/index.html"
+    },
+    {
+      "source": "/compare/sea-containers-vs-bankside-hotel",
+      "destination": "/compare/sea-containers-vs-bankside-hotel/index.html"
+    },
+    {
+      "source": "/scouts/alex-hurd",
+      "destination": "/scouts/alex-hurd/index.html"
     },
     {
       "source": "/(.*)",

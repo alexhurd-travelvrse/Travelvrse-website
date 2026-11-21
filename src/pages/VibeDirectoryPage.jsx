@@ -3,6 +3,11 @@ import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import VibeSearchChallengeWidget from '../components/VibeSearchChallengeWidget';
 import { SOUTH_BANK_VIBE_DATA } from '../data/southbankVibeData';
+import {
+  CANONICAL_URLS,
+  EDITORIAL_DISCLOSURE,
+  buildSouthBankHubJsonLd
+} from '../data/southBankCanonicalData';
 import { getVibeIntentTelemetry } from '../services/vibeIntentTelemetry';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -239,23 +244,25 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDesc} />
-        <link rel="canonical" href="https://www.travelvrse.com/vibe/london/south-bank" />
+        <link rel="canonical" href={CANONICAL_URLS.southBankHub} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDesc} />
         <meta property="og:image" content="https://static.cupid.travel/hotels/570881905.jpg" />
-        <meta property="og:url" content="https://www.travelvrse.com/vibe/london/south-bank" />
+        <meta property="og:url" content={CANONICAL_URLS.southBankHub} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDesc} />
         <meta name="twitter:image" content="https://static.cupid.travel/hotels/570881905.jpg" />
-        {isPrivateDemo && (
+        {isPrivateDemo ? (
           <>
             <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
             <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
           </>
+        ) : (
+          <meta name="robots" content="index, follow" />
         )}
-        <script type="application/ld+json">{JSON.stringify(SOUTHBANK_JSON_LD)}</script>
+        <script type="application/ld+json">{JSON.stringify(buildSouthBankHubJsonLd())}</script>
       </Helmet>
 
       <div
@@ -263,80 +270,62 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
           background: 'linear-gradient(180deg, #050b14 0%, #070e1c 40%, #050b14 100%)',
           color: '#f8fafc',
           minHeight: '100vh',
-          padding: '32px 20px 80px 20px',
+          padding: '18px 20px 80px 20px',
           fontFamily: 'Inter, system-ui, sans-serif'
         }}
       >
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          {/* Breadcrumb Navigation */}
-          <nav
-            aria-label="Breadcrumb"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '12.5px',
-              color: '#94a3b8',
-              marginBottom: '18px'
-            }}
-          >
-            <Link to="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>Home</Link>
-            <ChevronRight size={13} color="#475569" />
-            <span style={{ color: '#94a3b8' }}>London</span>
-            <ChevronRight size={13} color="#475569" />
-            <span style={{ color: '#38bdf8', fontWeight: 700 }}>South Bank (SE1)</span>
-          </nav>
-
-          {/* Top Destination Header */}
-          <div style={{ marginBottom: '32px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '12px' }}>
-              <span
+          {/* Compact Unified Header (Keeps "01 · Discover Your Vibe" Above the Fold) */}
+          <div style={{ marginBottom: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginBottom: '8px' }}>
+              <nav
+                aria-label="Breadcrumb"
                 style={{
-                  display: 'inline-flex',
+                  display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  padding: '4px 12px',
-                  borderRadius: '999px',
-                  background: 'rgba(56, 189, 248, 0.12)',
-                  border: '1px solid rgba(56, 189, 248, 0.3)',
-                  color: '#38bdf8',
                   fontSize: '12px',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em'
+                  color: '#94a3b8'
                 }}
               >
-                <Compass size={14} /> Creator-Verified Neighborhood Hub
-              </span>
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  padding: '4px 10px',
-                  borderRadius: '999px',
-                  background: 'rgba(16, 185, 129, 0.12)',
-                  border: '1px solid rgba(52, 211, 153, 0.3)',
-                  color: '#34d399',
-                  fontSize: '11.5px',
-                  fontWeight: 700
-                }}
-              >
-                <CalendarCheck size={13} /> Last Verified On-Site: Nov 2026
-              </span>
-              <span style={{ fontSize: '13px', color: '#94a3b8' }}>
-                Borough of {SOUTH_BANK_VIBE_DATA.geo.borough} • SE1
-              </span>
+                <Link to="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>Home</Link>
+                <ChevronRight size={12} color="#475569" />
+                <span style={{ color: '#94a3b8' }}>London</span>
+                <ChevronRight size={12} color="#475569" />
+                <span style={{ color: '#38bdf8', fontWeight: 700 }}>South Bank (SE1)</span>
+              </nav>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    padding: '3px 9px',
+                    borderRadius: '999px',
+                    background: 'rgba(16, 185, 129, 0.12)',
+                    border: '1px solid rgba(52, 211, 153, 0.3)',
+                    color: '#34d399',
+                    fontSize: '11px',
+                    fontWeight: 700
+                  }}
+                >
+                  <CalendarCheck size={12} /> Audited On-Site · Nov 2026
+                </span>
+                <span style={{ fontSize: '12px', color: '#94a3b8' }}>
+                  {SOUTH_BANK_VIBE_DATA.geo.borough} · SE1
+                </span>
+              </div>
             </div>
 
             <h1
               style={{
-                fontSize: 'clamp(28px, 4vw, 40px)',
+                fontSize: 'clamp(22px, 3vw, 30px)',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
-                lineHeight: 1.15,
-                margin: '0 0 12px 0',
-                background: 'linear-gradient(135deg, #ffffff 40%, #93c5fd 100%)',
+                lineHeight: 1.18,
+                margin: '0 0 8px 0',
+                background: 'linear-gradient(135deg, #ffffff 45%, #93c5fd 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent'
               }}
@@ -344,50 +333,26 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
               South Bank, London: Curated Hotels, Hidden Gems &amp; Insider Guide
             </h1>
 
-            <p style={{ fontSize: '16px', color: '#94a3b8', maxWidth: '800px', lineHeight: 1.6, margin: '0 0 20px 0' }}>
-              Discover your vibe. Feel the place. Find your stay — curated on-site by London culture scouts across quiet riverside sanctuaries and independent craft studios.
-            </p>
-
-            {/* Macro Stats Strip */}
+            {/* Verifiable GEO Facts Strip (replaces arbitrary composite scores) */}
             <div
               style={{
                 display: 'flex',
-                gap: '20px',
+                alignItems: 'center',
+                gap: '14px',
                 flexWrap: 'wrap',
-                background: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '16px',
-                padding: '14px 20px'
+                fontSize: '12.5px',
+                color: '#cbd5e1'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Sparkles size={18} color="#38bdf8" />
-                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Atmospheric Vibe Score:</span>
-                <strong style={{ color: '#38bdf8', fontSize: '14px' }}>
-                  {SOUTH_BANK_VIBE_DATA.atmosphericProfile.compositeVibeScore} / 100
-                </strong>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <MapPin size={18} color="#34d399" />
-                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Walkability Score:</span>
-                <strong style={{ color: '#34d399', fontSize: '14px' }}>
-                  {SOUTH_BANK_VIBE_DATA.atmosphericProfile.walkabilityScore} / 100
-                </strong>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <ShieldCheck size={18} color="#a78bfa" />
-                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Local Independent Gem Ratio:</span>
-                <strong style={{ color: '#a78bfa', fontSize: '14px' }}>
-                  {(SOUTH_BANK_VIBE_DATA.atmosphericProfile.independentGemRatio * 100).toFixed(0)}%
-                </strong>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Activity size={18} color="#f59e0b" />
-                <span style={{ fontSize: '13px', color: '#94a3b8' }}>Verified Local Explorers:</span>
-                <strong style={{ color: '#f59e0b', fontSize: '14px' }}>
-                  {telemetry.totalRadarCompletions} Profiles
-                </strong>
-              </div>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                <MapPin size={14} color="#34d399" />
+                <span><strong style={{ color: '#f8fafc' }}>2–6 min walk</strong> between Tate Modern, Gabriel’s Wharf &amp; SE1 hotels</span>
+              </span>
+              <span style={{ color: '#334155' }}>•</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                <ShieldCheck size={14} color="#a78bfa" />
+                <span><strong style={{ color: '#f8fafc' }}>Zero-Chain Charter</strong> across Gabriel’s Wharf &amp; Lower Marsh</span>
+              </span>
             </div>
           </div>
 
@@ -407,13 +372,30 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
               marginBottom: '28px'
             }}
           >
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: 800, marginBottom: '4px' }}>
-                Quick Comparison
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '16px' }}>
+              <div>
+                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: 800, marginBottom: '4px' }}>
+                  Quick Comparison
+                </div>
+                <h2 id="southbank-comparison-heading" style={{ fontSize: '20px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                  South Bank Boutique Hotels at a Glance
+                </h2>
               </div>
-              <h2 id="southbank-comparison-heading" style={{ fontSize: '20px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
-                South Bank Boutique Hotels at a Glance
-              </h2>
+              <Link
+                to="/compare/sea-containers-vs-bankside-hotel"
+                style={{
+                  fontSize: '12.5px',
+                  fontWeight: 700,
+                  color: '#7dd3fc',
+                  background: 'rgba(56, 189, 248, 0.12)',
+                  border: '1px solid rgba(56, 189, 248, 0.3)',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  textDecoration: 'none'
+                }}
+              >
+                Full Side-by-Side Comparison →
+              </Link>
             </div>
 
             <div style={{ overflowX: 'auto' }}>
@@ -564,17 +546,24 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
             }}
           >
             <div style={{ maxWidth: '720px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
                 <CheckCircle2 size={16} color="#34d399" />
                 <strong style={{ fontSize: '13.5px', color: '#ffffff' }}>
-                  How We Verify • On-Site Curation by Alex Hurd (@AlexCulture)
+                  How We Verify • On-Site Curation by{' '}
+                  <Link to="/scouts/alex-hurd" style={{ color: '#7dd3fc', textDecoration: 'none' }}>
+                    Alex Hurd (@AlexCulture)
+                  </Link>
                 </strong>
               </div>
-              <p style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.55, margin: 0 }}>
+              <p style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.55, margin: '0 0 8px 0' }}>
                 Every hotel, maker courtyard, and walking time on this page was walked and verified in person across South Bank SE1
                 — covering <strong>20 Upper Ground (SE1 9PD)</strong>, <strong>2–8 Great Suffolk St (SE1 0UG)</strong>,{' '}
                 <strong>Gabriel’s Wharf (SE1 9PP)</strong>, <strong>BFI Southbank (SE1 8XT)</strong>, and{' '}
-                <strong>Leake Street Arches (SE1 7NN)</strong>. No paid placements; honest Love/Avoid trade-offs are updated quarterly.
+                <strong>Leake Street Arches (SE1 7NN)</strong>. Neighbourhood landmark photography via Wikimedia Commons (CC BY-SA); hotel photography via Nuitée.
+              </p>
+              <p style={{ fontSize: '11.5px', color: '#94a3b8', lineHeight: 1.5, margin: 0 }}>
+                <strong style={{ color: '#cbd5e1' }}>{EDITORIAL_DISCLOSURE.title}:</strong> {EDITORIAL_DISCLOSURE.summary}{' '}
+                {EDITORIAL_DISCLOSURE.affiliateNote}
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>

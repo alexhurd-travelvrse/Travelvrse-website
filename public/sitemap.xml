@@ -1,88 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Brand & Commercial Pages -->
   <url>
     <loc>https://www.travelvrse.com/</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.travelvrse.com/marketplace</loc>
-    <lastmod>2026-11-02</lastmod>
+    <lastmod>2026-11-21</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.travelvrse.com/partner</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.travelvrse.com/creator</loc>
-    <lastmod>2026-11-02</lastmod>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Canonical Public Destination Hubs, Comparisons & Verified Scouts (Prerendered Static HTML) -->
+  <url>
+    <loc>https://www.travelvrse.com/destinations/london/south-bank</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.travelvrse.com/compare/sea-containers-vs-bankside-hotel</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.travelvrse.com/scouts/alex-hurd</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Public Spatial Play Experiences -->
+  <url>
+    <loc>https://www.travelvrse.com/play/sea-containers</loc>
+    <lastmod>2026-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-  <!-- White-Label Co-Brand Challenges (Canonical 3-Tier GEO Taxonomy & Short Play URLs) -->
   <url>
-    <loc>https://www.travelvrse.com/vibe/london/richmond/ted-lasso</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>https://www.travelvrse.com/play/25-hours</loc>
+    <lastmod>2026-11-21</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.travelvrse.com/play/ted-lasso</loc>
-    <lastmod>2026-11-02</lastmod>
+    <lastmod>2026-11-21</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.travelvrse.com/vibe/copenhagen/indre-by/25-hours-copenhagen</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://www.travelvrse.com/play/25-hours</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.travelvrse.com/vibe/london/south-bank/sea-containers</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://www.travelvrse.com/play/sea-containers</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.travelvrse.com/vibe/las-vegas/the-strip/virgin-hotel-las-vegas</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://www.travelvrse.com/play/virgin-vegas</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.travelvrse.com/vibe/seoul/jung-gu/ena-suite-seoul</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://www.travelvrse.com/play/seoul</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <priority>0.85</priority>
   </url>
 </urlset>

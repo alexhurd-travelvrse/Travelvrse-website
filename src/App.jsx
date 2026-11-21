@@ -13,7 +13,11 @@ import PartnerPage from './pages/PartnerPage';
 import CreatorPage from './pages/CreatorPage';
 import BarcelonaPage from './pages/BarcelonaPage';
 import PrivateDemoPage from './pages/PrivateDemoPage';
+import VibeDirectoryPage from './pages/VibeDirectoryPage';
+import CompareHotelsPage from './pages/CompareHotelsPage';
+import ScoutProfilePage from './pages/ScoutProfilePage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
+import { trackAiSearchReferrer } from './services/vibeIntentTelemetry';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import MobileSimulatorWrapper from './components/MobileSimulatorWrapper';
 import LightweightMobileChallengeDemo from './components/LightweightMobileChallengeDemo';
@@ -29,6 +33,7 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
   React.useEffect(() => {
     window.scrollTo(0, 0);
+    trackAiSearchReferrer(pathname);
   }, [pathname]);
   return null;
 };
@@ -240,6 +245,10 @@ const App = () => {
             <Route path="/notrack" element={<IgnoreAnalyticsPage />} />
             <Route path="/cookies" element={<CookiePolicyPage />} />
             <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+            {/* Public Canonical SEO & GEO Destination Hubs, Comparisons & Verified Scouts */}
+            <Route path="/destinations/london/south-bank" element={<VibeDirectoryPage isPrivateDemo={false} />} />
+            <Route path="/compare/sea-containers-vs-bankside-hotel" element={<CompareHotelsPage />} />
+            <Route path="/scouts/alex-hurd" element={<ScoutProfilePage />} />
             {/* Private Password-Gated Demo & Vibe Directory */}
             <Route path="/demo" element={<PrivateDemoPage />} />
             <Route path="/demo/southbank" element={<PrivateDemoPage />} />
@@ -265,14 +274,16 @@ const App = () => {
           </Routes>
         </MobileSimulatorWrapper>
       </Router>
-      <Analytics
-        beforeSend={(event) => {
-          if (shouldDropAnalyticsEvent()) {
-            return null;
-          }
-          return event;
-        }}
-      />
+      {typeof window !== 'undefined' && !['localhost', '127.0.0.1'].includes(window.location.hostname) && (
+        <Analytics
+          beforeSend={(event) => {
+            if (shouldDropAnalyticsEvent()) {
+              return null;
+            }
+            return event;
+          }}
+        />
+      )}
     </HelmetProvider>
   );
 };

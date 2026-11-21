@@ -38,14 +38,14 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'big_art',
           label: 'BIG ART',
-          photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/southbank/tate-modern.jpg',
           soundProfile: 'cavern',
           crowdPct: 62
         },
         right: {
           id: 'hidden_walls',
           label: 'HIDDEN WALLS',
-          photo: 'https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/southbank/leake-street.jpg',
           soundProfile: 'spray',
           crowdPct: 38
         },
@@ -58,7 +58,7 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'misty_830',
           label: 'MISTY 8:30',
-          photo: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/southbank/millennium-bridge.jpg',
           soundProfile: 'mist',
           crowdPct: 34
         },
@@ -78,14 +78,14 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'hidden_lanes',
           label: 'HIDDEN LANES',
-          photo: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/southbank/gabriels-wharf.jpg',
           soundProfile: 'courtyard',
           crowdPct: 41
         },
         right: {
           id: 'river_buzz',
           label: 'RIVER BUZZ',
-          photo: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/southbank/queens-walk.jpg',
           soundProfile: 'crowd',
           crowdPct: 59
         },
@@ -145,7 +145,7 @@ const CHALLENGE_DESTINATIONS = {
     shortCode: 'CPH',
     shareUrl: 'travelvrse.com/cph',
     completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours/completion',
-    hookBg: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=900',
+    hookBg: '/media/copenhagen/nyhavn-dusk.jpg',
     hookHeadline: 'Are you a Copenhagen local at heart?',
     creatorHeadline: 'Do you vibe like Freja?',
     creator: {
@@ -167,14 +167,14 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'royal_halls',
           label: 'ROYAL HALLS',
-          photo: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/copenhagen/glyptotek.jpg',
           soundProfile: 'cavern',
           crowdPct: 58
         },
         right: {
           id: 'back_courtyards',
           label: 'BACK COURTYARDS',
-          photo: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/copenhagen/courtyard.jpg',
           soundProfile: 'courtyard',
           crowdPct: 42
         },
@@ -187,14 +187,14 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'harbour_dawn',
           label: 'HARBOUR DAWN',
-          photo: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/copenhagen/nyhavn-dawn.jpg',
           soundProfile: 'mist',
           crowdPct: 45
         },
         right: {
           id: 'golden_bridges',
           label: 'GOLDEN BRIDGES',
-          photo: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/copenhagen/nyhavn-dusk.jpg',
           soundProfile: 'golden',
           crowdPct: 55
         },
@@ -207,14 +207,14 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'quiet_lanes',
           label: 'QUIET LANES',
-          photo: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/copenhagen/latin-quarter.jpg',
           soundProfile: 'courtyard',
           crowdPct: 44
         },
         right: {
           id: 'harbour_buzz',
           label: 'HARBOUR BUZZ',
-          photo: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=900',
+          photo: '/media/copenhagen/torvehallerne.jpg',
           soundProfile: 'crowd',
           crowdPct: 56
         },

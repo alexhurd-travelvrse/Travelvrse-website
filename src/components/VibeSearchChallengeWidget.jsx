@@ -99,7 +99,7 @@ const DESTINATION_DATABASE = {
         desc: "London's famous 300-meter legal graffiti tunnel lined with independent subterranean cocktail lounges and live comedy.",
         badge: "Street Art Landmark",
         impactTag: "Supports independent alternative arts",
-        image: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&q=80&w=600"
+        image: "/media/southbank/leake-street.jpg"
       }
     ],
     // Curated Tours & Audio Trails
@@ -114,7 +114,7 @@ const DESTINATION_DATABASE = {
         badge: 'Most Popular',
         loveThisIf: 'You want an unhurried audio stroll linking Tate Modern’s turbine views, Waterloo antique book stalls, and hidden maker courtyards.',
         curatorNote: 'Created by @AlexCulture • Includes synced Spotify soundtrack',
-        image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800'
+        image: '/media/southbank/tate-modern.jpg'
       },
       {
         id: 'leake-street-underground',
@@ -126,7 +126,7 @@ const DESTINATION_DATABASE = {
         badge: 'After Dark',
         loveThisIf: 'You love raw street art, local artist stories inside the 300m legal tunnel, and finishing at a hidden subterranean cocktail bar.',
         curatorNote: 'Led by local muralist • Includes 1 welcome botanical cocktail',
-        image: 'https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&q=80&w=800'
+        image: '/media/southbank/leake-street.jpg'
       },
       {
         id: 'gabriels-wharf-makers',
@@ -138,7 +138,7 @@ const DESTINATION_DATABASE = {
         badge: 'Zero-Chain Charter',
         loveThisIf: 'You want private studio access to independent printmakers, leatherworkers, and a single-origin espresso tasting before the crowds.',
         curatorNote: '100% of pass fees go directly to participating makers',
-        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800'
+        image: '/media/southbank/gabriels-wharf.jpg'
       }
     ],
     // Basecamp Hotel Anchors
@@ -452,7 +452,7 @@ const DESTINATION_DATABASE = {
         desc: "Over 60 independent stalls: fresh Danish pastries, smørrebrød and coffee directly funding local food producers.",
         badge: "Culinary Gem",
         impactTag: "Directly funds independent Danish producers",
-        image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=600"
+        image: "/media/copenhagen/torvehallerne.jpg"
       },
       {
         id: 'rundetaarn',
@@ -463,7 +463,7 @@ const DESTINATION_DATABASE = {
         desc: "17th-century equestrian spiral ramp with 360-degree panoramic views over Copenhagen's copper steeples.",
         badge: "Historic Gem",
         impactTag: "Preserves landmark Danish observatory",
-        image: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=600"
+        image: "/media/copenhagen/latin-quarter.jpg"
       },
       {
         id: 'indreby-design',
@@ -474,7 +474,7 @@ const DESTINATION_DATABASE = {
         desc: "Independent local ceramists hand-throwing stoneware tableware in open-view workshops.",
         badge: "Artisan Gem",
         impactTag: "Supports independent Copenhagen artists",
-        image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=600"
+        image: "/media/copenhagen/courtyard.jpg"
       }
     ],
     tours: [
@@ -488,7 +488,7 @@ const DESTINATION_DATABASE = {
         badge: 'Morning Ritual',
         loveThisIf: 'You want to uncover 18th-century cobblestone courtyards, warm cardamom buns, and ceramic studios before midday crowds.',
         curatorNote: 'Curated by @FrejaCph • Includes bakery tasting map',
-        image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=800'
+        image: '/media/copenhagen/latin-quarter.jpg'
       },
       {
         id: 'cph-canal-wine-stroll',
@@ -500,7 +500,7 @@ const DESTINATION_DATABASE = {
         badge: 'Golden Hour',
         loveThisIf: 'You enjoy Nordic architectural storytelling paired with two pours at independent canal-side natural wine cellars.',
         curatorNote: 'Hosted by local architect • Max 8 guests',
-        image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80&w=800'
+        image: '/media/copenhagen/nyhavn-dusk.jpg'
       }
     ],
     stayAnchors: [
@@ -723,6 +723,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
 
   // Interactive Destination Duel & Harmony Wizard State
   const [duelStep, setDuelStep] = useState(0); // 0..3
+  const [pullCompleted, setPullCompleted] = useState(false);
   const [duelViewMode, setDuelViewMode] = useState('wizard');
   const [pullSplitPct, setPullSplitPct] = useState(50);
   const [isPullDragging, setIsPullDragging] = useState(false);
@@ -735,20 +736,20 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         {
           id: 'culturePace',
           type: 'pull',
-          left: { id: 'brutalist_film', label: 'ROYAL HALLS', photo: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=900', crowdPct: 58 },
-          right: { id: 'street_arches', label: 'BACK COURTYARDS', photo: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=900', crowdPct: 42 }
+          left: { id: 'brutalist_film', label: 'ROYAL HALLS', photo: '/media/copenhagen/glyptotek.jpg', crowdPct: 58 },
+          right: { id: 'street_arches', label: 'BACK COURTYARDS', photo: '/media/copenhagen/courtyard.jpg', crowdPct: 42 }
         },
         {
           id: 'diurnalRhythm',
           type: 'sun',
-          left: { id: 'morning_mist', label: 'HARBOUR DAWN', photo: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=900', crowdPct: 45 },
-          right: { id: 'sunset_glow', label: 'GOLDEN BRIDGES', photo: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80&w=900', crowdPct: 55 }
+          left: { id: 'morning_mist', label: 'HARBOUR DAWN', photo: '/media/copenhagen/nyhavn-dawn.jpg', crowdPct: 45 },
+          right: { id: 'sunset_glow', label: 'GOLDEN BRIDGES', photo: '/media/copenhagen/nyhavn-dusk.jpg', crowdPct: 55 }
         },
         {
           id: 'dispersion',
           type: 'pull',
-          left: { id: 'indie_makers', label: 'QUIET LANES', photo: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=900', crowdPct: 44 },
-          right: { id: 'river_promenade', label: 'HARBOUR BUZZ', photo: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=900', crowdPct: 56 }
+          left: { id: 'indie_makers', label: 'QUIET LANES', photo: '/media/copenhagen/latin-quarter.jpg', crowdPct: 44 },
+          right: { id: 'river_promenade', label: 'HARBOUR BUZZ', photo: '/media/copenhagen/torvehallerne.jpg', crowdPct: 56 }
         },
         {
           id: 'sanctuary',
@@ -761,20 +762,20 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         {
           id: 'culturePace',
           type: 'pull',
-          left: { id: 'brutalist_film', label: 'BIG ART', photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=900', crowdPct: 62 },
-          right: { id: 'street_arches', label: 'HIDDEN WALLS', photo: 'https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&q=80&w=900', crowdPct: 38 }
+          left: { id: 'brutalist_film', label: 'BIG ART', photo: '/media/southbank/tate-modern.jpg', crowdPct: 62 },
+          right: { id: 'street_arches', label: 'HIDDEN WALLS', photo: '/media/southbank/leake-street.jpg', crowdPct: 38 }
         },
         {
           id: 'diurnalRhythm',
           type: 'sun',
-          left: { id: 'morning_mist', label: 'MISTY 8:30', photo: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=900', crowdPct: 34 },
+          left: { id: 'morning_mist', label: 'MISTY 8:30', photo: '/media/southbank/millennium-bridge.jpg', crowdPct: 34 },
           right: { id: 'sunset_glow', label: 'GOLDEN 6PM', photo: 'https://static.cupid.travel/hotels/570881905.jpg', crowdPct: 66 }
         },
         {
           id: 'dispersion',
           type: 'pull',
-          left: { id: 'indie_makers', label: 'HIDDEN LANES', photo: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=900', crowdPct: 41 },
-          right: { id: 'river_promenade', label: 'RIVER BUZZ', photo: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&q=80&w=900', crowdPct: 59 }
+          left: { id: 'indie_makers', label: 'HIDDEN LANES', photo: '/media/southbank/gabriels-wharf.jpg', crowdPct: 41 },
+          right: { id: 'river_promenade', label: 'RIVER BUZZ', photo: '/media/southbank/queens-walk.jpg', crowdPct: 59 }
         },
         {
           id: 'sanctuary',
@@ -803,6 +804,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
       setPullSplitPct(50);
       if (duelStep < PULL_VISUALS.length - 1) {
         setDuelStep(prev => prev + 1);
+      } else {
+        setPullCompleted(true);
       }
     }, 780);
   };
@@ -865,7 +868,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     if (!Array.isArray(imgs) || imgs.length === 0) return fallbackPhotos;
 
     const clutterRe = /(pool|bath|toilet|sink|shower|meeting|conference|boardroom|banquet|ballroom|fitness|gym|corridor|hallway|parking|elevator)/i;
-    const picked = { views: [], rooms: [], dining: [], design: [] };
+    const picked = { views: [], rooms: [], diningPrimary: [], diningBuffet: [], design: [] };
     const seenUrls = new Set();
 
     imgs.forEach((img, idx) => {
@@ -875,27 +878,36 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
       const capLower = cap.toLowerCase();
       if (clutterRe.test(capLower)) return;
 
+      let bucket = null;
       let category = null;
       let vibeTag = 'brutalist_film';
       let title = cap ? cap.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'Hotel Space';
 
       if (/(roof|balcony|terrace|view|exterior|building)/i.test(capLower)) {
+        bucket = 'views';
         category = 'views';
         vibeTag = /(roof|terrace|balcony)/i.test(capLower) ? 'sunset_glow' : 'morning_mist';
       } else if (/(hotel room|bedroom|suite|bed)/i.test(capLower)) {
+        bucket = 'rooms';
         category = 'rooms';
         vibeTag = 'courtyard_quiet';
-      } else if (/(restaurant|bar|lounge|breakfast|dining|cafe|bbq)/i.test(capLower)) {
+      } else if (/(restaurant|bar|lounge|bistro|brasserie|dining|cafe|pub)/i.test(capLower)) {
+        bucket = 'diningPrimary';
         category = 'dining';
         vibeTag = /(bar|lounge|restaurant)/i.test(capLower) ? 'social_terrace' : 'sunset_glow';
+      } else if (/(breakfast|buffet)/i.test(capLower)) {
+        bucket = 'diningBuffet';
+        category = 'dining';
+        vibeTag = 'morning_mist';
       } else if (/(reception|lobby|living|mezzanine|art|library|cinema)/i.test(capLower)) {
+        bucket = 'design';
         category = 'design';
         vibeTag = 'indie_makers';
       }
 
-      if (category && picked[category].length < 3) {
+      if (bucket && picked[bucket].length < 4) {
         seenUrls.add(url);
-        picked[category].push({
+        picked[bucket].push({
           id: `live-${category}-${idx}`,
           category,
           vibeTag,
@@ -906,30 +918,129 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
       }
     });
 
-    const merged = [...picked.views, ...picked.rooms, ...picked.dining, ...picked.design];
+    // Prioritize real restaurant/bar/lounge shots over generic breakfast buffet photos
+    const diningPicked = [
+      ...picked.diningPrimary.slice(0, 3),
+      ...(picked.diningPrimary.length < 2 ? picked.diningBuffet.slice(0, 2 - picked.diningPrimary.length) : [])
+    ];
+
+    const merged = [
+      ...picked.views.slice(0, 3),
+      ...picked.rooms.slice(0, 3),
+      ...diningPicked,
+      ...picked.design.slice(0, 3)
+    ];
     return merged.length >= 4 ? merged : fallbackPhotos;
   };
 
-  // Atmosvibe + User Filter Photo Ranking Engine (prefers live Nuitée feed photos)
+  // 3-Layer Photo Ranking Signatures:
+  // (a) Destination Signature (20%), (b) Hotel Signature (30%), (c) User Intent (50%)
+  const DESTINATION_PHOTO_SIGNATURES = {
+    'london-southbank': {
+      label: 'South Bank',
+      categoryWeights: { views: 1.0, design: 0.85, dining: 0.78, rooms: 0.68 },
+      keywordRe: /(roof|terrace|balcony|view|river|thames|art|cinema|bar|lounge|exterior)/i
+    },
+    'copenhagen-indre-by': {
+      label: 'Indre By',
+      categoryWeights: { design: 1.0, rooms: 0.92, dining: 0.86, views: 0.70 },
+      keywordRe: /(courtyard|lounge|sauna|design|vinyl|glasshouse|living|bar|bedroom)/i
+    }
+  };
+
+  const HOTEL_PHOTO_SIGNATURES = {
+    'sea-containers': {
+      label: 'Sea Containers DNA',
+      categoryWeights: { views: 1.0, dining: 0.92, design: 0.86, rooms: 0.74 },
+      keywordRe: /(roof|terrace|balcony|bar|restaurant|lounge|lobby|copper|reception)/i
+    },
+    'bankside-hotel': {
+      label: 'Bankside Art DNA',
+      categoryWeights: { design: 1.0, rooms: 0.92, views: 0.76, dining: 0.68 },
+      keywordRe: /(living|lounge|lobby|art|mezzanine|bedroom|suite|exterior|hotel room)/i
+    },
+    '25hours-copenhagen': {
+      label: '25hours Nordic DNA',
+      categoryWeights: { design: 1.0, dining: 0.90, rooms: 0.86, views: 0.74 },
+      keywordRe: /(lounge|vinyl|bar|glasshouse|courtyard|sauna|design)/i
+    }
+  };
+
+  // Atmosvibe 3-Layer Photo Ranking Engine (prefers live Nuitée feed photos)
+  // Final Score = 0.50 * UserIntent + 0.30 * HotelSignature + 0.20 * DestinationSignature
   const getFilteredHotelPhotos = (stay, filterOverride = null) => {
     const liveFeedPhotos = nuiteeRates.hotels[stay.id]?.livePhotos;
     const rawPhotos = (Array.isArray(liveFeedPhotos) && liveFeedPhotos.length > 0) ? liveFeedPhotos : (stay.photos || []);
     const activeFilter = filterOverride || cardPhotoFilter[stay.id] || globalPhotoFilter;
 
-    // 1. Score every photo with Atmosvibe based on live Duel answers
+    const destSig = DESTINATION_PHOTO_SIGNATURES[selectedLocKey] || DESTINATION_PHOTO_SIGNATURES['london-southbank'];
+    const hotelSig = HOTEL_PHOTO_SIGNATURES[stay.id] || {
+      label: stay.name,
+      categoryWeights: { views: 0.85, rooms: 0.85, dining: 0.80, design: 0.85 },
+      keywordRe: /(roof|terrace|bar|restaurant|lobby|lounge|suite|bedroom)/i
+    };
+
+    const party = (tripContext?.party || 'Couple').toLowerCase();
+
+    // Score every photo across (a) Destination Signature, (b) Hotel Signature, (c) User Intent
     const scored = rawPhotos.map((photo, originalIdx) => {
-      let score = 0;
-      if (photo.vibeTag === userAnswers.diurnalRhythm) score += 30;
-      if (photo.vibeTag === userAnswers.sanctuary) score += 28;
-      if (photo.vibeTag === userAnswers.culturePace) score += 22;
-      if (photo.vibeTag === userAnswers.dispersion) score += 18;
-      return { ...photo, atmosScore: score, originalIdx };
+      const text = `${photo.title || ''} ${photo.caption || ''}`.toLowerCase();
+      const cat = photo.category || 'design';
+
+      // (a) Destination Signature (0..100)
+      const destBase = (destSig.categoryWeights[cat] ?? 0.65) * 80;
+      const destKeywordBonus = destSig.keywordRe.test(text) ? 20 : 0;
+      const destScore = Math.min(100, destBase + destKeywordBonus);
+
+      // (b) Hotel Signature (0..100)
+      const hotelBase = (hotelSig.categoryWeights[cat] ?? 0.65) * 78;
+      const hotelKeywordBonus = hotelSig.keywordRe.test(text) ? 22 : 0;
+      const hotelScore = Math.min(100, hotelBase + hotelKeywordBonus);
+
+      // (c) User Intent from "The Pull" + Trip Party (0..100)
+      let intentScore = 20; // baseline
+      if (photo.vibeTag === userAnswers.diurnalRhythm) intentScore += 28;
+      if (photo.vibeTag === userAnswers.sanctuary) intentScore += 26;
+      if (photo.vibeTag === userAnswers.culturePace) intentScore += 16;
+      if (photo.vibeTag === userAnswers.dispersion) intentScore += 12;
+
+      // Cross-category Pull boosts so choices visibly re-order live Nuitée photos
+      if (userAnswers.sanctuary === 'courtyard_quiet' && cat === 'rooms') intentScore += 18;
+      if (userAnswers.sanctuary === 'social_terrace' && (cat === 'dining' || /roof|bar|terrace/i.test(text))) intentScore += 18;
+      if (userAnswers.diurnalRhythm === 'sunset_glow' && (cat === 'views' || /roof|terrace|bar|restaurant/i.test(text))) intentScore += 14;
+      if (userAnswers.diurnalRhythm === 'morning_mist' && (cat === 'rooms' || /balcony|exterior|view/i.test(text))) intentScore += 14;
+      if (userAnswers.dispersion === 'indie_makers' && cat === 'design') intentScore += 12;
+
+      // Trip party nuance
+      if (party === 'solo' && (cat === 'rooms' || cat === 'design')) intentScore += 8;
+      if (party === 'couple' && (cat === 'views' || cat === 'dining')) intentScore += 8;
+      if (party === 'friends' && (cat === 'dining' || /bar|lounge|roof/i.test(text))) intentScore += 10;
+      intentScore = Math.min(100, intentScore);
+
+      // Weighted 3-layer composite (50% User Intent · 30% Hotel Signature · 20% Destination Signature)
+      const atmosScore = Math.round(
+        0.50 * intentScore +
+        0.30 * hotelScore +
+        0.20 * destScore
+      );
+
+      return {
+        ...photo,
+        atmosScore,
+        scoreBreakdown: {
+          intent: Math.round(intentScore),
+          hotel: Math.round(hotelScore),
+          destination: Math.round(destScore)
+        },
+        rankingLabel: `Your Vibe · ${hotelSig.label} · ${destSig.label}`,
+        originalIdx
+      };
     });
 
-    // Sort descending by Atmosvibe score (preserve curated order on ties)
+    // Sort descending by 3-layer composite score (preserve curated order on ties)
     const atmosOrdered = [...scored].sort((a, b) => b.atmosScore - a.atmosScore || a.originalIdx - b.originalIdx);
 
-    // 2. Apply user category filter while keeping Atmosvibe ordering within the category
+    // Apply user category filter while keeping 3-layer ordering within the category
     if (activeFilter === 'for_your_vibe') {
       return atmosOrdered;
     }
@@ -1365,35 +1476,67 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '16px',
-        paddingBottom: '24px',
+        paddingBottom: '12px',
         borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-        marginBottom: '32px'
+        marginBottom: '16px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
-            width: '42px',
-            height: '42px',
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 0 20px rgba(14, 165, 233, 0.4)'
-          }}>
-            <Compass size={22} color="#ffffff" />
+        {/* Compact Curator Attribution Bar (replaces duplicate header + bulky creator card) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <div style={{ position: 'relative', flexShrink: 0 }}>
+            <img
+              src={activeCurator.avatar}
+              alt={activeCurator.name}
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '2px solid #38bdf8'
+              }}
+            />
+            <div style={{
+              position: 'absolute',
+              bottom: '-2px',
+              right: '-2px',
+              background: '#10b981',
+              borderRadius: '50%',
+              width: '14px',
+              height: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '1.5px solid #0f172a'
+            }}>
+              <ShieldCheck size={9} color="#ffffff" />
+            </div>
           </div>
           <div>
-            <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1.5px', color: '#38bdf8', fontWeight: '700' }}>
-              Neighborhood Vibe Challenge • {location.borough || 'London'}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '13px', fontWeight: '800', color: '#ffffff' }}>
+                Scouted by {activeCurator.name}
+              </span>
+              <span style={{ fontSize: '12px', color: '#38bdf8', fontWeight: '600' }}>
+                {activeCurator.handle}
+              </span>
+              <span style={{
+                fontSize: '10.5px',
+                background: 'rgba(56, 189, 248, 0.14)',
+                color: '#7dd3fc',
+                padding: '1px 7px',
+                borderRadius: '999px',
+                fontWeight: '700'
+              }}>
+                {activeCurator.role}
+              </span>
             </div>
-            <h2 style={{ fontSize: '24px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
-              {location.name}
-            </h2>
+            <div style={{ fontSize: '11.5px', color: '#94a3b8' }}>
+              {location.tagline}
+            </div>
           </div>
         </div>
 
         {/* Location Switcher */}
-        <div style={{ display: 'flex', gap: '8px', background: 'rgba(255, 255, 255, 0.04)', padding: '4px', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+        <div style={{ display: 'flex', gap: '6px', background: 'rgba(255, 255, 255, 0.04)', padding: '4px', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
           {Object.keys(DESTINATION_DATABASE).map(key => {
             const loc = DESTINATION_DATABASE[key];
             const isSelected = key === selectedLocKey;
@@ -1401,13 +1544,17 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               <button
                 key={key}
                 type="button"
-                onClick={() => setSelectedLocKey(key)}
+                onClick={() => {
+                  setSelectedLocKey(key);
+                  setPullCompleted(false);
+                  setDuelStep(0);
+                }}
                 style={{
                   background: isSelected ? 'linear-gradient(135deg, #0ea5e9, #6366f1)' : 'transparent',
                   color: isSelected ? '#ffffff' : '#94a3b8',
                   border: 'none',
                   borderRadius: '8px',
-                  padding: '8px 14px',
+                  padding: '7px 13px',
                   fontSize: '12px',
                   fontWeight: '700',
                   cursor: 'pointer',
@@ -1418,100 +1565,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               </button>
             );
           })}
-        </div>
-      </div>
-
-      {/* 1. CREATOR LEAD HERO (THE TASTEMAKER) */}
-      <div style={{
-        background: 'rgba(255, 255, 255, 0.03)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        borderRadius: '20px',
-        padding: '24px',
-        marginBottom: '36px',
-        display: 'grid',
-        gridTemplateColumns: 'auto 1fr',
-        gap: '24px',
-        alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        <div style={{ position: 'relative' }}>
-          <img 
-            src={activeCurator.avatar} 
-            alt={activeCurator.name}
-            style={{
-              width: '88px',
-              height: '88px',
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: '3px solid #38bdf8',
-              boxShadow: '0 0 25px rgba(56, 189, 248, 0.3)'
-            }}
-          />
-          <div style={{
-            position: 'absolute',
-            bottom: '0',
-            right: '0',
-            background: '#10b981',
-            borderRadius: '50%',
-            width: '24px',
-            height: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '2px solid #0f172a'
-          }}>
-            <ShieldCheck size={14} color="#ffffff" />
-          </div>
-        </div>
-
-        <div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-            <span style={{ fontSize: '17px', fontWeight: '800', color: '#ffffff' }}>{activeCurator.name}</span>
-            <span style={{ fontSize: '13px', color: '#38bdf8', fontWeight: '600' }}>{activeCurator.handle}</span>
-            <span style={{
-              fontSize: '11px',
-              background: 'rgba(56, 189, 248, 0.15)',
-              color: '#7dd3fc',
-              padding: '2px 8px',
-              borderRadius: '999px',
-              fontWeight: '700'
-            }}>
-              {activeCurator.role}
-            </span>
-          </div>
-
-          <p style={{
-            fontSize: '14.5px',
-            lineHeight: '1.6',
-            color: '#e2e8f0',
-            margin: '0 0 12px 0',
-            fontStyle: 'italic'
-          }}>
-            "{activeCurator.quote}"
-          </p>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px' }}>
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'rgba(56, 189, 248, 0.08)',
-              border: '1px solid rgba(56, 189, 248, 0.25)',
-              borderRadius: '8px',
-              padding: '6px 12px',
-              fontSize: '12px',
-              color: '#38bdf8',
-              fontWeight: '600'
-            }}>
-              <Radio size={14} />
-              <span>Voice Note: {activeCurator.voiceNote}</span>
-            </div>
-
-            <div style={{ fontSize: '13px', color: '#94a3b8' }}>
-              Compare your destination frequency to {activeCurator.name.split(' ')[0]} below ↓
-            </div>
-          </div>
         </div>
       </div>
 
@@ -1531,8 +1584,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
                 01 · Discover Your Vibe
               </span>
-              <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '600' }}>
-                Drag the seam or tap a photo · {duelStep + 1} of 4
+              <span style={{ fontSize: '11px', color: pullCompleted ? '#34d399' : '#94a3b8', fontWeight: pullCompleted ? '700' : '600' }}>
+                {pullCompleted
+                  ? '✓ Vibe profile complete · Tap any step to refine'
+                  : `Drag the seam or tap a photo · ${duelStep + 1} of 4`}
               </span>
               {hydratedFromMobilePull && (
                 <span style={{ fontSize: '11px', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(52, 211, 153, 0.35)', padding: '2px 8px', borderRadius: '999px', fontWeight: '700' }}>
@@ -1555,14 +1610,15 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                   onClick={() => {
                     setPullRevealMsg(null);
                     setPullSplitPct(50);
+                    setPullCompleted(false);
                     setDuelStep(idx);
                   }}
                   title={`Step ${idx + 1}: ${pv.left.label} vs ${pv.right.label}`}
                   style={{
-                    width: duelStep === idx ? '26px' : '10px',
+                    width: (!pullCompleted && duelStep === idx) ? '26px' : '10px',
                     height: '8px',
                     borderRadius: '999px',
-                    background: duelStep === idx ? '#38bdf8' : 'rgba(255,255,255,0.25)',
+                    background: pullCompleted ? '#34d399' : (duelStep === idx ? '#38bdf8' : 'rgba(255,255,255,0.25)'),
                     border: 'none',
                     cursor: 'pointer',
                     padding: 0,
@@ -1597,8 +1653,136 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
           gap: '20px',
           alignItems: 'stretch'
         }}>
-          {/* LEFT: LIVE INTERACTIVE "THE PULL" PHOTO CANVAS */}
-          {(() => {
+          {/* LEFT: LIVE INTERACTIVE "THE PULL" PHOTO CANVAS (OR COMPLETION STATE) */}
+          {pullCompleted ? (
+            <div style={{
+              position: 'relative',
+              height: '360px',
+              borderRadius: '18px',
+              overflow: 'hidden',
+              border: '1px solid rgba(52, 211, 153, 0.45)',
+              background: '#0f172a',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center',
+              padding: '24px'
+            }}>
+              {/* Subtle 2x2 Mosaic of User's 4 Chosen Photos */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gridTemplateRows: '1fr 1fr',
+                opacity: 0.32,
+                filter: 'saturate(1.1)'
+              }}>
+                {PULL_VISUALS.map((stepItem) => {
+                  const chosenPhoto = userAnswers[stepItem.id] === stepItem.left.id ? stepItem.left.photo : stepItem.right.photo;
+                  return (
+                    <div
+                      key={stepItem.id}
+                      style={{
+                        backgroundImage: `url(${chosenPhoto})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, rgba(10, 16, 30, 0.72) 0%, rgba(10, 16, 30, 0.90) 100%)'
+              }} />
+
+              {/* Foreground Completion Content */}
+              <div style={{ position: 'relative', zIndex: 2, maxWidth: '340px' }}>
+                <div style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'rgba(16, 185, 129, 0.2)',
+                  border: '1px solid rgba(52, 211, 153, 0.5)',
+                  color: '#34d399',
+                  fontSize: '11px',
+                  fontWeight: '800',
+                  letterSpacing: '0.8px',
+                  textTransform: 'uppercase',
+                  padding: '5px 12px',
+                  borderRadius: '999px',
+                  marginBottom: '12px'
+                }}>
+                  <CheckCircle2 size={13} />
+                  <span>Vibe Profile Complete · 4 of 4</span>
+                </div>
+
+                <h4 style={{ fontSize: '24px', fontWeight: '900', color: '#ffffff', margin: '0 0 8px 0', lineHeight: 1.2 }}>
+                  {crowdBenchmark.archetype}
+                </h4>
+
+                <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 18px 0', lineHeight: 1.45 }}>
+                  <strong style={{ color: '#7dd3fc' }}>{matchCalculation.pct}% aligned</strong> with {activeCurator.handle}. Your neighbourhood guide, 3D walk &amp; live hotel galleries below are now tuned to your vibe.
+                </p>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const el = document.getElementById('stage-04-stays');
+                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }}
+                    style={{
+                      background: 'linear-gradient(135deg, #0284c7, #10b981)',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '10px',
+                      padding: '10px 18px',
+                      fontSize: '13px',
+                      fontWeight: '800',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)'
+                    }}
+                  >
+                    <span>Explore Matched Stays</span>
+                    <ArrowRight size={14} />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setPullRevealMsg(null);
+                      setPullSplitPct(50);
+                      setPullCompleted(false);
+                      setDuelStep(0);
+                    }}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.08)',
+                      color: '#e2e8f0',
+                      border: '1px solid rgba(255, 255, 255, 0.2)',
+                      borderRadius: '10px',
+                      padding: '10px 14px',
+                      fontSize: '12.5px',
+                      fontWeight: '700',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    <RefreshCw size={13} />
+                    <span>Replay Pull</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (() => {
             const pv = PULL_VISUALS[duelStep];
             return (
               <div
@@ -1816,7 +2000,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 {PULL_VISUALS.map((pv, idx) => {
                   const chosenId = userAnswers[pv.id];
                   const chosenLabel = chosenId === pv.left.id ? pv.left.label : pv.right.label;
-                  const isActive = duelStep === idx;
+                  const isActive = !pullCompleted && duelStep === idx;
                   return (
                     <button
                       key={pv.id}
@@ -1824,6 +2008,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                       onClick={() => {
                         setPullRevealMsg(null);
                         setPullSplitPct(50);
+                        setPullCompleted(false);
                         setDuelStep(idx);
                       }}
                       style={{
@@ -1845,17 +2030,39 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               </div>
             </div>
 
-            <div style={{
-              background: 'rgba(56, 189, 248, 0.1)',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
-              borderRadius: '10px',
-              padding: '10px 12px',
-              fontSize: '11.5px',
-              color: '#e2e8f0',
-              lineHeight: 1.4
-            }}>
-              <strong style={{ color: '#7dd3fc' }}>Personalised Discovery Active:</strong> Every pull reshapes the Blueprint, 3D walk &amp; real hotel photos below in real time.
-            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setPullRevealMsg(null);
+                setPullSplitPct(50);
+                setPullCompleted(false);
+                setDuelStep(0);
+                setUserAnswers({
+                  culturePace: activeCurator.duelChoices.culturePace,
+                  diurnalRhythm: activeCurator.duelChoices.diurnalRhythm,
+                  dispersion: activeCurator.duelChoices.dispersion,
+                  sanctuary: activeCurator.duelChoices.sanctuary
+                });
+              }}
+              style={{
+                width: '100%',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.14)',
+                borderRadius: '10px',
+                padding: '9px 12px',
+                fontSize: '12px',
+                fontWeight: '700',
+                color: '#cbd5e1',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px'
+              }}
+            >
+              <RefreshCw size={13} />
+              <span>Start Again</span>
+            </button>
           </div>
         </div>
       </div>
@@ -2049,9 +2256,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             padding: '22px 24px',
             position: 'relative'
           }}>
-            {/* Panel 1: Dynamic "You'll Love This" */}
-            {blueprintActiveTab === 'youWillLove' && (
-              <div>
+            {/* Panel 1: Dynamic "You'll Love This" (kept mounted in DOM for SEO/GEO crawlers) */}
+            <div role="tabpanel" style={{ display: blueprintActiveTab === 'youWillLove' ? 'block' : 'none' }}>
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '14px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Heart size={18} color="#f43f5e" />
@@ -2060,7 +2266,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                     </h4>
                   </div>
                   <span style={{ fontSize: '12px', color: '#94a3b8' }}>
-                    Tapping the Duel cards below rewrites these points in real time ↓
+                    Your Pull choices above reshape these highlights in real time ↑
                   </span>
                 </div>
 
@@ -2107,21 +2313,19 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                     </button>
                   </div>
                 </div>
-              </div>
-            )}
+            </div>
 
-            {/* Panel 2: Top Destination Vibes */}
-            {blueprintActiveTab === 'topVibes' && (
-              <div>
+            {/* Panel 2: Top Destination Vibes (kept mounted in DOM for SEO/GEO crawlers) */}
+            <div role="tabpanel" style={{ display: blueprintActiveTab === 'topVibes' ? 'block' : 'none' }}>
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '14px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Flame size={18} color="#f59e0b" />
                     <h4 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#ffffff' }}>
-                      South Bank's 3 Defining Destination Signatures
+                      {location.name.split('•')[1]?.trim() || location.name}&apos;s 3 Defining Destination Signatures
                     </h4>
                   </div>
                   <span style={{ fontSize: '12px', color: '#38bdf8', fontWeight: '600' }}>
-                    ★ #1 Match is dynamically calculated from your duel choices
+                    ★ #1 Match is tuned to your Pull choices
                   </span>
                 </div>
 
@@ -2187,12 +2391,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                     </button>
                   </div>
                 </div>
-              </div>
-            )}
+            </div>
 
-            {/* Panel 3: Walkable Micro-Gems */}
-            {blueprintActiveTab === 'microGems' && (
-              <div>
+            {/* Panel 3: Walkable Micro-Gems (kept mounted in DOM for SEO/GEO crawlers) */}
+            <div role="tabpanel" style={{ display: blueprintActiveTab === 'microGems' ? 'block' : 'none' }}>
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '14px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <ShieldCheck size={18} color="#10b981" />
@@ -2284,8 +2486,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                     </button>
                   </div>
                 </div>
-              </div>
-            )}
+            </div>
           </div>
         ) : (
           /* Full 3-Column Grid View (when user clicks 'Expand All') */
@@ -2605,7 +2806,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             fontWeight: '700'
           }}>
             <Sparkles size={13} />
-            <span>04 · Find Your Stay · Member Rates Active</span>
+            <span id="stage-04-stays" style={{ scrollMarginTop: '90px' }}>04 · Find Your Stay · Member Rates Active</span>
           </div>
         </div>
 
@@ -2801,7 +3002,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                           }}
                         >
                           <Images size={12} />
-                          <span>All Photos ({(stay.photos || []).length})</span>
+                          <span>All Photos ({(nuiteeRates.hotels[stay.id]?.livePhotos || stay.photos || []).length})</span>
                         </button>
 
                         {/* Left / Right Flip Arrows */}
@@ -2874,7 +3075,12 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                             fontWeight: '600',
                             textShadow: '0 1px 4px rgba(0,0,0,0.9)'
                           }}>
-                            {activePhoto.title}
+                            <div>{activePhoto.title}</div>
+                            {activeFilter === 'for_your_vibe' && safeIndex === 0 && activePhoto.rankingLabel && (
+                              <div style={{ fontSize: '10px', color: '#bae6fd', fontWeight: '500', marginTop: '1px' }}>
+                                Ordered by {activePhoto.rankingLabel}
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>

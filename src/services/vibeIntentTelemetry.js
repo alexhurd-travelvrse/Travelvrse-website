@@ -218,3 +218,37 @@ export function recordVibeSearchTerm(query, city = 'london-south-bank') {
   }
   return current;
 }
+
+// Track referrals arriving from AI search engines (ChatGPT, Perplexity, Claude, Gemini)
+export function trackAiSearchReferrer(pathname = '/') {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return null;
+  const ref = (document.referrer || '').toLowerCase();
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = (params.get('utm_source') || '').toLowerCase();
+
+  let aiEngine = null;
+  if (ref.includes('chatgpt.com') || ref.includes('chat.openai.com') || utmSource.includes('chatgpt')) {
+    aiEngine = 'chatgpt';
+  } else if (ref.includes('perplexity.ai') || utmSource.includes('perplexity')) {
+    aiEngine = 'perplexity';
+  } else if (ref.includes('claude.ai') || utmSource.includes('claude')) {
+    aiEngine = 'claude';
+  } else if (ref.includes('gemini.google.com') || utmSource.includes('gemini')) {
+    aiEngine = 'gemini';
+  }
+
+  if (!aiEngine) return null;
+
+  const sessionKey = `travelvrse_ai_ref_${aiEngine}_${pathname}`;
+  if (sessionStorage.getItem(sessionKey)) return aiEngine;
+  sessionStorage.setItem(sessionKey, '1');
+
+  if (!isOwnerAnalyticsBlocked()) {
+    try {
+      track('ai_search_referral', { engine: aiEngine, landing_path: pathname });
+    } catch {
+      // Ignore
+    }
+  }
+  return aiEngine;
+}

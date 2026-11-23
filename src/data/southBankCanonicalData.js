@@ -31,7 +31,7 @@ export const SCOUT_ALEX_HURD = {
   location: 'London SE1, United Kingdom',
   url: CANONICAL_URLS.scoutAlexHurd,
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
-  bio: 'London architectural and neighbourhood scout verifying South Bank boutique hotels, timed walking corridors, morning vs. golden-hour light, evening acoustic conditions, and zero-chain independent makers on-site.',
+  bio: 'Founder of TravelVRSE and London architectural & neighbourhood scout verifying South Bank hotels, timed walking corridors, morning vs. golden-hour light, evening acoustic conditions, and independent local makers on-site.',
   methodologyNote:
     'Every walk time is timed on foot from hotel reception to venue entrance. Acoustic and light notes reflect physical on-site visits across morning (08:30–10:30) and evening (17:00–21:00) windows.',
   sameAs: [

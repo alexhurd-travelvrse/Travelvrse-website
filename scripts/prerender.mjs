@@ -28,23 +28,30 @@ function esc(str = '') {
 function injectIntoTemplate(baseHtml, { title, description, canonicalUrl, jsonLd, bodyHtml }) {
   let html = baseHtml;
 
-  // Replace or inject <title>
+  // Replace <title>
   if (/<title>[\s\S]*?<\/title>/i.test(html)) {
     html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${esc(title)}</title>`);
   }
 
-  // Strip any generic meta description/canonical from base index.html to avoid duplicates
-  html = html.replace(/<meta\s+name=["']description["'][^>]*>/gi, '');
+  // Strip base B2B homepage meta, OG, Twitter, keywords, canonical & JSON-LD so public routes have zero duplicates
+  html = html.replace(/<meta\s+name=["'](description|keywords|robots|googlebot)["'][^>]*>/gi, '');
+  html = html.replace(/<meta\s+property=["']og:[^"']+["'][^>]*>/gi, '');
+  html = html.replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, '');
   html = html.replace(/<link\s+rel=["']canonical["'][^>]*>/gi, '');
+  html = html.replace(/<script\s+type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, '');
 
   const headInject = [
     `<meta name="description" content="${esc(description)}" />`,
     `<meta name="robots" content="index, follow" />`,
     `<link rel="canonical" href="${esc(canonicalUrl)}" />`,
+    `<meta property="og:type" content="website" />`,
     `<meta property="og:title" content="${esc(title)}" />`,
     `<meta property="og:description" content="${esc(description)}" />`,
     `<meta property="og:url" content="${esc(canonicalUrl)}" />`,
     `<meta property="og:image" content="https://static.cupid.travel/hotels/570881905.jpg" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${esc(title)}" />`,
+    `<meta name="twitter:description" content="${esc(description)}" />`,
     `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`
   ].join('\n    ');
 
@@ -87,8 +94,8 @@ function renderSouthBankHubBody() {
       <h1>South Bank, London: Curated Hotels, Hidden Gems &amp; Insider Guide</h1>
       <p>2&ndash;6 min walk between Tate Modern, Gabriel&rsquo;s Wharf &amp; SE1 boutique hotels. Zero-Chain Charter across Gabriel&rsquo;s Wharf &amp; Lower Marsh.</p>
 
-      <section aria-labelledby="southbank-comparison-heading">
-        <h2 id="southbank-comparison-heading">South Bank Boutique Hotels at a Glance</h2>
+      <details open>
+        <summary><strong>Compare All 4 South Bank Hotels Side-by-Side (SE1)</strong></summary>
         <p><a href="/compare/sea-containers-vs-bankside-hotel">Read full side-by-side comparison: Sea Containers London vs. Bankside Hotel &rarr;</a></p>
         <table>
           <thead>
@@ -102,10 +109,10 @@ function renderSouthBankHubBody() {
           </thead>
           <tbody>${hotelRows}</tbody>
         </table>
-      </section>
+      </details>
 
-      <section aria-labelledby="southbank-gems-heading">
-        <h2 id="southbank-gems-heading">South Bank Hidden Gems &amp; Walkable Spots at a Glance</h2>
+      <details>
+        <summary><strong>All 4 Verified SE1 Local Gems &mdash; Postcodes &amp; Timed Walks</strong></summary>
         <table>
           <thead>
             <tr>
@@ -118,7 +125,7 @@ function renderSouthBankHubBody() {
           </thead>
           <tbody>${gemRows}</tbody>
         </table>
-      </section>
+      </details>
 
       <section>
         <h2>South Bank Insider FAQ</h2>

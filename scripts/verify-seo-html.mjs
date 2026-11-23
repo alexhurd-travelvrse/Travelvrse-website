@@ -30,10 +30,18 @@ for (const target of TARGETS) {
   const html = await res.text();
   const xRobots = res.headers.get('x-robots-tag') || '';
 
+  const titleCount = (html.match(/<title>/gi) || []).length;
+  const canonicalCount = (html.match(/<link\s+rel=["']canonical["']/gi) || []).length;
+  const jsonLdCount = (html.match(/<script\s+type=["']application\/ld\+json["']/gi) || []).length;
+
   const checks = [
     ['HTTP 200', res.status === 200],
     ['No X-Robots-Tag noindex', !/noindex/i.test(xRobots)],
     ['HTML robots index,follow', /<meta\s+name="robots"\s+content="index,\s*follow"/i.test(html)],
+    ['Exactly 1 <title>', titleCount === 1],
+    ['Exactly 1 canonical', canonicalCount === 1],
+    ['Exactly 1 JSON-LD block', jsonLdCount === 1],
+    ['Zero B2B cruise/SoftwareApplication leak', !/SoftwareApplication|cruise operators/i.test(html)],
     ['Self-referencing canonical', html.includes(`href="${target.expectedCanonical}"`)],
     ...target.mustContain.map((snippet) => [`Contains "${snippet}"`, html.includes(snippet)])
   ];

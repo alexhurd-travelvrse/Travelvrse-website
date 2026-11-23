@@ -8,11 +8,17 @@ const Layout = ({ children }) => {
     const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const isConsumerDirectoryRoute =
+        location.pathname.startsWith('/destinations') ||
+        location.pathname.startsWith('/compare') ||
+        location.pathname.startsWith('/scouts') ||
+        location.pathname.startsWith('/booking');
+
     return (
         <>
             <header className="main-header">
                 <div className="container header-content">
-                    <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
+                    <Link to={isConsumerDirectoryRoute ? '/destinations/london/south-bank' : '/'} className="logo" onClick={() => setIsMenuOpen(false)}>
                         <img
                             src="/models/travelvrse_logo_main.svg"
                             alt="Travelvrse"
@@ -30,10 +36,20 @@ const Layout = ({ children }) => {
                     </button>
 
                     <nav className={`header-nav ${isMenuOpen ? 'open' : ''}`}>
-                        <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>CHALLENGE MARKETPLACE</a>
-                        <Link to="/creator" className="nav-link" onClick={() => setIsMenuOpen(false)}>CREATOR LOGIN</Link>
-                        <a href="#journal" className="nav-link" onClick={() => setIsMenuOpen(false)}>JOURNAL</a>
-                        <a href="#team" className="nav-link" onClick={() => setIsMenuOpen(false)}>OUR TEAM</a>
+                        {isConsumerDirectoryRoute ? (
+                            <>
+                                <Link to="/destinations/london/south-bank" className="nav-link" onClick={() => setIsMenuOpen(false)}>SOUTH BANK GUIDE</Link>
+                                <Link to="/compare/sea-containers-vs-bankside-hotel" className="nav-link" onClick={() => setIsMenuOpen(false)}>HOTEL COMPARISON</Link>
+                                <Link to="/scouts/alex-hurd" className="nav-link" onClick={() => setIsMenuOpen(false)}>FIELD AUDITS</Link>
+                            </>
+                        ) : (
+                            <>
+                                <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>CHALLENGE MARKETPLACE</a>
+                                <Link to="/creator" className="nav-link" onClick={() => setIsMenuOpen(false)}>CREATOR LOGIN</Link>
+                                <a href="#journal" className="nav-link" onClick={() => setIsMenuOpen(false)}>JOURNAL</a>
+                                <a href="#team" className="nav-link" onClick={() => setIsMenuOpen(false)}>OUR TEAM</a>
+                            </>
+                        )}
                     </nav>
                 </div>
             </header>

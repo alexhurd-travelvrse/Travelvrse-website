@@ -239,7 +239,7 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
 
   const pageTitle = 'South Bank, London: Curated Hotels, Hidden Gems & Insider Guide (2026) | TravelVRSE';
   const pageDesc =
-    'On-site verified guide to London’s South Bank (SE1). Compare Sea Containers London and Bankside Hotel, discover zero-chain local gems like Gabriel’s Wharf, and unlock 10% stay credits.';
+    'On-site verified guide to London’s South Bank (SE1). Compare Sea Containers London, Bankside Hotel, The Hoxton Southwark, and citizenM Bankside, plus zero-chain local gems like Gabriel’s Wharf.';
 
   const content = (
     <>
@@ -272,61 +272,29 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
           background: 'linear-gradient(180deg, #050b14 0%, #070e1c 40%, #050b14 100%)',
           color: '#f8fafc',
           minHeight: '100vh',
-          padding: '18px 20px 80px 20px',
+          padding: '12px 14px 72px 14px',
           fontFamily: 'Inter, system-ui, sans-serif'
         }}
       >
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          {/* Compact Unified Header (Keeps "01 · Discover Your Vibe" Above the Fold) */}
-          <div style={{ marginBottom: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginBottom: '8px' }}>
-              <nav
-                aria-label="Breadcrumb"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  fontSize: '12px',
-                  color: '#94a3b8'
-                }}
-              >
-                <Link to="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>Home</Link>
-                <ChevronRight size={12} color="#475569" />
-                <span style={{ color: '#94a3b8' }}>London</span>
-                <ChevronRight size={12} color="#475569" />
-                <span style={{ color: '#38bdf8', fontWeight: 700 }}>South Bank (SE1)</span>
-              </nav>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <span
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '5px',
-                    padding: '3px 9px',
-                    borderRadius: '999px',
-                    background: 'rgba(16, 185, 129, 0.12)',
-                    border: '1px solid rgba(52, 211, 153, 0.3)',
-                    color: '#34d399',
-                    fontSize: '11px',
-                    fontWeight: 700
-                  }}
-                >
-                  <CalendarCheck size={12} /> Audited On-Site · Nov 2026
-                </span>
-                <span style={{ fontSize: '12px', color: '#94a3b8' }}>
-                  {SOUTH_BANK_VIBE_DATA.geo.borough} · SE1
-                </span>
-              </div>
+          {/* Ultra-Compact Header (Keeps "The Pull" & "Skip to Hotels" Above the Fold on Mobile) */}
+          <div style={{ marginBottom: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: '4px' }}>
+              <span style={{ fontSize: '11.5px', color: '#38bdf8', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                London · South Bank (SE1)
+              </span>
+              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>
+                Field checked Nov 2026
+              </span>
             </div>
 
             <h1
               style={{
-                fontSize: 'clamp(22px, 3vw, 30px)',
+                fontSize: 'clamp(21px, 3vw, 29px)',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
                 lineHeight: 1.18,
-                margin: '0 0 8px 0',
+                margin: '0 0 6px 0',
                 background: 'linear-gradient(135deg, #ffffff 45%, #93c5fd 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent'
@@ -335,27 +303,9 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
               South Bank, London: Curated Hotels, Hidden Gems &amp; Insider Guide
             </h1>
 
-            {/* Verifiable GEO Facts Strip (replaces arbitrary composite scores) */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '14px',
-                flexWrap: 'wrap',
-                fontSize: '12.5px',
-                color: '#cbd5e1'
-              }}
-            >
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                <MapPin size={14} color="#34d399" />
-                <span><strong style={{ color: '#f8fafc' }}>2–6 min walk</strong> between Tate Modern, Gabriel’s Wharf &amp; SE1 hotels</span>
-              </span>
-              <span style={{ color: '#334155' }}>•</span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                <ShieldCheck size={14} color="#a78bfa" />
-                <span><strong style={{ color: '#f8fafc' }}>Zero-Chain Charter</strong> across Gabriel’s Wharf &amp; Lower Marsh</span>
-              </span>
-            </div>
+            <p style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: 1.45, margin: 0 }}>
+              <strong style={{ color: '#f8fafc' }}>4 hotels within 2–5 min of Tate Modern (from £170)</strong> — plus independent Zero-Chain local gems at Gabriel’s Wharf &amp; Lower Marsh.
+            </p>
           </div>
 
           {/* THE GAMIFIED DESTINATION VIBE CHALLENGE & UNIFIED DISCOVERY TABS */}
@@ -363,30 +313,40 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
             <VibeSearchChallengeWidget initialLocation="london-southbank" />
           </div>
 
-          {/* GEO SECTION 1: STRUCTURED HOTEL COMPARISON TABLE (HTML <table>) */}
-          <section
-            aria-labelledby="southbank-comparison-heading"
+          {/* GEO SECTION 1: LAYERED NATIVE <details> HOTEL COMPARISON TABLE (100% IN DOM & STATIC HTML) */}
+          <details
             style={{
               background: 'rgba(15, 23, 42, 0.65)',
               border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderRadius: '20px',
-              padding: '24px',
-              marginBottom: '28px'
+              borderRadius: '16px',
+              padding: '16px 20px',
+              marginBottom: '16px'
             }}
           >
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '16px' }}>
+            <summary
+              style={{
+                cursor: 'pointer',
+                listStyle: 'none',
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '10px'
+              }}
+            >
               <div>
-                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: 800, marginBottom: '4px' }}>
-                  Quick Comparison
+                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: 800, marginBottom: '2px' }}>
+                  Quick Comparison · Tap to Expand
                 </div>
-                <h2 id="southbank-comparison-heading" style={{ fontSize: '20px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
-                  South Bank Boutique Hotels at a Glance
+                <h2 id="southbank-comparison-heading" style={{ fontSize: '18px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                  Compare All 4 South Bank Hotels Side-by-Side
                 </h2>
               </div>
               <Link
                 to="/compare/sea-containers-vs-bankside-hotel"
+                onClick={(e) => e.stopPropagation()}
                 style={{
-                  fontSize: '12.5px',
+                  fontSize: '12px',
                   fontWeight: 700,
                   color: '#7dd3fc',
                   background: 'rgba(56, 189, 248, 0.12)',
@@ -396,11 +356,11 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                   textDecoration: 'none'
                 }}
               >
-                Full Side-by-Side Comparison →
+                Sea Containers vs. Bankside →
               </Link>
-            </div>
+            </summary>
 
-            <div style={{ overflowX: 'auto' }}>
+            <div style={{ overflowX: 'auto', marginTop: '16px' }}>
               <table
                 style={{
                   width: '100%',
@@ -450,29 +410,28 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                 </tbody>
               </table>
             </div>
-          </section>
+          </details>
 
-          {/* GEO SECTION 1B: VERIFIED WALKABLE LOCAL GEMS TABLE (HTML <table>) */}
-          <section
-            aria-labelledby="southbank-gems-heading"
+          {/* GEO SECTION 1B: LAYERED NATIVE <details> LOCAL GEMS TABLE */}
+          <details
             style={{
               background: 'rgba(15, 23, 42, 0.65)',
               border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderRadius: '20px',
-              padding: '24px',
-              marginBottom: '28px'
+              borderRadius: '16px',
+              padding: '16px 20px',
+              marginBottom: '20px'
             }}
           >
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#34d399', fontWeight: 800, marginBottom: '4px' }}>
-                Verified SE1 Dispersal Spots
+            <summary style={{ cursor: 'pointer', listStyle: 'none' }}>
+              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#34d399', fontWeight: 800, marginBottom: '2px' }}>
+                Verified SE1 Local Gems · Tap to Expand
               </div>
-              <h2 id="southbank-gems-heading" style={{ fontSize: '20px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
-                South Bank Hidden Gems &amp; Walkable Spots at a Glance
+              <h2 id="southbank-gems-heading" style={{ fontSize: '18px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                All 4 Verified SE1 Hidden Gems — Postcodes &amp; Timed Walks
               </h2>
-            </div>
+            </summary>
 
-            <div style={{ overflowX: 'auto' }}>
+            <div style={{ overflowX: 'auto', marginTop: '16px' }}>
               <table
                 style={{
                   width: '100%',
@@ -520,7 +479,7 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                 </tbody>
               </table>
             </div>
-          </section>
+          </details>
 
           {/* GEO SECTION 2: DIRECT-ANSWER INSIDER FAQ (COLLAPSIBLE ACCORDION) */}
           <section

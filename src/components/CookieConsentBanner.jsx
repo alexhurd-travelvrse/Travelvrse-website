@@ -99,8 +99,8 @@ const CookieConsentBanner = () => {
           </div>
 
           <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.55, margin: '0 0 16px 0' }}>
-            We use essential cookies and anonymous analytics to understand how travellers explore destination vibes and to
-            ensure high-performance 3D loading. We never sell your data or deploy cross-site advertising trackers. Read our{' '}
+            We use essential cookies and analytics to personalise destination discovery and measure anonymous, aggregated
+            neighbourhood trend insights. We never sell personally identifiable data or deploy cross-site advertising trackers. Read our{' '}
             <Link to="/cookies" style={{ color: '#38bdf8', textDecoration: 'underline', fontWeight: 500 }}>
               Cookie Policy
             </Link>

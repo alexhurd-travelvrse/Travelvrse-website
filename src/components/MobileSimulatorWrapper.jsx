@@ -43,7 +43,11 @@ const MobileSimulatorWrapper = ({ children }) => {
     location.pathname.startsWith('/presenter') || 
     location.pathname.startsWith('/demo-hub') ||
     location.pathname.startsWith('/play') ||
-    location.pathname.startsWith('/pull');
+    location.pathname.startsWith('/pull') ||
+    location.pathname.startsWith('/destinations') ||
+    location.pathname.startsWith('/compare') ||
+    location.pathname.startsWith('/scouts') ||
+    location.pathname.startsWith('/booking');
 
   if (isSimulatorRoute) {
     return <>{children}</>;

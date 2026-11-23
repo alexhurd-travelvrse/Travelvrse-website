@@ -405,7 +405,7 @@ const DESTINATION_DATABASE = {
         handle: '@AlexCulture',
         role: 'South Bank Design & Cultural Scout',
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
-        quote: "South Bank stretches 2 miles along the Thames. Most tourists shuffle in packs between the London Eye and chain restaurants. I map the real neighborhood: the zero-chain maker courtyards hidden 2 minutes inland, the free archival cinema carrels, and the quietest architectural sanctuaries.",
+        quote: "South Bank stretches 2 miles along the Thames. Most tourists shuffle in packs between the London Eye and chain restaurants. I map the real neighborhood: the zero-chain maker courtyards hidden 2 minutes inland, the free archival cinema booths, and the quietest architectural sanctuaries.",
         voiceNote: 'The South Bank Cultural Frequency (34s)',
         duelChoices: {
           culturePace: 'brutalist_film',
@@ -464,7 +464,7 @@ const DESTINATION_DATABASE = {
         title: '3. Neighborhood Exploration & Spending',
         subtitle: 'Where do you wander when you need to escape the tourist crowds?',
         creatorPick: 'indie_makers',
-        creatorReason: '“Walk 120 seconds inland to Gabriel’s Wharf or Lower Marsh. 100% of your spend directly sustains local makers.”',
+        creatorReason: '“Walk 120 seconds inland to Gabriel’s Wharf or Lower Marsh to support independent local makers.”',
         optionA: {
           id: 'indie_makers',
           label: 'Zero-Chain Artisan Courtyards (Inland)',
@@ -1590,15 +1590,21 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     const details = [];
 
     questions.forEach(q => {
-      const isMatch = userAnswers[q.id] === q.creatorPick;
+      const userChoice = userAnswers[q.id];
+      const isAnswered = Boolean(userChoice);
+      const isMatch = isAnswered && userChoice === q.creatorPick;
       if (isMatch) matchCount += 1;
 
       details.push({
         id: q.id,
         title: q.title.replace(/^[0-9]\.\s*/, ''),
+        isAnswered,
         isMatch,
-        userPickLabel: userAnswers[q.id] === q.optionA.id ? q.optionA.label : q.optionB.label,
-        creatorPickLabel: q.creatorPick === q.optionA.id ? q.optionA.label : q.optionB.label
+        userPickLabel: !isAnswered
+          ? 'Not chosen yet'
+          : (userChoice === q.optionA.id ? q.optionA.label : q.optionB.label),
+        creatorPickLabel: q.creatorPick === q.optionA.id ? q.optionA.label : q.optionB.label,
+        creatorReason: q.creatorReason || ''
       });
     });
 
@@ -2332,6 +2338,75 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                   );
                 })}
               </div>
+              {/* Expandable Creator Pick Breakdown (Compact <details> — zero bloat on load) */}
+              {hasUserPulled && (
+                <details
+                  style={{
+                    background: 'rgba(15, 23, 42, 0.65)',
+                    border: '1px solid rgba(56, 189, 248, 0.22)',
+                    borderRadius: '10px',
+                    padding: '9px 11px',
+                    marginBottom: '12px'
+                  }}
+                >
+                  <summary
+                    style={{
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                      fontWeight: '700',
+                      color: '#7dd3fc',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      listStyle: 'none'
+                    }}
+                  >
+                    <span>See why {activeCurator.handle} picked each ({matchCalculation.matchCount}/{matchCalculation.details.length} matched)</span>
+                    <span style={{ fontSize: '11px', color: '#94a3b8' }}>▾</span>
+                  </summary>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
+                    {matchCalculation.details.map((item, idx) => (
+                      <div
+                        key={item.id}
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.03)',
+                          border: `1px solid ${!item.isAnswered ? 'rgba(255, 255, 255, 0.07)' : (item.isMatch ? 'rgba(52, 211, 153, 0.28)' : 'rgba(251, 191, 36, 0.28)')}`,
+                          borderRadius: '8px',
+                          padding: '8px 10px'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '6px', marginBottom: '4px' }}>
+                          <span style={{ fontSize: '11px', fontWeight: '800', color: '#e2e8f0' }}>
+                            {idx + 1}. {item.title}
+                          </span>
+                          <span style={{
+                            fontSize: '10px',
+                            fontWeight: '800',
+                            padding: '2px 7px',
+                            borderRadius: '999px',
+                            whiteSpace: 'nowrap',
+                            background: !item.isAnswered ? 'rgba(148, 163, 184, 0.14)' : (item.isMatch ? 'rgba(16, 185, 129, 0.18)' : 'rgba(251, 191, 36, 0.16)'),
+                            color: !item.isAnswered ? '#94a3b8' : (item.isMatch ? '#34d399' : '#fbbf24')
+                          }}>
+                            {!item.isAnswered ? 'Pending' : (item.isMatch ? '✓ Match' : 'Different vibe')}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: '11px', color: '#cbd5e1', lineHeight: 1.4, marginBottom: item.creatorReason ? '4px' : 0 }}>
+                          <strong style={{ color: '#7dd3fc' }}>{activeCurator.name.split(' ')[0]}:</strong> {item.creatorPickLabel}
+                          {item.isAnswered && !item.isMatch && (
+                            <span style={{ color: '#94a3b8' }}> · <strong style={{ color: '#f8fafc' }}>You:</strong> {item.userPickLabel}</span>
+                          )}
+                        </div>
+                        {item.creatorReason && (
+                          <div style={{ fontSize: '10.5px', fontStyle: 'italic', color: '#94a3b8', lineHeight: 1.35 }}>
+                            {item.creatorReason}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              )}
             </div>
 
             {hasUserPulled ? (

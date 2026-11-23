@@ -353,16 +353,21 @@ export async function executeSouthBankLivePrebook({
     finisherCreditGbp,
     checkin,
     checkout,
-    nights = 2
+    nights = 2,
+    voucherCode = ''
 }) {
     if (offerId && !String(offerId).startsWith('static_')) {
         try {
+            const cleanVoucher = String(voucherCode || '').trim();
+            const prebookBody = {
+                offerId,
+                usePaymentSdk: true,
+                ...(cleanVoucher ? { voucherCode: cleanVoucher } : {})
+            };
+
             const { ok, json, publicKeyMode } = await callNuiteeApi('rates/prebook', {
                 method: 'POST',
-                body: {
-                    offerId,
-                    usePaymentSdk: true
-                }
+                body: prebookBody
             });
 
             const prebookData = json?.data;
@@ -381,6 +386,7 @@ export async function executeSouthBankLivePrebook({
                     roomName: prebookData.roomTypes?.[0]?.rates?.[0]?.name || roomName,
                     totalPrice: prebookData.price ?? (challengeRate * nights),
                     currency: prebookData.currency || 'GBP',
+                    voucherApplied: cleanVoucher || null,
                     checkin: prebookData.checkin || checkin,
                     checkout: prebookData.checkout || checkout,
                     nights,
@@ -393,12 +399,17 @@ export async function executeSouthBankLivePrebook({
             return {
                 status: 'PREBOOK_ERROR',
                 isLiveApi: false,
-                error: json?.error?.message || 'Rate expired or unavailable — please refresh dates and try again.',
+                error: json?.error?.message || (cleanVoucher ? `Voucher "${cleanVoucher}" was not accepted by Nuitée — check code or continue without a voucher.` : 'Rate expired or unavailable — please refresh dates and try again.'),
                 hotelName,
                 roomName,
                 retailRate,
                 challengeRate,
-                finisherCreditGbp
+                finisherCreditGbp,
+                offerId,
+                nuiteeHotelId,
+                checkin,
+                checkout,
+                nights
             };
         } catch (err) {
             return {
@@ -424,6 +435,70 @@ export async function executeSouthBankLivePrebook({
         challengeRate,
         finisherCreditGbp
     };
+}
+
+/**
+ * Mint a unique, single-use, 7-day Nuitée voucher server-side (`POST /api/nuitee?endpoint=vouchers/mint`)
+ * Cached in localStorage so the same user doesn't mint duplicate codes on replay.
+ */
+export async function mintPersonalVibeVoucher() {
+    const STORAGE_KEY = 'travelvrse_personal_vibe_voucher_v1';
+    try {
+        const cachedRaw = localStorage.getItem(STORAGE_KEY);
+        if (cachedRaw) {
+            const cached = JSON.parse(cachedRaw);
+            if (cached?.voucherCode && cached?.validUntil && cached.validUntil >= new Date().toISOString().slice(0, 10)) {
+                return cached;
+            }
+        }
+    } catch (_) {
+        // ignore
+    }
+
+    if (shouldUseServerProxy()) {
+        try {
+            const res = await fetch('/api/nuitee?endpoint=vouchers/mint', {
+                method: 'POST',
+                headers: { accept: 'application/json', 'content-type': 'application/json' },
+                body: JSON.stringify({})
+            });
+            const json = await res.json().catch(() => null);
+            if (res.ok && json?.ok && json?.voucherCode) {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(json));
+                } catch (_) {
+                    // ignore
+                }
+                return json;
+            }
+        } catch (_) {
+            // ignore
+        }
+    }
+
+    // Local preview fallback (single-use preview format — live minting runs server-side on Vercel)
+    const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let suffix = '';
+    for (let i = 0; i < 6; i++) {
+        suffix += alphabet[Math.floor(Math.random() * alphabet.length)];
+    }
+    const validUntil = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
+    const localPreview = {
+        ok: true,
+        isLocalPreview: true,
+        voucherCode: `VIBE-${suffix}`,
+        discountPercent: 5,
+        maxDiscountGbp: 30,
+        minSpendGbp: 150,
+        validUntil,
+        usagesLimit: 1
+    };
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(localPreview));
+    } catch (_) {
+        // ignore
+    }
+    return localPreview;
 }
 
 /**

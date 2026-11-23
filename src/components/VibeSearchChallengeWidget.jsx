@@ -9,7 +9,11 @@ import {
   BedDouble, Images, AlertTriangle, CheckCircle2, Box
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { fetchLiveSouthBankNuiteeFeeds, executeSouthBankLivePrebook } from '../services/nuiteeLiveFeedService';
+import {
+  fetchLiveSouthBankNuiteeFeeds,
+  executeSouthBankLivePrebook,
+  mintPersonalVibeVoucher
+} from '../services/nuiteeLiveFeedService';
 import { loadPortableVibeProfile, savePortableTripContext, computeTripDates, getDefaultTripContext } from '../services/vibeProfileStore';
 
 // Comprehensive DESTINATION-LEVEL Database (Focusing on the neighborhood, not a single hotel)
@@ -1187,6 +1191,25 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   const [checkoutStep, setCheckoutStep] = useState('guest'); // 'guest' | 'payment'
   const [guestForm, setGuestForm] = useState({ firstName: '', lastName: '', email: '' });
   const [paymentSdkError, setPaymentSdkError] = useState('');
+  const [voucherInput, setVoucherInput] = useState('');
+  const [voucherStatusMsg, setVoucherStatusMsg] = useState('');
+  const [isApplyingVoucher, setIsApplyingVoucher] = useState(false);
+  const [personalVoucher, setPersonalVoucher] = useState(null);
+
+  // Mint a unique single-use Nuitée voucher server-side when user completes Stage 01
+  useEffect(() => {
+    if (!pullCompleted) return;
+    let cancelled = false;
+    mintPersonalVibeVoucher().then((v) => {
+      if (!cancelled && v?.voucherCode) {
+        setPersonalVoucher(v);
+        setVoucherInput(v.voucherCode);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [pullCompleted]);
 
   // Load LiteAPI Payment SDK script dynamically when entering Step 2 ('payment')
   useEffect(() => {
@@ -1362,11 +1385,15 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     }
   };
 
-  // Instant Live Nuitée Prebook Booking Flow (usePaymentSdk: true)
-  const handleInitiateBooking = async (stay) => {
+  // Instant Live Nuitée Prebook Booking Flow (usePaymentSdk: true + optional voucherCode)
+  const handleInitiateBooking = async (stay, customVoucher = '') => {
     setIsPrebooking(true);
     setCheckoutStep('guest');
     setPaymentSdkError('');
+    setVoucherStatusMsg('');
+    if (!customVoucher) {
+      setVoucherInput(personalVoucher?.voucherCode || '');
+    }
     const rateData = nuiteeRates.hotels[stay.id] || {
       retailRate: stay.fallbackRetail,
       challengeRate: Math.round(stay.fallbackRetail * 0.9),
@@ -1385,18 +1412,54 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         finisherCreditGbp: rateData.finisherCreditGbp,
         checkin: tripContext.checkin,
         checkout: tripContext.checkout,
-        nights: tripContext.nights
+        nights: tripContext.nights,
+        voucherCode: customVoucher
       });
-      setPrebookSession(session);
+      setPrebookSession({ ...session, stayRef: stay });
     } catch (err) {
       setPrebookSession({
         status: 'PREBOOK_ERROR',
         error: err?.message || 'Unable to lock live rate right now.',
         hotelName: stay.name,
-        roomName: rateData.roomName
+        roomName: rateData.roomName,
+        stayRef: stay
       });
     } finally {
       setIsPrebooking(false);
+    }
+  };
+
+  const handleApplyVoucherCode = async () => {
+    if (!prebookSession || !prebookSession.offerId) return;
+    const code = voucherInput.trim();
+    if (!code) {
+      setVoucherStatusMsg('Enter a Vibe or Creator Stay Credit code first.');
+      return;
+    }
+    setIsApplyingVoucher(true);
+    setVoucherStatusMsg('');
+    try {
+      const updated = await executeSouthBankLivePrebook({
+        nuiteeHotelId: prebookSession.hotelId || prebookSession.nuiteeHotelId,
+        offerId: prebookSession.offerId,
+        hotelName: prebookSession.hotelName,
+        roomName: prebookSession.roomName,
+        retailRate: prebookSession.retailRate,
+        challengeRate: prebookSession.challengeRate,
+        finisherCreditGbp: prebookSession.finisherCreditGbp,
+        checkin: prebookSession.checkin,
+        checkout: prebookSession.checkout,
+        nights: prebookSession.nights,
+        voucherCode: code
+      });
+      if (updated.status === 'READY_FOR_PAYMENT') {
+        setPrebookSession({ ...updated, stayRef: prebookSession.stayRef });
+        setVoucherStatusMsg(`✓ Voucher "${code}" applied to live Nuitée total.`);
+      } else {
+        setVoucherStatusMsg(updated.error || `Voucher "${code}" is not active in Nuitée yet.`);
+      }
+    } finally {
+      setIsApplyingVoucher(false);
     }
   };
 
@@ -1910,9 +1973,25 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                   {crowdBenchmark.archetype}
                 </h4>
 
-                <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 18px 0', lineHeight: 1.45 }}>
-                  <strong style={{ color: '#7dd3fc' }}>{matchCalculation.pct}% aligned</strong> with {activeCurator.handle}. Your neighbourhood guide, 3D walk &amp; live hotel galleries below are now tuned to your vibe.
+                <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 12px 0', lineHeight: 1.45 }}>
+                  <strong style={{ color: '#7dd3fc' }}>{matchCalculation.pct}% aligned</strong> with {activeCurator.handle}. Your neighbourhood guide &amp; live hotel galleries below are now tuned to your vibe.
                 </p>
+
+                <div style={{
+                  background: 'rgba(16, 185, 129, 0.14)',
+                  border: '1px solid rgba(52, 211, 153, 0.4)',
+                  borderRadius: '10px',
+                  padding: '8px 12px',
+                  fontSize: '11.5px',
+                  color: '#d1fae5',
+                  marginBottom: '14px'
+                }}>
+                  <strong style={{ color: '#34d399' }}>Personal Single-Use Stay Credit:</strong>{' '}
+                  <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>
+                    {personalVoucher?.voucherCode || 'Generating…'}
+                  </strong>{' '}
+                  · 5% off up to £30 (1-time use, valid 7 days)
+                </div>
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
                   <button
@@ -2815,7 +2894,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             fontWeight: '700'
           }}>
             <Sparkles size={13} />
-            <span id="stage-04-stays" style={{ scrollMarginTop: '90px' }}>03 · Find Your Stay · Member Rates Active</span>
+            <span id="stage-04-stays" style={{ scrollMarginTop: '90px' }}>03 · Find Your Stay · Live Hotel Rates</span>
           </div>
         </div>
 
@@ -3316,30 +3395,23 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                       gap: '14px'
                     }}>
                       <div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                          <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>Standard Rate</span>
-                          <span style={{ fontSize: '13px', color: '#94a3b8', textDecoration: 'line-through' }}>
-                            £{rateData.retailRate}
-                          </span>
-                        </div>
-
                         <div style={{
                           display: 'inline-block',
                           fontSize: '10.5px',
-                          fontWeight: '800',
-                          color: '#34d399',
-                          background: 'rgba(16, 185, 129, 0.15)',
-                          border: '1px solid rgba(52, 211, 153, 0.35)',
+                          fontWeight: '700',
+                          color: '#7dd3fc',
+                          background: 'rgba(56, 189, 248, 0.12)',
+                          border: '1px solid rgba(56, 189, 248, 0.3)',
                           padding: '3px 8px',
                           borderRadius: '6px',
                           marginBottom: '10px'
                         }}>
-                          Member Rate · Save £{rateData.finisherCreditGbp}/nt
+                          Live Rate
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
                           <span style={{ fontSize: '30px', fontWeight: '900', color: '#ffffff', lineHeight: 1 }}>
-                            £{rateData.challengeRate}
+                            £{rateData.retailRate}
                           </span>
                           <span style={{ fontSize: '12px', color: '#94a3b8' }}>/ night</span>
                         </div>
@@ -3986,15 +4058,77 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  marginBottom: '16px',
+                  marginBottom: '12px',
                   border: '1px solid rgba(255, 255, 255, 0.08)'
                 }}>
-                  <span style={{ color: '#94a3b8' }}>Live Total ({prebookSession.currency || 'GBP'}):</span>
+                  <div>
+                    <span style={{ color: '#94a3b8' }}>Live Total ({prebookSession.currency || 'GBP'}):</span>
+                    {prebookSession.voucherApplied && (
+                      <div style={{ fontSize: '11px', color: '#34d399', fontWeight: '700', marginTop: '2px' }}>
+                        ✓ Voucher {prebookSession.voucherApplied} applied
+                      </div>
+                    )}
+                  </div>
                   <strong style={{ color: '#34d399', fontSize: '17px' }}>
                     {prebookSession.currency === 'GBP' ? '£' : `${prebookSession.currency} `}
                     {Number(prebookSession.totalPrice || 0).toFixed(2)}
                   </strong>
                 </div>
+
+                {checkoutStep === 'guest' && (
+                  <div style={{
+                    background: 'rgba(56, 189, 248, 0.06)',
+                    border: '1px solid rgba(56, 189, 248, 0.2)',
+                    borderRadius: '10px',
+                    padding: '10px 12px',
+                    marginBottom: '14px'
+                  }}>
+                    <div style={{ fontSize: '11px', fontWeight: '700', color: '#7dd3fc', marginBottom: '6px' }}>
+                      Vibe / Creator Stay Credit Code (Nuitée Voucher)
+                    </div>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <input
+                        type="text"
+                        placeholder="e.g. VIBE-7K9P2Q or SCOUT-ALEX"
+                        value={voucherInput}
+                        onChange={(e) => setVoucherInput(e.target.value.toUpperCase())}
+                        style={{
+                          flex: 1,
+                          padding: '8px 10px',
+                          borderRadius: '8px',
+                          border: '1px solid rgba(255,255,255,0.16)',
+                          background: 'rgba(0,0,0,0.35)',
+                          color: '#fff',
+                          fontSize: '12.5px',
+                          fontFamily: 'monospace'
+                        }}
+                      />
+                      <button
+                        type="button"
+                        disabled={isApplyingVoucher}
+                        onClick={handleApplyVoucherCode}
+                        style={{
+                          background: 'rgba(56, 189, 248, 0.2)',
+                          border: '1px solid rgba(56, 189, 248, 0.45)',
+                          color: '#ffffff',
+                          padding: '8px 12px',
+                          borderRadius: '8px',
+                          fontSize: '12px',
+                          fontWeight: '700',
+                          cursor: isApplyingVoucher ? 'wait' : 'pointer',
+                          whiteSpace: 'nowrap'
+                        }}
+                      >
+                        {isApplyingVoucher ? 'Checking…' : 'Apply'}
+                      </button>
+                    </div>
+                    {voucherStatusMsg && (
+                      <div style={{ fontSize: '11.5px', marginTop: '6px', color: voucherStatusMsg.startsWith('✓') ? '#34d399' : '#fbbf24' }}>
+                        {voucherStatusMsg}
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {checkoutStep === 'guest' ? (
                   <form

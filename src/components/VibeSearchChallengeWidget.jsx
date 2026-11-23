@@ -1194,6 +1194,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   const [voucherStatusMsg, setVoucherStatusMsg] = useState('');
   const [isApplyingVoucher, setIsApplyingVoucher] = useState(false);
   const [personalVoucher, setPersonalVoucher] = useState(null);
+  const [voucherCopied, setVoucherCopied] = useState(false);
 
   // Mint a unique single-use Nuitée voucher server-side when user completes Stage 01
   useEffect(() => {
@@ -1825,7 +1826,315 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         </div>
       </div>
 
-      {/* DISCOVER YOUR VIBE: INTERACTIVE VISUAL "THE PULL" (ABOVE THE FOLD ON DESKTOP & MOBILE) */}
+      {/* DISCOVER YOUR VIBE: COLLAPSE CHALLENGE CONTAINER INTO HORIZONTAL CONFIRMATION CARDS ONCE COMPLETED */}
+      {pullCompleted ? (
+        <div style={{ marginBottom: '20px' }}>
+          {/* Compact Top Bar */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '8px',
+            marginBottom: '10px'
+          }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <CheckCircle2 size={15} color="#34d399" />
+              <span style={{ fontSize: '12px', fontWeight: '800', color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.7px' }}>
+                Vibe Match Complete
+              </span>
+              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>
+                · Hotels below reordered
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setPullRevealMsg(null);
+                setPullSplitPct(50);
+                setPullCompleted(false);
+                setDuelStep(0);
+              }}
+              style={{
+                background: 'rgba(255, 255, 255, 0.06)',
+                border: '1px solid rgba(255, 255, 255, 0.16)',
+                color: '#e2e8f0',
+                borderRadius: '8px',
+                padding: '6px 11px',
+                fontSize: '11.5px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                minHeight: '34px'
+              }}
+            >
+              <RefreshCw size={12} />
+              <span>Replay Pull</span>
+            </button>
+          </div>
+
+          {/* Horizontal Swipeable Confirmation Cards (Swipe on mobile · 3-up row on desktop) */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'nowrap',
+            overflowX: 'auto',
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            gap: '12px',
+            paddingBottom: '6px'
+          }}>
+            {/* CARD 1: YOUR VIBE & CREATOR ALIGNMENT */}
+            <div style={{
+              flex: '1 0 min(82vw, 310px)',
+              scrollSnapAlign: 'start',
+              background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(12, 22, 42, 0.98) 100%)',
+              border: '1px solid rgba(56, 189, 248, 0.35)',
+              borderRadius: '16px',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: '10px'
+            }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <img
+                    src={activeCurator.avatar}
+                    alt={activeCurator.name}
+                    style={{ width: '30px', height: '30px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid #38bdf8' }}
+                  />
+                  <div>
+                    <div style={{ fontSize: '11px', fontWeight: '800', color: '#7dd3fc', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+                      {matchCalculation.percentage}% Aligned · {activeCurator.handle}
+                    </div>
+                    <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+                      {matchCalculation.matchCount} of {matchCalculation.details.length} scout picks matched
+                    </div>
+                  </div>
+                </div>
+
+                <h3 style={{ fontSize: '18px', fontWeight: '900', color: '#ffffff', margin: '0 0 6px 0', lineHeight: 1.25 }}>
+                  {crowdBenchmark.archetype}
+                </h3>
+                <p style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.5, margin: 0 }}>
+                  {matchCalculation.alignmentSummary}
+                </p>
+              </div>
+
+              <details
+                style={{
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(56, 189, 248, 0.22)',
+                  borderRadius: '10px',
+                  padding: '8px 10px'
+                }}
+              >
+                <summary
+                  style={{
+                    cursor: 'pointer',
+                    fontSize: '11.5px',
+                    fontWeight: '700',
+                    color: '#7dd3fc',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    listStyle: 'none'
+                  }}
+                >
+                  <span>See why {activeCurator.handle} picked each</span>
+                  <span style={{ color: '#94a3b8' }}>▾</span>
+                </summary>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '7px', marginTop: '8px' }}>
+                  {matchCalculation.details.map((item, idx) => (
+                    <div
+                      key={item.id}
+                      style={{
+                        background: 'rgba(2, 6, 23, 0.55)',
+                        border: `1px solid ${item.isMatch ? 'rgba(52, 211, 153, 0.28)' : 'rgba(251, 191, 36, 0.28)'}`,
+                        borderRadius: '8px',
+                        padding: '7px 9px'
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '6px', marginBottom: '3px' }}>
+                        <span style={{ fontSize: '11px', fontWeight: '800', color: '#e2e8f0' }}>
+                          {idx + 1}. {item.title}
+                        </span>
+                        <span style={{
+                          fontSize: '10px',
+                          fontWeight: '800',
+                          padding: '1px 6px',
+                          borderRadius: '999px',
+                          background: item.isMatch ? 'rgba(16, 185, 129, 0.18)' : 'rgba(251, 191, 36, 0.16)',
+                          color: item.isMatch ? '#34d399' : '#fbbf24'
+                        }}>
+                          {item.isMatch ? '✓ Match' : 'Different'}
+                        </span>
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#cbd5e1', lineHeight: 1.35, marginBottom: item.creatorReason ? '3px' : 0 }}>
+                        <strong style={{ color: '#7dd3fc' }}>{activeCurator.name.split(' ')[0]}:</strong> {item.creatorPickLabel}
+                        {!item.isMatch && (
+                          <span style={{ color: '#94a3b8' }}> · <strong style={{ color: '#f8fafc' }}>You:</strong> {item.userPickLabel}</span>
+                        )}
+                      </div>
+                      {item.creatorReason && (
+                        <div style={{ fontSize: '10.5px', fontStyle: 'italic', color: '#94a3b8', lineHeight: 1.35 }}>
+                          {item.creatorReason}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </details>
+            </div>
+
+            {/* CARD 2: UNLOCKED SINGLE-USE STAY CREDIT VOUCHER */}
+            <div style={{
+              flex: '1 0 min(82vw, 290px)',
+              scrollSnapAlign: 'start',
+              background: 'linear-gradient(135deg, rgba(6, 44, 36, 0.72) 0%, rgba(15, 23, 42, 0.96) 100%)',
+              border: '1px solid rgba(52, 211, 153, 0.42)',
+              borderRadius: '16px',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: '12px'
+            }}>
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: '800', color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '6px' }}>
+                  Unlocked Stay Credit
+                </div>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
+                  background: 'rgba(2, 6, 23, 0.65)',
+                  border: '1px dashed rgba(52, 211, 153, 0.5)',
+                  borderRadius: '10px',
+                  padding: '10px 12px',
+                  marginBottom: '8px'
+                }}>
+                  <span style={{ fontSize: '17px', fontWeight: '900', color: '#ffffff', fontFamily: 'monospace', letterSpacing: '0.6px' }}>
+                    {personalVoucher?.voucherCode || 'Generating…'}
+                  </span>
+                  {personalVoucher?.voucherCode && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        try {
+                          navigator.clipboard?.writeText(personalVoucher.voucherCode);
+                        } catch {}
+                        setVoucherCopied(true);
+                        setTimeout(() => setVoucherCopied(false), 2000);
+                      }}
+                      style={{
+                        background: voucherCopied ? 'rgba(52, 211, 153, 0.25)' : 'rgba(255, 255, 255, 0.1)',
+                        border: '1px solid rgba(52, 211, 153, 0.4)',
+                        color: voucherCopied ? '#6ee7b7' : '#ffffff',
+                        borderRadius: '7px',
+                        padding: '5px 10px',
+                        fontSize: '11px',
+                        fontWeight: '800',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {voucherCopied ? 'Copied ✓' : 'Copy'}
+                    </button>
+                  )}
+                </div>
+                <p style={{ fontSize: '12px', color: '#d1fae5', lineHeight: 1.45, margin: 0 }}>
+                  <strong>5% off up to £30</strong> on your stay — single-use code, auto-applied at checkout (valid 7 days).
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('stage-04-stays');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                style={{
+                  width: '100%',
+                  minHeight: '42px',
+                  background: 'linear-gradient(135deg, #0284c7, #10b981)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  padding: '10px 14px',
+                  fontSize: '13px',
+                  fontWeight: '800',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <span>Browse Matched Stays</span>
+                <ArrowRight size={14} />
+              </button>
+            </div>
+
+            {/* CARD 3: YOUR 4 CHOSEN TRADE-OFFS (TAP ANY TO REFINE) */}
+            <div style={{
+              flex: '1 0 min(82vw, 290px)',
+              scrollSnapAlign: 'start',
+              background: 'rgba(15, 23, 42, 0.92)',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              borderRadius: '16px',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: '10px'
+            }}>
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: '800', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '10px' }}>
+                  Your 4 Picks · Tap Any to Edit
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
+                  {PULL_VISUALS.map((pv, idx) => {
+                    const chosenId = userAnswers[pv.id];
+                    const chosenLabel = chosenId === pv.left.id ? pv.left.label : pv.right.label;
+                    return (
+                      <button
+                        key={pv.id}
+                        type="button"
+                        onClick={() => {
+                          setPullRevealMsg(null);
+                          setPullSplitPct(50);
+                          setPullCompleted(false);
+                          setDuelStep(idx);
+                        }}
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          border: '1px solid rgba(56, 189, 248, 0.22)',
+                          borderRadius: '9px',
+                          padding: '8px 9px',
+                          minHeight: '46px',
+                          textAlign: 'left',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: '700' }}>Step {idx + 1}</div>
+                        <div style={{ fontSize: '11.5px', color: '#ffffff', fontWeight: '800', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {chosenLabel}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+                Live hotel galleries &amp; order below reflect these 4 choices.
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
       <div style={{
         background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(10, 16, 30, 0.96) 100%)',
         border: '1px solid rgba(56, 189, 248, 0.25)',
@@ -1841,10 +2150,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
                 Sort By Your Vibe
               </span>
-              <span style={{ fontSize: '11px', color: pullCompleted ? '#34d399' : '#94a3b8', fontWeight: pullCompleted ? '700' : '600' }}>
-                {pullCompleted
-                  ? '✓ Complete · Tap any step to refine'
-                  : `4 quick taps · ${duelStep + 1} of 4`}
+              <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '600' }}>
+                4 quick taps · {duelStep + 1} of 4
               </span>
             </div>
             <h2 style={{ fontSize: '19px', fontWeight: '900', margin: 0, color: '#ffffff' }}>
@@ -1867,10 +2174,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                   }}
                   title={`Step ${idx + 1}: ${pv.left.label} vs ${pv.right.label}`}
                   style={{
-                    width: (!pullCompleted && duelStep === idx) ? '24px' : '9px',
+                    width: duelStep === idx ? '24px' : '9px',
                     height: '8px',
                     borderRadius: '999px',
-                    background: pullCompleted ? '#34d399' : (userAnswers[pv.id] ? '#38bdf8' : (duelStep === idx ? '#7dd3fc' : 'rgba(255,255,255,0.25)')),
+                    background: userAnswers[pv.id] ? '#38bdf8' : (duelStep === idx ? '#7dd3fc' : 'rgba(255,255,255,0.25)'),
                     border: 'none',
                     cursor: 'pointer',
                     padding: 0,
@@ -1905,156 +2212,12 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         {/* 2-Column Split: Visual Pull Canvas (Left) + Live Alignment Scorecard (Right) */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '20px',
           alignItems: 'stretch'
         }}>
-          {/* LEFT: LIVE INTERACTIVE "THE PULL" PHOTO CANVAS (OR COMPLETION STATE) */}
-          {pullCompleted ? (
-            <div style={{
-              position: 'relative',
-              height: '360px',
-              borderRadius: '18px',
-              overflow: 'hidden',
-              border: '1px solid rgba(52, 211, 153, 0.45)',
-              background: '#0f172a',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              textAlign: 'center',
-              padding: '24px'
-            }}>
-              {/* Subtle 2x2 Mosaic of User's 4 Chosen Photos */}
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gridTemplateRows: '1fr 1fr',
-                opacity: 0.32,
-                filter: 'saturate(1.1)'
-              }}>
-                {PULL_VISUALS.map((stepItem) => {
-                  const chosenPhoto = userAnswers[stepItem.id] === stepItem.left.id ? stepItem.left.photo : stepItem.right.photo;
-                  return (
-                    <div
-                      key={stepItem.id}
-                      style={{
-                        backgroundImage: `url(${chosenPhoto})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center'
-                      }}
-                    />
-                  );
-                })}
-              </div>
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(180deg, rgba(10, 16, 30, 0.72) 0%, rgba(10, 16, 30, 0.90) 100%)'
-              }} />
-
-              {/* Foreground Completion Content */}
-              <div style={{ position: 'relative', zIndex: 2, maxWidth: '340px' }}>
-                <div style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  background: 'rgba(16, 185, 129, 0.2)',
-                  border: '1px solid rgba(52, 211, 153, 0.5)',
-                  color: '#34d399',
-                  fontSize: '11px',
-                  fontWeight: '800',
-                  letterSpacing: '0.8px',
-                  textTransform: 'uppercase',
-                  padding: '5px 12px',
-                  borderRadius: '999px',
-                  marginBottom: '12px'
-                }}>
-                  <CheckCircle2 size={13} />
-                  <span>Vibe Profile Complete · 4 of 4</span>
-                </div>
-
-                <h4 style={{ fontSize: '24px', fontWeight: '900', color: '#ffffff', margin: '0 0 8px 0', lineHeight: 1.2 }}>
-                  {crowdBenchmark.archetype}
-                </h4>
-
-                <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 12px 0', lineHeight: 1.45 }}>
-                  <strong style={{ color: '#7dd3fc' }}>{matchCalculation.percentage}% aligned</strong> with {activeCurator.handle}. Your neighbourhood guide &amp; live hotel galleries below are now tuned to your vibe.
-                </p>
-
-                <div style={{
-                  background: 'rgba(16, 185, 129, 0.14)',
-                  border: '1px solid rgba(52, 211, 153, 0.4)',
-                  borderRadius: '10px',
-                  padding: '8px 12px',
-                  fontSize: '11.5px',
-                  color: '#d1fae5',
-                  marginBottom: '14px'
-                }}>
-                  <strong style={{ color: '#34d399' }}>Personal Single-Use Stay Credit:</strong>{' '}
-                  <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>
-                    {personalVoucher?.voucherCode || 'Generating…'}
-                  </strong>{' '}
-                  · 5% off up to £30 (1-time use, valid 7 days)
-                </div>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const el = document.getElementById('stage-04-stays');
-                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }}
-                    style={{
-                      background: 'linear-gradient(135deg, #0284c7, #10b981)',
-                      color: '#ffffff',
-                      border: 'none',
-                      borderRadius: '10px',
-                      padding: '10px 18px',
-                      fontSize: '13px',
-                      fontWeight: '800',
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)'
-                    }}
-                  >
-                    <span>Explore Matched Stays</span>
-                    <ArrowRight size={14} />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setPullRevealMsg(null);
-                      setPullSplitPct(50);
-                      setPullCompleted(false);
-                      setDuelStep(0);
-                    }}
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.08)',
-                      color: '#e2e8f0',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      borderRadius: '10px',
-                      padding: '10px 14px',
-                      fontSize: '12.5px',
-                      fontWeight: '700',
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px'
-                    }}
-                  >
-                    <RefreshCw size={13} />
-                    <span>Replay Pull</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          ) : (() => {
+          {/* LEFT: LIVE INTERACTIVE "THE PULL" PHOTO CANVAS */}
+          {(() => {
             const pv = PULL_VISUALS[duelStep];
             return (
               <div
@@ -2465,9 +2628,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
           </div>
         </div>
       </div>
+      )}
 
-      {/* SLIM PERSONALIZED MATCH STRIP (only shown once user interacts with The Pull) */}
-      {hasUserPulled && (
+      {/* SLIM PERSONALIZED MATCH STRIP (shown mid-Pull only; once completed, horizontal confirmation cards above replace it) */}
+      {hasUserPulled && !pullCompleted && (
         <div style={{
           background: 'rgba(56, 189, 248, 0.08)',
           border: '1px solid rgba(56, 189, 248, 0.25)',

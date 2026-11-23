@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
@@ -23,10 +24,13 @@ const cities = [
     name: 'London',
     vibe: 'South Bank',
     img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800',
-    desc: 'The historic capital of England',
-    shortUrl: 'https://www.travelvrse.com/play/sea-containers',
-    canonicalUrl: 'https://www.travelvrse.com/vibe/london/south-bank/sea-containers',
-    url: 'https://www.travelvrse.com/play/sea-containers',
+    desc: 'Curated hotels, zero-chain local gems & live vibe matching',
+    shortUrl: 'https://www.travelvrse.com/destinations/london/south-bank',
+    canonicalUrl: 'https://www.travelvrse.com/destinations/london/south-bank',
+    url: '/destinations/london/south-bank',
+    openDirect: true,
+    ctaLabel: 'Explore South Bank Hub',
+    ctaSublabel: 'Desktop & mobile • Live rates, 3D tour & local gems',
     geoScore: 91.3,
     atmosphereScore: 91.4,
     gemProximityScore: 90.8,
@@ -112,6 +116,7 @@ const cities = [
 ];
 
 const MarketplacePage = () => {
+    const navigate = useNavigate();
     const [selectedModalCity, setSelectedModalCity] = useState(null);
     const [showGateForCity, setShowGateForCity] = useState(null);
     const [copied, setCopied] = useState(false);
@@ -129,6 +134,11 @@ const MarketplacePage = () => {
     }, []);
 
     const launchCityExperience = (city, e) => {
+        if (city.openDirect) {
+            e?.preventDefault();
+            navigate(city.url);
+            return;
+        }
         const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
         if (isMobileDevice) {
             window.open(city.url, '_blank');
@@ -388,6 +398,40 @@ const MarketplacePage = () => {
                                 {/* Compact 25% smaller Try on Mobile action container */}
                                 <div style={{ padding: '16px 24px', flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '6px' }}>
                                     {city.url ? (
+                                        city.openDirect ? (
+                                            <>
+                                                <Link
+                                                    to={city.url}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    className="btn btn-primary"
+                                                    style={{
+                                                        width: 'auto',
+                                                        minWidth: '220px',
+                                                        display: 'inline-flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        gap: '8px',
+                                                        padding: '0.58rem 1.3rem',
+                                                        fontSize: '0.84rem',
+                                                        fontWeight: '800',
+                                                        borderRadius: '999px',
+                                                        textDecoration: 'none'
+                                                    }}
+                                                >
+                                                    <span>{city.ctaLabel || 'Explore Hub'}</span>
+                                                    <ArrowRight size={14} />
+                                                </Link>
+                                                <span style={{
+                                                    textAlign: 'center',
+                                                    fontSize: '0.67rem',
+                                                    color: 'rgba(230, 241, 255, 0.55)',
+                                                    fontWeight: '600',
+                                                    letterSpacing: '0.03em'
+                                                }}>
+                                                    {city.ctaSublabel || 'Open live destination hub'}
+                                                </span>
+                                            </>
+                                        ) : (
                                         <>
                                             <button 
                                                 className="btn btn-primary" 
@@ -424,6 +468,7 @@ const MarketplacePage = () => {
                                                 {city.isProtected ? 'Password protected • Scan QR or tap to launch' : 'Scan QR on desktop or tap to launch'}
                                             </span>
                                         </>
+                                        )
                                     ) : (
                                         <button className="btn btn-outline" style={{ width: 'auto', minWidth: '180px', opacity: '0.5', cursor: 'not-allowed', borderStyle: 'dashed', borderRadius: '999px', padding: '0.58rem 1.3rem', fontSize: '0.84rem' }}>
                                             Coming Soon

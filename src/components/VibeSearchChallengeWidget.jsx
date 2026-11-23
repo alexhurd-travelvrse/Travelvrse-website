@@ -158,6 +158,7 @@ const DESTINATION_DATABASE = {
         fallbackCredit: 45,
         hasSpatial3D: true,
         spatialUrl: '/simulator?preset=sea-containers',
+        stepInsideScenes: ['Room With a View', 'Nautical Lobby', 'Tate Modern', 'Aqua Spa', 'Leake Street Arches'],
         url: '/demo/southbank',
         roomDetails: {
           roomType: 'Superior River View Sanctuary Room',
@@ -293,6 +294,102 @@ const DESTINATION_DATABASE = {
             url: 'https://static.cupid.travel/hotels/560813397.jpg',
             title: 'Bankside Cultural Mews Exterior',
             caption: 'Tucked away on a peaceful tree-lined street steps from Tate Modern.'
+          }
+        ]
+      },
+      {
+        id: 'hoxton-southwark',
+        nuiteeHotelId: 'lp20e425',
+        name: 'The Hoxton, Southwark',
+        walkability: '5 min walk to Tate Modern • 4 min to Blackfriars',
+        vibeAlignment: 'Creative Social & Rooftop Seafood',
+        vibeMatchBase: 91,
+        highlight: 'Industrial-chic rooms, buzzing ground-floor workspace lobby, and Seabird 14th-floor rooftop oyster bar.',
+        loveThisIf: 'You love a lively, design-led neighbourhood hangout with Seabird rooftop views across London, great coffee downstairs, and easy walks to Borough & Tate Modern.',
+        avoidThisIf: 'Rooms follow Hoxton’s compact "Snug / Cosy" urban footprint and the ground-floor lobby is a popular social hub all day.',
+        quietFeature: 'Double-glazed crittall-style windows keep Blackfriars Road traffic hush inside bedrooms.',
+        fallbackRetail: 259,
+        fallbackCredit: 26,
+        hasSpatial3D: false,
+        url: '/destinations/london/south-bank',
+        roomDetails: {
+          roomType: 'Cosy King Industrial Room',
+          size: '22 m² (237 sq ft)',
+          bed: 'King Bed • Industrial Crittall Windows',
+          view: 'Southwark & City Skyline',
+          checkIn: '14:00 Check-in • 12:00 Checkout',
+          cancellation: 'Free cancellation up to 24h prior',
+          highlights: [
+            '14th-floor Seabird rooftop restaurant & terrace',
+            'Albie all-day lobby café & neighbourhood bar',
+            'Signature Hoxton breakfast bag option delivered to your door',
+            '5-minute walk to Tate Modern, South Bank & Borough Market'
+          ]
+        },
+        photos: [
+          {
+            id: 'hx-roof',
+            category: 'dining',
+            vibeTag: 'sunset_glow',
+            url: 'https://static.cupid.travel/hotels/570881905.jpg',
+            title: 'Seabird 14th-Floor Rooftop',
+            caption: 'Panoramic Southwark skyline views and raw bar.'
+          },
+          {
+            id: 'hx-room',
+            category: 'rooms',
+            vibeTag: 'courtyard_quiet',
+            url: 'https://static.cupid.travel/hotels/209880755.jpg',
+            title: 'Cosy Industrial Bedroom',
+            caption: 'Warm velvet headboard, raw concrete ceiling, and crittall windows.'
+          }
+        ]
+      },
+      {
+        id: 'citizenm-bankside',
+        nuiteeHotelId: 'lp70f2e',
+        name: 'citizenM London Bankside',
+        walkability: '2 min walk to Tate Modern • 4 min to Borough Market',
+        vibeAlignment: 'Smart Design & Art-Lover Value',
+        vibeMatchBase: 90,
+        highlight: 'Vitra-furnished living-room lobby, wall-to-wall XL king beds, and iPad-controlled mood lighting 2 minutes from Tate Modern.',
+        loveThisIf: 'You want unbeatable 2-minute proximity to Tate Modern & Borough Market with punchy modern art, fast Wi-Fi, and smart-tech rooms at a sharper price point.',
+        avoidThisIf: 'All rooms share one compact smart-cabin layout (built for 1–2 guests) with glass-enclosed rain showers rather than large traditional suites.',
+        quietFeature: 'Soundproofed modular cabins with blackout blinds controlled from bedside iPad.',
+        fallbackRetail: 189,
+        fallbackCredit: 19,
+        hasSpatial3D: false,
+        url: '/destinations/london/south-bank',
+        roomDetails: {
+          roomType: 'XL King Smart Cabin',
+          size: '16 m² (172 sq ft)',
+          bed: 'Wall-to-Wall XL King Bed • Blackout Blinds',
+          view: 'Bankside Cultural Quarter',
+          checkIn: '14:00 Check-in • 11:00 Checkout',
+          cancellation: 'Flexible cancellation available',
+          highlights: [
+            '2-minute walk to Tate Modern & Millennium Bridge',
+            'Curated Vitra living room & 24/7 canteenM bar',
+            'In-room iPad controlling lighting, temperature & blinds',
+            '4-minute walk to Borough Market independent food stalls'
+          ]
+        },
+        photos: [
+          {
+            id: 'cm-lobby',
+            category: 'design',
+            vibeTag: 'indie_makers',
+            url: 'https://static.cupid.travel/hotels/463631777.jpg',
+            title: 'Vitra Living Room & Art Lobby',
+            caption: 'Colourful contemporary art, bookshelves, and 24/7 café bar.'
+          },
+          {
+            id: 'cm-room',
+            category: 'rooms',
+            vibeTag: 'courtyard_quiet',
+            url: 'https://static.cupid.travel/hotels/466062553.jpg',
+            title: 'XL King Smart Cabin',
+            caption: 'Wall-to-wall XL king bed with custom mood lighting.'
           }
         ]
       }
@@ -519,6 +616,7 @@ const DESTINATION_DATABASE = {
         fallbackCredit: 29,
         hasSpatial3D: true,
         spatialUrl: '/simulator?preset=25-hours',
+        stepInsideScenes: ['Retro Vinyl Session Room', 'The Bar', 'The Spa', 'Luxury Suite', 'Rosenborg Gardens'],
         url: '/play/25-hours',
         roomDetails: {
           roomType: 'Medium Passion / Knowledge Room',
@@ -959,6 +1057,16 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
       categoryWeights: { design: 1.0, rooms: 0.92, views: 0.76, dining: 0.68 },
       keywordRe: /(living|lounge|lobby|art|mezzanine|bedroom|suite|exterior|hotel room)/i
     },
+    'hoxton-southwark': {
+      label: 'Hoxton Southwark DNA',
+      categoryWeights: { dining: 1.0, design: 0.94, views: 0.88, rooms: 0.76 },
+      keywordRe: /(roof|terrace|bar|restaurant|lobby|lounge|cafe|bedroom|hotel room)/i
+    },
+    'citizenm-bankside': {
+      label: 'citizenM Design DNA',
+      categoryWeights: { design: 1.0, rooms: 0.92, dining: 0.84, views: 0.70 },
+      keywordRe: /(living|lounge|lobby|bar|art|bedroom|hotel room|cafe)/i
+    },
     '25hours-copenhagen': {
       label: '25hours Nordic DNA',
       categoryWeights: { design: 1.0, dining: 0.90, rooms: 0.86, views: 0.74 },
@@ -1161,6 +1269,9 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
 
         const sea = res.hotelUpdatesByDemoId['sea-containers'];
         const bankside = res.hotelUpdatesByDemoId['bankside-autograph'];
+        const hoxton = res.hotelUpdatesByDemoId['hoxton-southwark'];
+        const citizenm = res.hotelUpdatesByDemoId['citizenm-bankside'];
+        const sbAnchors = DESTINATION_DATABASE['london-southbank'].stayAnchors;
 
         setNuiteeRates({
           loading: false,
@@ -1174,7 +1285,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               roomName: sea?.liveRoomName || 'Superior River View Sanctuary Room',
               boardName: sea?.liveBoardName || 'Room Only',
               liveOfferId: sea?.liveOfferId || null,
-              livePhotos: curateLiveNuiteePhotos(sea?.rawHotelDetail, DESTINATION_DATABASE['london-southbank'].stayAnchors[0].photos)
+              livePhotos: curateLiveNuiteePhotos(sea?.rawHotelDetail, sbAnchors[0].photos)
             },
             'bankside-hotel': {
               retailRate: bankside?.nightlyRetailGbp || 385,
@@ -1183,7 +1294,25 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               roomName: bankside?.liveRoomName || 'Boutique King Art Studio',
               boardName: bankside?.liveBoardName || 'Room Only',
               liveOfferId: bankside?.liveOfferId || null,
-              livePhotos: curateLiveNuiteePhotos(bankside?.rawHotelDetail, DESTINATION_DATABASE['london-southbank'].stayAnchors[1].photos)
+              livePhotos: curateLiveNuiteePhotos(bankside?.rawHotelDetail, sbAnchors[1].photos)
+            },
+            'hoxton-southwark': {
+              retailRate: hoxton?.nightlyRetailGbp || 259,
+              challengeRate: hoxton?.nuiteeChallengeRate || Math.round((hoxton?.nightlyRetailGbp || 259) * 0.9),
+              finisherCreditGbp: hoxton?.finisherCreditGbp || Math.round((hoxton?.nightlyRetailGbp || 259) * 0.1),
+              roomName: hoxton?.liveRoomName || 'Cosy King Industrial Room',
+              boardName: hoxton?.liveBoardName || 'Room Only',
+              liveOfferId: hoxton?.liveOfferId || null,
+              livePhotos: curateLiveNuiteePhotos(hoxton?.rawHotelDetail, sbAnchors[2].photos)
+            },
+            'citizenm-bankside': {
+              retailRate: citizenm?.nightlyRetailGbp || 189,
+              challengeRate: citizenm?.nuiteeChallengeRate || Math.round((citizenm?.nightlyRetailGbp || 189) * 0.9),
+              finisherCreditGbp: citizenm?.finisherCreditGbp || Math.round((citizenm?.nightlyRetailGbp || 189) * 0.1),
+              roomName: citizenm?.liveRoomName || 'XL King Smart Cabin',
+              boardName: citizenm?.liveBoardName || 'Room Only',
+              liveOfferId: citizenm?.liveOfferId || null,
+              livePhotos: curateLiveNuiteePhotos(citizenm?.rawHotelDetail, sbAnchors[3].photos)
             }
           }
         });
@@ -2223,10 +2352,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Heart size={16} color={blueprintActiveTab === 'youWillLove' ? '#f43f5e' : '#94a3b8'} />
-                <div>
-                  <div style={{ fontSize: '13px', fontWeight: '700' }}>You'll Love This</div>
-                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>Dynamic Personalization</div>
-                </div>
+                <div style={{ fontSize: '13px', fontWeight: '700' }}>You'll Love This</div>
               </div>
               {blueprintRecentlyUpdated && (
                 <span style={{ fontSize: '10px', background: '#f43f5e', color: '#fff', padding: '1px 6px', borderRadius: '4px', fontWeight: '800' }}>
@@ -2258,10 +2384,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Flame size={16} color={blueprintActiveTab === 'topVibes' ? '#f59e0b' : '#94a3b8'} />
-                <div>
-                  <div style={{ fontSize: '13px', fontWeight: '700' }}>Destination Vibes</div>
-                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>3 Cultural Signatures</div>
-                </div>
+                <div style={{ fontSize: '13px', fontWeight: '700' }}>Destination Vibes</div>
               </div>
               <span style={{ fontSize: '10px', background: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', padding: '2px 6px', borderRadius: '4px', fontWeight: '700' }}>
                 ★ #1 Match
@@ -2291,10 +2414,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <ShieldCheck size={16} color={blueprintActiveTab === 'microGems' ? '#10b981' : '#94a3b8'} />
-                <div>
-                  <div style={{ fontSize: '13px', fontWeight: '700' }}>Walkable Gems</div>
-                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>4 Dispersal Micro-Gems</div>
-                </div>
+                <div style={{ fontSize: '13px', fontWeight: '700' }}>Walkable Gems</div>
               </div>
               <span style={{ fontSize: '10px', background: savedGemIds.length > 0 ? '#10b981' : 'rgba(255, 255, 255, 0.1)', color: '#ffffff', padding: '2px 6px', borderRadius: '4px', fontWeight: '700' }}>
                 {savedGemIds.length > 0 ? `${savedGemIds.length} Saved` : '4 Spots'}
@@ -2345,30 +2465,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                       <span style={{ fontSize: '13px', lineHeight: '1.5', color: '#e2e8f0' }}>{pt}</span>
                     </div>
                   ))}
-                </div>
-
-                {/* Quick Next Jumper */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
-                  <span style={{ fontSize: '12px', color: '#64748b' }}>
-                    Next Blueprint Pillar:
-                  </span>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <button
-                      type="button"
-                      onClick={() => setBlueprintActiveTab('topVibes')}
-                      style={{ background: 'transparent', border: 'none', color: '#f59e0b', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
-                    >
-                      View Top Destination Vibes ({location.topVibes.length}) →
-                    </button>
-                    <span style={{ color: '#334155' }}>•</span>
-                    <button
-                      type="button"
-                      onClick={() => setBlueprintActiveTab('microGems')}
-                      style={{ background: 'transparent', border: 'none', color: '#10b981', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
-                    >
-                      View Walkable Micro-Gems ({location.gems.length}) →
-                    </button>
-                  </div>
                 </div>
             </div>
 
@@ -2423,30 +2519,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                       </div>
                     );
                   })}
-                </div>
-
-                {/* Quick Next Jumper */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
-                  <span style={{ fontSize: '12px', color: '#64748b' }}>
-                    Next Blueprint Pillar:
-                  </span>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <button
-                      type="button"
-                      onClick={() => setBlueprintActiveTab('youWillLove')}
-                      style={{ background: 'transparent', border: 'none', color: '#f43f5e', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
-                    >
-                      ← Back to You'll Love This
-                    </button>
-                    <span style={{ color: '#334155' }}>•</span>
-                    <button
-                      type="button"
-                      onClick={() => setBlueprintActiveTab('microGems')}
-                      style={{ background: 'transparent', border: 'none', color: '#10b981', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
-                    >
-                      View Walkable Micro-Gems ({location.gems.length}) →
-                    </button>
-                  </div>
                 </div>
             </div>
 
@@ -2518,30 +2590,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                       </div>
                     );
                   })}
-                </div>
-
-                {/* Quick Next Jumper */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
-                  <span style={{ fontSize: '12px', color: '#64748b' }}>
-                    Next Blueprint Pillar:
-                  </span>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <button
-                      type="button"
-                      onClick={() => setBlueprintActiveTab('youWillLove')}
-                      style={{ background: 'transparent', border: 'none', color: '#f43f5e', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
-                    >
-                      ← Back to You'll Love This
-                    </button>
-                    <span style={{ color: '#334155' }}>•</span>
-                    <button
-                      type="button"
-                      onClick={() => setBlueprintActiveTab('topVibes')}
-                      style={{ background: 'transparent', border: 'none', color: '#f59e0b', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: 0 }}
-                    >
-                      View Top Destination Vibes →
-                    </button>
-                  </div>
                 </div>
             </div>
           </div>
@@ -2701,103 +2749,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         )}
       </div>
 
-      {/* STAGE 03 · EXPERIENCE: DEDICATED 3D SPATIAL WALK FEATURE CARD (ON-SITE & NEIGHBOURHOOD ATMOSPHERE) */}
-      <div style={{
-        position: 'relative',
-        borderRadius: '22px',
-        overflow: 'hidden',
-        border: '1px solid rgba(56, 189, 248, 0.3)',
-        marginBottom: '36px',
-        backgroundImage: `url(${selectedLocKey === 'copenhagen-indre-by'
-          ? 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&q=80&w=1200'
-          : 'https://static.cupid.travel/hotels/37483771.jpg'})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.45)'
-      }}>
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(95deg, rgba(5, 11, 20, 0.94) 0%, rgba(5, 11, 20, 0.82) 55%, rgba(5, 11, 20, 0.38) 100%)'
-        }} />
-        <div style={{
-          position: 'relative',
-          zIndex: 2,
-          padding: '28px 28px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '20px'
-        }}>
-          <div style={{ maxWidth: '580px' }}>
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '11px',
-              textTransform: 'uppercase',
-              letterSpacing: '1.1px',
-              color: '#38bdf8',
-              fontWeight: '800',
-              marginBottom: '8px'
-            }}>
-              <Box size={13} /> 03 · Step Inside · 60–90 Sec Spatial Walk
-            </div>
-            <h3 style={{ fontSize: '24px', fontWeight: '900', margin: '0 0 8px 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
-              Feel the place before you arrive.
-            </h3>
-            <p style={{ fontSize: '14px', color: '#cbd5e1', lineHeight: '1.55', margin: '0 0 14px 0' }}>
-              {selectedLocKey === 'copenhagen-indre-by'
-                ? 'Step inside the Vinyl Lounge, NENI glasshouse, and surrounding Indre By lanes of 25hours Hotel Copenhagen — then explore actual rooms below.'
-                : 'Step inside the social spaces, sounds, and hidden local discoveries around Sea Containers London & South Bank — then explore actual rooms below.'}
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {['On-Site Social Spaces', 'Spatial Soundscape', 'Collectible Pocket Map'].map(tag => (
-                <span
-                  key={tag}
-                  style={{
-                    fontSize: '11px',
-                    fontWeight: '700',
-                    color: '#e2e8f0',
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    border: '1px solid rgba(255, 255, 255, 0.14)',
-                    padding: '4px 10px',
-                    borderRadius: '999px'
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
-            <Link
-              to={selectedLocKey === 'copenhagen-indre-by' ? '/simulator?preset=25-hours' : '/simulator?preset=sea-containers'}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)',
-                color: '#ffffff',
-                textDecoration: 'none',
-                padding: '13px 22px',
-                borderRadius: '12px',
-                fontSize: '14px',
-                fontWeight: '800',
-                boxShadow: '0 10px 28px rgba(14, 165, 233, 0.4)'
-              }}
-            >
-              <Box size={16} />
-              <span>Step inside in 3D →</span>
-            </Link>
-            <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>
-              Open immediately · No sign-up required
-            </span>
-          </div>
-        </div>
-      </div>
+      {/* STAGE 03 · FIND YOUR STAY (UNIFIED HOTELS | TOURS | LOCAL GEMS) */}
 
       {/* STAGE 04 · CHOOSE: UNIFIED DISCOVERY TABS (HOTELS | TOURS | LOCAL GEMS) */}
       <div id="curated-discovery" style={{ marginBottom: '24px' }}>
@@ -2863,7 +2815,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             fontWeight: '700'
           }}>
             <Sparkles size={13} />
-            <span id="stage-04-stays" style={{ scrollMarginTop: '90px' }}>04 · Find Your Stay · Member Rates Active</span>
+            <span id="stage-04-stays" style={{ scrollMarginTop: '90px' }}>03 · Find Your Stay · Member Rates Active</span>
           </div>
         </div>
 
@@ -3244,6 +3196,58 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                           <strong style={{ color: '#fbbf24' }}>Good to know: </strong>
                           {stay.avoidThisIf || 'Central cultural neighbourhood location with lively daytime energy.'}
                         </div>
+
+                        {/* Highlighted Step Inside 3D Feature Strip (Accurate 5-Scene Preview) */}
+                        {stay.hasSpatial3D && (
+                          <div style={{
+                            background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.14) 0%, rgba(99, 102, 241, 0.12) 100%)',
+                            border: '1px solid rgba(56, 189, 248, 0.35)',
+                            borderRadius: '10px',
+                            padding: '10px 12px',
+                            marginTop: '2px'
+                          }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', flexWrap: 'wrap', marginBottom: '6px' }}>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '11px', fontWeight: '800', color: '#7dd3fc', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+                                <Box size={13} color="#38bdf8" /> Interactive 3D Walkthrough Included
+                              </span>
+                              <Link
+                                to={stay.spatialUrl || '/simulator'}
+                                style={{
+                                  fontSize: '11.5px',
+                                  fontWeight: '800',
+                                  color: '#ffffff',
+                                  background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
+                                  padding: '4px 10px',
+                                  borderRadius: '999px',
+                                  textDecoration: 'none',
+                                  boxShadow: '0 4px 12px rgba(14, 165, 233, 0.35)'
+                                }}
+                              >
+                                Step Inside in 3D →
+                              </Link>
+                            </div>
+                            {Array.isArray(stay.stepInsideScenes) && stay.stepInsideScenes.length > 0 && (
+                              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+                                {stay.stepInsideScenes.map(scene => (
+                                  <span
+                                    key={scene}
+                                    style={{
+                                      fontSize: '10.5px',
+                                      fontWeight: '600',
+                                      color: '#e2e8f0',
+                                      background: 'rgba(15, 23, 42, 0.7)',
+                                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                                      padding: '2px 7px',
+                                      borderRadius: '999px'
+                                    }}
+                                  >
+                                    {scene}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
 
                       {/* Matched Room & Quick Links */}

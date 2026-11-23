@@ -6,6 +6,8 @@ import { SOUTH_BANK_VIBE_DATA } from '../data/southbankVibeData';
 import {
   CANONICAL_URLS,
   EDITORIAL_DISCLOSURE,
+  SOUTHBANK_HOTELS_CANONICAL,
+  SOUTHBANK_MICRO_GEMS,
   buildSouthBankHubJsonLd
 } from '../data/southBankCanonicalData';
 import { getVibeIntentTelemetry } from '../services/vibeIntentTelemetry';
@@ -418,29 +420,100 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {SOUTHBANK_COMPARISON_ROWS.map((row, idx) => (
+                  {SOUTHBANK_HOTELS_CANONICAL.map((hotel, idx) => (
                     <tr
-                      key={row.name}
+                      key={hotel.id}
                       style={{
-                        borderBottom: idx < SOUTHBANK_COMPARISON_ROWS.length - 1 ? '1px solid rgba(255, 255, 255, 0.06)' : 'none'
+                        borderBottom: idx < SOUTHBANK_HOTELS_CANONICAL.length - 1 ? '1px solid rgba(255, 255, 255, 0.06)' : 'none'
                       }}
                     >
                       <td style={{ padding: '14px 12px', verticalAlign: 'top' }}>
-                        <div style={{ fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>{row.name}</div>
-                        <div style={{ fontSize: '11.5px', color: '#94a3b8' }}>{row.address}</div>
+                        <div style={{ fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>{hotel.name}</div>
+                        <div style={{ fontSize: '11.5px', color: '#94a3b8' }}>{hotel.address}</div>
                       </td>
                       <td style={{ padding: '14px 12px', color: '#e2e8f0', verticalAlign: 'top', lineHeight: 1.45 }}>
-                        {row.bestFor}
+                        {hotel.bestFor}
                       </td>
                       <td style={{ padding: '14px 12px', color: '#7dd3fc', fontWeight: 700, verticalAlign: 'top', whiteSpace: 'nowrap' }}>
-                        {row.walkToTate}
+                        {hotel.walkToTate}
                       </td>
                       <td style={{ padding: '14px 12px', color: '#cbd5e1', verticalAlign: 'top', lineHeight: 1.45 }}>
-                        {row.loveAvoid}
+                        <strong style={{ color: '#34d399' }}>Love:</strong> {hotel.loveThisIf}{' '}
+                        <strong style={{ color: '#fbbf24' }}>Good to know:</strong> {hotel.avoidThisIf}
                       </td>
                       <td style={{ padding: '14px 12px', textAlign: 'right', verticalAlign: 'top', whiteSpace: 'nowrap' }}>
-                        <div style={{ fontWeight: 800, color: '#34d399', fontSize: '14px' }}>{row.startingRate}</div>
-                        <div style={{ fontSize: '11px', color: '#94a3b8' }}>{row.creditNote}</div>
+                        <div style={{ fontWeight: 800, color: '#34d399', fontSize: '14px' }}>{hotel.indicativeRate}</div>
+                        <div style={{ fontSize: '11px', color: '#94a3b8' }}>Checked {hotel.rateCheckedDate}</div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* GEO SECTION 1B: VERIFIED WALKABLE LOCAL GEMS TABLE (HTML <table>) */}
+          <section
+            aria-labelledby="southbank-gems-heading"
+            style={{
+              background: 'rgba(15, 23, 42, 0.65)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '20px',
+              padding: '24px',
+              marginBottom: '28px'
+            }}
+          >
+            <div style={{ marginBottom: '16px' }}>
+              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#34d399', fontWeight: 800, marginBottom: '4px' }}>
+                Verified SE1 Dispersal Spots
+              </div>
+              <h2 id="southbank-gems-heading" style={{ fontSize: '20px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                South Bank Hidden Gems &amp; Walkable Spots at a Glance
+              </h2>
+            </div>
+
+            <div style={{ overflowX: 'auto' }}>
+              <table
+                style={{
+                  width: '100%',
+                  borderCollapse: 'collapse',
+                  fontSize: '13px',
+                  textAlign: 'left',
+                  minWidth: '680px'
+                }}
+              >
+                <thead>
+                  <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.12)', color: '#94a3b8', fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    <th style={{ padding: '10px 12px' }}>Local Gem &amp; Postcode</th>
+                    <th style={{ padding: '10px 12px' }}>Timed Walk</th>
+                    <th style={{ padding: '10px 12px' }}>Best Time</th>
+                    <th style={{ padding: '10px 12px' }}>Why Go &amp; Good to Know</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'right' }}>Access</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {SOUTHBANK_MICRO_GEMS.map((gem, idx) => (
+                    <tr
+                      key={gem.name}
+                      style={{
+                        borderBottom: idx < SOUTHBANK_MICRO_GEMS.length - 1 ? '1px solid rgba(255, 255, 255, 0.06)' : 'none'
+                      }}
+                    >
+                      <td style={{ padding: '14px 12px', verticalAlign: 'top' }}>
+                        <div style={{ fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>{gem.name}</div>
+                        <div style={{ fontSize: '11.5px', color: '#94a3b8' }}>{gem.address}</div>
+                      </td>
+                      <td style={{ padding: '14px 12px', color: '#7dd3fc', fontWeight: 700, verticalAlign: 'top' }}>
+                        {gem.walkTime}
+                      </td>
+                      <td style={{ padding: '14px 12px', color: '#e2e8f0', verticalAlign: 'top', whiteSpace: 'nowrap' }}>
+                        {gem.bestTime}
+                      </td>
+                      <td style={{ padding: '14px 12px', color: '#cbd5e1', verticalAlign: 'top', lineHeight: 1.45 }}>
+                        {gem.desc} <strong style={{ color: '#fbbf24' }}>Good to know:</strong> {gem.goodToKnow}
+                      </td>
+                      <td style={{ padding: '14px 12px', textAlign: 'right', verticalAlign: 'top', whiteSpace: 'nowrap' }}>
+                        <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#34d399' }}>{gem.status}</span>
                       </td>
                     </tr>
                   ))}

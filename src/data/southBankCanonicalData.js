@@ -139,6 +139,56 @@ export const SOUTHBANK_HOTELS_CANONICAL = [
       'Quiet cultural mews location',
       'Complimentary Pashley bicycles'
     ]
+  },
+  {
+    id: 'hoxton-southwark',
+    entityId: `${SITE_ORIGIN}/destinations/london/south-bank/hotels/hoxton-southwark#hotel`,
+    name: 'The Hoxton, Southwark',
+    address: '40 Blackfriars Rd, London SE1 8NY',
+    postcode: 'SE1 8NY',
+    officialUrl: 'https://thehoxton.com/london/southwark/',
+    sameAs: [
+      'https://thehoxton.com/london/southwark/'
+    ],
+    bestFor: 'Creative social lobby, industrial design & 14th-floor Seabird rooftop seafood bar',
+    walkToTate: '5 min walk (410m)',
+    walkToGabrielsWharf: '6 min walk (480m)',
+    acousticProfile: 'Buzzing all-day lobby workspace & Albie bar; double-glazed crittall bedroom windows keep street noise out.',
+    lightProfile: 'Panoramic city views from the 14th-floor Seabird rooftop terrace.',
+    loveThisIf: 'You love a lively, design-led neighbourhood hangout with Seabird rooftop views across London and easy walks to Borough & Tate Modern.',
+    avoidThisIf: 'Rooms follow Hoxton’s compact "Snug / Cosy" urban footprint and the ground-floor lobby is a popular social hub all day.',
+    indicativeRate: 'From £233 / nt',
+    rateCheckedDate: 'Nov 2026',
+    amenities: [
+      'Seabird 14th-Floor Rooftop Restaurant',
+      'Albie All-Day Lobby Café & Bar',
+      'Crittall-window industrial rooms'
+    ]
+  },
+  {
+    id: 'citizenm-bankside',
+    entityId: `${SITE_ORIGIN}/destinations/london/south-bank/hotels/citizenm-bankside#hotel`,
+    name: 'citizenM London Bankside',
+    address: '20 Lavington St, London SE1 0NZ',
+    postcode: 'SE1 0NZ',
+    officialUrl: 'https://www.citizenm.com/hotels/europe/london/london-bankside-hotel',
+    sameAs: [
+      'https://www.citizenm.com/hotels/europe/london/london-bankside-hotel'
+    ],
+    bestFor: '2-minute walk to Tate Modern, Vitra art lobby & smart-tech XL king cabins at sharper value',
+    walkToTate: '2 min walk (170m)',
+    walkToGabrielsWharf: '6 min walk (490m)',
+    acousticProfile: 'Soundproofed modular cabins with blackout blinds controlled from bedside iPad.',
+    lightProfile: 'Bright, playful Vitra-furnished living room lobby with curated modern art.',
+    loveThisIf: 'You want unbeatable 2-minute proximity to Tate Modern & Borough Market with punchy modern art and smart-tech rooms at a sharper price point.',
+    avoidThisIf: 'All rooms share one compact smart-cabin layout (built for 1–2 guests) rather than large traditional suites.',
+    indicativeRate: 'From £170 / nt',
+    rateCheckedDate: 'Nov 2026',
+    amenities: [
+      'Vitra Living Room & Art Lobby',
+      '24/7 canteenM Bar & Kitchen',
+      'iPad-controlled room lighting & blackout blinds'
+    ]
   }
 ];
 
@@ -146,26 +196,38 @@ export const SOUTHBANK_MICRO_GEMS = [
   {
     name: "Gabriel's Wharf Artisan Courtyard",
     address: '56 Upper Ground, SE1 9PP',
-    walkTime: '2 min walk (120m) from Sea Containers',
-    desc: 'Zero-chain riverside courtyard of independent leatherworkers, printmakers, and local wood-fired cafes.'
+    walkTime: '2 min from Sea Containers (4 min from Tate)',
+    bestTime: '11:00–16:00 (studios open)',
+    status: 'Zero-Chain Charter · Free Entry',
+    desc: 'Zero-chain riverside courtyard of independent leatherworkers, printmakers, and local wood-fired cafes.',
+    goodToKnow: 'Small independent studios often close by 18:00; visit late morning or lunch for full artisan access.'
   },
   {
     name: 'BFI Mediatheque & Archival Lounge',
     address: 'Belvedere Rd, SE1 8XT',
-    walkTime: '4 min walk (280m) from Tate Modern',
-    desc: 'Free sound-dampened viewing booths with 10,000+ archived British films and television classics.'
+    walkTime: '4 min from Tate Modern (280m)',
+    bestTime: '12:00–18:00 (quiet afternoon escape)',
+    status: 'Free Entry · Indoor Sanctuary',
+    desc: 'Free sound-dampened viewing booths with 10,000+ archived British films and television classics.',
+    goodToKnow: 'Closed Mondays; booths are first-come, first-served and ideal on rainy London afternoons.'
   },
   {
     name: 'Waterloo Bridge Vintage Book Market',
     address: 'Queen’s Walk under Waterloo Bridge, SE1',
-    walkTime: '3 min walk (190m) from National Theatre',
-    desc: 'Daily outdoor stalls selling antique books, vintage maps, and rare prints sheltered under the bridge arches.'
+    walkTime: '3 min from National Theatre (190m)',
+    bestTime: '10:30–14:00 (before river crowds)',
+    status: 'Open Daily · Weather-Sheltered',
+    desc: 'Daily outdoor stalls selling antique books, vintage maps, and rare prints sheltered under the bridge arches.',
+    goodToKnow: 'Cash and card both widely accepted; sheltered from rain under the bridge arches.'
   },
   {
     name: 'Leake Street Graffiti & Culture Tunnel',
     address: 'Leake St, SE1 7NN',
-    walkTime: '6 min inland walk (400m) from riverfront',
-    desc: 'London’s 300-meter legal street-art tunnel lined with independent subterranean bars and live comedy.'
+    walkTime: '6 min inland from riverfront (400m)',
+    bestTime: '15:00–21:00 (live muralists & bars)',
+    status: 'Free 24/7 · Subterranean Arts',
+    desc: 'London’s 300-meter legal street-art tunnel lined with independent subterranean bars and live comedy.',
+    goodToKnow: 'Active spray-paint tunnel so fresh paint fumes are common; liveliest late afternoon into evening.'
   }
 ];
 

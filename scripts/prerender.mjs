@@ -65,8 +65,15 @@ function renderSouthBankHubBody() {
       </tr>`
   ).join('');
 
-  const gemItems = SOUTHBANK_MICRO_GEMS.map(
-    (g) => `<li><strong>${esc(g.name)}</strong> (${esc(g.address)} — ${esc(g.walkTime)}): ${esc(g.desc)}</li>`
+  const gemRows = SOUTHBANK_MICRO_GEMS.map(
+    (g) => `
+      <tr>
+        <td><strong>${esc(g.name)}</strong><br />${esc(g.address)}</td>
+        <td>${esc(g.walkTime)}</td>
+        <td>${esc(g.bestTime)}</td>
+        <td>${esc(g.desc)} Good to know: ${esc(g.goodToKnow)}</td>
+        <td>${esc(g.status)}</td>
+      </tr>`
   ).join('');
 
   const faqItems = SOUTHBANK_INSIDER_FAQS.map(
@@ -97,9 +104,20 @@ function renderSouthBankHubBody() {
         </table>
       </section>
 
-      <section>
-        <h2>Walkable Local Micro-Gems (SE1)</h2>
-        <ul>${gemItems}</ul>
+      <section aria-labelledby="southbank-gems-heading">
+        <h2 id="southbank-gems-heading">South Bank Hidden Gems &amp; Walkable Spots at a Glance</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Local Gem &amp; Postcode</th>
+              <th>Timed Walk</th>
+              <th>Best Time</th>
+              <th>Why Go &amp; Good to Know</th>
+              <th>Access</th>
+            </tr>
+          </thead>
+          <tbody>${gemRows}</tbody>
+        </table>
       </section>
 
       <section>

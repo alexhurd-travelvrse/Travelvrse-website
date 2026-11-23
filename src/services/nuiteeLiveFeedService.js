@@ -10,6 +10,7 @@
  */
 
 const LITEAPI_BASE_URL = 'https://api.liteapi.travel/v3.0';
+const LITEAPI_BOOK_URL = 'https://book.liteapi.travel/v3.0';
 const DEFAULT_SANDBOX_KEY = 'sand_71a1ef1d-0412-402f-9585-2e1d190eebb7';
 
 export function getLiteApiKey() {
@@ -42,9 +43,12 @@ async function callNuiteeApi(endpoint, { method = 'GET', query = {}, body = null
                 },
                 ...(method === 'POST' && body ? { body: JSON.stringify(body) } : {})
             });
+            const json = await res.json().catch(() => null);
+            const publicKeyMode = res.headers.get('x-nuitee-mode') || 'live';
             if (res.ok) {
-                return { ok: true, json: await res.json(), mode: 'live-proxy' };
+                return { ok: true, json, mode: 'live-proxy', publicKeyMode };
             }
+            return { ok: false, json, mode: 'live-proxy', publicKeyMode, status: res.status };
         } catch (_) {
             // Fall back to sandbox below if proxy unavailable
         }
@@ -53,7 +57,9 @@ async function callNuiteeApi(endpoint, { method = 'GET', query = {}, body = null
     // 2. Local dev / fallback: call LiteAPI directly using sandbox key
     const apiKey = getLiteApiKey();
     const qs = new URLSearchParams(query).toString();
-    const url = `${LITEAPI_BASE_URL}/${endpoint}${qs ? `?${qs}` : ''}`;
+    const isBookHost = endpoint === 'rates/prebook' || endpoint === 'rates/book';
+    const base = isBookHost ? LITEAPI_BOOK_URL : LITEAPI_BASE_URL;
+    const url = `${base}/${endpoint}${qs ? `?${qs}` : ''}`;
     const res = await fetch(url, {
         method,
         headers: {
@@ -63,8 +69,10 @@ async function callNuiteeApi(endpoint, { method = 'GET', query = {}, body = null
         },
         ...(method === 'POST' && body ? { body: JSON.stringify(body) } : {})
     });
-    if (!res.ok) return { ok: false, json: null, mode: 'sandbox' };
-    return { ok: true, json: await res.json(), mode: 'sandbox' };
+    const json = await res.json().catch(() => null);
+    const publicKeyMode = apiKey.startsWith('prod_') ? 'live' : 'sandbox';
+    if (!res.ok) return { ok: false, json, mode: 'sandbox', publicKeyMode, status: res.status };
+    return { ok: true, json, mode: 'sandbox', publicKeyMode };
 }
 
 /**
@@ -332,16 +340,28 @@ export async function fetchLiveSouthBankNuiteeFeeds(customDates = null, guestNat
 }
 
 /**
- * Execute a live `POST /v3.0/rates/prebook` call for any South Bank hotel offer
+ * Execute a live `POST /v3.0/rates/prebook` call with `usePaymentSdk: true`
+ * Returns `prebookId`, `transactionId`, and `secretKey` for LiteAPI Payment SDK checkout.
  */
-export async function executeSouthBankLivePrebook({ nuiteeHotelId, offerId, hotelName, roomName, retailRate, challengeRate, finisherCreditGbp }) {
+export async function executeSouthBankLivePrebook({
+    nuiteeHotelId,
+    offerId,
+    hotelName,
+    roomName,
+    retailRate,
+    challengeRate,
+    finisherCreditGbp,
+    checkin,
+    checkout,
+    nights = 2
+}) {
     if (offerId && !String(offerId).startsWith('static_')) {
         try {
-            const { ok, json } = await callNuiteeApi('rates/prebook', {
+            const { ok, json, publicKeyMode } = await callNuiteeApi('rates/prebook', {
                 method: 'POST',
                 body: {
                     offerId,
-                    usePaymentSdk: false
+                    usePaymentSdk: true
                 }
             });
 
@@ -349,37 +369,106 @@ export async function executeSouthBankLivePrebook({ nuiteeHotelId, offerId, hote
 
             if (ok && prebookData?.prebookId) {
                 return {
-                    status: 'CONFIRMED_LIVE_PREBOOK',
+                    status: 'READY_FOR_PAYMENT',
                     isLiveApi: true,
+                    publicKeyMode: publicKeyMode || 'live',
                     prebookId: prebookData.prebookId,
+                    transactionId: prebookData.transactionId || null,
+                    secretKey: prebookData.secretKey || null,
                     offerId: prebookData.offerId || offerId,
                     hotelId: prebookData.hotelId || nuiteeHotelId,
                     hotelName,
                     roomName: prebookData.roomTypes?.[0]?.rates?.[0]?.name || roomName,
+                    totalPrice: prebookData.price ?? (challengeRate * nights),
                     currency: prebookData.currency || 'GBP',
+                    checkin: prebookData.checkin || checkin,
+                    checkout: prebookData.checkout || checkout,
+                    nights,
                     retailRate,
                     challengeRate,
                     finisherCreditGbp,
                     createdAt: new Date().toLocaleTimeString()
                 };
             }
-        } catch (_) {
-            // Fall through to deterministic sandbox prebook confirmation if rate token expired
+            return {
+                status: 'PREBOOK_ERROR',
+                isLiveApi: false,
+                error: json?.error?.message || 'Rate expired or unavailable — please refresh dates and try again.',
+                hotelName,
+                roomName,
+                retailRate,
+                challengeRate,
+                finisherCreditGbp
+            };
+        } catch (err) {
+            return {
+                status: 'PREBOOK_ERROR',
+                isLiveApi: false,
+                error: err?.message || 'Unable to connect to live booking engine.',
+                hotelName,
+                roomName,
+                retailRate,
+                challengeRate,
+                finisherCreditGbp
+            };
         }
     }
 
     return {
-        status: 'SANDBOX_VERIFIED_PREBOOK',
+        status: 'PREBOOK_ERROR',
         isLiveApi: false,
-        prebookId: `pb_live_${nuiteeHotelId}_${Date.now().toString(36)}`,
-        offerId: offerId || `off_${nuiteeHotelId}`,
-        hotelId: nuiteeHotelId,
+        error: 'Live Nuitée rate is still loading — please wait a moment and click Reserve Stay again.',
         hotelName,
-        roomName: roomName || 'Curated South Bank Room',
-        currency: 'GBP',
+        roomName,
         retailRate,
         challengeRate,
-        finisherCreditGbp,
-        createdAt: new Date().toLocaleTimeString()
+        finisherCreditGbp
+    };
+}
+
+/**
+ * Finalize a real Nuitée booking after LiteAPI Payment SDK succeeds (`POST /v3.0/rates/book`)
+ */
+export async function completeSouthBankLiveBooking({
+    prebookId,
+    transactionId,
+    firstName,
+    lastName,
+    email
+}) {
+    const { ok, json } = await callNuiteeApi('rates/book', {
+        method: 'POST',
+        body: {
+            prebookId,
+            holder: {
+                firstName,
+                lastName,
+                email
+            },
+            payment: {
+                method: 'TRANSACTION_ID',
+                transactionId
+            },
+            guests: [
+                {
+                    occupancyNumber: 1,
+                    firstName,
+                    lastName,
+                    email
+                }
+            ]
+        }
+    });
+
+    if (ok && json?.data) {
+        return {
+            ok: true,
+            booking: json.data
+        };
+    }
+
+    return {
+        ok: false,
+        error: json?.error?.message || json?.error?.description || 'Could not finalize booking with Nuitée.'
     };
 }

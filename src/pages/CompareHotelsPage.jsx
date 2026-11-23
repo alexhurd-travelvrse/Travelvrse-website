@@ -153,8 +153,8 @@ export default function CompareHotelsPage() {
               <p style={{ fontSize: '13.5px', color: '#cbd5e1', lineHeight: 1.55, margin: '0 0 12px 0' }}>
                 {seaContainers.loveThisIf}
               </p>
-              <div style={{ fontSize: '12.5px', color: '#fca5a5', lineHeight: 1.45 }}>
-                <strong>Avoid if:</strong> {seaContainers.avoidThisIf}
+              <div style={{ fontSize: '12.5px', color: '#fcd34d', lineHeight: 1.45 }}>
+                <strong>Good to know:</strong> {seaContainers.avoidThisIf}
               </div>
             </div>
 
@@ -175,8 +175,8 @@ export default function CompareHotelsPage() {
               <p style={{ fontSize: '13.5px', color: '#cbd5e1', lineHeight: 1.55, margin: '0 0 12px 0' }}>
                 {bankside.loveThisIf}
               </p>
-              <div style={{ fontSize: '12.5px', color: '#fca5a5', lineHeight: 1.45 }}>
-                <strong>Avoid if:</strong> {bankside.avoidThisIf}
+              <div style={{ fontSize: '12.5px', color: '#fcd34d', lineHeight: 1.45 }}>
+                <strong>Good to know:</strong> {bankside.avoidThisIf}
               </div>
             </div>
           </section>

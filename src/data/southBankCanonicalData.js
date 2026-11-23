@@ -16,7 +16,7 @@ export const CANONICAL_URLS = {
 export const EDITORIAL_DISCLOSURE = {
   title: 'Editorial Independence & Commercial Disclosure',
   summary:
-    'TravelVRSE editorial verdicts — including our "Love this if / Avoid this if" hotel fit notes — are written independently by named local scouts and verified against Atmosvibe field methodology. Hotels cannot pay to alter an editorial verdict or suppress a trade-off.',
+    'TravelVRSE editorial verdicts — including our "Love this if / Good to know" hotel fit notes — are written independently by named local scouts and verified against Atmosvibe field methodology. Hotels cannot pay to alter an editorial verdict or suppress a trade-off.',
   affiliateNote:
     'When you book a stay via live member rates on TravelVRSE (powered by Nuitée), we may earn a booking commission at no extra cost to you. Commercial relationships never influence our verified neighbourhood facts or honest-fit assessments, in line with UK CMA / DMCC Act transparency standards.',
   lastReviewed: '2026-11-21'
@@ -104,7 +104,7 @@ export const SOUTHBANK_HOTELS_CANONICAL = [
     acousticProfile: 'Lively lobby & Lyaness bar on Fri–Sat evenings; quiet upper-floor rooms with acoustic glazing.',
     lightProfile: 'Direct north/east Thames reflections; peak golden hour at 12th Knot rooftop (17:00–19:30).',
     loveThisIf: 'You want iconic Tom Dixon nautical copper interiors, panoramic Thames & St Paul’s sunset views from 12th Knot, and a private 56-seat Curzon cinema downstairs.',
-    avoidThisIf: 'You prefer a tiny, quiet residential guesthouse — the ground-floor lobby and Lyaness bar carry a lively evening buzz on weekends.',
+    avoidThisIf: 'The lobby and Lyaness cocktail bar have a lively weekend buzz — request an upper-floor acoustically glazed room if you want deep quiet.',
     indicativeRate: 'From £247 / nt',
     rateCheckedDate: 'Nov 2026',
     amenities: [
@@ -130,7 +130,7 @@ export const SOUTHBANK_HOTELS_CANONICAL = [
     acousticProfile: 'Noticeably quieter after 22:00; tucked off the riverfront promenade on a calm cultural side street.',
     lightProfile: 'Warm morning light across the ground-floor Art Yard atrium and calm interior mezzanine.',
     loveThisIf: 'You want a creative, art-filled boutique stay with a live Makers Studio, complimentary Pashley bicycles, and a genuinely calm night’s sleep steps from Tate Modern.',
-    avoidThisIf: 'You specifically want direct, unobstructed Thames river views from your bedroom window.',
+    avoidThisIf: 'Tucked in a quiet cultural mews 3 minutes from Tate Modern, so bedrooms overlook peaceful tree-lined streets rather than direct Thames riverfront.',
     indicativeRate: 'From £292 / nt',
     rateCheckedDate: 'Nov 2026',
     amenities: [

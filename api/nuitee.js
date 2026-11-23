@@ -1,14 +1,21 @@
 // Vercel Serverless Proxy for Live Nuitée (LiteAPI v3.0)
 // Keeps NUITEE_API_KEY (prod_...) strictly server-side — never exposed in browser bundles.
+// Content/Rates -> https://api.liteapi.travel/v3.0
+// Prebook/Book  -> https://book.liteapi.travel/v3.0
 
-const LITEAPI_BASE_URL = 'https://api.liteapi.travel/v3.0';
+const LITEAPI_DATA_BASE_URL = 'https://api.liteapi.travel/v3.0';
+const LITEAPI_BOOK_BASE_URL = 'https://book.liteapi.travel/v3.0';
 
 const ALLOWED_ENDPOINTS = new Set([
   'hotels/rates',
   'data/hotel',
   'data/places',
-  'rates/prebook'
+  'rates/prebook',
+  'rates/book'
 ]);
+
+const BOOK_HOST_ENDPOINTS = new Set(['rates/prebook', 'rates/book']);
+const POST_ENDPOINTS = new Set(['hotels/rates', 'rates/prebook', 'rates/book']);
 
 export default async function handler(req, res) {
   const apiKey = process.env.NUITEE_API_KEY || process.env.LITEAPI_KEY;
@@ -23,7 +30,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: `Unsupported Nuitée endpoint: ${endpoint}` });
   }
 
-  const isPost = endpoint === 'hotels/rates' || endpoint === 'rates/prebook';
+  const isPost = POST_ENDPOINTS.has(endpoint);
   if (isPost && req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -31,8 +38,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  // Build upstream URL + forward safe query params
-  const upstreamUrl = new URL(`${LITEAPI_BASE_URL}/${endpoint}`);
+  const baseUrl = BOOK_HOST_ENDPOINTS.has(endpoint)
+    ? LITEAPI_BOOK_BASE_URL
+    : LITEAPI_DATA_BASE_URL;
+
+  const upstreamUrl = new URL(`${baseUrl}/${endpoint}`);
   if (!isPost) {
     for (const [k, v] of Object.entries(req.query || {})) {
       if (k !== 'endpoint' && v !== undefined) {
@@ -55,6 +65,8 @@ export default async function handler(req, res) {
     const text = await upstreamRes.text();
     res.status(upstreamRes.status);
     res.setHeader('Content-Type', 'application/json');
+    res.setHeader('X-Nuitee-Mode', apiKey.startsWith('prod_') ? 'live' : 'sandbox');
+
     if (endpoint === 'data/hotel' || endpoint === 'data/places') {
       res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
     } else {

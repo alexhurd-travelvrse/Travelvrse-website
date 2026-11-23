@@ -66,7 +66,7 @@ const DESTINATION_DATABASE = {
         desc: "Strictly zero corporate chains: independent jewelers, custom leatherworkers, and local wood-fired cafes.",
         badge: "Zero-Chain Charter",
         impactTag: "Directs 100% of spend to local craftspeople",
-        image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=600"
+        image: "/media/southbank/gabriels-wharf.jpg"
       },
       {
         id: 'bfi-mediatheque',
@@ -77,7 +77,7 @@ const DESTINATION_DATABASE = {
         desc: "Over 10,000 free British heritage films and rare television archives in sound-dampened private viewing carrels.",
         badge: "Free Archive Access",
         impactTag: "Preserves public cinematic heritage",
-        image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=600"
+        image: "/media/southbank/bfi-southbank.jpg"
       },
       {
         id: 'waterloo-bookmarket',
@@ -88,7 +88,7 @@ const DESTINATION_DATABASE = {
         desc: "Open-air antique book, print, and classic map stalls tucked quietly under the acoustic arches of Waterloo Bridge.",
         badge: "Historic Gem",
         impactTag: "Protects independent street sellers",
-        image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=600"
+        image: "/media/southbank/waterloo-books.jpg"
       },
       {
         id: 'leake-street',
@@ -152,7 +152,7 @@ const DESTINATION_DATABASE = {
         vibeMatchBase: 96,
         highlight: 'Tom Dixon nautical copper design, 12th Knot rooftop, and Curzon boutique cinema on-site.',
         loveThisIf: 'You want iconic Tom Dixon copper interiors, St Paul’s golden-hour rooftop cocktails at 12th Knot, and a private 56-seat Curzon cinema downstairs.',
-        avoidThisIf: 'You prefer a tiny, quiet residential guesthouse — the lobby and Lyaness cocktail bar have a lively evening buzz on weekends.',
+        avoidThisIf: 'The lobby and Lyaness cocktail bar have a lively weekend buzz — ask for an upper-floor acoustically glazed room if you want deep quiet.',
         quietFeature: 'Upper-floor acoustic glazing dampens Thames river hum to peaceful calm.',
         fallbackRetail: 449,
         fallbackCredit: 45,
@@ -233,7 +233,7 @@ const DESTINATION_DATABASE = {
         vibeMatchBase: 92,
         highlight: 'Live artist-in-residence studio on the ground floor with peaceful interior dining courtyard.',
         loveThisIf: 'You appreciate a creative, art-filled boutique stay with a live Makers Studio on the ground floor and a serene, unhurried courtyard.',
-        avoidThisIf: 'You are specifically looking for direct, unobstructed Thames river views from your bedroom window.',
+        avoidThisIf: 'Tucked in a quiet cultural mews 3 minutes from Tate Modern, so bedrooms overlook peaceful tree-lined streets rather than direct Thames riverfront.',
         quietFeature: 'Tucked away from main thoroughfares in a quiet cultural mews.',
         fallbackRetail: 385,
         fallbackCredit: 39,
@@ -513,7 +513,7 @@ const DESTINATION_DATABASE = {
         vibeMatchBase: 97,
         highlight: '19th-century porcelain factory with vinyl listening room, NENI glasshouse dining, and outdoor Nordic sauna.',
         loveThisIf: 'You love playful design storytelling, spinning analog vinyl records in a cozy lounge, and relaxing in a secret outdoor courtyard sauna.',
-        avoidThisIf: 'You want ultra-minimalist white-box luxury — this hotel celebrates eclectic, colourful Danish maximalism.',
+        avoidThisIf: 'Celebrates eclectic, colourful Danish maximalism rather than ultra-minimalist white-box luxury.',
         quietFeature: 'Protected interior courtyards shielded from bicycle streets.',
         fallbackRetail: 285,
         fallbackCredit: 29,
@@ -1073,9 +1073,65 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     }
   });
 
-  // Prebook Confirmation Modal State
+  // Prebook & Live LiteAPI Payment SDK Checkout Modal State
   const [prebookSession, setPrebookSession] = useState(null);
   const [isPrebooking, setIsPrebooking] = useState(false);
+  const [checkoutStep, setCheckoutStep] = useState('guest'); // 'guest' | 'payment'
+  const [guestForm, setGuestForm] = useState({ firstName: '', lastName: '', email: '' });
+  const [paymentSdkError, setPaymentSdkError] = useState('');
+
+  // Load LiteAPI Payment SDK script dynamically when entering Step 2 ('payment')
+  useEffect(() => {
+    if (!prebookSession || checkoutStep !== 'payment' || !prebookSession.secretKey) return;
+    let cancelled = false;
+    setPaymentSdkError('');
+
+    const mountSdk = () => {
+      if (cancelled) return;
+      const target = document.getElementById('nuitee-payment-element');
+      if (!target || typeof window.LiteAPIPayment !== 'function') {
+        setPaymentSdkError('Secure payment form could not initialize. Please try again.');
+        return;
+      }
+      target.innerHTML = '';
+      try {
+        const returnUrl = `${window.location.origin}/booking/confirm?pid=${encodeURIComponent(prebookSession.prebookId)}&tid=${encodeURIComponent(prebookSession.transactionId || '')}`;
+        const payment = new window.LiteAPIPayment({
+          publicKey: prebookSession.publicKeyMode || 'live',
+          secretKey: prebookSession.secretKey,
+          targetElement: '#nuitee-payment-element',
+          returnUrl,
+          appearance: { theme: 'night' }
+        });
+        payment.handlePayment();
+      } catch (err) {
+        setPaymentSdkError(err?.message || 'Unable to render payment element.');
+      }
+    };
+
+    if (typeof window.LiteAPIPayment === 'function') {
+      mountSdk();
+    } else {
+      const existing = document.querySelector('script[data-liteapi-payment-sdk="1"]');
+      if (existing) {
+        existing.addEventListener('load', mountSdk, { once: true });
+      } else {
+        const script = document.createElement('script');
+        script.src = 'https://payment-wrapper.liteapi.travel/dist/liteAPIPayment.js?v=a1';
+        script.async = true;
+        script.dataset.liteapiPaymentSdk = '1';
+        script.onload = mountSdk;
+        script.onerror = () => {
+          if (!cancelled) setPaymentSdkError('Failed to load LiteAPI Payment SDK.');
+        };
+        document.body.appendChild(script);
+      }
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [prebookSession, checkoutStep]);
 
   // Saved Gems Intent Tracker for DMO Telemetry
   const [savedGemIds, setSavedGemIds] = useState(() => {
@@ -1177,9 +1233,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     }
   };
 
-  // Instant Live Nuitée Prebook Booking Flow
+  // Instant Live Nuitée Prebook Booking Flow (usePaymentSdk: true)
   const handleInitiateBooking = async (stay) => {
     setIsPrebooking(true);
+    setCheckoutStep('guest');
+    setPaymentSdkError('');
     const rateData = nuiteeRates.hotels[stay.id] || {
       retailRate: stay.fallbackRetail,
       challengeRate: Math.round(stay.fallbackRetail * 0.9),
@@ -1195,19 +1253,18 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         roomName: rateData.roomName,
         retailRate: rateData.retailRate,
         challengeRate: rateData.challengeRate,
-        finisherCreditGbp: rateData.finisherCreditGbp
+        finisherCreditGbp: rateData.finisherCreditGbp,
+        checkin: tripContext.checkin,
+        checkout: tripContext.checkout,
+        nights: tripContext.nights
       });
       setPrebookSession(session);
-    } catch {
+    } catch (err) {
       setPrebookSession({
-        status: 'CONFIRMED_PREBOOK',
-        prebookId: `pb_live_${stay.id}_${Date.now().toString(36)}`,
+        status: 'PREBOOK_ERROR',
+        error: err?.message || 'Unable to lock live rate right now.',
         hotelName: stay.name,
-        roomName: rateData.roomName,
-        retailRate: rateData.retailRate,
-        challengeRate: rateData.challengeRate,
-        finisherCreditGbp: rateData.finisherCreditGbp,
-        createdAt: new Date().toLocaleTimeString()
+        roomName: rateData.roomName
       });
     } finally {
       setIsPrebooking(false);
@@ -3174,7 +3231,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                           {stay.loveThisIf || stay.highlight}
                         </div>
 
-                        {/* Avoid This If */}
+                        {/* Good to Know */}
                         <div style={{
                           background: 'rgba(245, 158, 11, 0.07)',
                           borderLeft: '3px solid #f59e0b',
@@ -3184,8 +3241,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                           lineHeight: '1.45',
                           color: '#cbd5e1'
                         }}>
-                          <strong style={{ color: '#fbbf24' }}>Avoid this if: </strong>
-                          {stay.avoidThisIf || 'You want a remote suburban resort far from central cultural walks.'}
+                          <strong style={{ color: '#fbbf24' }}>Good to know: </strong>
+                          {stay.avoidThisIf || 'Central cultural neighbourhood location with lively daytime energy.'}
                         </div>
                       </div>
 
@@ -3821,7 +3878,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         </div>
       )}
 
-      {/* MODAL 3: RESERVATION CONFIRMATION MODAL */}
+      {/* MODAL 3: LIVE TRANSACTIONAL NUITÉE CHECKOUT MODAL (LITEAPI PAYMENT SDK) */}
       {prebookSession && (
         <div
           onClick={() => setPrebookSession(null)}
@@ -3834,7 +3891,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 9999,
-            padding: '20px'
+            padding: '20px',
+            overflowY: 'auto'
           }}
         >
           <div
@@ -3843,9 +3901,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
               border: '1px solid rgba(56, 189, 248, 0.4)',
               borderRadius: '20px',
-              maxWidth: '460px',
+              maxWidth: '500px',
               width: '100%',
-              padding: '28px',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              padding: '26px',
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
               position: 'relative'
             }}
@@ -3872,59 +3932,169 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               <X size={16} />
             </button>
 
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(52, 211, 153, 0.15)', color: '#34d399', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '800', marginBottom: '12px' }}>
-              <Check size={13} /> MEMBER RATE RESERVED
-            </div>
-
-            <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#ffffff', margin: '0 0 4px 0' }}>
-              {prebookSession.hotelName}
-            </h3>
-            <p style={{ fontSize: '13px', color: '#38bdf8', fontWeight: '600', margin: '0 0 16px 0' }}>
-              {prebookSession.roomName}
-            </p>
-
-            <div style={{
-              background: 'rgba(0, 0, 0, 0.3)',
-              borderRadius: '12px',
-              padding: '14px',
-              fontSize: '12.5px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '8px',
-              marginBottom: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.08)'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
-                <span>Standard Rate:</span>
-                <span style={{ textDecoration: 'line-through' }}>£{prebookSession.retailRate}/night</span>
+            {prebookSession.status === 'PREBOOK_ERROR' ? (
+              <div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '800', marginBottom: '12px' }}>
+                  <AlertTriangle size={13} /> RATE CHECK REQUIRED
+                </div>
+                <h3 style={{ fontSize: '19px', fontWeight: '800', color: '#ffffff', margin: '0 0 8px 0' }}>
+                  {prebookSession.hotelName}
+                </h3>
+                <p style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: 1.5, margin: '0 0 18px 0' }}>
+                  {prebookSession.error}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setPrebookSession(null)}
+                  style={{
+                    width: '100%',
+                    background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
+                    color: '#ffffff',
+                    border: 'none',
+                    padding: '11px',
+                    borderRadius: '10px',
+                    fontSize: '13px',
+                    fontWeight: '800',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Close &amp; Refresh Dates
+                </button>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#34d399', fontWeight: '700' }}>
-                <span>Member Rate Savings:</span>
-                <span>-£{prebookSession.finisherCreditGbp}/night</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#ffffff', fontWeight: '800', fontSize: '15px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '6px' }}>
-                <span>Your Rate:</span>
-                <span style={{ color: '#34d399' }}>£{prebookSession.challengeRate}/night</span>
-              </div>
-            </div>
+            ) : (
+              <div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(52, 211, 153, 0.15)', color: '#34d399', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '800', marginBottom: '10px' }}>
+                  <ShieldCheck size={13} /> SECURE NUITÉE CHECKOUT · {checkoutStep === 'guest' ? 'STEP 1 OF 2' : 'STEP 2 OF 2'}
+                </div>
 
-            <button
-              type="button"
-              onClick={() => setPrebookSession(null)}
-              style={{
-                width: '100%',
-                background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
-                color: '#ffffff',
-                border: 'none',
-                padding: '12px',
-                borderRadius: '10px',
-                fontSize: '13px',
-                fontWeight: '800',
-                cursor: 'pointer'
-              }}
-            >
-              Continue Exploring
-            </button>
+                <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#ffffff', margin: '0 0 4px 0' }}>
+                  {prebookSession.hotelName}
+                </h3>
+                <p style={{ fontSize: '12.5px', color: '#38bdf8', fontWeight: '600', margin: '0 0 14px 0' }}>
+                  {prebookSession.roomName} · {prebookSession.checkin} → {prebookSession.checkout} ({prebookSession.nights || 2} nights)
+                </p>
+
+                <div style={{
+                  background: 'rgba(0, 0, 0, 0.32)',
+                  borderRadius: '12px',
+                  padding: '12px 14px',
+                  fontSize: '12.5px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '16px',
+                  border: '1px solid rgba(255, 255, 255, 0.08)'
+                }}>
+                  <span style={{ color: '#94a3b8' }}>Live Total ({prebookSession.currency || 'GBP'}):</span>
+                  <strong style={{ color: '#34d399', fontSize: '17px' }}>
+                    {prebookSession.currency === 'GBP' ? '£' : `${prebookSession.currency} `}
+                    {Number(prebookSession.totalPrice || 0).toFixed(2)}
+                  </strong>
+                </div>
+
+                {checkoutStep === 'guest' ? (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (!guestForm.firstName.trim() || !guestForm.lastName.trim() || !guestForm.email.trim()) return;
+                      try {
+                        sessionStorage.setItem(
+                          'travelvrse_pending_booking',
+                          JSON.stringify({
+                            firstName: guestForm.firstName.trim(),
+                            lastName: guestForm.lastName.trim(),
+                            email: guestForm.email.trim(),
+                            hotelName: prebookSession.hotelName,
+                            roomName: prebookSession.roomName,
+                            checkin: prebookSession.checkin,
+                            checkout: prebookSession.checkout,
+                            totalPrice: prebookSession.totalPrice,
+                            currency: prebookSession.currency
+                          })
+                        );
+                      } catch {
+                        // ignore
+                      }
+                      setCheckoutStep('payment');
+                    }}
+                  >
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
+                      <input
+                        required
+                        placeholder="First name"
+                        value={guestForm.firstName}
+                        onChange={(e) => setGuestForm(prev => ({ ...prev, firstName: e.target.value }))}
+                        style={{ padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.16)', background: 'rgba(0,0,0,0.35)', color: '#fff', fontSize: '13px' }}
+                      />
+                      <input
+                        required
+                        placeholder="Last name"
+                        value={guestForm.lastName}
+                        onChange={(e) => setGuestForm(prev => ({ ...prev, lastName: e.target.value }))}
+                        style={{ padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.16)', background: 'rgba(0,0,0,0.35)', color: '#fff', fontSize: '13px' }}
+                      />
+                    </div>
+                    <input
+                      required
+                      type="email"
+                      placeholder="Email for booking confirmation"
+                      value={guestForm.email}
+                      onChange={(e) => setGuestForm(prev => ({ ...prev, email: e.target.value }))}
+                      style={{ width: '100%', boxSizing: 'border-box', padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.16)', background: 'rgba(0,0,0,0.35)', color: '#fff', fontSize: '13px', marginBottom: '14px' }}
+                    />
+                    <button
+                      type="submit"
+                      style={{
+                        width: '100%',
+                        background: 'linear-gradient(135deg, #10b981, #059669)',
+                        color: '#ffffff',
+                        border: 'none',
+                        padding: '12px',
+                        borderRadius: '10px',
+                        fontSize: '13.5px',
+                        fontWeight: '800',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Continue to Secure Payment →
+                    </button>
+                  </form>
+                ) : (
+                  <div>
+                    {paymentSdkError ? (
+                      <div style={{ color: '#fca5a5', fontSize: '13px', marginBottom: '12px' }}>
+                        {paymentSdkError}
+                      </div>
+                    ) : (
+                      <div
+                        id="nuitee-payment-element"
+                        style={{
+                          minHeight: '260px',
+                          background: 'rgba(255,255,255,0.03)',
+                          borderRadius: '12px',
+                          padding: '12px',
+                          marginBottom: '12px'
+                        }}
+                      />
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => setCheckoutStep('guest')}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#94a3b8',
+                        fontSize: '12px',
+                        cursor: 'pointer',
+                        padding: 0
+                      }}
+                    >
+                      ← Edit Guest Details
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}

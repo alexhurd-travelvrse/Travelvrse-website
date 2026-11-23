@@ -16,6 +16,7 @@ import PrivateDemoPage from './pages/PrivateDemoPage';
 import VibeDirectoryPage from './pages/VibeDirectoryPage';
 import CompareHotelsPage from './pages/CompareHotelsPage';
 import ScoutProfilePage from './pages/ScoutProfilePage';
+import BookingConfirmPage from './pages/BookingConfirmPage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
 import { trackAiSearchReferrer } from './services/vibeIntentTelemetry';
 import CookieConsentBanner from './components/CookieConsentBanner';
@@ -249,6 +250,7 @@ const App = () => {
             <Route path="/destinations/london/south-bank" element={<VibeDirectoryPage isPrivateDemo={false} />} />
             <Route path="/compare/sea-containers-vs-bankside-hotel" element={<CompareHotelsPage />} />
             <Route path="/scouts/alex-hurd" element={<ScoutProfilePage />} />
+            <Route path="/booking/confirm" element={<BookingConfirmPage />} />
             {/* Private Password-Gated Demo & Vibe Directory */}
             <Route path="/demo" element={<PrivateDemoPage />} />
             <Route path="/demo/southbank" element={<PrivateDemoPage />} />

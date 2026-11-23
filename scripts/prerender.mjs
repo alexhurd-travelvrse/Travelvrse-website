@@ -60,7 +60,7 @@ function renderSouthBankHubBody() {
         <td><strong>${esc(h.name)}</strong><br />${esc(h.address)}</td>
         <td>${esc(h.bestFor)}</td>
         <td>${esc(h.walkToTate)}</td>
-        <td>Love: ${esc(h.loveThisIf)} Avoid: ${esc(h.avoidThisIf)}</td>
+        <td>Love: ${esc(h.loveThisIf)} Good to know: ${esc(h.avoidThisIf)}</td>
         <td>${esc(h.indicativeRate)} (indicative, checked ${esc(h.rateCheckedDate)})</td>
       </tr>`
   ).join('');
@@ -89,7 +89,7 @@ function renderSouthBankHubBody() {
               <th>Hotel &amp; Address</th>
               <th>Best For</th>
               <th>Walk to Tate Modern</th>
-              <th>Honest Fit (Love / Avoid)</th>
+              <th>Honest Fit (Love / Good to Know)</th>
               <th>Indicative Rate</th>
             </tr>
           </thead>
@@ -126,8 +126,8 @@ function renderCompareHotelsBody() {
 
       <section>
         <h2>Quick Verdict</h2>
-        <p><strong>Choose ${esc(sea.name)} if:</strong> ${esc(sea.loveThisIf)} <em>Avoid if:</em> ${esc(sea.avoidThisIf)}</p>
-        <p><strong>Choose ${esc(bankside.name)} if:</strong> ${esc(bankside.loveThisIf)} <em>Avoid if:</em> ${esc(bankside.avoidThisIf)}</p>
+        <p><strong>Choose ${esc(sea.name)} if:</strong> ${esc(sea.loveThisIf)} <em>Good to know:</em> ${esc(sea.avoidThisIf)}</p>
+        <p><strong>Choose ${esc(bankside.name)} if:</strong> ${esc(bankside.loveThisIf)} <em>Good to know:</em> ${esc(bankside.avoidThisIf)}</p>
       </section>
 
       <section>

@@ -53,7 +53,7 @@ const SOUTHBANK_COMPARISON_ROWS = [
     address: '20 Upper Ground, SE1 9PD',
     bestFor: 'St Paul’s sunset rooftop, Tom Dixon design & on-site Curzon cinema',
     walkToTate: '4 min walk (320m)',
-    loveAvoid: 'Love: Panoramic Thames views & Lyaness bar. Avoid: If you want a tiny residential guesthouse.',
+    loveAvoid: 'Love: Panoramic Thames views & Lyaness bar. Good to know: Lively weekend lobby & bar buzz — pick an upper-floor room for deep quiet.',
     startingRate: 'From £247 / nt',
     creditNote: 'Member Rate'
   },
@@ -62,7 +62,7 @@ const SOUTHBANK_COMPARISON_ROWS = [
     address: '2–8 Great Suffolk St, SE1 0UG',
     bestFor: 'Art-filled quiet sanctuary, live Makers Studio & sheltered courtyard',
     walkToTate: '3 min walk (240m)',
-    loveAvoid: 'Love: Calm creative mews & local art. Avoid: If you specifically need direct river views from bed.',
+    loveAvoid: 'Love: Calm creative mews & local art. Good to know: Bedrooms overlook peaceful tree-lined streets rather than direct riverfront.',
     startingRate: 'From £292 / nt',
     creditNote: 'Member Rate'
   }
@@ -413,7 +413,7 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                     <th style={{ padding: '10px 12px' }}>Hotel &amp; Address</th>
                     <th style={{ padding: '10px 12px' }}>Best For</th>
                     <th style={{ padding: '10px 12px' }}>Walk to Tate Modern</th>
-                    <th style={{ padding: '10px 12px' }}>Honest Fit (Love / Avoid)</th>
+                    <th style={{ padding: '10px 12px' }}>Honest Fit (Love / Good to Know)</th>
                     <th style={{ padding: '10px 12px', textAlign: 'right' }}>Starting Rate</th>
                   </tr>
                 </thead>

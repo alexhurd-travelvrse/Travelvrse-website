@@ -39,8 +39,6 @@ const Layout = ({ children }) => {
                         {isConsumerDirectoryRoute ? (
                             <>
                                 <Link to="/destinations/london/south-bank" className="nav-link" onClick={() => setIsMenuOpen(false)}>SOUTH BANK GUIDE</Link>
-                                <Link to="/compare/sea-containers-vs-bankside-hotel" className="nav-link" onClick={() => setIsMenuOpen(false)}>HOTEL COMPARISON</Link>
-                                <Link to="/scouts/alex-hurd" className="nav-link" onClick={() => setIsMenuOpen(false)}>FIELD AUDITS</Link>
                             </>
                         ) : (
                             <>

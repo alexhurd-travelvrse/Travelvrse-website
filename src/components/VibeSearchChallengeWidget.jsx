@@ -778,7 +778,7 @@ const DESTINATION_DATABASE = {
   }
 };
 
-export default function VibeSearchChallengeWidget({ initialLocation = 'london-southbank' }) {
+export default function VibeSearchChallengeWidget({ initialLocation = 'london-southbank', isPrivateDemo = false }) {
   const [selectedLocKey, setSelectedLocKey] = useState(initialLocation);
   const location = DESTINATION_DATABASE[selectedLocKey] || DESTINATION_DATABASE['london-southbank'];
 
@@ -1769,9 +1769,13 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '13px', fontWeight: '800', color: '#ffffff' }}>
                 Scouted by{' '}
-                <Link to="/scouts/alex-hurd" style={{ color: '#ffffff', textDecoration: 'underline', textUnderlineOffset: '2px' }}>
-                  {activeCurator.name}
-                </Link>
+                {isPrivateDemo ? (
+                  <Link to="/scouts/alex-hurd" style={{ color: '#ffffff', textDecoration: 'underline', textUnderlineOffset: '2px' }}>
+                    {activeCurator.name}
+                  </Link>
+                ) : (
+                  activeCurator.name
+                )}
               </span>
               <span style={{ fontSize: '12px', color: '#38bdf8', fontWeight: '600' }}>
                 {activeCurator.handle}
@@ -1793,37 +1797,39 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
           </div>
         </div>
 
-        {/* Location Switcher */}
-        <div style={{ display: 'flex', gap: '6px', background: 'rgba(255, 255, 255, 0.04)', padding: '4px', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-          {Object.keys(DESTINATION_DATABASE).map(key => {
-            const loc = DESTINATION_DATABASE[key];
-            const isSelected = key === selectedLocKey;
-            return (
-              <button
-                key={key}
-                type="button"
-                onClick={() => {
-                  setSelectedLocKey(key);
-                  setPullCompleted(false);
-                  setDuelStep(0);
-                }}
-                style={{
-                  background: isSelected ? 'linear-gradient(135deg, #0ea5e9, #6366f1)' : 'transparent',
-                  color: isSelected ? '#ffffff' : '#94a3b8',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: '6px 12px',
-                  fontSize: '12px',
-                  fontWeight: '700',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease'
-                }}
-              >
-                {loc.name.split('•')[1]?.trim() || loc.name}
-              </button>
-            );
-          })}
-        </div>
+        {/* Location Switcher (Demo Only — hidden on live South Bank page) */}
+        {isPrivateDemo && (
+          <div style={{ display: 'flex', gap: '6px', background: 'rgba(255, 255, 255, 0.04)', padding: '4px', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+            {Object.keys(DESTINATION_DATABASE).map(key => {
+              const loc = DESTINATION_DATABASE[key];
+              const isSelected = key === selectedLocKey;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => {
+                    setSelectedLocKey(key);
+                    setPullCompleted(false);
+                    setDuelStep(0);
+                  }}
+                  style={{
+                    background: isSelected ? 'linear-gradient(135deg, #0ea5e9, #6366f1)' : 'transparent',
+                    color: isSelected ? '#ffffff' : '#94a3b8',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '6px 12px',
+                    fontSize: '12px',
+                    fontWeight: '700',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {loc.name.split('•')[1]?.trim() || loc.name}
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* DISCOVER YOUR VIBE: COLLAPSE CHALLENGE CONTAINER INTO HORIZONTAL CONFIRMATION CARDS ONCE COMPLETED */}

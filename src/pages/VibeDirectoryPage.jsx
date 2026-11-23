@@ -310,7 +310,7 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
 
           {/* THE GAMIFIED DESTINATION VIBE CHALLENGE & UNIFIED DISCOVERY TABS */}
           <div style={{ marginBottom: '40px' }}>
-            <VibeSearchChallengeWidget initialLocation="london-southbank" />
+            <VibeSearchChallengeWidget initialLocation="london-southbank" isPrivateDemo={isPrivateDemo} />
           </div>
 
           {/* GEO SECTION 1: LAYERED NATIVE <details> HOTEL COMPARISON TABLE (100% IN DOM & STATIC HTML) */}
@@ -342,22 +342,24 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                   Compare All 4 South Bank Hotels Side-by-Side
                 </h2>
               </div>
-              <Link
-                to="/compare/sea-containers-vs-bankside-hotel"
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  fontSize: '12px',
-                  fontWeight: 700,
-                  color: '#7dd3fc',
-                  background: 'rgba(56, 189, 248, 0.12)',
-                  border: '1px solid rgba(56, 189, 248, 0.3)',
-                  padding: '6px 12px',
-                  borderRadius: '8px',
-                  textDecoration: 'none'
-                }}
-              >
-                Sea Containers vs. Bankside →
-              </Link>
+              {isPrivateDemo && (
+                <Link
+                  to="/compare/sea-containers-vs-bankside-hotel"
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    color: '#7dd3fc',
+                    background: 'rgba(56, 189, 248, 0.12)',
+                    border: '1px solid rgba(56, 189, 248, 0.3)',
+                    padding: '6px 12px',
+                    borderRadius: '8px',
+                    textDecoration: 'none'
+                  }}
+                >
+                  Sea Containers vs. Bankside →
+                </Link>
+              )}
             </summary>
 
             <div style={{ overflowX: 'auto', marginTop: '16px' }}>
@@ -582,9 +584,13 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
                 <CheckCircle2 size={16} color="#34d399" />
                 <strong style={{ fontSize: '13.5px', color: '#ffffff' }}>
                   How We Verify • On-Site Curation by{' '}
-                  <Link to="/scouts/alex-hurd" style={{ color: '#7dd3fc', textDecoration: 'none' }}>
-                    Alex Hurd (@AlexCulture)
-                  </Link>
+                  {isPrivateDemo ? (
+                    <Link to="/scouts/alex-hurd" style={{ color: '#7dd3fc', textDecoration: 'none' }}>
+                      Alex Hurd (@AlexCulture)
+                    </Link>
+                  ) : (
+                    <span style={{ color: '#7dd3fc' }}>Alex Hurd (@AlexCulture)</span>
+                  )}
                 </strong>
               </div>
               <p style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.55, margin: '0 0 8px 0' }}>

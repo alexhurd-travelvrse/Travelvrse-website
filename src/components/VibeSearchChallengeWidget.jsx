@@ -1346,15 +1346,16 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     return () => { isMounted = false; };
   }, [selectedLocKey, tripContext.checkin, tripContext.checkout, tripContext.nights]);
 
-  // Reset user answers when location switches
+  // Reset user answers to neutral only when user switches destination (never pre-fill on initial mount)
+  const prevLocKeyRef = useRef(selectedLocKey);
   useEffect(() => {
-    setUserAnswers({
-      culturePace: activeCurator.duelChoices.culturePace,
-      diurnalRhythm: activeCurator.duelChoices.diurnalRhythm,
-      dispersion: activeCurator.duelChoices.dispersion,
-      sanctuary: activeCurator.duelChoices.sanctuary
-    });
-  }, [selectedLocKey, activeCurator]);
+    if (prevLocKeyRef.current !== selectedLocKey) {
+      prevLocKeyRef.current = selectedLocKey;
+      setUserAnswers({});
+      setPullCompleted(false);
+      setDuelStep(0);
+    }
+  }, [selectedLocKey]);
 
   const toggleSaveGem = (gemId) => {
     setSavedGemIds(prev => {
@@ -1717,6 +1718,107 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
 
+      {/* COMPACT CURATOR ATTRIBUTION BAR & DESTINATION SWITCHER */}
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '12px',
+        paddingBottom: '12px',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        marginBottom: '14px'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <div style={{ position: 'relative', flexShrink: 0 }}>
+            <img
+              src={activeCurator.avatar}
+              alt={activeCurator.name}
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '2px solid #38bdf8'
+              }}
+            />
+            <div style={{
+              position: 'absolute',
+              bottom: '-2px',
+              right: '-2px',
+              background: '#10b981',
+              borderRadius: '50%',
+              width: '14px',
+              height: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '1.5px solid #0f172a'
+            }}>
+              <ShieldCheck size={9} color="#ffffff" />
+            </div>
+          </div>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '13px', fontWeight: '800', color: '#ffffff' }}>
+                Scouted by{' '}
+                <Link to="/scouts/alex-hurd" style={{ color: '#ffffff', textDecoration: 'underline', textUnderlineOffset: '2px' }}>
+                  {activeCurator.name}
+                </Link>
+              </span>
+              <span style={{ fontSize: '12px', color: '#38bdf8', fontWeight: '600' }}>
+                {activeCurator.handle}
+              </span>
+              <span style={{
+                fontSize: '10.5px',
+                background: 'rgba(56, 189, 248, 0.14)',
+                color: '#7dd3fc',
+                padding: '1px 7px',
+                borderRadius: '999px',
+                fontWeight: '700'
+              }}>
+                {activeCurator.role}
+              </span>
+            </div>
+            <div style={{ fontSize: '11.5px', color: '#94a3b8' }}>
+              {location.tagline}
+            </div>
+          </div>
+        </div>
+
+        {/* Location Switcher */}
+        <div style={{ display: 'flex', gap: '6px', background: 'rgba(255, 255, 255, 0.04)', padding: '4px', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+          {Object.keys(DESTINATION_DATABASE).map(key => {
+            const loc = DESTINATION_DATABASE[key];
+            const isSelected = key === selectedLocKey;
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => {
+                  setSelectedLocKey(key);
+                  setPullCompleted(false);
+                  setDuelStep(0);
+                }}
+                style={{
+                  background: isSelected ? 'linear-gradient(135deg, #0ea5e9, #6366f1)' : 'transparent',
+                  color: isSelected ? '#ffffff' : '#94a3b8',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '6px 12px',
+                  fontSize: '12px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {loc.name.split('•')[1]?.trim() || loc.name}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* DISCOVER YOUR VIBE: INTERACTIVE VISUAL "THE PULL" (ABOVE THE FOLD ON DESKTOP & MOBILE) */}
       <div style={{
         background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(10, 16, 30, 0.96) 100%)',
@@ -1873,7 +1975,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 </h4>
 
                 <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 12px 0', lineHeight: 1.45 }}>
-                  <strong style={{ color: '#7dd3fc' }}>{matchCalculation.pct}% aligned</strong> with {activeCurator.handle}. Your neighbourhood guide &amp; live hotel galleries below are now tuned to your vibe.
+                  <strong style={{ color: '#7dd3fc' }}>{matchCalculation.percentage}% aligned</strong> with {activeCurator.handle}. Your neighbourhood guide &amp; live hotel galleries below are now tuned to your vibe.
                 </p>
 
                 <div style={{
@@ -2136,11 +2238,18 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             <div>
               {hasUserPulled ? (
                 <>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
-                      Your Vibe Selection
-                    </span>
-                    <span style={{ fontSize: '11px', color: '#34d399', fontWeight: '700' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <img
+                        src={activeCurator.avatar}
+                        alt={activeCurator.name}
+                        style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid #38bdf8' }}
+                      />
+                      <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#7dd3fc', fontWeight: '800' }}>
+                        {matchCalculation.percentage}% Aligned · {activeCurator.handle}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: '11px', color: '#34d399', fontWeight: '700', whiteSpace: 'nowrap' }}>
                       {answeredCount} of 4 chosen
                     </span>
                   </div>
@@ -2148,20 +2257,42 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                     {crowdBenchmark.archetype}
                   </div>
                   <p style={{ fontSize: '12px', lineHeight: '1.45', color: '#cbd5e1', margin: '0 0 12px 0' }}>
-                    Hotel galleries and highlights below are reordered to match your selections.
+                    {pullCompleted
+                      ? matchCalculation.alignmentSummary
+                      : 'Hotel galleries and highlights below are reordered to match your selections.'}
                   </p>
                 </>
               ) : (
                 <>
-                  <div style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800', marginBottom: '6px' }}>
-                    Personalise Your Match
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                    <img
+                      src={activeCurator.avatar}
+                      alt={activeCurator.name}
+                      style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid #38bdf8' }}
+                    />
+                    <span style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#38bdf8', fontWeight: '800' }}>
+                      Compare With {activeCurator.handle}
+                    </span>
                   </div>
                   <div style={{ fontSize: '17px', fontWeight: '900', color: '#ffffff', marginBottom: '6px' }}>
                     Tap or drag 4 visual trade-offs
                   </div>
-                  <p style={{ fontSize: '12px', lineHeight: '1.45', color: '#cbd5e1', margin: '0 0 12px 0' }}>
-                    Reorder South Bank’s hotels, photos, and local highlights to match your trip mood — and unlock a single-use stay voucher on completion.
+                  <p style={{ fontSize: '12px', lineHeight: '1.45', color: '#cbd5e1', margin: '0 0 10px 0' }}>
+                    See how your South Bank taste aligns with {activeCurator.name.split(' ')[0]}’s on-site scout picks, reorder the hotels below, and unlock a single-use stay voucher.
                   </p>
+                  <div style={{
+                    fontSize: '11.5px',
+                    fontStyle: 'italic',
+                    color: '#94a3b8',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    borderLeft: '2px solid rgba(56, 189, 248, 0.45)',
+                    padding: '6px 10px',
+                    borderRadius: '0 8px 8px 0',
+                    marginBottom: '12px',
+                    lineHeight: 1.4
+                  }}>
+                    “{activeCurator.quote.slice(0, 138)}…”
+                  </div>
                 </>
               )}
 

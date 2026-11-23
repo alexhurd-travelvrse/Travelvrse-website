@@ -36,20 +36,17 @@ const MobileSimulatorWrapper = ({ children }) => {
     localStorage.setItem('travelvrse_simulator_mode', enabled ? 'true' : 'false');
   };
 
-  const isSimulatorRoute = 
-    location.pathname.startsWith('/simulator') || 
-    location.pathname.startsWith('/mobile') || 
-    location.pathname.startsWith('/live-mobile') || 
-    location.pathname.startsWith('/presenter') || 
-    location.pathname.startsWith('/demo-hub') ||
-    location.pathname.startsWith('/play') ||
-    location.pathname.startsWith('/pull') ||
-    location.pathname.startsWith('/destinations') ||
-    location.pathname.startsWith('/compare') ||
-    location.pathname.startsWith('/scouts') ||
-    location.pathname.startsWith('/booking');
+  const params = new URLSearchParams(location.search);
+  const explicitSimulatorParam =
+    params.get('simulator') === 'true' ||
+    params.get('mobile') === 'true' ||
+    params.get('frame') === 'true';
 
-  if (isSimulatorRoute) {
+  // Only show the floating "Present in Mobile Simulator" button on private /demo routes (or explicit ?simulator=true)
+  const allowFloatingSimulator =
+    location.pathname.startsWith('/demo') && !location.pathname.startsWith('/demo-hub');
+
+  if (!allowFloatingSimulator && !explicitSimulatorParam) {
     return <>{children}</>;
   }
 

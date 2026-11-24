@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Volume2, VolumeX, Share2, Copy, Check, Sparkles, ShieldCheck, RotateCcw, Sun, ChevronRight } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Volume2, VolumeX, Share2, Copy, Check, Sparkles, ShieldCheck, RotateCcw, Sun, ChevronRight, ChevronLeft } from 'lucide-react';
 import { fetchLiveSouthBankNuiteeFeeds } from '../services/nuiteeLiveFeedService';
 import { savePortableVibeProfile, savePortableTripContext, computeTripDates, getDefaultTripContext, trackPullFunnelEvent } from '../services/vibeProfileStore';
+import { trackCoreFunnelEvent } from '../services/vibeIntentTelemetry';
 
 /**
  * TravelVRSE Mobile-First Vibe Challenge: "The Pull"
@@ -413,8 +415,10 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
   const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
   const cityParam = urlParams?.get('city')?.toLowerCase();
   const refParam = urlParams?.get('ref');
+  const fromParam = urlParams?.get('from');
   const activeCityKey = cityParam === 'copenhagen' || initialCity === 'copenhagen' ? 'copenhagen' : 'southbank';
   const config = CHALLENGE_DESTINATIONS[activeCityKey];
+  const returnBasePath = fromParam && fromParam.startsWith('/') ? fromParam : '/destinations/london/south-bank';
 
   // Screen flow: 'hook' | 'pull' | 'blend' | 'story1' | 'story2' | 'story3' | 'credit'
   const [screen, setScreen] = useState('hook');
@@ -767,6 +771,19 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
   const activeStep = config.steps[stepIdx];
   const wantsRooftop = picks[3]?.side === 'right';
 
+  const pullCanonical = activeCityKey === 'copenhagen'
+    ? 'https://www.travelvrse.com/pull/copenhagen'
+    : 'https://www.travelvrse.com/pull/southbank';
+  const pullTitle = activeCityKey === 'copenhagen'
+    ? 'Copenhagen Indre By Vibe Pull (20-Second Match) | TravelVRSE'
+    : 'South Bank, London Vibe Pull — Find Your Stay & Mood in 20s | TravelVRSE';
+  const pullDesc = activeCityKey === 'copenhagen'
+    ? '4 quick visual trade-offs to match Copenhagen Indre By to your mood, compare with local scouts, and unlock stay credits.'
+    : '4 quick visual trade-offs to match London’s South Bank to your mood, compare with @AlexCulture, and discover curated stays near Tate Modern.';
+  const pullOgImage = activeCityKey === 'copenhagen'
+    ? 'https://www.travelvrse.com/media/copenhagen/nyhavn-dusk.jpg'
+    : 'https://www.travelvrse.com/media/southbank/tate-modern.jpg';
+
   return (
     <div
       style={{
@@ -782,6 +799,21 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
         WebkitUserSelect: 'none'
       }}
     >
+      <Helmet>
+        <title>{pullTitle}</title>
+        <meta name="description" content={pullDesc} />
+        <link rel="canonical" href={pullCanonical} />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pullTitle} />
+        <meta property="og:description" content={pullDesc} />
+        <meta property="og:url" content={pullCanonical} />
+        <meta property="og:image" content={pullOgImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pullTitle} />
+        <meta name="twitter:description" content={pullDesc} />
+        <meta name="twitter:image" content={pullOgImage} />
+      </Helmet>
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes ghostNudge {
           0%, 100% { transform: translate(-50%, -50%) translateX(0px); }
@@ -1766,6 +1798,7 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
                   guests: tripContext.guests
                 });
                 trackPullFunnelEvent('passport_revealed', { city: activeCityKey, archetype: archetype.name });
+                trackCoreFunnelEvent('vibe_pull_completed', { city: activeCityKey, archetype: archetype.name, ref: refParam || 'direct' });
                 setScreen('credit');
               }}
               style={{
@@ -1834,6 +1867,29 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
           >
             <RotateCcw size={12} /> Replay Pull
           </button>
+          <a
+            href={returnBasePath}
+            style={{
+              position: 'fixed',
+              bottom: '14px',
+              right: '14px',
+              zIndex: 9999,
+              background: 'linear-gradient(135deg, #0284c7, #10b981)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              color: '#ffffff',
+              padding: '7px 13px',
+              borderRadius: '999px',
+              fontSize: '11.5px',
+              fontWeight: 800,
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.6)'
+            }}
+          >
+            <ChevronLeft size={13} /> Back to {config.cityName}
+          </a>
         </div>
       )}
     </div>

@@ -19,6 +19,16 @@ const TARGETS = [
     path: '/scouts/alex-hurd',
     expectedCanonical: 'https://www.travelvrse.com/scouts/alex-hurd',
     mustContain: ['<h1', 'Alex Hurd', 'Verified On-Site Field Audits', '2026-11-18', 'application/ld+json']
+  },
+  {
+    path: '/pull/southbank',
+    expectedCanonical: 'https://www.travelvrse.com/pull/southbank',
+    mustContain: ['<h1', 'South Bank, London Vibe Pull', '/media/southbank/tate-modern.jpg', 'application/ld+json']
+  },
+  {
+    path: '/pull/copenhagen',
+    expectedCanonical: 'https://www.travelvrse.com/pull/copenhagen',
+    mustContain: ['<h1', 'Copenhagen Indre By Vibe Pull', '/media/copenhagen/nyhavn-dusk.jpg', 'application/ld+json']
   }
 ];
 

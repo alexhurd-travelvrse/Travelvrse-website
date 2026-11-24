@@ -15,6 +15,7 @@ import {
   mintPersonalVibeVoucher
 } from '../services/nuiteeLiveFeedService';
 import { loadPortableVibeProfile, savePortableTripContext, computeTripDates, getDefaultTripContext } from '../services/vibeProfileStore';
+import { trackCoreFunnelEvent } from '../services/vibeIntentTelemetry';
 
 // Comprehensive DESTINATION-LEVEL Database (Focusing on the neighborhood, not a single hotel)
 const DESTINATION_DATABASE = {
@@ -161,7 +162,7 @@ const DESTINATION_DATABASE = {
         fallbackRetail: 247,
         fallbackCredit: 25,
         hasSpatial3D: true,
-        spatialUrl: '/simulator?preset=sea-containers',
+        spatialUrl: '/play/sea-containers',
         spatialEmbedUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers',
         stepInsideScenes: ['Room With a View', 'Nautical Lobby', 'Tate Modern', 'Aqua Spa', 'Leake Street Arches'],
         url: '/demo/southbank',
@@ -620,7 +621,7 @@ const DESTINATION_DATABASE = {
         fallbackRetail: 285,
         fallbackCredit: 29,
         hasSpatial3D: true,
-        spatialUrl: '/simulator?preset=25-hours',
+        spatialUrl: '/play/25-hours',
         spatialEmbedUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours',
         stepInsideScenes: ['Retro Vinyl Session Room', 'The Bar', 'The Spa', 'Luxury Suite', 'Rosenborg Gardens'],
         url: '/play/25-hours',
@@ -805,16 +806,55 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     });
   };
 
-  // User Pull Answers — start neutral/unstarted unless hydrated from Mobile Pull (zero pre-completed fake stats)
+  // User Pull Answers — hydrate from Portable Vibe Profile or ?vibe= URL param (zero pre-completed fake stats)
   const [userAnswers, setUserAnswers] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const vibeParam = new URLSearchParams(window.location.search).get('vibe');
+      if (vibeParam) {
+        const parts = vibeParam.split('-');
+        if (parts.length === 4) {
+          return {
+            culturePace: parts[0],
+            diurnalRhythm: parts[1],
+            dispersion: parts[2],
+            sanctuary: parts[3]
+          };
+        }
+      }
+    }
     const saved = loadPortableVibeProfile();
-    if (saved?.desktopAnswers) {
+    if (saved?.desktopAnswers && Object.keys(saved.desktopAnswers).length > 0) {
       return saved.desktopAnswers;
     }
     return {};
   });
   const answeredCount = Object.keys(userAnswers || {}).length;
   const hasUserPulled = answeredCount > 0;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const savedScroll = sessionStorage.getItem('travelvrse_dir_scroll');
+      if (savedScroll) {
+        const y = parseInt(savedScroll, 10);
+        sessionStorage.removeItem('travelvrse_dir_scroll');
+        if (!Number.isNaN(y) && y > 0) {
+          requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' }));
+        }
+      }
+    } catch {}
+  }, []);
+
+  const pullBasePath = selectedLocKey === 'copenhagen-indre-by' ? '/pull/copenhagen' : '/pull/southbank';
+  const currentPathForReturn = typeof window !== 'undefined' ? window.location.pathname : '/destinations/london/south-bank';
+  const pullLaunchHref = `${pullBasePath}?from=${encodeURIComponent(currentPathForReturn)}`;
+
+  const saveDirectoryScrollBeforeLeave = () => {
+    if (typeof window === 'undefined') return;
+    try {
+      sessionStorage.setItem('travelvrse_dir_scroll', String(Math.round(window.scrollY || 0)));
+    } catch {}
+  };
 
   // Photo Curation View Mode ('vibe' vs 'raw_ota')
   const [photoEngineMode, setPhotoEngineMode] = useState('vibe');
@@ -964,7 +1004,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   const [galleryModalHotel, setGalleryModalHotel] = useState(null);
   const [galleryModalFilter, setGalleryModalFilter] = useState('for_your_vibe');
   const [roomModalHotel, setRoomModalHotel] = useState(null);
-  const [active3DHotel, setActive3DHotel] = useState(null);
   const [isMobileViewport, setIsMobileViewport] = useState(() => (typeof window !== 'undefined' ? window.innerWidth <= 768 : false));
 
   useEffect(() => {
@@ -973,30 +1012,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
-
-  useEffect(() => {
-    if (!active3DHotel || typeof window === 'undefined') return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    const onKey = (e) => {
-      if (e.key === 'Escape') setActive3DHotel(null);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      document.body.style.overflow = prevOverflow;
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [active3DHotel]);
-
-  const featured3DStay = useMemo(
-    () => (location.stayAnchors || []).find(s => s.hasSpatial3D && s.spatialEmbedUrl) || null,
-    [location]
-  );
-
-  const openVibeChallenge3D = (stay) => {
-    if (!stay) return;
-    setActive3DHotel(stay);
-  };
 
   // Curate & filter real live Nuitée hotelImages (removing pools, bathrooms, meeting rooms, gyms)
   const curateLiveNuiteePhotos = (rawHotelDetail, fallbackPhotos = []) => {
@@ -1233,7 +1248,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
 
   // Mint a unique single-use Nuitée voucher server-side when user completes Stage 01
   useEffect(() => {
-    if (!pullCompleted) return;
+    if (!hasUserPulled && !pullCompleted) return;
     let cancelled = false;
     mintPersonalVibeVoucher().then((v) => {
       if (!cancelled && v?.voucherCode) {
@@ -1423,6 +1438,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
 
   // Instant Live Nuitée Prebook Booking Flow (usePaymentSdk: true + optional voucherCode)
   const handleInitiateBooking = async (stay, customVoucher = '') => {
+    trackCoreFunnelEvent('hotel_booking_clicked', { hotelId: stay.id, hotelName: stay.name, city: selectedLocKey, hasVibeProfile: hasUserPulled });
     setIsPrebooking(true);
     setCheckoutStep('guest');
     setPaymentSdkError('');
@@ -1868,7 +1884,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
       </div>
 
       {/* DISCOVER YOUR VIBE: COLLAPSE CHALLENGE CONTAINER INTO HORIZONTAL CONFIRMATION CARDS ONCE COMPLETED */}
-      {pullCompleted ? (
+      {hasUserPulled ? (
         <div style={{ marginBottom: '20px' }}>
           {/* Compact Top Bar */}
           <div style={{
@@ -1888,13 +1904,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 · Hotels below reordered
               </span>
             </div>
-            <button
-              type="button"
+            <Link
+              to={pullLaunchHref}
               onClick={() => {
-                setPullRevealMsg(null);
-                setPullSplitPct(50);
-                setPullCompleted(false);
-                setDuelStep(0);
+                saveDirectoryScrollBeforeLeave();
+                trackCoreFunnelEvent('vibe_pull_launcher_clicked', { city: selectedLocKey, source: 'return_strip_replay' });
               }}
               style={{
                 background: 'rgba(255, 255, 255, 0.06)',
@@ -1904,7 +1918,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 padding: '6px 11px',
                 fontSize: '11.5px',
                 fontWeight: '700',
-                cursor: 'pointer',
+                textDecoration: 'none',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
@@ -1912,8 +1926,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               }}
             >
               <RefreshCw size={12} />
-              <span>Replay Pull</span>
-            </button>
+              <span>Replay Vibe Pull</span>
+            </Link>
           </div>
 
           {/* Horizontal Swipeable Confirmation Cards (Swipe on mobile · 3-up row on desktop) */}
@@ -2176,499 +2190,79 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
           </div>
         </div>
       ) : (
-      <div style={{
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(10, 16, 30, 0.96) 100%)',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
-        borderRadius: '18px',
-        padding: '16px 18px',
-        marginBottom: '24px',
-        boxShadow: '0 16px 40px rgba(0, 0, 0, 0.4)'
-      }}>
-        {/* Header Bar */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '12px' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '2px' }}>
-              <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#38bdf8', fontWeight: '800' }}>
-                Sort By Your Vibe
-              </span>
-              <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '600' }}>
-                4 quick taps · {duelStep + 1} of 4
-              </span>
-            </div>
-            <h2 style={{ fontSize: '19px', fontWeight: '900', margin: 0, color: '#ffffff' }}>
-              Find your {location.name.split('•')[1]?.trim() || location.name}.
-            </h2>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            {/* 4 Step Pills */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-              {PULL_VISUALS.map((pv, idx) => (
-                <button
-                  key={pv.id}
-                  type="button"
-                  onClick={() => {
-                    setPullRevealMsg(null);
-                    setPullSplitPct(50);
-                    setPullCompleted(false);
-                    setDuelStep(idx);
-                  }}
-                  title={`Step ${idx + 1}: ${pv.left.label} vs ${pv.right.label}`}
-                  style={{
-                    width: duelStep === idx ? '24px' : '9px',
-                    height: '8px',
-                    borderRadius: '999px',
-                    background: userAnswers[pv.id] ? '#38bdf8' : (duelStep === idx ? '#7dd3fc' : 'rgba(255,255,255,0.25)'),
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: 0,
-                    transition: 'all 0.2s ease'
-                  }}
-                />
-              ))}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('stage-04-stays');
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }}
-              style={{
-                fontSize: '12px',
-                background: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid rgba(255, 255, 255, 0.16)',
-                color: '#e2e8f0',
-                padding: '6px 12px',
-                borderRadius: '8px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
-            >
-              Skip to {location.stayAnchors.length} Hotels ↓
-            </button>
-          </div>
-        </div>
-
-        {/* 2-Column Split: Visual Pull Canvas (Left) + Live Alignment Scorecard (Right) */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '20px',
-          alignItems: 'stretch'
-        }}>
-          {/* LEFT: LIVE INTERACTIVE "THE PULL" PHOTO CANVAS */}
-          {(() => {
-            const pv = PULL_VISUALS[duelStep];
-            return (
-              <div
-                ref={pullSurfaceRef}
-                onPointerDown={onEmbeddedPullDown}
-                onPointerMove={onEmbeddedPullMove}
-                onPointerUp={onEmbeddedPullUp}
-                onPointerCancel={onEmbeddedPullUp}
-                style={{
-                  position: 'relative',
-                  height: '360px',
-                  borderRadius: '18px',
-                  overflow: 'hidden',
-                  touchAction: 'none',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  cursor: isPullDragging ? 'grabbing' : 'grab',
-                  border: '1px solid rgba(255, 255, 255, 0.14)'
-                }}
-              >
-                {/* Right Photo */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundImage: `url(${pv.right.photo})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }} />
-
-                {/* Left Photo (Clipped or Crossfade on Scrub the Sun) */}
-                {pv.type === 'sun' ? (
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundImage: `url(${pv.left.photo})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    opacity: pullSplitPct / 100,
-                    transition: isPullDragging ? 'none' : 'opacity 0.25s ease'
-                  }} />
-                ) : (
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundImage: `url(${pv.left.photo})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    clipPath: `inset(0 ${100 - pullSplitPct}% 0 0)`,
-                    transition: isPullDragging ? 'none' : 'clip-path 0.25s cubic-bezier(0.22, 1, 0.36, 1)'
-                  }} />
-                )}
-
-                {/* Contrast Scrim */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(180deg, rgba(5,8,17,0.25) 0%, rgba(5,8,17,0) 40%, rgba(5,8,17,0.88) 100%)',
-                  pointerEvents: 'none'
-                }} />
-
-                {/* Vertical Glowing Seam */}
-                {pv.type !== 'sun' && !pullRevealMsg && (
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    bottom: 0,
-                    left: `${pullSplitPct}%`,
-                    width: '2px',
-                    background: 'rgba(255,255,255,0.88)',
-                    boxShadow: '0 0 16px rgba(56, 189, 248, 0.9)',
-                    pointerEvents: 'none',
-                    transition: isPullDragging ? 'none' : 'left 0.25s cubic-bezier(0.22, 1, 0.36, 1)'
-                  }} />
-                )}
-
-                {/* Bold 2-Word Labels */}
-                {!pullRevealMsg && (
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '92px',
-                    left: '16px',
-                    right: '16px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    pointerEvents: 'none'
-                  }}>
-                    <span style={{ fontSize: '21px', fontWeight: 900, color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.9)' }}>
-                      {pv.left.label}
-                    </span>
-                    <span style={{ fontSize: '21px', fontWeight: 900, color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.9)' }}>
-                      {pv.right.label}
-                    </span>
-                  </div>
-                )}
-
-                {/* Drag Handle (or Sun Handle on Step 2) */}
-                {!pullRevealMsg && (
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '44px',
-                    left: `${Math.max(12, Math.min(88, pullSplitPct))}%`,
-                    transform: 'translate(-50%, 50%)',
-                    pointerEvents: 'none',
-                    transition: isPullDragging ? 'none' : 'left 0.25s cubic-bezier(0.22, 1, 0.36, 1)'
-                  }}>
-                    {pv.type === 'sun' ? (
-                      <div style={{
-                        width: '48px',
-                        height: '48px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, #fde047, #f97316)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 0 26px rgba(251, 146, 60, 0.9), 0 0 0 3px rgba(255,255,255,0.45)'
-                      }}>
-                        <Sun size={22} color="#ffffff" />
-                      </div>
-                    ) : (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.8)' }}>◀</span>
-                        <div style={{
-                          width: '44px',
-                          height: '44px',
-                          borderRadius: '50%',
-                          background: 'rgba(15, 23, 42, 0.88)',
-                          border: '2px solid #ffffff',
-                          boxShadow: '0 0 20px rgba(56, 189, 248, 0.8)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}>
-                          <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#38bdf8' }} />
-                        </div>
-                        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.8)' }}>▶</span>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* 700ms Micro-Reveal Overlay */}
-                {pullRevealMsg && (
-                  <div style={{
-                    position: 'absolute',
-                    left: '16px',
-                    right: '16px',
-                    bottom: '22px',
-                    background: 'rgba(5, 8, 17, 0.88)',
-                    backdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(56, 189, 248, 0.35)',
-                    borderRadius: '14px',
-                    padding: '12px 14px'
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '14px', fontWeight: 900, color: '#ffffff' }}>
-                        {pullRevealMsg.matchedCreator ? `Same as ${activeCurator.name.split(' ')[0]}.` : `${activeCurator.name.split(' ')[0]} went the other way.`}
-                      </span>
-                      <img
-                        src={activeCurator.avatar}
-                        alt={activeCurator.name}
-                        style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', border: `2px solid ${pullRevealMsg.matchedCreator ? '#34d399' : '#fbbf24'}` }}
-                      />
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 800, color: '#cbd5e1', marginBottom: '5px' }}>
-                      <span>{pullRevealMsg.leftPct}% {pullRevealMsg.leftLabel}</span>
-                      <span>{pullRevealMsg.rightPct}% {pullRevealMsg.rightLabel}</span>
-                    </div>
-                    <div style={{ height: '7px', borderRadius: '999px', background: 'rgba(255,255,255,0.12)', overflow: 'hidden' }}>
-                      <div style={{ width: `${pullRevealMsg.leftPct}%`, height: '100%', background: '#38bdf8' }} />
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })()}
-
-          {/* RIGHT: LIVE ALIGNMENT & PORTABLE VIBE IDENTITY SCORECARD */}
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.82), rgba(15, 23, 42, 0.94))',
-            border: '1px solid rgba(56, 189, 248, 0.28)',
-            borderRadius: '18px',
-            padding: '20px',
+        /* SINGLE HERO VIBE PULL LAUNCHER (MOBILE & DESKTOP GATEWAY TO FULL-SCREEN /pull/southbank) */
+        <Link
+          to={pullLaunchHref}
+          onClick={() => {
+            saveDirectoryScrollBeforeLeave();
+            trackCoreFunnelEvent('vibe_pull_launcher_clicked', {
+              city: selectedLocKey,
+              viewport: isMobileViewport ? 'mobile' : 'desktop'
+            });
+          }}
+          style={{
+            position: 'relative',
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
-          }}>
-            <div>
-              {hasUserPulled ? (
-                <>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '8px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <img
-                        src={activeCurator.avatar}
-                        alt={activeCurator.name}
-                        style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid #38bdf8' }}
-                      />
-                      <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#7dd3fc', fontWeight: '800' }}>
-                        {matchCalculation.percentage}% Aligned · {activeCurator.handle}
-                      </span>
-                    </div>
-                    <span style={{ fontSize: '11px', color: '#34d399', fontWeight: '700', whiteSpace: 'nowrap' }}>
-                      {answeredCount} of 4 chosen
-                    </span>
-                  </div>
-                  <div style={{ fontSize: '17px', fontWeight: '900', color: '#ffffff', marginBottom: '6px' }}>
-                    {crowdBenchmark.archetype}
-                  </div>
-                  <p style={{ fontSize: '12px', lineHeight: '1.45', color: '#cbd5e1', margin: '0 0 12px 0' }}>
-                    {pullCompleted
-                      ? matchCalculation.alignmentSummary
-                      : 'Hotel galleries and highlights below are reordered to match your selections.'}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <img
-                      src={activeCurator.avatar}
-                      alt={activeCurator.name}
-                      style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid #38bdf8' }}
-                    />
-                    <span style={{ fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#38bdf8', fontWeight: '800' }}>
-                      Compare With {activeCurator.handle}
-                    </span>
-                  </div>
-                  <div style={{ fontSize: '17px', fontWeight: '900', color: '#ffffff', marginBottom: '6px' }}>
-                    Tap or drag 4 visual trade-offs
-                  </div>
-                  <p style={{ fontSize: '12px', lineHeight: '1.45', color: '#cbd5e1', margin: '0 0 10px 0' }}>
-                    See how your South Bank taste aligns with {activeCurator.name.split(' ')[0]}’s on-site scout picks, reorder the hotels below, and unlock a single-use stay voucher.
-                  </p>
-                  <div style={{
-                    fontSize: '11.5px',
-                    fontStyle: 'italic',
-                    color: '#94a3b8',
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    borderLeft: '2px solid rgba(56, 189, 248, 0.45)',
-                    padding: '6px 10px',
-                    borderRadius: '0 8px 8px 0',
-                    marginBottom: '12px',
-                    lineHeight: 1.4
-                  }}>
-                    “{activeCurator.quote.slice(0, 138)}…”
-                  </div>
-                </>
-              )}
-
-              {/* 4 Clickable Visual Step Pills */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '7px', marginBottom: '12px' }}>
-                {PULL_VISUALS.map((pv, idx) => {
-                  const chosenId = userAnswers[pv.id];
-                  const chosenLabel = !chosenId
-                    ? 'Choose →'
-                    : (chosenId === pv.left.id ? pv.left.label : pv.right.label);
-                  const isActive = !pullCompleted && duelStep === idx;
-                  return (
-                    <button
-                      key={pv.id}
-                      type="button"
-                      onClick={() => {
-                        setPullRevealMsg(null);
-                        setPullSplitPct(50);
-                        setPullCompleted(false);
-                        setDuelStep(idx);
-                      }}
-                      style={{
-                        background: isActive ? 'rgba(56, 189, 248, 0.16)' : 'rgba(255, 255, 255, 0.04)',
-                        border: isActive ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.08)',
-                        borderRadius: '8px',
-                        padding: '8px 9px',
-                        minHeight: '44px',
-                        textAlign: 'left',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 700 }}>Step {idx + 1}</div>
-                      <div style={{ fontSize: '11.5px', color: chosenId ? '#ffffff' : '#7dd3fc', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {chosenLabel}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-              {/* Expandable Creator Pick Breakdown (Compact <details> — zero bloat on load) */}
-              {hasUserPulled && (
-                <details
-                  style={{
-                    background: 'rgba(15, 23, 42, 0.65)',
-                    border: '1px solid rgba(56, 189, 248, 0.22)',
-                    borderRadius: '10px',
-                    padding: '9px 11px',
-                    marginBottom: '12px'
-                  }}
-                >
-                  <summary
-                    style={{
-                      cursor: 'pointer',
-                      fontSize: '12px',
-                      fontWeight: '700',
-                      color: '#7dd3fc',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      listStyle: 'none'
-                    }}
-                  >
-                    <span>See why {activeCurator.handle} picked each ({matchCalculation.matchCount}/{matchCalculation.details.length} matched)</span>
-                    <span style={{ fontSize: '11px', color: '#94a3b8' }}>▾</span>
-                  </summary>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
-                    {matchCalculation.details.map((item, idx) => (
-                      <div
-                        key={item.id}
-                        style={{
-                          background: 'rgba(255, 255, 255, 0.03)',
-                          border: `1px solid ${!item.isAnswered ? 'rgba(255, 255, 255, 0.07)' : (item.isMatch ? 'rgba(52, 211, 153, 0.28)' : 'rgba(251, 191, 36, 0.28)')}`,
-                          borderRadius: '8px',
-                          padding: '8px 10px'
-                        }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '6px', marginBottom: '4px' }}>
-                          <span style={{ fontSize: '11px', fontWeight: '800', color: '#e2e8f0' }}>
-                            {idx + 1}. {item.title}
-                          </span>
-                          <span style={{
-                            fontSize: '10px',
-                            fontWeight: '800',
-                            padding: '2px 7px',
-                            borderRadius: '999px',
-                            whiteSpace: 'nowrap',
-                            background: !item.isAnswered ? 'rgba(148, 163, 184, 0.14)' : (item.isMatch ? 'rgba(16, 185, 129, 0.18)' : 'rgba(251, 191, 36, 0.16)'),
-                            color: !item.isAnswered ? '#94a3b8' : (item.isMatch ? '#34d399' : '#fbbf24')
-                          }}>
-                            {!item.isAnswered ? 'Pending' : (item.isMatch ? '✓ Match' : 'Different vibe')}
-                          </span>
-                        </div>
-                        <div style={{ fontSize: '11px', color: '#cbd5e1', lineHeight: 1.4, marginBottom: item.creatorReason ? '4px' : 0 }}>
-                          <strong style={{ color: '#7dd3fc' }}>{activeCurator.name.split(' ')[0]}:</strong> {item.creatorPickLabel}
-                          {item.isAnswered && !item.isMatch && (
-                            <span style={{ color: '#94a3b8' }}> · <strong style={{ color: '#f8fafc' }}>You:</strong> {item.userPickLabel}</span>
-                          )}
-                        </div>
-                        {item.creatorReason && (
-                          <div style={{ fontSize: '10.5px', fontStyle: 'italic', color: '#94a3b8', lineHeight: 1.35 }}>
-                            {item.creatorReason}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </details>
-              )}
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '14px',
+            borderRadius: '18px',
+            overflow: 'hidden',
+            padding: isMobileViewport ? '18px 16px' : '20px 24px',
+            marginBottom: '20px',
+            textDecoration: 'none',
+            border: '1px solid rgba(56, 189, 248, 0.42)',
+            backgroundImage: `linear-gradient(125deg, rgba(5, 11, 20, 0.88) 0%, rgba(12, 26, 48, 0.78) 55%, rgba(2, 132, 199, 0.38) 100%), url(${selectedLocKey === 'copenhagen-indre-by' ? '/media/copenhagen/nyhavn-dusk.jpg' : '/media/southbank/tate-modern.jpg'})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            boxShadow: '0 14px 34px rgba(2, 132, 199, 0.18)'
+          }}
+        >
+          <div style={{ maxWidth: '620px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+              <span style={{
+                fontSize: '10.5px',
+                fontWeight: '800',
+                letterSpacing: '0.9px',
+                textTransform: 'uppercase',
+                color: '#7dd3fc',
+                background: 'rgba(14, 165, 233, 0.18)',
+                border: '1px solid rgba(56, 189, 248, 0.4)',
+                padding: '3px 9px',
+                borderRadius: '999px'
+              }}>
+                20-Second Vibe Pull · 4 Taps
+              </span>
             </div>
-
-            {hasUserPulled ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setPullRevealMsg(null);
-                  setPullSplitPct(50);
-                  setPullCompleted(false);
-                  setDuelStep(0);
-                  setUserAnswers({});
-                }}
-                style={{
-                  width: '100%',
-                  minHeight: '42px',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.14)',
-                  borderRadius: '10px',
-                  padding: '9px 12px',
-                  fontSize: '12px',
-                  fontWeight: '700',
-                  color: '#cbd5e1',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px'
-                }}
-              >
-                <RefreshCw size={13} />
-                <span>Start Again</span>
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  const el = document.getElementById('stage-04-stays');
-                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }}
-                style={{
-                  width: '100%',
-                  minHeight: '42px',
-                  background: 'rgba(56, 189, 248, 0.14)',
-                  border: '1px solid rgba(56, 189, 248, 0.35)',
-                  borderRadius: '10px',
-                  padding: '9px 12px',
-                  fontSize: '12.5px',
-                  fontWeight: '800',
-                  color: '#7dd3fc',
-                  cursor: 'pointer'
-                }}
-              >
-                Or Browse All {location.stayAnchors.length} Hotels ↓
-              </button>
-            )}
+            <h2 style={{ fontSize: isMobileViewport ? '19px' : '22px', fontWeight: '900', color: '#ffffff', margin: '0 0 5px 0', lineHeight: 1.2 }}>
+              Match {location.name.split('•')[1]?.trim() || location.name} to your mood
+            </h2>
+            <p style={{ fontSize: '13px', color: '#cbd5e1', margin: 0, lineHeight: 1.45 }}>
+              4 quick visual trade-offs to compare your taste with {activeCurator.handle}, reorder the hotels below, and unlock a single-use stay credit.
+            </p>
           </div>
-        </div>
-      </div>
+
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            background: 'linear-gradient(135deg, #0ea5e9, #10b981)',
+            color: '#ffffff',
+            padding: '12px 18px',
+            minHeight: '46px',
+            width: isMobileViewport ? '100%' : 'auto',
+            borderRadius: '12px',
+            fontSize: '13.5px',
+            fontWeight: '800',
+            whiteSpace: 'nowrap',
+            boxShadow: '0 8px 22px rgba(14, 165, 233, 0.35)'
+          }}>
+            <span>Start the Vibe Pull</span>
+            <ArrowRight size={15} />
+          </div>
+        </Link>
       )}
 
       {/* SLIM PERSONALIZED MATCH STRIP (shown mid-Pull only; once completed, horizontal confirmation cards above replace it) */}
@@ -2740,32 +2334,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 </button>
               );
             })}
-            {featured3DStay && (
-              <button
-                type="button"
-                onClick={() => openVibeChallenge3D(featured3DStay)}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  padding: '10px 14px',
-                  minHeight: '44px',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0,
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
-                  border: '1px solid rgba(125, 211, 252, 0.45)',
-                  color: '#ffffff',
-                  fontSize: '13px',
-                  fontWeight: '800',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(14, 165, 233, 0.3)'
-                }}
-              >
-                <Box size={14} />
-                <span>3D Vibe Challenge</span>
-              </button>
-            )}
           </div>
 
           <div style={{
@@ -3213,9 +2781,12 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '11px', fontWeight: '800', color: '#7dd3fc', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
                                 <Box size={13} color="#38bdf8" /> 3D Vibe Challenge Included
                               </span>
-                              <button
-                                type="button"
-                                onClick={() => openVibeChallenge3D(stay)}
+                              <a
+                                href={stay.spatialUrl || '/play/sea-containers'}
+                                onClick={() => {
+                                  saveDirectoryScrollBeforeLeave();
+                                  trackCoreFunnelEvent('vibe_challenge_started', { hotelId: stay.id, hotelName: stay.name, source: 'hotel_card_strip' });
+                                }}
                                 style={{
                                   fontSize: '12px',
                                   fontWeight: '800',
@@ -3226,21 +2797,23 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                                   display: 'inline-flex',
                                   alignItems: 'center',
                                   borderRadius: '10px',
-                                  border: 'none',
-                                  cursor: 'pointer',
+                                  textDecoration: 'none',
                                   boxShadow: '0 4px 12px rgba(14, 165, 233, 0.35)'
                                 }}
                               >
                                 Step Inside in 3D →
-                              </button>
+                              </a>
                             </div>
                             {Array.isArray(stay.stepInsideScenes) && stay.stepInsideScenes.length > 0 && (
                               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
                                 {stay.stepInsideScenes.map(scene => (
-                                  <button
+                                  <a
                                     key={scene}
-                                    type="button"
-                                    onClick={() => openVibeChallenge3D(stay)}
+                                    href={stay.spatialUrl || '/play/sea-containers'}
+                                    onClick={() => {
+                                      saveDirectoryScrollBeforeLeave();
+                                      trackCoreFunnelEvent('vibe_challenge_started', { hotelId: stay.id, scene, source: 'hotel_card_scene_chip' });
+                                    }}
                                     style={{
                                       fontSize: '10.5px',
                                       fontWeight: '600',
@@ -3249,11 +2822,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                                       border: '1px solid rgba(255, 255, 255, 0.14)',
                                       padding: '3px 8px',
                                       borderRadius: '999px',
-                                      cursor: 'pointer'
+                                      textDecoration: 'none'
                                     }}
                                   >
                                     {scene}
-                                  </button>
+                                  </a>
                                 ))}
                               </div>
                             )}
@@ -3379,20 +2952,23 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                         </button>
 
                         {stay.hasSpatial3D && (
-                          <button
-                            type="button"
-                            onClick={() => openVibeChallenge3D(stay)}
+                          <a
+                            href={stay.spatialUrl || '/play/sea-containers'}
+                            onClick={() => {
+                              saveDirectoryScrollBeforeLeave();
+                              trackCoreFunnelEvent('vibe_challenge_started', { hotelId: stay.id, hotelName: stay.name, source: 'hotel_card_cta' });
+                            }}
                             style={{
                               width: '100%',
                               background: 'rgba(56, 189, 248, 0.1)',
                               border: '1px solid rgba(56, 189, 248, 0.3)',
                               color: '#7dd3fc',
+                              textDecoration: 'none',
                               padding: '10px 12px',
                               minHeight: '42px',
                               borderRadius: '10px',
                               fontSize: '12px',
                               fontWeight: '700',
-                              cursor: 'pointer',
                               display: 'inline-flex',
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -3402,7 +2978,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                           >
                             <Box size={13} />
                             <span>Play 3D Vibe Challenge</span>
-                          </button>
+                          </a>
                         )}
                       </div>
                     </div>
@@ -4269,122 +3845,6 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         </div>
       )}
 
-      {/* SEAMLESS FULL-SCREEN IN-PAGE 3D VIBE CHALLENGE OVERLAY (ZERO PAGE JUMP ON MOBILE & DESKTOP) */}
-      {active3DHotel && (() => {
-        const rateInfo = nuiteeRates.hotels[active3DHotel.id];
-        const nightlyRate = rateInfo?.retailRate || active3DHotel.fallbackRetail;
-        const embedBase = active3DHotel.spatialEmbedUrl || 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers';
-        const embedSrc = `${embedBase}?checkin=${encodeURIComponent(tripContext.checkin)}&checkout=${encodeURIComponent(tripContext.checkout)}&nights=${tripContext.nights}&guests=${tripContext.guests}&party=${encodeURIComponent(tripContext.party || 'Couple')}`;
-        return (
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${active3DHotel.name} 3D Vibe Challenge`}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 99999,
-              background: '#050b14',
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100dvh',
-              width: '100vw',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Native-Feel Top Action Bar */}
-            <div style={{
-              height: '54px',
-              flexShrink: 0,
-              background: 'rgba(5, 11, 20, 0.96)',
-              borderBottom: '1px solid rgba(56, 189, 248, 0.24)',
-              padding: '0 12px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '8px'
-            }}>
-              <button
-                type="button"
-                onClick={() => setActive3DHotel(null)}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.18)',
-                  color: '#ffffff',
-                  borderRadius: '10px',
-                  padding: '8px 12px',
-                  minHeight: '38px',
-                  fontSize: '12.5px',
-                  fontWeight: '800',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <ChevronLeft size={15} />
-                <span>Back</span>
-              </button>
-
-              <div style={{ minWidth: 0, textAlign: 'center', flex: 1 }}>
-                <div style={{
-                  fontSize: '12.5px',
-                  fontWeight: '800',
-                  color: '#ffffff',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}>
-                  {active3DHotel.name}
-                </div>
-                <div style={{ fontSize: '10.5px', color: '#7dd3fc', fontWeight: '700' }}>
-                  3D Vibe Challenge
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => {
-                  const hotelToBook = active3DHotel;
-                  setActive3DHotel(null);
-                  handleInitiateBooking(hotelToBook);
-                }}
-                style={{
-                  background: 'linear-gradient(135deg, #10b981, #059669)',
-                  border: 'none',
-                  color: '#ffffff',
-                  borderRadius: '10px',
-                  padding: '8px 12px',
-                  minHeight: '38px',
-                  fontSize: '12px',
-                  fontWeight: '800',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  boxShadow: '0 4px 12px rgba(16, 185, 129, 0.35)'
-                }}
-              >
-                Reserve · £{nightlyRate}
-              </button>
-            </div>
-
-            {/* Full-Bleed 3D Vibe Challenge Iframe */}
-            <iframe
-              src={embedSrc}
-              title={`${active3DHotel.name} 3D Vibe Challenge`}
-              style={{
-                flex: 1,
-                width: '100%',
-                height: '100%',
-                border: 'none',
-                display: 'block',
-                background: '#050b14'
-              }}
-              allow="fullscreen; autoplay; accelerometer; gyroscope; xr-spatial-tracking"
-            />
-          </div>
-        );
-      })()}
 
     </div>
   );

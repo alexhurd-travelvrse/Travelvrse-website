@@ -25,7 +25,7 @@ function esc(str = '') {
     .replace(/"/g, '&quot;');
 }
 
-function injectIntoTemplate(baseHtml, { title, description, canonicalUrl, jsonLd, bodyHtml }) {
+function injectIntoTemplate(baseHtml, { title, description, canonicalUrl, ogImage = 'https://www.travelvrse.com/media/southbank/tate-modern.jpg', jsonLd, bodyHtml }) {
   let html = baseHtml;
 
   // Replace <title>
@@ -48,10 +48,11 @@ function injectIntoTemplate(baseHtml, { title, description, canonicalUrl, jsonLd
     `<meta property="og:title" content="${esc(title)}" />`,
     `<meta property="og:description" content="${esc(description)}" />`,
     `<meta property="og:url" content="${esc(canonicalUrl)}" />`,
-    `<meta property="og:image" content="https://static.cupid.travel/hotels/570881905.jpg" />`,
+    `<meta property="og:image" content="${esc(ogImage)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${esc(title)}" />`,
     `<meta name="twitter:description" content="${esc(description)}" />`,
+    `<meta name="twitter:image" content="${esc(ogImage)}" />`,
     `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`
   ].join('\n    ');
 
@@ -93,6 +94,7 @@ function renderSouthBankHubBody() {
       <p>Audited On-Site: November 2026 &middot; Scouted by <a href="/scouts/alex-hurd">${esc(SCOUT_ALEX_HURD.name)} (${esc(SCOUT_ALEX_HURD.handle)})</a> &middot; <a href="https://atmosvibe.io/">Vibe Data Verified by Atmosvibe</a></p>
       <h1>South Bank, London: Curated Hotels, Hidden Gems &amp; Insider Guide</h1>
       <p>2&ndash;6 min walk between Tate Modern, Gabriel&rsquo;s Wharf &amp; SE1 boutique hotels. Zero-Chain Charter across Gabriel&rsquo;s Wharf &amp; Lower Marsh.</p>
+      <p><a href="/pull/southbank">Start the 20-Second South Bank Vibe Pull &rarr;</a> &middot; <a href="/play/sea-containers">Step Inside Sea Containers London in 3D &rarr;</a></p>
 
       <details open>
         <summary><strong>Compare All 4 South Bank Hotels Side-by-Side (SE1)</strong></summary>
@@ -244,6 +246,75 @@ const ROUTES = [
     canonicalUrl: CANONICAL_URLS.scoutAlexHurd,
     jsonLd: buildScoutProfileJsonLd(),
     bodyHtml: renderScoutProfileBody()
+  },
+  {
+    routePath: 'pull/southbank',
+    title: 'South Bank, London Vibe Pull — Match Your Mood & Stay in 20s | TravelVRSE',
+    description:
+      'Take the 20-second South Bank Vibe Pull: 4 visual trade-offs to compare your taste with @AlexCulture, discover curated SE1 hotels near Tate Modern, and unlock a stay credit.',
+    canonicalUrl: 'https://www.travelvrse.com/pull/southbank',
+    ogImage: 'https://www.travelvrse.com/media/southbank/tate-modern.jpg',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebApplication',
+          '@id': 'https://www.travelvrse.com/pull/southbank#app',
+          name: 'South Bank, London Vibe Pull',
+          applicationCategory: 'TravelApplication',
+          operatingSystem: 'Web',
+          url: 'https://www.travelvrse.com/pull/southbank',
+          description: '20-second interactive visual vibe matcher for London’s South Bank (SE1).'
+        },
+        {
+          '@type': 'TouristDestination',
+          '@id': 'https://www.travelvrse.com/destinations/london/south-bank#destination',
+          name: 'South Bank, London',
+          url: CANONICAL_URLS.southBankHub
+        }
+      ]
+    },
+    bodyHtml: `
+      <main style="max-width:720px;margin:0 auto;padding:32px 20px;font-family:Inter,system-ui,sans-serif;color:#f8fafc;background:#050b14;">
+        <h1>South Bank, London Vibe Pull</h1>
+        <p>4 quick visual trade-offs (20 seconds) to match London&rsquo;s South Bank (SE1) to your mood, compare your taste with local scout Alex Hurd (@AlexCulture), and discover curated stays near Tate Modern.</p>
+        <p><a href="/destinations/london/south-bank">Explore the Full South Bank Guide &amp; Hotels &rarr;</a> &middot; <a href="/play/sea-containers">Step Inside Sea Containers in 3D &rarr;</a></p>
+      </main>
+    `
+  },
+  {
+    routePath: 'pull/copenhagen',
+    title: 'Copenhagen Indre By Vibe Pull — Match Your Mood in 20s | TravelVRSE',
+    description:
+      'Take the 20-second Copenhagen Indre By Vibe Pull: 4 visual trade-offs to match Nordic design, canals, and hidden courtyards to your trip mood.',
+    canonicalUrl: 'https://www.travelvrse.com/pull/copenhagen',
+    ogImage: 'https://www.travelvrse.com/media/copenhagen/nyhavn-dusk.jpg',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebApplication',
+          '@id': 'https://www.travelvrse.com/pull/copenhagen#app',
+          name: 'Copenhagen Indre By Vibe Pull',
+          applicationCategory: 'TravelApplication',
+          operatingSystem: 'Web',
+          url: 'https://www.travelvrse.com/pull/copenhagen',
+          description: '20-second interactive visual vibe matcher for Copenhagen Indre By.'
+        },
+        {
+          '@type': 'TouristDestination',
+          '@id': 'https://www.travelvrse.com/pull/copenhagen#destination',
+          name: 'Copenhagen Indre By'
+        }
+      ]
+    },
+    bodyHtml: `
+      <main style="max-width:720px;margin:0 auto;padding:32px 20px;font-family:Inter,system-ui,sans-serif;color:#f8fafc;background:#050b14;">
+        <h1>Copenhagen Indre By Vibe Pull</h1>
+        <p>4 quick visual trade-offs (20 seconds) to match Copenhagen&rsquo;s Indre By to your mood and unlock curated Nordic stays.</p>
+        <p><a href="/play/25-hours">Step Inside 25hours Hotel Indre By in 3D &rarr;</a></p>
+      </main>
+    `
   }
 ];
 

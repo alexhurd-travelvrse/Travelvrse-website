@@ -250,12 +250,12 @@ const VibeDirectoryPage = ({ isPrivateDemo = false }) => {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDesc} />
-        <meta property="og:image" content="https://static.cupid.travel/hotels/570881905.jpg" />
+        <meta property="og:image" content="https://www.travelvrse.com/media/southbank/tate-modern.jpg" />
         <meta property="og:url" content={CANONICAL_URLS.southBankHub} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDesc} />
-        <meta name="twitter:image" content="https://static.cupid.travel/hotels/570881905.jpg" />
+        <meta name="twitter:image" content="https://www.travelvrse.com/media/southbank/tate-modern.jpg" />
         {isPrivateDemo ? (
           <>
             <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />

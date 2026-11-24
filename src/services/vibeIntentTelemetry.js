@@ -252,3 +252,19 @@ export function trackAiSearchReferrer(pathname = '/') {
   }
   return aiEngine;
 }
+
+// Core commercial funnel events:
+// - vibe_pull_launcher_clicked
+// - vibe_pull_completed
+// - vibe_challenge_started
+// - hotel_booking_clicked
+// - partner_booking_handoff_completed
+export function trackCoreFunnelEvent(eventName, properties = {}) {
+  if (typeof window === 'undefined') return;
+  if (isOwnerAnalyticsBlocked()) return;
+  try {
+    track(eventName, properties);
+  } catch {
+    // Ignore if analytics script not loaded
+  }
+}

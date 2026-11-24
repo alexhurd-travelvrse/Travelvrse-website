@@ -162,6 +162,7 @@ const DESTINATION_DATABASE = {
         fallbackCredit: 25,
         hasSpatial3D: true,
         spatialUrl: '/simulator?preset=sea-containers',
+        spatialEmbedUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers',
         stepInsideScenes: ['Room With a View', 'Nautical Lobby', 'Tate Modern', 'Aqua Spa', 'Leake Street Arches'],
         url: '/demo/southbank',
         roomDetails: {
@@ -620,6 +621,7 @@ const DESTINATION_DATABASE = {
         fallbackCredit: 29,
         hasSpatial3D: true,
         spatialUrl: '/simulator?preset=25-hours',
+        spatialEmbedUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/25-hours',
         stepInsideScenes: ['Retro Vinyl Session Room', 'The Bar', 'The Spa', 'Luxury Suite', 'Rosenborg Gardens'],
         url: '/play/25-hours',
         roomDetails: {
@@ -962,6 +964,39 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   const [galleryModalHotel, setGalleryModalHotel] = useState(null);
   const [galleryModalFilter, setGalleryModalFilter] = useState('for_your_vibe');
   const [roomModalHotel, setRoomModalHotel] = useState(null);
+  const [active3DHotel, setActive3DHotel] = useState(null);
+  const [isMobileViewport, setIsMobileViewport] = useState(() => (typeof window !== 'undefined' ? window.innerWidth <= 768 : false));
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const onResize = () => setIsMobileViewport(window.innerWidth <= 768);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useEffect(() => {
+    if (!active3DHotel || typeof window === 'undefined') return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => {
+      if (e.key === 'Escape') setActive3DHotel(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [active3DHotel]);
+
+  const featured3DStay = useMemo(
+    () => (location.stayAnchors || []).find(s => s.hasSpatial3D && s.spatialEmbedUrl) || null,
+    [location]
+  );
+
+  const openVibeChallenge3D = (stay) => {
+    if (!stay) return;
+    setActive3DHotel(stay);
+  };
 
   // Curate & filter real live Nuitée hotelImages (removing pools, bathrooms, meeting rooms, gyms)
   const curateLiveNuiteePhotos = (rawHotelDetail, fallbackPhotos = []) => {
@@ -2667,7 +2702,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           paddingBottom: '16px'
         }}>
-          <div style={{ display: 'flex', flexWrap: 'nowrap', overflowX: 'auto', gap: '8px', paddingBottom: '2px' }}>
+          <div style={{ display: 'flex', flexWrap: 'nowrap', overflowX: 'auto', gap: '8px', paddingBottom: '2px', WebkitOverflowScrolling: 'touch' }}>
             {[
               { id: 'hotels', label: `Hotels (${location.stayAnchors.length})` },
               { id: 'tours', label: `Tours (${(location.tours || []).length})` },
@@ -2705,6 +2740,32 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 </button>
               );
             })}
+            {featured3DStay && (
+              <button
+                type="button"
+                onClick={() => openVibeChallenge3D(featured3DStay)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '10px 14px',
+                  minHeight: '44px',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
+                  border: '1px solid rgba(125, 211, 252, 0.45)',
+                  color: '#ffffff',
+                  fontSize: '13px',
+                  fontWeight: '800',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(14, 165, 233, 0.3)'
+                }}
+              >
+                <Box size={14} />
+                <span>3D Vibe Challenge</span>
+              </button>
+            )}
           </div>
 
           <div style={{
@@ -2820,8 +2881,36 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
               </div>
             </div>
 
-            {/* Horizontal Hotel Cards List */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {/* Mobile Horizontal Swipe Cue */}
+            {isMobileViewport && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '10px',
+                fontSize: '11.5px',
+                color: '#94a3b8',
+                fontWeight: 700
+              }}>
+                <span>{location.stayAnchors.length} curated South Bank stays</span>
+                <span style={{ color: '#7dd3fc' }}>Swipe cards →</span>
+              </div>
+            )}
+
+            {/* Hotel Cards: Horizontal Swipeable Snap-Scroll Deck on Mobile · Editorial Stack on Desktop */}
+            <div style={isMobileViewport ? {
+              display: 'flex',
+              flexWrap: 'nowrap',
+              overflowX: 'auto',
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              gap: '14px',
+              paddingBottom: '10px'
+            } : {
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px'
+            }}>
               {location.stayAnchors.map(stay => {
                 const rateData = nuiteeRates.hotels[stay.id] || {
                   retailRate: stay.fallbackRetail,
@@ -2844,8 +2933,12 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                       border: '1px solid rgba(255, 255, 255, 0.1)',
                       borderRadius: '18px',
                       overflow: 'hidden',
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                      display: isMobileViewport ? 'flex' : 'grid',
+                      flexDirection: isMobileViewport ? 'column' : undefined,
+                      flex: isMobileViewport ? '0 0 86vw' : undefined,
+                      maxWidth: isMobileViewport ? '345px' : undefined,
+                      scrollSnapAlign: isMobileViewport ? 'start' : undefined,
+                      gridTemplateColumns: isMobileViewport ? undefined : 'repeat(auto-fit, minmax(260px, 1fr))',
                       boxShadow: '0 12px 30px rgba(0, 0, 0, 0.35)'
                     }}
                   >
@@ -2854,10 +2947,10 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                       display: 'flex',
                       flexDirection: 'column',
                       background: 'rgba(0, 0, 0, 0.35)',
-                      borderRight: '1px solid rgba(255, 255, 255, 0.06)'
+                      borderRight: isMobileViewport ? 'none' : '1px solid rgba(255, 255, 255, 0.06)'
                     }}>
                       {/* Hero Photo Viewport */}
-                      <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+                      <div style={{ position: 'relative', height: isMobileViewport ? '185px' : '220px', overflow: 'hidden' }}>
                         {activePhoto && (
                           <img
                             src={activePhoto.url}
@@ -3107,7 +3200,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                           {stay.avoidThisIf || 'Central cultural neighbourhood location with lively daytime energy.'}
                         </div>
 
-                        {/* Highlighted Step Inside 3D Feature Strip (Accurate 5-Scene Preview) */}
+                        {/* Highlighted Step Inside 3D Feature Strip (Seamless In-Page Vibe Challenge Launch) */}
                         {stay.hasSpatial3D && (
                           <div style={{
                             background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.14) 0%, rgba(99, 102, 241, 0.12) 100%)',
@@ -3118,10 +3211,11 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                           }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', flexWrap: 'wrap', marginBottom: '6px' }}>
                               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '11px', fontWeight: '800', color: '#7dd3fc', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
-                                <Box size={13} color="#38bdf8" /> Interactive 3D Walkthrough Included
+                                <Box size={13} color="#38bdf8" /> 3D Vibe Challenge Included
                               </span>
-                              <Link
-                                to={stay.spatialUrl || '/simulator'}
+                              <button
+                                type="button"
+                                onClick={() => openVibeChallenge3D(stay)}
                                 style={{
                                   fontSize: '12px',
                                   fontWeight: '800',
@@ -3132,30 +3226,34 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                                   display: 'inline-flex',
                                   alignItems: 'center',
                                   borderRadius: '10px',
-                                  textDecoration: 'none',
+                                  border: 'none',
+                                  cursor: 'pointer',
                                   boxShadow: '0 4px 12px rgba(14, 165, 233, 0.35)'
                                 }}
                               >
                                 Step Inside in 3D →
-                              </Link>
+                              </button>
                             </div>
                             {Array.isArray(stay.stepInsideScenes) && stay.stepInsideScenes.length > 0 && (
                               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
                                 {stay.stepInsideScenes.map(scene => (
-                                  <span
+                                  <button
                                     key={scene}
+                                    type="button"
+                                    onClick={() => openVibeChallenge3D(stay)}
                                     style={{
                                       fontSize: '10.5px',
                                       fontWeight: '600',
                                       color: '#e2e8f0',
                                       background: 'rgba(15, 23, 42, 0.7)',
-                                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                                      padding: '2px 7px',
-                                      borderRadius: '999px'
+                                      border: '1px solid rgba(255, 255, 255, 0.14)',
+                                      padding: '3px 8px',
+                                      borderRadius: '999px',
+                                      cursor: 'pointer'
                                     }}
                                   >
                                     {scene}
-                                  </span>
+                                  </button>
                                 ))}
                               </div>
                             )}
@@ -3281,18 +3379,20 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                         </button>
 
                         {stay.hasSpatial3D && (
-                          <Link
-                            to={stay.spatialUrl || '/simulator'}
+                          <button
+                            type="button"
+                            onClick={() => openVibeChallenge3D(stay)}
                             style={{
                               width: '100%',
                               background: 'rgba(56, 189, 248, 0.1)',
                               border: '1px solid rgba(56, 189, 248, 0.3)',
                               color: '#7dd3fc',
-                              textDecoration: 'none',
-                              padding: '8px 12px',
+                              padding: '10px 12px',
+                              minHeight: '42px',
                               borderRadius: '10px',
                               fontSize: '12px',
                               fontWeight: '700',
+                              cursor: 'pointer',
                               display: 'inline-flex',
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -3301,8 +3401,8 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                             }}
                           >
                             <Box size={13} />
-                            <span>Explore in 3D</span>
-                          </Link>
+                            <span>Play 3D Vibe Challenge</span>
+                          </button>
                         )}
                       </div>
                     </div>
@@ -3313,26 +3413,44 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
           </div>
         )}
 
-        {/* TAB 2: TOURS & CURATOR TRAILS (CLEAN VERTICAL GRID) */}
+        {/* TAB 2: TOURS & CURATOR TRAILS (HORIZONTAL SNAP DECK ON MOBILE · GRID ON DESKTOP) */}
         {discoveryTab === 'tours' && (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '20px'
-          }}>
-            {(location.tours || []).map(tour => (
-              <div
-                key={tour.id}
-                style={{
-                  background: 'rgba(15, 23, 42, 0.72)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '18px',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
+          <div>
+            {isMobileViewport && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '11.5px', color: '#94a3b8', fontWeight: 700 }}>
+                <span>{(location.tours || []).length} curated neighbourhood trails</span>
+                <span style={{ color: '#7dd3fc' }}>Swipe tours →</span>
+              </div>
+            )}
+            <div style={isMobileViewport ? {
+              display: 'flex',
+              flexWrap: 'nowrap',
+              overflowX: 'auto',
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              gap: '14px',
+              paddingBottom: '10px'
+            } : {
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '20px'
+            }}>
+              {(location.tours || []).map(tour => (
+                <div
+                  key={tour.id}
+                  style={{
+                    flex: isMobileViewport ? '0 0 84vw' : undefined,
+                    maxWidth: isMobileViewport ? '320px' : undefined,
+                    scrollSnapAlign: isMobileViewport ? 'start' : undefined,
+                    background: 'rgba(15, 23, 42, 0.72)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '18px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}
+                >
                 <div>
                   <div style={{ position: 'relative', height: '165px', overflow: 'hidden' }}>
                     <img
@@ -3409,31 +3527,50 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 </div>
               </div>
             ))}
+            </div>
           </div>
         )}
 
-        {/* TAB 3: LOCAL GEMS (CLEAN VERTICAL GRID) */}
+        {/* TAB 3: LOCAL GEMS (HORIZONTAL SNAP DECK ON MOBILE · GRID ON DESKTOP) */}
         {discoveryTab === 'gems' && (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '18px'
-          }}>
-            {location.gems.map(gem => {
-              const isSaved = savedGemIds.includes(gem.id);
-              return (
-                <div
-                  key={gem.id}
-                  style={{
-                    background: 'rgba(15, 23, 42, 0.72)',
-                    border: isSaved ? '1px solid rgba(52, 211, 153, 0.45)' : '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '18px',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                  }}
-                >
+          <div>
+            {isMobileViewport && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '11.5px', color: '#94a3b8', fontWeight: 700 }}>
+                <span>{location.gems.length} zero-chain local gems</span>
+                <span style={{ color: '#7dd3fc' }}>Swipe gems →</span>
+              </div>
+            )}
+            <div style={isMobileViewport ? {
+              display: 'flex',
+              flexWrap: 'nowrap',
+              overflowX: 'auto',
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              gap: '14px',
+              paddingBottom: '10px'
+            } : {
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '18px'
+            }}>
+              {location.gems.map(gem => {
+                const isSaved = savedGemIds.includes(gem.id);
+                return (
+                  <div
+                    key={gem.id}
+                    style={{
+                      flex: isMobileViewport ? '0 0 82vw' : undefined,
+                      maxWidth: isMobileViewport ? '310px' : undefined,
+                      scrollSnapAlign: isMobileViewport ? 'start' : undefined,
+                      background: 'rgba(15, 23, 42, 0.72)',
+                      border: isSaved ? '1px solid rgba(52, 211, 153, 0.45)' : '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '18px',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between'
+                    }}
+                  >
                   <div>
                     <div style={{ position: 'relative', height: '150px', overflow: 'hidden' }}>
                       <img
@@ -3499,19 +3636,41 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
                 </div>
               );
             })}
+            </div>
           </div>
         )}
 
-        {/* TAB 4: AREA GUIDE (CULTURAL SIGNATURES + PERSONALIZED HIGHLIGHTS) */}
+        {/* TAB 4: AREA GUIDE (HORIZONTAL SNAP DECK ON MOBILE · GRID ON DESKTOP) */}
         {discoveryTab === 'guide' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '12px' }}>
+            {isMobileViewport && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '-6px', fontSize: '11.5px', color: '#94a3b8', fontWeight: 700 }}>
+                <span>3 South Bank vibe signatures</span>
+                <span style={{ color: '#7dd3fc' }}>Swipe vibes →</span>
+              </div>
+            )}
+            <div style={isMobileViewport ? {
+              display: 'flex',
+              flexWrap: 'nowrap',
+              overflowX: 'auto',
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              gap: '12px',
+              paddingBottom: '6px'
+            } : {
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gap: '12px'
+            }}>
               {location.topVibes.map(vibe => {
                 const isHighlighted = hasUserPulled && vibe.id === highlightedTopVibeId;
                 return (
                   <div
                     key={vibe.id}
                     style={{
+                      flex: isMobileViewport ? '0 0 82vw' : undefined,
+                      maxWidth: isMobileViewport ? '310px' : undefined,
+                      scrollSnapAlign: isMobileViewport ? 'start' : undefined,
                       background: isHighlighted ? 'rgba(56, 189, 248, 0.08)' : 'rgba(255, 255, 255, 0.03)',
                       border: `1px solid ${isHighlighted ? 'rgba(56, 189, 248, 0.35)' : 'rgba(255, 255, 255, 0.08)'}`,
                       borderRadius: '14px',
@@ -4109,6 +4268,123 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
           </div>
         </div>
       )}
+
+      {/* SEAMLESS FULL-SCREEN IN-PAGE 3D VIBE CHALLENGE OVERLAY (ZERO PAGE JUMP ON MOBILE & DESKTOP) */}
+      {active3DHotel && (() => {
+        const rateInfo = nuiteeRates.hotels[active3DHotel.id];
+        const nightlyRate = rateInfo?.retailRate || active3DHotel.fallbackRetail;
+        const embedBase = active3DHotel.spatialEmbedUrl || 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers';
+        const embedSrc = `${embedBase}?checkin=${encodeURIComponent(tripContext.checkin)}&checkout=${encodeURIComponent(tripContext.checkout)}&nights=${tripContext.nights}&guests=${tripContext.guests}&party=${encodeURIComponent(tripContext.party || 'Couple')}`;
+        return (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${active3DHotel.name} 3D Vibe Challenge`}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 99999,
+              background: '#050b14',
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100dvh',
+              width: '100vw',
+              overflow: 'hidden'
+            }}
+          >
+            {/* Native-Feel Top Action Bar */}
+            <div style={{
+              height: '54px',
+              flexShrink: 0,
+              background: 'rgba(5, 11, 20, 0.96)',
+              borderBottom: '1px solid rgba(56, 189, 248, 0.24)',
+              padding: '0 12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '8px'
+            }}>
+              <button
+                type="button"
+                onClick={() => setActive3DHotel(null)}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid rgba(255, 255, 255, 0.18)',
+                  color: '#ffffff',
+                  borderRadius: '10px',
+                  padding: '8px 12px',
+                  minHeight: '38px',
+                  fontSize: '12.5px',
+                  fontWeight: '800',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                <ChevronLeft size={15} />
+                <span>Back</span>
+              </button>
+
+              <div style={{ minWidth: 0, textAlign: 'center', flex: 1 }}>
+                <div style={{
+                  fontSize: '12.5px',
+                  fontWeight: '800',
+                  color: '#ffffff',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  {active3DHotel.name}
+                </div>
+                <div style={{ fontSize: '10.5px', color: '#7dd3fc', fontWeight: '700' }}>
+                  3D Vibe Challenge
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  const hotelToBook = active3DHotel;
+                  setActive3DHotel(null);
+                  handleInitiateBooking(hotelToBook);
+                }}
+                style={{
+                  background: 'linear-gradient(135deg, #10b981, #059669)',
+                  border: 'none',
+                  color: '#ffffff',
+                  borderRadius: '10px',
+                  padding: '8px 12px',
+                  minHeight: '38px',
+                  fontSize: '12px',
+                  fontWeight: '800',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 4px 12px rgba(16, 185, 129, 0.35)'
+                }}
+              >
+                Reserve · £{nightlyRate}
+              </button>
+            </div>
+
+            {/* Full-Bleed 3D Vibe Challenge Iframe */}
+            <iframe
+              src={embedSrc}
+              title={`${active3DHotel.name} 3D Vibe Challenge`}
+              style={{
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                border: 'none',
+                display: 'block',
+                background: '#050b14'
+              }}
+              allow="fullscreen; autoplay; accelerometer; gyroscope; xr-spatial-tracking"
+            />
+          </div>
+        );
+      })()}
 
     </div>
   );

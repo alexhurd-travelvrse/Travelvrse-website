@@ -18,7 +18,7 @@ const CHALLENGE_DESTINATIONS = {
     shortCode: 'SE1',
     shareUrl: 'travelvrse.com/sb',
     completionUrl: 'https://ted-lasso-vibe-challenge.vercel.app/play/sea-containers/completion',
-    hookBg: 'https://static.cupid.travel/hotels/570881905.jpg',
+    hookBg: '/media/southbank/pull-golden-hour.jpg',
     hookHeadline: 'Are you a South Bank local at heart?',
     creatorHeadline: 'Do you vibe like Alex?',
     creator: {
@@ -41,13 +41,15 @@ const CHALLENGE_DESTINATIONS = {
           id: 'big_art',
           label: 'BIG ART',
           photo: '/media/southbank/tate-modern.jpg',
+          creatorPhoto: null,
           soundProfile: 'cavern',
           crowdPct: 62
         },
         right: {
           id: 'hidden_walls',
           label: 'HIDDEN WALLS',
-          photo: '/media/southbank/leake-street.jpg',
+          photo: '/media/southbank/pull-hidden-walls.jpg',
+          creatorPhoto: null,
           soundProfile: 'spray',
           crowdPct: 38
         },
@@ -60,14 +62,16 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'misty_830',
           label: 'MISTY 8:30',
-          photo: '/media/southbank/millennium-bridge.jpg',
+          photo: '/media/southbank/pull-misty-morning.jpg',
+          creatorPhoto: null,
           soundProfile: 'mist',
           crowdPct: 34
         },
         right: {
           id: 'golden_6pm',
           label: 'GOLDEN 6PM',
-          photo: 'https://static.cupid.travel/hotels/570881905.jpg',
+          photo: '/media/southbank/pull-golden-hour.jpg',
+          creatorPhoto: null,
           soundProfile: 'golden',
           crowdPct: 66
         },
@@ -80,14 +84,16 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'hidden_lanes',
           label: 'HIDDEN LANES',
-          photo: '/media/southbank/gabriels-wharf.jpg',
+          photo: '/media/southbank/pull-hidden-lanes.jpg',
+          creatorPhoto: null,
           soundProfile: 'courtyard',
           crowdPct: 41
         },
         right: {
           id: 'river_buzz',
           label: 'RIVER BUZZ',
-          photo: '/media/southbank/queens-walk.jpg',
+          photo: '/media/southbank/pull-river-buzz.jpg',
+          creatorPhoto: null,
           soundProfile: 'crowd',
           crowdPct: 59
         },
@@ -101,14 +107,16 @@ const CHALLENGE_DESTINATIONS = {
         left: {
           id: 'deep_quiet',
           label: 'DEEP QUIET',
-          photo: 'https://static.cupid.travel/hotels/209880755.jpg',
+          photo: '/media/southbank/pull-deep-quiet.jpg',
+          creatorPhoto: null,
           soundProfile: 'rain',
           crowdPct: 54
         },
         right: {
           id: 'rooftop_buzz',
           label: 'ROOFTOP BUZZ',
-          photo: 'https://static.cupid.travel/hotels/37483636.jpg',
+          photo: '/media/southbank/pull-rooftop-buzz.jpg',
+          creatorPhoto: null,
           soundProfile: 'lounge',
           crowdPct: 46
         },
@@ -1019,14 +1027,15 @@ export default function MobileVibePullChallenge({
             </div>
           </div>
 
-          {/* RIGHT PHOTO (Background Full Layer) */}
+          {/* RIGHT PHOTO (Background Full Layer — supports creatorPhoto override + editorial grading) */}
           <div
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: `url(${activeStep.right.photo})`,
+              backgroundImage: `url(${activeStep.right.creatorPhoto || activeStep.right.photo})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
+              filter: 'contrast(1.06) saturate(1.12)',
               transform: holdingSide === 'right' ? 'scale(1.035)' : 'scale(1)',
               transition: isDragging ? 'none' : 'transform 0.25s ease'
             }}
@@ -1038,9 +1047,10 @@ export default function MobileVibePullChallenge({
               style={{
                 position: 'absolute',
                 inset: 0,
-                backgroundImage: `url(${activeStep.left.photo})`,
+                backgroundImage: `url(${activeStep.left.creatorPhoto || activeStep.left.photo})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                filter: 'contrast(1.06) saturate(1.12)',
                 opacity: splitPct / 100,
                 transition: isDragging ? 'none' : 'opacity 0.25s ease'
               }}
@@ -1050,9 +1060,10 @@ export default function MobileVibePullChallenge({
               style={{
                 position: 'absolute',
                 inset: 0,
-                backgroundImage: `url(${activeStep.left.photo})`,
+                backgroundImage: `url(${activeStep.left.creatorPhoto || activeStep.left.photo})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                filter: 'contrast(1.06) saturate(1.12)',
                 clipPath: `inset(0 ${100 - splitPct}% 0 0)`,
                 transform: holdingSide === 'left' ? 'scale(1.035)' : 'scale(1)',
                 transition: isDragging ? 'none' : 'clip-path 0.28s cubic-bezier(0.22, 1, 0.36, 1), transform 0.25s ease'
@@ -1060,11 +1071,11 @@ export default function MobileVibePullChallenge({
             />
           )}
 
-          {/* Bottom Gradient for High-Contrast Thumb Zone Labels */}
+          {/* Editorial Depth Vignette + High-Contrast Thumb Zone Gradient */}
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(180deg, rgba(5,8,17,0.45) 0%, rgba(5,8,17,0) 28%, rgba(5,8,17,0) 58%, rgba(5,8,17,0.88) 100%)',
+            background: 'radial-gradient(circle at 50% 42%, rgba(5,8,17,0) 46%, rgba(5,8,17,0.42) 100%), linear-gradient(180deg, rgba(5,8,17,0.52) 0%, rgba(5,8,17,0) 26%, rgba(5,8,17,0) 56%, rgba(5,8,17,0.90) 100%)',
             pointerEvents: 'none'
           }} />
 

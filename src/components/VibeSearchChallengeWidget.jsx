@@ -16,6 +16,7 @@ import {
 } from '../services/nuiteeLiveFeedService';
 import { loadPortableVibeProfile, savePortableTripContext, computeTripDates, getDefaultTripContext } from '../services/vibeProfileStore';
 import { trackCoreFunnelEvent } from '../services/vibeIntentTelemetry';
+import MobileVibePullChallenge from './MobileVibePullChallenge';
 
 // Comprehensive DESTINATION-LEVEL Database (Focusing on the neighborhood, not a single hotel)
 const DESTINATION_DATABASE = {
@@ -1006,12 +1007,52 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
   const [roomModalHotel, setRoomModalHotel] = useState(null);
   const [isMobileViewport, setIsMobileViewport] = useState(() => (typeof window !== 'undefined' ? window.innerWidth <= 768 : false));
 
+  const [showDesktopPullModal, setShowDesktopPullModal] = useState(false);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const onResize = () => setIsMobileViewport(window.innerWidth <= 768);
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+
+  useEffect(() => {
+    if (!showDesktopPullModal || typeof window === 'undefined') return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => {
+      if (e.key === 'Escape') setShowDesktopPullModal(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [showDesktopPullModal]);
+
+  const handleOpenVibePull = (e, source = 'launcher_hero') => {
+    trackCoreFunnelEvent('vibe_pull_launcher_clicked', {
+      city: selectedLocKey,
+      viewport: isMobileViewport ? 'mobile' : 'desktop',
+      source
+    });
+    if (!isMobileViewport) {
+      e?.preventDefault();
+      setShowDesktopPullModal(true);
+    } else {
+      saveDirectoryScrollBeforeLeave();
+    }
+  };
+
+  const handleDesktopPullComplete = (savedProfile) => {
+    setShowDesktopPullModal(false);
+    if (savedProfile?.desktopAnswers) {
+      setUserAnswers(savedProfile.desktopAnswers);
+    }
+    setPullCompleted(true);
+    setBlueprintRecentlyUpdated(true);
+    setTimeout(() => setBlueprintRecentlyUpdated(false), 2400);
+  };
 
   // Curate & filter real live Nuitée hotelImages (removing pools, bathrooms, meeting rooms, gyms)
   const curateLiveNuiteePhotos = (rawHotelDetail, fallbackPhotos = []) => {
@@ -1906,10 +1947,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
             </div>
             <Link
               to={pullLaunchHref}
-              onClick={() => {
-                saveDirectoryScrollBeforeLeave();
-                trackCoreFunnelEvent('vibe_pull_launcher_clicked', { city: selectedLocKey, source: 'return_strip_replay' });
-              }}
+              onClick={(e) => handleOpenVibePull(e, 'return_strip_replay')}
               style={{
                 background: 'rgba(255, 255, 255, 0.06)',
                 border: '1px solid rgba(255, 255, 255, 0.16)',
@@ -2193,13 +2231,7 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         /* SINGLE HERO VIBE PULL LAUNCHER (MOBILE & DESKTOP GATEWAY TO FULL-SCREEN /pull/southbank) */
         <Link
           to={pullLaunchHref}
-          onClick={() => {
-            saveDirectoryScrollBeforeLeave();
-            trackCoreFunnelEvent('vibe_pull_launcher_clicked', {
-              city: selectedLocKey,
-              viewport: isMobileViewport ? 'mobile' : 'desktop'
-            });
-          }}
+          onClick={(e) => handleOpenVibePull(e, 'launcher_hero')}
           style={{
             position: 'relative',
             display: 'flex',
@@ -3845,6 +3877,71 @@ export default function VibeSearchChallengeWidget({ initialLocation = 'london-so
         </div>
       )}
 
+      {/* OPTION A: CENTERED DESKTOP VIBE PULL MODAL (AUTO-CLOSES ON TAP 4 INTO DESKTOP DIRECTORY RESULTS) */}
+      {showDesktopPullModal && !isMobileViewport && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Vibe Pull Interactive Matcher"
+          onClick={() => setShowDesktopPullModal(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 99999,
+            background: 'rgba(5, 11, 20, 0.78)',
+            backdropFilter: 'blur(10px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'relative',
+              width: '440px',
+              maxWidth: '94vw',
+              height: 'min(86vh, 720px)',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              border: '1px solid rgba(56, 189, 248, 0.35)',
+              boxShadow: '0 28px 80px rgba(0, 0, 0, 0.75)',
+              background: '#050811'
+            }}
+          >
+            <button
+              type="button"
+              aria-label="Close Vibe Pull"
+              onClick={() => setShowDesktopPullModal(false)}
+              style={{
+                position: 'absolute',
+                top: '12px',
+                right: '12px',
+                zIndex: 50,
+                width: '34px',
+                height: '34px',
+                borderRadius: '50%',
+                background: 'rgba(5, 11, 20, 0.78)',
+                border: '1px solid rgba(255, 255, 255, 0.22)',
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <X size={16} />
+            </button>
+
+            <MobileVibePullChallenge
+              initialCity={selectedLocKey === 'copenhagen-indre-by' ? 'copenhagen' : 'southbank'}
+              embeddedDesktopMode={true}
+              onDesktopComplete={handleDesktopPullComplete}
+            />
+          </div>
+        </div>
+      )}
 
     </div>
   );

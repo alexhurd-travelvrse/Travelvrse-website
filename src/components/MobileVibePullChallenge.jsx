@@ -411,7 +411,11 @@ class PullAudioEngine {
   }
 }
 
-export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
+export default function MobileVibePullChallenge({
+  initialCity = 'southbank',
+  embeddedDesktopMode = false,
+  onDesktopComplete = null
+}) {
   const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
   const cityParam = urlParams?.get('city')?.toLowerCase();
   const refParam = urlParams?.get('ref');
@@ -421,7 +425,7 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
   const returnBasePath = fromParam && fromParam.startsWith('/') ? fromParam : '/destinations/london/south-bank';
 
   // Screen flow: 'hook' | 'pull' | 'blend' | 'story1' | 'story2' | 'story3' | 'credit'
-  const [screen, setScreen] = useState('hook');
+  const [screen, setScreen] = useState(embeddedDesktopMode ? 'pull' : 'hook');
   const [stepIdx, setStepIdx] = useState(0);
   const [splitPct, setSplitPct] = useState(50); // 0 = full right shown, 50 = center, 100 = full left shown
   const [isDragging, setIsDragging] = useState(false);
@@ -648,7 +652,7 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
         const finalPct = computeMatchPct(nextPicks);
         const finalArch = getArchetype(nextPicks);
         const strongest = [...nextPicks].sort((a, b) => b.intensity - a.intensity)[0];
-        savePortableVibeProfile({
+        const savedProfile = savePortableVibeProfile({
           city: activeCityKey,
           picks: nextPicks,
           alignmentPct: finalPct,
@@ -660,6 +664,17 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
           alignmentPct: finalPct,
           archetype: finalArch.name
         });
+        trackCoreFunnelEvent('vibe_pull_completed', {
+          city: activeCityKey,
+          archetype: finalArch.name,
+          mode: embeddedDesktopMode ? 'desktop_modal' : 'standalone',
+          ref: refParam || 'direct'
+        });
+        if (embeddedDesktopMode && typeof onDesktopComplete === 'function') {
+          audioRef.current.stopAmbience();
+          onDesktopComplete(savedProfile);
+          return;
+        }
         setScreen('blend');
       }
     }, 880);
@@ -789,8 +804,8 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
       style={{
         position: 'relative',
         width: '100%',
-        height: screen === 'credit' ? 'auto' : '100dvh',
-        minHeight: '100dvh',
+        height: embeddedDesktopMode ? '100%' : (screen === 'credit' ? 'auto' : '100dvh'),
+        minHeight: embeddedDesktopMode ? '100%' : '100dvh',
         background: '#050811',
         color: '#ffffff',
         fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
@@ -799,21 +814,23 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
         WebkitUserSelect: 'none'
       }}
     >
-      <Helmet>
-        <title>{pullTitle}</title>
-        <meta name="description" content={pullDesc} />
-        <link rel="canonical" href={pullCanonical} />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={pullTitle} />
-        <meta property="og:description" content={pullDesc} />
-        <meta property="og:url" content={pullCanonical} />
-        <meta property="og:image" content={pullOgImage} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pullTitle} />
-        <meta name="twitter:description" content={pullDesc} />
-        <meta name="twitter:image" content={pullOgImage} />
-      </Helmet>
+      {!embeddedDesktopMode && (
+        <Helmet>
+          <title>{pullTitle}</title>
+          <meta name="description" content={pullDesc} />
+          <link rel="canonical" href={pullCanonical} />
+          <meta name="robots" content="index, follow" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={pullTitle} />
+          <meta property="og:description" content={pullDesc} />
+          <meta property="og:url" content={pullCanonical} />
+          <meta property="og:image" content={pullOgImage} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={pullTitle} />
+          <meta name="twitter:description" content={pullDesc} />
+          <meta name="twitter:image" content={pullOgImage} />
+        </Helmet>
+      )}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes ghostNudge {
           0%, 100% { transform: translate(-50%, -50%) translateX(0px); }
@@ -921,7 +938,7 @@ export default function MobileVibePullChallenge({ initialCity = 'southbank' }) {
           style={{
             position: 'relative',
             width: '100%',
-            height: '100dvh',
+            height: embeddedDesktopMode ? '100%' : '100dvh',
             touchAction: 'none',
             overflow: 'hidden',
             cursor: isDragging ? 'grabbing' : 'grab'

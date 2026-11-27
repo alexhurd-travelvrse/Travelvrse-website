@@ -4,6 +4,8 @@ import { Volume2, VolumeX, Share2, Copy, Check, Sparkles, ShieldCheck, RotateCcw
 import { fetchLiveSouthBankNuiteeFeeds } from '../services/nuiteeLiveFeedService';
 import { savePortableVibeProfile, savePortableTripContext, computeTripDates, getDefaultTripContext, trackPullFunnelEvent } from '../services/vibeProfileStore';
 import { trackCoreFunnelEvent } from '../services/vibeIntentTelemetry';
+import { ATMOSVIBE_NEIGHBOURHOODS, computeAtmosvibeVector } from '../data/atmosvibeNeighbourhoods';
+import { writeAtmosvibeIntent } from '../services/atmosvibeIntentService';
 
 /**
  * TravelVRSE Mobile-First Vibe Challenge: "The Pull"
@@ -69,7 +71,7 @@ const CHALLENGE_DESTINATIONS = {
         },
         right: {
           id: 'golden_6pm',
-          label: 'GOLDEN 6PM',
+          label: 'WINTER LIGHT 6PM',
           photo: '/media/southbank/pull-golden-hour.jpg',
           creatorPhoto: null,
           soundProfile: 'golden',
@@ -91,7 +93,7 @@ const CHALLENGE_DESTINATIONS = {
         },
         right: {
           id: 'river_buzz',
-          label: 'RIVER BUZZ',
+          label: 'WINTER MARKET',
           photo: '/media/southbank/pull-river-buzz.jpg',
           creatorPhoto: null,
           soundProfile: 'crowd',
@@ -106,7 +108,7 @@ const CHALLENGE_DESTINATIONS = {
         holdBackCreator: true, // Spec: hold back creator's Step 4 pick until Reveal 1!
         left: {
           id: 'deep_quiet',
-          label: 'DEEP QUIET',
+          label: 'QUIET & FILM',
           photo: '/media/southbank/pull-deep-quiet.jpg',
           creatorPhoto: null,
           soundProfile: 'rain',
@@ -114,7 +116,7 @@ const CHALLENGE_DESTINATIONS = {
         },
         right: {
           id: 'rooftop_buzz',
-          label: 'ROOFTOP BUZZ',
+          label: 'FIRESIDE & BAR',
           photo: '/media/southbank/pull-rooftop-buzz.jpg',
           creatorPhoto: null,
           soundProfile: 'lounge',
@@ -428,9 +430,16 @@ export default function MobileVibePullChallenge({
   const cityParam = urlParams?.get('city')?.toLowerCase();
   const refParam = urlParams?.get('ref');
   const fromParam = urlParams?.get('from');
+  const modeParam = urlParams?.get('mode')?.toLowerCase();
+  const creatorParam = urlParams?.get('creator');
+  const partnerParam = urlParams?.get('partner');
+  const isSoloMode = modeParam === 'solo';
   const activeCityKey = cityParam === 'copenhagen' || initialCity === 'copenhagen' ? 'copenhagen' : 'southbank';
   const config = CHALLENGE_DESTINATIONS[activeCityKey];
+  const atmosHood = ATMOSVIBE_NEIGHBOURHOODS[activeCityKey] || ATMOSVIBE_NEIGHBOURHOODS.southbank;
   const returnBasePath = fromParam && fromParam.startsWith('/') ? fromParam : '/destinations/london/south-bank';
+  const stepStartTimeRef = useRef(Date.now());
+  const decisionTimesRef = useRef([]);
 
   // Screen flow: 'hook' | 'pull' | 'blend' | 'story1' | 'story2' | 'story3' | 'credit'
   const [screen, setScreen] = useState(embeddedDesktopMode ? 'pull' : 'hook');
@@ -606,10 +615,10 @@ export default function MobileVibePullChallenge({
     // Snap photo full-bleed
     setSplitPct(side === 'left' ? 100 : 0);
 
-    // Pick micro-line (max 4 words)
-    let microLine = 'Same as ' + config.creator.firstName + '.';
-    if (step.holdBackCreator) {
-      microLine = 'Locked in.';
+    // Pick micro-line (max 4 words — respects Tier 1 Solo Mode vs. Tier 2 Creator Duel)
+    let microLine = isSoloMode ? 'Vibe captured.' : ('Same as ' + config.creator.firstName + '.');
+    if (step.holdBackCreator || isSoloMode) {
+      microLine = intensity >= 0.92 ? 'Strong pull.' : 'Locked in.';
     } else if (intensity >= 0.94) {
       microLine = 'No hesitation.';
     } else if (matchedCreator && chosen.crowdPct < 48) {
@@ -618,12 +627,16 @@ export default function MobileVibePullChallenge({
       microLine = `${config.creator.firstName} went the other way.`;
     }
 
+    const decisionMs = Math.max(400, Math.min(15000, Date.now() - stepStartTimeRef.current));
+    decisionTimesRef.current = [...decisionTimesRef.current, decisionMs];
+
     const newPick = {
       stepId: step.id,
       side,
       intensity: Math.max(0.6, Math.min(1, intensity)),
+      decisionMs,
       label: chosen.label,
-      photo: chosen.photo,
+      photo: chosen.creatorPhoto || chosen.photo,
       matchedCreator
     };
 
@@ -633,7 +646,7 @@ export default function MobileVibePullChallenge({
       side,
       matchedCreator,
       microLine,
-      holdBackCreator: Boolean(step.holdBackCreator),
+      holdBackCreator: Boolean(step.holdBackCreator) || isSoloMode,
       leftPct: step.left.crowdPct,
       rightPct: step.right.crowdPct,
       creatorSide: step.creatorSide
@@ -654,6 +667,7 @@ export default function MobileVibePullChallenge({
     setTimeout(() => {
       setMicroReveal(null);
       if (stepIdx < config.steps.length - 1) {
+        stepStartTimeRef.current = Date.now();
         setStepIdx(prev => prev + 1);
         setSplitPct(50);
       } else {
@@ -667,6 +681,44 @@ export default function MobileVibePullChallenge({
           archetype: finalArch,
           strongestPick: strongest
         });
+
+        // Compute Atmosvibe 6-axis demand vector & write back verified intent record
+        const atmosResult = computeAtmosvibeVector(activeCityKey, nextPicks);
+        const avgDecisionMs = Math.round(
+          decisionTimesRef.current.reduce((acc, ms) => acc + ms, 0) / Math.max(1, decisionTimesRef.current.length)
+        );
+        const dragIntensityAvg = Number(
+          (nextPicks.reduce((acc, p) => acc + (p.intensity || 0.75), 0) / Math.max(1, nextPicks.length)).toFixed(2)
+        );
+        writeAtmosvibeIntent({
+          location: {
+            neighbourhoodId: activeCityKey,
+            city: atmosHood.citySlug,
+            neighbourhood: atmosHood.neighbourhoodSlug,
+            postcode: atmosHood.postcode
+          },
+          tier: partnerParam ? 'tier3_partner' : (isSoloMode ? 'tier1_solo' : 'tier2_creator'),
+          attribution: {
+            source: refParam || (embeddedDesktopMode ? 'desktop_directory' : 'direct'),
+            creatorHandle: isSoloMode ? null : (creatorParam ? `@${creatorParam.replace(/^@/, '')}` : config.creator.handle),
+            partnerId: partnerParam || null
+          },
+          vibeVector: atmosResult.vibeVector,
+          archetype: atmosResult.archetypeKey,
+          dispersionSignal: {
+            willingToDisperse: atmosResult.willingToDisperse,
+            selectedCorridors: atmosResult.selectedCorridors
+          },
+          categorySignals: atmosResult.categorySignals,
+          tripIntent: tripContext,
+          verification: {
+            avgDecisionMs,
+            dragIntensityAvg,
+            vibeWalkStarted: false,
+            hotelClicked: null
+          }
+        });
+
         trackPullFunnelEvent('pull_completed', {
           city: activeCityKey,
           alignmentPct: finalPct,
@@ -675,7 +727,7 @@ export default function MobileVibePullChallenge({
         trackCoreFunnelEvent('vibe_pull_completed', {
           city: activeCityKey,
           archetype: finalArch.name,
-          mode: embeddedDesktopMode ? 'desktop_modal' : 'standalone',
+          mode: embeddedDesktopMode ? 'desktop_modal' : (isSoloMode ? 'tier1_solo' : 'standalone'),
           ref: refParam || 'direct'
         });
         if (embeddedDesktopMode && typeof onDesktopComplete === 'function') {
@@ -983,27 +1035,42 @@ export default function MobileVibePullChallenge({
               ))}
             </div>
 
-            {/* Creator Avatar + Live Match % + Mute Toggle */}
+            {/* Creator Avatar + Live Match % (hidden in Tier 1 Solo Mode) + Mute Toggle */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                background: 'rgba(5, 8, 17, 0.7)',
-                backdropFilter: 'blur(8px)',
-                padding: '4px 10px 4px 4px',
-                borderRadius: '999px',
-                border: '1px solid rgba(255,255,255,0.18)'
-              }}>
-                <img
-                  src={config.creator.avatar}
-                  alt={config.creator.firstName}
-                  style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover' }}
-                />
-                <span style={{ fontSize: '12px', fontWeight: 800, color: '#ffffff' }}>
-                  {picks.length === 0 ? '—' : `${liveMatchPct}%`}
-                </span>
-              </div>
+              {!isSoloMode ? (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'rgba(5, 8, 17, 0.7)',
+                  backdropFilter: 'blur(8px)',
+                  padding: '4px 10px 4px 4px',
+                  borderRadius: '999px',
+                  border: '1px solid rgba(255,255,255,0.18)'
+                }}>
+                  <img
+                    src={config.creator.avatar}
+                    alt={config.creator.firstName}
+                    style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover' }}
+                  />
+                  <span style={{ fontSize: '12px', fontWeight: 800, color: '#ffffff' }}>
+                    {picks.length === 0 ? '—' : `${liveMatchPct}%`}
+                  </span>
+                </div>
+              ) : (
+                <div style={{
+                  background: 'rgba(5, 8, 17, 0.72)',
+                  backdropFilter: 'blur(8px)',
+                  padding: '5px 10px',
+                  borderRadius: '999px',
+                  border: '1px solid rgba(56, 189, 248, 0.35)',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  color: '#7dd3fc'
+                }}>
+                  Vibe Match
+                </div>
+              )}
 
               <button
                 type="button"
@@ -1026,6 +1093,47 @@ export default function MobileVibePullChallenge({
               </button>
             </div>
           </div>
+
+          {/* 4-Beat Day Story Whisper (Crisp 6-word local narrative above the photos) */}
+          {!microReveal && atmosHood?.storyBeats?.[activeStep.id] && (
+            <div style={{
+              position: 'absolute',
+              top: '96px',
+              left: '16px',
+              right: '16px',
+              zIndex: 35,
+              pointerEvents: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}>
+              <span style={{
+                fontSize: '10px',
+                fontWeight: 800,
+                letterSpacing: '0.9px',
+                textTransform: 'uppercase',
+                color: '#7dd3fc',
+                background: 'rgba(5, 8, 17, 0.72)',
+                border: '1px solid rgba(56, 189, 248, 0.3)',
+                padding: '3px 9px',
+                borderRadius: '999px',
+                marginBottom: '5px'
+              }}>
+                {atmosHood.storyBeats[activeStep.id].beatLabel}
+              </span>
+              <div style={{
+                fontSize: '14.5px',
+                fontWeight: 800,
+                color: '#ffffff',
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.9)',
+                maxWidth: '310px',
+                lineHeight: 1.3
+              }}>
+                {atmosHood.storyBeats[activeStep.id].storyWhisper}
+              </div>
+            </div>
+          )}
 
           {/* RIGHT PHOTO (Background Full Layer — supports creatorPhoto override + editorial grading) */}
           <div

@@ -4,16 +4,18 @@ import { Helmet } from 'react-helmet-async';
 import PasswordGate from '../components/PasswordGate';
 import VibeDirectoryPage from './VibeDirectoryPage';
 import SouthBankDemoPage from './SouthBankDemoPage';
-import { Compass, Building2, ShieldAlert } from 'lucide-react';
+import AtmosvibeIntelligenceDashboard from '../components/AtmosvibeIntelligenceDashboard';
+import { Compass, Building2, ShieldAlert, Activity } from 'lucide-react';
 
 export default function PrivateDemoPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialTab = searchParams.get('tab') === 'hotel' ? 'hotel' : 'radar';
+  const rawTab = searchParams.get('tab');
+  const initialTab = rawTab === 'hotel' ? 'hotel' : (rawTab === 'intelligence' ? 'intelligence' : 'radar');
   const [activeTab, setActiveTab] = useState(initialTab);
 
   useEffect(() => {
     const tabParam = searchParams.get('tab');
-    if (tabParam === 'hotel' || tabParam === 'radar') {
+    if (tabParam === 'hotel' || tabParam === 'radar' || tabParam === 'intelligence') {
       setActiveTab(tabParam);
     }
   }, [searchParams]);
@@ -117,6 +119,26 @@ export default function PrivateDemoPage() {
             <Building2 size={14} />
             <span>South Bank Hotel ROI Demo</span>
           </button>
+          <button
+            onClick={() => switchTab('intelligence')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 16px',
+              borderRadius: '50px',
+              background: activeTab === 'intelligence' ? '#10b981' : 'transparent',
+              color: activeTab === 'intelligence' ? '#042014' : '#94a3b8',
+              fontWeight: 800,
+              fontSize: '12px',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <Activity size={14} />
+            <span>Atmosvibe Intelligence</span>
+          </button>
         </div>
       </div>
 
@@ -124,6 +146,8 @@ export default function PrivateDemoPage() {
       <div style={{ position: 'relative' }}>
         {activeTab === 'radar' ? (
           <VibeDirectoryPage isPrivateDemo={true} />
+        ) : activeTab === 'intelligence' ? (
+          <AtmosvibeIntelligenceDashboard />
         ) : (
           <SouthBankDemoPage isPrivateDemo={true} />
         )}

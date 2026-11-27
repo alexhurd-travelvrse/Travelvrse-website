@@ -12,7 +12,74 @@
  */
 
 const memoryStore = new Map(); // neighbourhoodId -> Array<record>
+const ipRateWindows = new Map(); // ip -> Array<timestampMs>
 const MAX_RECORDS = 250;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const MAX_WRITES_PER_IP_PER_HOUR = 5;
+
+const BOT_UA_RE = /(bot|crawler|spider|headless|playwright|puppeteer|selenium|phantomjs|webdriver|curl|wget|python-requests|httpclient|scrapy|gptbot|oai-searchbot|perplexitybot|claudebot|anthropic-ai)/i;
+const ALLOWED_ORIGIN_RE = /^https?:\/\/((www\.)?travelvrse\.com|([a-z0-9-]+\.)?vercel\.app|localhost(:\d+)?|127\.0\.0\.1(:\d+)?)$/i;
+
+function getClientIp(req) {
+  const xff = req.headers?.['x-forwarded-for'];
+  if (typeof xff === 'string' && xff.length > 0) {
+    return xff.split(',')[0].trim();
+  }
+  return req.socket?.remoteAddress || 'unknown';
+}
+
+function isAllowedOrigin(req) {
+  const origin = req.headers?.origin || '';
+  const referer = req.headers?.referer || '';
+  if (origin && ALLOWED_ORIGIN_RE.test(origin)) return true;
+  if (referer) {
+    try {
+      const refOrigin = new URL(referer).origin;
+      if (ALLOWED_ORIGIN_RE.test(refOrigin)) return true;
+    } catch {
+      return false;
+    }
+  }
+  return false;
+}
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const prev = (ipRateWindows.get(ip) || []).filter((ts) => now - ts < RATE_LIMIT_WINDOW_MS);
+  if (prev.length >= MAX_WRITES_PER_IP_PER_HOUR) {
+    ipRateWindows.set(ip, prev);
+    return false;
+  }
+  prev.push(now);
+  ipRateWindows.set(ip, prev);
+  return true;
+}
+
+function evaluateHumanVerification(req, body) {
+  const ua = String(req.headers?.['user-agent'] || '');
+  const signals = body?.verification?.humanSignals || {};
+  const reasons = [];
+
+  if (!ua || BOT_UA_RE.test(ua)) reasons.push('bot_user_agent');
+  if (signals.webdriverDetected === true) reasons.push('webdriver_detected');
+  if (signals.allTrusted === false) reasons.push('untrusted_pointer_event');
+  if (typeof signals.minDecisionMs === 'number' && signals.minDecisionMs < 250) reasons.push('subhuman_step_speed');
+  if (typeof body?.verification?.avgDecisionMs === 'number' && body.verification.avgDecisionMs < 450) {
+    reasons.push('subhuman_avg_speed');
+  }
+  if (
+    typeof signals.decisionVarianceMs === 'number' &&
+    signals.decisionVarianceMs < 15 &&
+    Number(body?.verification?.avgDecisionMs || 0) < 1500
+  ) {
+    reasons.push('robotic_timing_variance');
+  }
+
+  return {
+    verificationStatus: reasons.length === 0 ? 'verified_human' : 'suspected_agent',
+    reasons
+  };
+}
 
 async function persistToUpstash(neighbourhoodId, record) {
   const url = process.env.UPSTASH_REDIS_REST_URL;
@@ -75,6 +142,11 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
+      // Layer 1: Same-origin enforcement (crawlers can GET pages, but only real site sessions can POST intent)
+      if (!isAllowedOrigin(req)) {
+        return res.status(403).json({ ok: false, error: 'Forbidden origin' });
+      }
+
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
       const neighbourhoodId = String(body?.location?.neighbourhoodId || body?.neighbourhoodId || 'southbank')
         .toLowerCase()
@@ -84,10 +156,30 @@ export default async function handler(req, res) {
         return res.status(400).json({ ok: false, error: 'Missing vibeVector in atmosvibe.intent.v1 payload' });
       }
 
+      // Layer 2 & 3: Silent behavioral/kinematic verification & quarantine (zero CAPTCHA friction for humans)
+      const humanCheck = evaluateHumanVerification(req, body);
+      if (humanCheck.verificationStatus === 'suspected_agent') {
+        return res.status(200).json({
+          ok: true,
+          quarantined: true,
+          verificationStatus: 'suspected_agent'
+        });
+      }
+
+      // Layer 4: Per-IP sliding-window rate limit (max 5 verified write-backs / IP / hour)
+      const clientIp = getClientIp(req);
+      if (!checkRateLimit(clientIp)) {
+        return res.status(429).json({
+          ok: false,
+          error: 'Rate limit exceeded for this IP. Try again later.'
+        });
+      }
+
       const record = {
         schemaVersion: body.schemaVersion || 'atmosvibe.intent.v1',
         eventId: body.eventId || `av_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
         timestamp: body.timestamp || new Date().toISOString(),
+        verificationStatus: 'verified_human',
         location: {
           neighbourhoodId,
           city: body?.location?.city || 'london',

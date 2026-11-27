@@ -19,6 +19,42 @@ const ALLOWED_ENDPOINTS = new Set([
 const BOOK_HOST_ENDPOINTS = new Set(['rates/prebook', 'rates/book']);
 const POST_ENDPOINTS = new Set(['hotels/rates', 'rates/prebook', 'rates/book', 'vouchers/mint']);
 
+// Anti-agent shield for single-use voucher minting (Layers 1 & 4)
+const voucherIpWindows = new Map();
+const VOUCHER_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const MAX_VOUCHERS_PER_IP_PER_HOUR = 3;
+const BOT_UA_RE = /(bot|crawler|spider|headless|playwright|puppeteer|selenium|phantomjs|webdriver|curl|wget|python-requests|httpclient|scrapy|gptbot|oai-searchbot|perplexitybot|claudebot|anthropic-ai)/i;
+const ALLOWED_ORIGIN_RE = /^https?:\/\/((www\.)?travelvrse\.com|([a-z0-9-]+\.)?vercel\.app|localhost(:\d+)?|127\.0\.0\.1(:\d+)?)$/i;
+
+function checkVoucherShield(req) {
+  const ua = String(req.headers?.['user-agent'] || '');
+  if (!ua || BOT_UA_RE.test(ua)) return { ok: false, status: 403, error: 'Automated clients cannot mint stay vouchers.' };
+
+  const origin = req.headers?.origin || '';
+  const referer = req.headers?.referer || '';
+  let originOk = Boolean(origin && ALLOWED_ORIGIN_RE.test(origin));
+  if (!originOk && referer) {
+    try {
+      originOk = ALLOWED_ORIGIN_RE.test(new URL(referer).origin);
+    } catch {
+      originOk = false;
+    }
+  }
+  if (!originOk) return { ok: false, status: 403, error: 'Forbidden voucher origin.' };
+
+  const xff = req.headers?.['x-forwarded-for'];
+  const ip = typeof xff === 'string' && xff.length > 0 ? xff.split(',')[0].trim() : (req.socket?.remoteAddress || 'unknown');
+  const now = Date.now();
+  const recent = (voucherIpWindows.get(ip) || []).filter((ts) => now - ts < VOUCHER_WINDOW_MS);
+  if (recent.length >= MAX_VOUCHERS_PER_IP_PER_HOUR) {
+    voucherIpWindows.set(ip, recent);
+    return { ok: false, status: 429, error: 'Voucher mint rate limit reached for this session.' };
+  }
+  recent.push(now);
+  voucherIpWindows.set(ip, recent);
+  return { ok: true };
+}
+
 function generateUniqueVoucherCode(prefix = 'VIBE') {
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let suffix = '';
@@ -51,6 +87,10 @@ export default async function handler(req, res) {
 
   // Hardened server-side single-use voucher minter (client cannot tamper with discount or usage limits)
   if (endpoint === 'vouchers/mint') {
+    const shield = checkVoucherShield(req);
+    if (!shield.ok) {
+      return res.status(shield.status).json({ ok: false, error: shield.error });
+    }
     const voucherCode = generateUniqueVoucherCode('VIBE');
     const now = new Date();
     const validStart = now.toISOString().slice(0, 10);

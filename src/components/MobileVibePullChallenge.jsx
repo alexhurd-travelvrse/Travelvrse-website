@@ -440,6 +440,8 @@ export default function MobileVibePullChallenge({
   const returnBasePath = fromParam && fromParam.startsWith('/') ? fromParam : '/destinations/london/south-bank';
   const stepStartTimeRef = useRef(Date.now());
   const decisionTimesRef = useRef([]);
+  const trustedEventsRef = useRef([]);
+  const pointerMoveCountRef = useRef(0);
 
   // Screen flow: 'hook' | 'pull' | 'blend' | 'story1' | 'story2' | 'story3' | 'credit'
   const [screen, setScreen] = useState(embeddedDesktopMode ? 'pull' : 'hook');
@@ -687,6 +689,11 @@ export default function MobileVibePullChallenge({
         const avgDecisionMs = Math.round(
           decisionTimesRef.current.reduce((acc, ms) => acc + ms, 0) / Math.max(1, decisionTimesRef.current.length)
         );
+        const minDecisionMs = decisionTimesRef.current.length > 0 ? Math.min(...decisionTimesRef.current) : avgDecisionMs;
+        const maxDecisionMs = decisionTimesRef.current.length > 0 ? Math.max(...decisionTimesRef.current) : avgDecisionMs;
+        const decisionVarianceMs = maxDecisionMs - minDecisionMs;
+        const allTrusted = trustedEventsRef.current.length > 0 ? trustedEventsRef.current.every(Boolean) : true;
+        const webdriverDetected = typeof navigator !== 'undefined' && Boolean(navigator.webdriver);
         const dragIntensityAvg = Number(
           (nextPicks.reduce((acc, p) => acc + (p.intensity || 0.75), 0) / Math.max(1, nextPicks.length)).toFixed(2)
         );
@@ -715,7 +722,14 @@ export default function MobileVibePullChallenge({
             avgDecisionMs,
             dragIntensityAvg,
             vibeWalkStarted: false,
-            hotelClicked: null
+            hotelClicked: null,
+            humanSignals: {
+              allTrusted,
+              webdriverDetected,
+              pointerMoveFrames: pointerMoveCountRef.current,
+              minDecisionMs,
+              decisionVarianceMs
+            }
           }
         });
 
@@ -743,6 +757,7 @@ export default function MobileVibePullChallenge({
   // Pointer drag + tap + hold-to-hear handlers
   const handlePointerDown = (e) => {
     if (microReveal || !surfaceRef.current) return;
+    trustedEventsRef.current = [...trustedEventsRef.current, Boolean(e?.isTrusted)];
     const rect = surfaceRef.current.getBoundingClientRect();
     const relX = (e.clientX - rect.left) / rect.width;
     dragStartRef.current = { x: e.clientX, y: e.clientY, time: Date.now(), moved: false, startRelX: relX };
@@ -760,6 +775,7 @@ export default function MobileVibePullChallenge({
 
   const handlePointerMove = (e) => {
     if (!isDragging || microReveal || !surfaceRef.current || !dragStartRef.current) return;
+    pointerMoveCountRef.current += 1;
     const dx = Math.abs(e.clientX - dragStartRef.current.x);
     if (dx > 8) {
       dragStartRef.current.moved = true;
